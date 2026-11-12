@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kirill Golikov</title>
+<meta name="description" content="Kirill Golikov — Senior Software Engineer. C++, performance optimization, ML infrastructure, systems. Bilbao, Spain.">
+<meta property="og:title" content="Kirill Golikov — Senior Software Engineer">
+<meta property="og:description" content="C++, performance optimization, ML infrastructure, systems. Bilbao, Spain.">
+<meta property="og:type" content="profile">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23004f90'/%3E%3Ctext x='32' y='42' font-family='Georgia,serif' font-size='28' fill='white' text-anchor='middle'%3EKG%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fbfaf7;
+    --surface: #ffffff;
+    --text: #1c1f24;
+    --muted: #5d6470;
+    --line: #e6e3dc;
+    --accent: #004f90;
+    --accent-soft: #e5eef7;
+    --chip: #f1efe9;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #111418;
+      --surface: #171b21;
+      --text: #e7e9ec;
+      --muted: #9aa3ae;
+      --line: #262c34;
+      --accent: #6aaef0;
+      --accent-soft: #16273a;
+      --chip: #1e242c;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.6 Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+
+  header.hero { padding: 88px 0 56px; border-bottom: 1px solid var(--line); }
+  .kicker { font: 500 13px/1 "JetBrains Mono", monospace; color: var(--accent); letter-spacing: .04em; text-transform: uppercase; }
+  h1 {
+    font-family: "Source Serif 4", Georgia, serif;
+    font-weight: 600; font-size: clamp(40px, 7vw, 64px); line-height: 1.05;
+    margin: 18px 0 16px; letter-spacing: -.01em;
+  }
+  .lead { font-size: 19px; color: var(--muted); max-width: 640px; margin: 0; }
+  .lead strong { color: var(--text); font-weight: 600; }
+  .links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 9px 14px; border: 1px solid var(--line); border-radius: 10px;
+    background: var(--surface); color: var(--text); font-size: 14px; font-weight: 500;
+  }
+  .btn:hover { border-color: var(--accent); text-decoration: none; color: var(--accent); }
+  .btn svg { width: 16px; height: 16px; fill: currentColor; }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  @media (prefers-color-scheme: dark) { .btn.primary { color: #0b1420; } }
+  .btn.primary:hover { color: #fff; opacity: .9; }
+  @media (prefers-color-scheme: dark) { .btn.primary:hover { color: #0b1420; } }
+
+  section { padding: 56px 0 8px; }
+  h2 {
+    font: 500 13px/1 "JetBrains Mono", monospace; text-transform: uppercase; letter-spacing: .08em;
+    color: var(--muted); margin: 0 0 28px; display: flex; align-items: center; gap: 14px;
+  }
+  h2::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+
+  .focus { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; }
+  .card h3 { margin: 0 0 6px; font-size: 16px; font-weight: 600; }
+  .card p { margin: 0; color: var(--muted); font-size: 14.5px; }
+
+  .job { display: grid; grid-template-columns: 150px 1fr; gap: 6px 28px; padding: 22px 0; border-top: 1px solid var(--line); }
+  .job:first-of-type { border-top: 0; padding-top: 0; }
+  .when { font: 13px/1.5 "JetBrains Mono", monospace; color: var(--muted); padding-top: 3px; }
+  .when span { display: block; }
+  .job h3 { margin: 0; font-size: 18px; font-weight: 600; }
+  .job .role { color: var(--muted); font-size: 15px; margin: 2px 0 10px; }
+  .job ul { margin: 0; padding-left: 18px; }
+  .job li { margin: 4px 0; font-size: 15px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+  .chip { font: 12px/1 "JetBrains Mono", monospace; background: var(--chip); color: var(--muted); padding: 6px 8px; border-radius: 6px; }
+  .tag { display: inline-block; font-size: 12px; font-weight: 500; color: var(--accent); background: var(--accent-soft); border-radius: 6px; padding: 2px 8px; margin-left: 8px; vertical-align: 2px; }
+
+  .skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 22px 28px; }
+  .skills h3 { margin: 0 0 10px; font-size: 15px; font-weight: 600; }
+
+  .contact { display: grid; gap: 14px; max-width: 640px; }
+  .contact .row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .contact label { display: grid; gap: 6px; font-size: 13px; font-weight: 500; color: var(--muted); }
+  .contact input, .contact textarea {
+    font: inherit; font-size: 15px; color: var(--text); background: var(--bg);
+    border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; width: 100%;
+  }
+  .contact input:focus, .contact textarea:focus { outline: 2px solid var(--accent); outline-offset: -1px; border-color: transparent; }
+  .contact .actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .contact button { cursor: pointer; font-family: inherit; }
+  #form-status { font-size: 14px; color: var(--muted); }
+  @media (max-width: 640px) { .contact .row { grid-template-columns: 1fr; } }
+
+  footer { margin-top: 64px; padding: 32px 0 48px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+
+  @media (max-width: 640px) {
+    header.hero { padding: 56px 0 40px; }
+    .job { grid-template-columns: 1fr; }
+    .when span { display: inline; }
+    .when span + span::before { content: " · "; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <div class="kicker">Senior Software Engineer · Bilbao, Spain</div>
+  <h1>Kirill Golikov</h1>
+  <p class="lead">I make <strong>C++ systems fast</strong>: performance optimization, profiling and system design — from SSD firmware and storage deduplication to neural-network runtimes and mobile games. Postgraduate in discrete mathematics and cybernetics, 7 years of lecturing at Lomonosov MSU.</p>
+  <div class="links">
+    <a class="btn primary" href="#contact">
+      <svg viewBox="0 0 24 24"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm9 7.2L4 7.3V17h16V7.3l-8 4.9ZM5.2 7 12 11.1 18.8 7H5.2Z"/></svg>
+      Contact
+    </a>
+    <a class="btn" href="https://www.linkedin.com/in/golikovkirill/" rel="me">
+      <svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg>
+      LinkedIn
+    </a>
+    <a class="btn" href="https://github.com/favorart" rel="me">
+      <svg viewBox="0 0 24 24"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.2.8.8 1.3 1.9 1.3 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1.1.9 2.2v3.3c0 .3.1.7.8.6A12 12 0 0 0 12 .3"/></svg>
+      GitHub
+    </a>
+  </div>
+</header>
+
+<section id="focus">
+  <h2>What I do</h2>
+  <div class="focus">
+    <div class="card"><h3>Performance engineering</h3><p>Profiling and optimizing hot paths: fps, micro-freezes, startup time, crash rate, GPU acceleration.</p></div>
+    <div class="card"><h3>ML infrastructure</h3><p>Neural-network runtimes in C++/CUDA: Transformer, Attention, LoRA in the open-source NeoML framework; ONNX.</p></div>
+    <div class="card"><h3>Systems &amp; storage</h3><p>SSD firmware, content-defined chunking for deduplication, data-reduction estimation for cloud storage.</p></div>
+  </div>
+</section>
+
+<section id="experience">
+  <h2>Experience</h2>
+
+  <div class="job">
+    <div class="when"><span>May 2026 — now</span><span>Bilbao</span></div>
+    <div>
+      <h3><a href="https://www.artificialseed.io">Artificial Seed</a><span class="tag">current</span></h3>
+      <div class="role">Senior Software Engineer · Dev team</div>
+      <ul>
+        <li>System design &amp; performance optimizations</li>
+        <li>CI/CD: automated testing infrastructure for complex ML analysis simulations</li>
+      </ul>
+      <div class="chips"><span class="chip">c++26</span><span class="chip">cmake</span><span class="chip">conan</span><span class="chip">onnx</span><span class="chip">python</span><span class="chip">perf</span><span class="chip">gitlab</span><span class="chip">ai-agents</span></div>
+    </div>
+  </div>
+
+  <div class="job">
+    <div class="when"><span>Mar 2025 — Oct 2025</span><span>Remote</span></div>
+    <div>
+      <h3><a href="https://playrix.com">Playrix</a></h3>
+      <div class="role">Senior Software Engineer · Game Quality team</div>
+      <ul>
+        <li>Performance optimizations of mobile games: fps, micro-freezes, starting time, crash rate</li>
+      </ul>
+      <div class="chips"><span class="chip">c++20</span><span class="chip">tracy</span><span class="chip">profiling</span><span class="chip">cmake</span><span class="chip">teamcity</span><span class="chip">ios</span><span class="chip">android</span><span class="chip">macos</span></div>
+    </div>
+  </div>
+
+  <div class="job">
+    <div class="when"><span>Sep 2022 — Nov 2024</span><span>Remote</span></div>
+    <div>
+      <h3><a href="https://www.abbyy.com">ABBYY</a></h3>
+      <div class="role">Principal Software Engineer · Common Libraries, NLP department</div>
+      <ul>
+        <li>Contributed to the open-source <a href="https://github.com/neoml-lib/neoml">NeoML</a> framework: Transformer, Attention, Embeddings, LoRA</li>
+        <li>Performance optimizations for ANN computing infrastructure, including GPU acceleration</li>
+        <li>Mentored an intern for a year</li>
+      </ul>
+      <div class="chips"><span class="chip">c++17</span><span class="chip">cuda</span><span class="chip">onnx-runtime</span><span class="chip">neural-networks</span><span class="chip">research</span></div>
+    </div>
+  </div>
+
+  <div class="job">
+    <div class="when"><span>Aug 2020 — Sep 2022</span><span>Moscow</span></div>
+    <div>
+      <h3><a href="https://career.huawei.ru/rri/en/zadachi-nashego-instituta/data-storage">Huawei</a></h3>
+      <div class="role">Senior Software Engineer · Storage team, Intellect Systems &amp; Data Science lab</div>
+      <ul>
+        <li><em>Estimation Tool</em> predicting data reduction of Ocean Cloud Storage</li>
+        <li><em>Content-Defined Chunking</em> — high-performance deduplication detection in bit-streams</li>
+        <li><em>Unstructured Data Reduction</em> for medical image compression</li>
+      </ul>
+      <div class="chips"><span class="chip">c++14</span><span class="chip">boost</span><span class="chip">intel-intrinsics</span><span class="chip">x86-64</span><span class="chip">arm</span><span class="chip">python</span><span class="chip">ml</span></div>
+    </div>
+  </div>
+
+  <div class="job">
+    <div class="when"><span>Oct 2017 — Sep 2022</span><span>Moscow</span></div>
+    <div>
+      <h3><a href="https://kraftway.ru/company/issledovaniya-i-razrabotki.php">Kraftway</a></h3>
+      <div class="role">Senior Software Engineer · SSD Firmware team</div>
+      <ul>
+        <li>Firmware for 2 generations of SSD prototypes</li>
+        <li><em>Temperature Detector</em> — monitoring sector rewrite frequencies</li>
+        <li><em>QATC</em> — controlling read / write / trim request queues and tables</li>
+        <li><em>Validity Module</em> — garbage-collector component tracking sector rewrites in blocks scheduled for erase</li>
+      </ul>
+      <div class="chips"><span class="chip">c++11</span><span class="chip">nvme</span><span class="chip">micro-controllers</span><span class="chip">xilinx-sdk</span></div>
+    </div>
+  </div>
+
+  <div class="job">
+    <div class="when"><span>Jul 2017 — Oct 2017</span><span>Moscow</span></div>
+    <div>
+      <h3><a href="https://vk.company/en/company/about/">VK</a> <span style="color:var(--muted);font-weight:400;font-size:15px">(ex Mail.ru Group)</span></h3>
+      <div class="role">Software Engineer · ICQ Messenger back-end</div>
+      <ul><li>Add-in allowing users to create custom emojis</li></ul>
+      <div class="chips"><span class="chip">c++11</span><span class="chip">linux</span><span class="chip">micro-services</span><span class="chip">high-load</span></div>
+    </div>
+  </div>
+
+  <div class="job">
+    <div class="when"><span>Jun 2015 — Jul 2017</span><span>Moscow</span></div>
+    <div>
+      <h3>VK &amp; Lomonosov MSU</h3>
+      <div class="role">Junior Researcher · Data Science lab, CM&amp;C faculty</div>
+      <ul><li>Automated website parsing and text analysis</li></ul>
+      <div class="chips"><span class="chip">python</span><span class="chip">sklearn</span><span class="chip">beautiful-soup</span></div>
+    </div>
+  </div>
+
+  <div class="job">
+    <div class="when"><span>Jun 2013 — Aug 2014</span><span>Tashkent</span></div>
+    <div>
+      <h3><a href="https://saesp.uz/">SAESP</a></h3>
+      <div class="role">Engineer · Secondary Circuits department</div>
+      <ul><li>Automated drafting of power line and substation drawings</li></ul>
+      <div class="chips"><span class="chip">c#</span><span class="chip">wpf</span><span class="chip">autocad objectarx</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="teaching">
+  <h2>Teaching</h2>
+  <div class="job">
+    <div class="when"><span>2016 — 2023</span><span>MSU</span></div>
+    <div>
+      <h3><a href="https://math.msu.ru">Lomonosov MSU</a></h3>
+      <div class="role">University Lecturer · Applied Mathematics and Computer Science</div>
+      <ul>
+        <li><a href="https://github.com/favorart/cpp_course">Design of Big Systems in C++</a> — 2019, 2020, 2021, 2023</li>
+        <li><a href="https://github.com/favorart/arch_course">Architecture and Software of High-Performance Systems</a> — 2018, 2020</li>
+        <li>Assisted <em>Practice in Computer Science</em> (2018–2020)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <h2>Education</h2>
+  <div class="job">
+    <div class="when"><span>2016 — 2020</span></div>
+    <div>
+      <h3>Postgraduate · Discrete Mathematics and Cybernetics</h3>
+      <div class="role">Lomonosov Moscow State University</div>
+      <ul>
+        <li>Learning algorithms for planar robot models with discrete control</li>
+        <li>Publications: <a href="http://intsysjournal.ru/pdfs/23-1/Golikov.pdf">#1</a>, <a href="http://intsysjournal.ru/pdfs/22-4/Golikov.pdf">#2</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="job">
+    <div class="when"><span>2014 — 2016</span></div>
+    <div>
+      <h3>M.Sc. · Mathematics and Computer Science</h3>
+      <div class="role">Lomonosov Moscow State University · GPA 4.77/5</div>
+      <ul><li><a href="https://github.com/favorart/robot-hand">Learning algorithms for positioning a robotic arm with discrete control</a></li></ul>
+    </div>
+  </div>
+  <div class="job">
+    <div class="when"><span>2009 — 2013</span></div>
+    <div>
+      <h3>B.Sc. · Applied Mathematics and Computer Science</h3>
+      <div class="role">Lomonosov Moscow State University · GPA 4.95/5</div>
+      <ul><li><a href="https://github.com/favorart/IPL">Cross-platform interpreter for a language with customizable syntax</a></li></ul>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <h2>Skills</h2>
+  <div class="skills">
+    <div><h3>Languages</h3><div class="chips"><span class="chip">C++ 11–26</span><span class="chip">Python</span><span class="chip">CUDA</span><span class="chip">C#</span></div></div>
+    <div><h3>Performance</h3><div class="chips"><span class="chip">perf</span><span class="chip">Tracy</span><span class="chip">intrinsics</span><span class="chip">GPU</span><span class="chip">profiling</span></div></div>
+    <div><h3>Build &amp; CI</h3><div class="chips"><span class="chip">CMake</span><span class="chip">Conan</span><span class="chip">GitLab CI</span><span class="chip">TeamCity</span><span class="chip">git</span></div></div>
+    <div><h3>ML</h3><div class="chips"><span class="chip">ONNX</span><span class="chip">NeoML</span><span class="chip">Transformers</span><span class="chip">sklearn</span></div></div>
+    <div><h3>Platforms</h3><div class="chips"><span class="chip">Linux</span><span class="chip">Windows</span><span class="chip">macOS</span><span class="chip">iOS</span><span class="chip">Android</span><span class="chip">ARM</span></div></div>
+    <div><h3>Spoken</h3><div class="chips"><span class="chip">English — full professional</span><span class="chip">Russian — native</span></div></div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2>Contact</h2>
+  <!-- Formspree: replace YOUR_FORM_ID with the id from formspree.io (e.g. xyzabcde) -->
+  <form id="contact-form" class="card contact" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+    <div class="row">
+      <label>Name<input name="name" autocomplete="name" required></label>
+      <label>Your email<input type="email" name="email" autocomplete="email" required></label>
+    </div>
+    <label>Message<textarea name="message" rows="5" required></textarea></label>
+    <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none">
+    <div class="actions">
+      <button class="btn primary" type="submit">Send message</button>
+      <span id="form-status" role="status"></span>
+    </div>
+  </form>
+  <p id="contact-fallback" class="card" hidden>The best way to reach me is via <a href="https://www.linkedin.com/in/golikovkirill/">LinkedIn</a>.</p>
+</section>
+
+<footer>
+  <span>© 2026 Kirill Golikov</span>
+  <span><a href="#contact">Contact</a> · <a href="https://www.linkedin.com/in/golikovkirill/">LinkedIn</a> · <a href="https://github.com/favorart">GitHub</a></span>
+</footer>
+
+</div>
+<script>
+  (function () {
+    var form = document.getElementById('contact-form');
+    var status = document.getElementById('form-status');
+    if (form.action.indexOf('YOUR_FORM_ID') !== -1) {
+      form.hidden = true;
+      document.getElementById('contact-fallback').hidden = false;
+      return;
+    }
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      status.textContent = 'Sending…';
+      fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } })
+        .then(function (r) {
+          if (!r.ok) throw new Error();
+          form.reset();
+          status.textContent = 'Thanks! I will get back to you soon.';
+        })
+        .catch(function () { status.textContent = 'Something went wrong. Please try LinkedIn.'; });
+    });
+  })();
+</script>
+</body>
+</html>
