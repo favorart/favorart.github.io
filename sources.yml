@@ -16,6 +16,9 @@
 #   cover       repo-relative path to the preview image (options: see /writing/covers/)
 #   demo_url    optional "Live demo" link on the page
 #   list        false = page is built but has no card of its own (e.g. a translation)
+#
+# `papers`: journal publications -> /writing/<slug>/ (type Paper). Nothing is fetched: the page shows the
+# bibliographic record, the abstracts (copied from the paper itself) and a link to the journal's PDF.
 
 articles:
   - slug: pi-birthday
@@ -93,3 +96,60 @@ courses:
     lang: ru
     summary: Lecture course on CPU architecture, x86-64, caches, virtual memory, interrupts, OS and high-load systems — with videos and slides.
     cover: covers/arch-course/cover-1.svg
+
+papers:
+  - slug: learning-algorithm-discrete-control
+    title: Алгоритм обучения систем с дискретным управлением
+    title_en: Learning algorithm of systems with discrete control
+    authors: Голиков К.А.
+    authors_en: Golikov K.A.
+    journal: Интеллектуальные системы. Теория и приложения
+    journal_en: Intelligent Systems. Theory and Applications
+    volume: 23
+    issue: 1
+    year: 2019
+    pages: 7–38
+    pdf: http://intsysjournal.ru/pdfs/23-1/Golikov.pdf
+    lang: ru
+    summary: 'Разработан алгоритм обучения для задачи позиционирования систем с дискретным управлением, основанный на методе обобщения проб и ошибок, сохраняющихся в базе данных, с помощью глобальной интерполяции и градиентного спуска.'
+    abstract: 'Разработан алгоритм обучения для задачи позиционирования систем с дискретным управлением, основанный
+      на методе обобщения проб и ошибок, сохраняющихся в базе данных, с помощью глобальной интерполяции и градиентного
+      спуска. Оптимизация алгоритма производится по критерию сокращения времени обучения (числа попыток). Алгоритм
+      был протестирован на симуляторе для моделей систем, действующих на плоскости, двух разных типов: для мобильного
+      робота с двумя ведущими гусеницами и для открытой кинематической цепи с вращательными и призматическими сочленениями.'
+    keywords: позиционирование, алгоритм обучения, робот, интерполяция, аппроксимация
+    abstract_en: 'The learning algorithm was developed for the problem of positioning systems with discrete control,
+      it is based on a method of generalizing using a global interpolation and a gradient descent of trials and fails
+      that stored in the database. The algorithm is optimized by the criterion of reducing the learning time (number
+      of attempts). The algorithm was tested on a simulator for models of systems operating on a plate of two different
+      types: for a mobile differential-drive robot and for an open kinematic chain with rotational and prismatic joints.'
+    keywords_en: positioning, learning algorithm, robot, interpolation, approximation
+    cover: covers/learning-algorithm-discrete-control/cover-1-plain.svg
+
+  - slug: learning-systems-discrete-control
+    title: Обучение систем с дискретным управлением
+    title_en: Learning systems with descrete control
+    authors: Голиков К.А.
+    authors_en: Golikov K.A.
+    journal: Интеллектуальные системы. Теория и приложения
+    journal_en: Intelligent Systems. Theory and Applications
+    volume: 22
+    issue: 4
+    year: 2018
+    pages: 143–151
+    pdf: http://intsysjournal.ru/pdfs/22-4/Golikov.pdf
+    lang: ru
+    summary: 'В докладе изложена работа по созданию алгоритма обучения системы с дискретным управлением действовать и достигать целей.'
+    abstract: 'В докладе изложена работа по созданию алгоритма обучения системы с дискретным управлением действовать
+      и достигать целей. Обучение происходит на основе проб и ошибок. Весь опыт системы сохраняется в Базе Данных.
+      Оптимизация алгоритма производится по двум критериям: точность достижения поставленных целей и максимальное
+      сокращение времени обучения. Сокращение времени обучения реализуется, главным образом, уменьшением количества
+      пробных действий с помощью методов прогнозирования и интерполяции по опытным данным.'
+    keywords: позиционирование, алгоритм обучения, робот, интерполяция, аппроксимация
+    abstract_en: 'The report outlines the work to create a discrete-control system learning algorithm for acting and
+      achieving goals. Learning is based on trials and misses. The entire experience of the system is stored in the
+      Database. The algorithm is optimized by two criteria: the accuracy of achieving the goals and the maximum reduction
+      in training time. The reduction in training time is implemented mainly by reducing the number of trials using
+      prediction methods and interpolation by experimental data.'
+    keywords_en: positioning, learning algorithm, robot, interpolation, approximation
+    cover: covers/learning-systems-discrete-control/cover-1-plain.svg
