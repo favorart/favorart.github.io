@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<rect width="1200" height="630" fill="#111418"/>
+<g opacity=".75"><rect x="300.0" y="70.0" width="600.0" height="490.0" rx="18" fill="none" stroke="#9aa3ae" stroke-width="5"/>
+<rect x="324.0" y="94.0" width="120.0" height="98.8" rx="8" fill="#6aaef0" opacity=".25"/>
+<text x="334.0" y="120.0" font-family="'JetBrains Mono', Consolas, monospace" font-size="18" fill="#9aa3ae">L1</text>
+<rect x="468.0" y="94.0" width="120.0" height="98.8" rx="8" fill="#6aaef0" opacity=".85"/>
+<text x="478.0" y="120.0" font-family="'JetBrains Mono', Consolas, monospace" font-size="18" fill="#9aa3ae">L1</text>
+<rect x="612.0" y="94.0" width="120.0" height="98.8" rx="8" fill="#6aaef0" opacity=".25"/>
+<text x="622.0" y="120.0" font-family="'JetBrains Mono', Consolas, monospace" font-size="18" fill="#9aa3ae">L1</text>
+<rect x="756.0" y="94.0" width="120.0" height="98.8" rx="8" fill="#6aaef0" opacity=".25"/>
+<text x="766.0" y="120.0" font-family="'JetBrains Mono', Consolas, monospace" font-size="18" fill="#9aa3ae">L1</text>
+<rect x="324.0" y="216.8" width="120.0" height="98.8" rx="8" fill="#6aaef0" opacity=".25"/>
+<text x="334.0" y="242.8" font-family="'JetBrains Mono', Consolas, monospace" font-size="18" fill="#9aa3ae">L1</text>
+<rect x="468.0" y="216.8" width="120.0" height="98.8" rx="8" fill="#6aaef0" opacity=".25"/>
+<text x="478.0" y="242.8" font-family="'JetBrains Mono', Consolas, monospace" font-size="18" fill="#9aa3ae">L1</text>
+<rect x="612.0" y="216.8" width="120.0" height="98.8" rx="8" fill="#6aaef0" opacity=".25"/>
+<text x="622.0" y="242.8" font-family="'JetBrains Mono', Consolas, monospace" font-size="18" fill="#9aa3ae">L1</text>
+<rect x="756.0" y="216.8" width="120.0" height="98.8" rx="8" fill="#6aaef0" opacity=".25"/>
+<text x="766.0" y="242.8" font-family="'JetBrains Mono', Consolas, monospace" font-size="18" fill="#9aa3ae">L1</text>
+<rect x="324.0" y="345.5" width="552.0" height="88.2" rx="8" fill="none" stroke="#6aaef0" stroke-width="4"/>
+<text x="338.0" y="399.4" font-family="'JetBrains Mono', Consolas, monospace" font-size="22" fill="#9aa3ae">L3 cache</text>
+<line x1="330.0" y1="560.0" x2="330.0" y2="582.0" stroke="#9aa3ae" stroke-width="5"/>
+<line x1="390.0" y1="560.0" x2="390.0" y2="582.0" stroke="#9aa3ae" stroke-width="5"/>
+<line x1="450.0" y1="560.0" x2="450.0" y2="582.0" stroke="#9aa3ae" stroke-width="5"/>
+<line x1="510.0" y1="560.0" x2="510.0" y2="582.0" stroke="#9aa3ae" stroke-width="5"/>
+<line x1="570.0" y1="560.0" x2="570.0" y2="582.0" stroke="#9aa3ae" stroke-width="5"/>
+<line x1="630.0" y1="560.0" x2="630.0" y2="582.0" stroke="#9aa3ae" stroke-width="5"/>
+<line x1="690.0" y1="560.0" x2="690.0" y2="582.0" stroke="#9aa3ae" stroke-width="5"/>
+<line x1="750.0" y1="560.0" x2="750.0" y2="582.0" stroke="#9aa3ae" stroke-width="5"/>
+<line x1="810.0" y1="560.0" x2="810.0" y2="582.0" stroke="#9aa3ae" stroke-width="5"/>
+<line x1="870.0" y1="560.0" x2="870.0" y2="582.0" stroke="#9aa3ae" stroke-width="5"/></g>
+<line x1="72" y1="560" x2="200" y2="560" stroke="#6aaef0" stroke-width="4"/>
+</svg>

@@ -8,11 +8,11 @@ author: Kirill Golikov
 months: [Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec]
 
 home_title: Kirill Golikov
-home_description: Kirill Golikov — Senior Software Engineer. C++, performance optimization, ML infrastructure, systems. Bilbao, Spain.
-home_og_title: Kirill Golikov — Senior Software Engineer
-home_og_description: C++, performance optimization, ML infrastructure, systems. Bilbao, Spain.
+home_description: "Kirill Golikov — Principal Software Engineer | C/C++ | Python | ML | AI. Performance optimization, ML infrastructure, systems. Bilbao, Spain."
+home_og_title: Kirill Golikov — Principal Software Engineer
+home_og_description: "Principal Software Engineer | C/C++ | Python | ML | AI. Bilbao, Spain."
 
-tagline: Senior Software Engineer · Bilbao, Spain
+tagline: "Principal Software Engineer | C/C++ | Python | ML | AI"
 lang_soon: coming soon
 
 nav_home: Home
@@ -31,12 +31,15 @@ footer_copy:
 # {n} = number of items in the list
 all_writing: All {n} articles
 all_courses: All {n} courses
+# used instead when there are exactly two
+all_writing_two: Both articles
+all_courses_two: Both courses
 cv_title: CV
-cv_description: CV of Kirill Golikov — Senior Software Engineer. C++, performance optimization, ML infrastructure, systems.
+cv_description: "CV of Kirill Golikov — Principal Software Engineer | C/C++ | Python | ML | AI. Bilbao, Spain."
 comment_on_linkedin: Leave a comment on LinkedIn
 send_feedback: Send feedback
-back_to_writing: ← All writing
-back_to_courses: ← All courses
+back_to_writing: All articles
+back_to_courses: All courses
 
 writing_kicker: Writing
 writing_title: Posts & articles
@@ -55,7 +58,8 @@ linkedin_post: LinkedIn post
 
 covers_kicker: Covers
 covers_title: Cover options
-covers_lead: Generated SVG covers for content without its own preview image. Pick one per item by changing its cover field, then commit and push. Option 1 is the default.
+covers_lead: Generated SVG covers for content without its own preview image. Each option has a titled version for cards (left) and a text-free one shown above the title on the article page (right). Pick one per item by changing its cover field, then commit and push. Option 1 is the default.
 covers_set_in: Set in
 covers_current: current
 covers_option: Option
+covers_plain: Text-free variant for the article page

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<rect width="1200" height="630" fill="#111418"/>
+<defs><linearGradient id="fade" x1="0" x2="1"><stop offset="0" stop-color="#111418"/><stop offset=".55" stop-color="#111418" stop-opacity=".6"/><stop offset="1" stop-color="#111418" stop-opacity="0"/></linearGradient></defs>
+<g opacity=".35"><line x1="860.0" y1="77.4" x2="710.0" y2="217.8" stroke="#9aa3ae" stroke-width="4" opacity=".7"/>
+<line x1="860.0" y1="77.4" x2="1010.0" y2="217.8" stroke="#9aa3ae" stroke-width="4" opacity=".7"/>
+<line x1="710.0" y1="217.8" x2="632.0" y2="367.6" stroke="#9aa3ae" stroke-width="4" opacity=".7"/>
+<line x1="710.0" y1="217.8" x2="788.0" y2="367.6" stroke="#9aa3ae" stroke-width="4" opacity=".7"/>
+<line x1="1010.0" y1="217.8" x2="932.0" y2="367.6" stroke="#9aa3ae" stroke-width="4" opacity=".7"/>
+<line x1="1010.0" y1="217.8" x2="1088.0" y2="367.6" stroke="#9aa3ae" stroke-width="4" opacity=".7"/>
+<line x1="1088.0" y1="367.6" x2="1040.0" y2="494.0" stroke="#9aa3ae" stroke-width="4" opacity=".7"/>
+<line x1="1088.0" y1="367.6" x2="1136.0" y2="494.0" stroke="#9aa3ae" stroke-width="4" opacity=".7"/>
+<rect x="812.0" y="53.4" width="96" height="48" rx="12" fill="none" stroke="#9aa3ae" stroke-width="4"/>
+<text x="860.0" y="85.4" text-anchor="middle" font-family="'JetBrains Mono', Consolas, monospace" font-size="22" fill="#9aa3ae">stmt</text>
+<rect x="662.0" y="193.8" width="96" height="48" rx="12" fill="#6aaef0" stroke="#6aaef0" stroke-width="4"/>
+<text x="710.0" y="225.8" text-anchor="middle" font-family="'JetBrains Mono', Consolas, monospace" font-size="22" fill="#ffffff">if</text>
+<rect x="962.0" y="193.8" width="96" height="48" rx="12" fill="#6aaef0" stroke="#6aaef0" stroke-width="4"/>
+<text x="1010.0" y="225.8" text-anchor="middle" font-family="'JetBrains Mono', Consolas, monospace" font-size="22" fill="#ffffff">=</text>
+<rect x="584.0" y="343.6" width="96" height="48" rx="12" fill="none" stroke="#9aa3ae" stroke-width="4"/>
+<text x="632.0" y="375.6" text-anchor="middle" font-family="'JetBrains Mono', Consolas, monospace" font-size="22" fill="#9aa3ae">cond</text>
+<rect x="740.0" y="343.6" width="96" height="48" rx="12" fill="none" stroke="#9aa3ae" stroke-width="4"/>
+<text x="788.0" y="375.6" text-anchor="middle" font-family="'JetBrains Mono', Consolas, monospace" font-size="22" fill="#9aa3ae">then</text>
+<rect x="884.0" y="343.6" width="96" height="48" rx="12" fill="none" stroke="#9aa3ae" stroke-width="4"/>
+<text x="932.0" y="375.6" text-anchor="middle" font-family="'JetBrains Mono', Consolas, monospace" font-size="22" fill="#9aa3ae">x</text>
+<rect x="1040.0" y="343.6" width="96" height="48" rx="12" fill="none" stroke="#9aa3ae" stroke-width="4"/>
+<text x="1088.0" y="375.6" text-anchor="middle" font-family="'JetBrains Mono', Consolas, monospace" font-size="22" fill="#9aa3ae">+</text>
+<rect x="992.0" y="470.0" width="96" height="48" rx="12" fill="none" stroke="#9aa3ae" stroke-width="4"/>
+<text x="1040.0" y="502.0" text-anchor="middle" font-family="'JetBrains Mono', Consolas, monospace" font-size="22" fill="#9aa3ae">a</text>
+<rect x="1088.0" y="470.0" width="96" height="48" rx="12" fill="none" stroke="#9aa3ae" stroke-width="4"/>
+<text x="1136.0" y="502.0" text-anchor="middle" font-family="'JetBrains Mono', Consolas, monospace" font-size="22" fill="#9aa3ae">1</text></g>
+<rect x="0" y="0" width="1200" height="630" fill="url(#fade)"/>
+<text x="72" y="360" font-family="'JetBrains Mono', Consolas, monospace" font-size="22" letter-spacing="2" fill="#6aaef0">LINKEDIN · IPL → AI AGENTS</text>
+<text x="72" y="440" font-family="'Source Serif 4', Georgia, serif" font-weight="600" font-size="52" fill="#e7e9ec">Я застал, как моя дипломная</text>
+<text x="72" y="498" font-family="'Source Serif 4', Georgia, serif" font-weight="600" font-size="52" fill="#e7e9ec">тема перестала быть наукой</text>
+<line x1="72" y1="320" x2="200" y2="320" stroke="#6aaef0" stroke-width="4"/>
+</svg>

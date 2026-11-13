@@ -2,8 +2,9 @@
      Placeholders: $$prefix (URL language prefix), $$writing_cards, $$all_writing,
      $$course_cards, $$all_courses. Sections with data-nav are tracked by the side navigation. -->
 <header class="hero glass" data-nav="home">
-  <div class="kicker">Senior Software Engineer · Bilbao, Spain</div>
+  <div class="kicker">Principal Software Engineer | C/C++ | Python | ML | AI</div>
   <h1>Kirill Golikov</h1>
+  <p class="place">Bilbao, Spain</p>
   <p class="lead">I make <strong>C++ systems fast</strong>: performance optimization, profiling and system design — from SSD firmware and storage deduplication to neural-network runtimes and mobile games. Postgraduate in discrete mathematics and cybernetics, 7 years of lecturing at Lomonosov MSU.</p>
   <div class="links">
     <a class="btn sun" href="#contact">
@@ -32,13 +33,19 @@
 <section id="teaching" data-nav="teaching">
   <div class="shead"><h2><small>Teaching</small>Lecture courses</h2></div>
   $course_cards
-  <p class="note glass"><b>University Lecturer at <a href="https://math.msu.ru">Lomonosov MSU</a>, 2016 — 2023.</b> Applied Mathematics and Computer Science: <em>Design of Big Systems in C++</em> (2019, 2020, 2021, 2023), <em>Architecture and Software of High-Performance Systems</em> (2018, 2020); assisted <em>Practice in Computer Science</em> (2018–2020).</p>
+  <div class="note glass linked lecturer">
+    <a class="stretch" href="$prefix/courses/"><b>University Lecturer</b> · Lomonosov MSU · 2016 — 2023</a>
+    <ul>
+      <li><a href="$prefix/courses/cpp-course/">Design of Big Systems in C++</a><span>2019 — 2023</span></li>
+      <li><a href="$prefix/courses/arch-course/">Architecture and Software of High-Performance Systems</a><span>2018, 2020</span></li>
+    </ul>
+  </div>
   <p class="all"><a class="btn sun big" href="$prefix/courses/">$all_courses <span class="arr">→</span></a></p>
 </section>
 
 <section id="about" data-nav="about">
   <div class="shead"><h2><small>About / CV</small>Who I am</h2></div>
-  <div class="panel glass cv-preview">
+  <div class="panel glass cv-preview linked">
     <div>
       <p class="intro">Senior C++ engineer who makes systems fast: profiling, performance optimization and system design, from SSD firmware and storage deduplication to neural-network runtimes and mobile games.</p>
       <ul class="facts">
@@ -48,7 +55,7 @@
         <li><span>Teaching</span><b>Lomonosov MSU, 2016 — 2023</b></li>
       </ul>
     </div>
-    <a class="btn sun big" href="$prefix/cv/">Open full CV <span class="arr">→</span></a>
+    <a class="btn sun big stretch" href="$prefix/cv/">Open full CV <span class="arr">→</span></a>
   </div>
 </section>
 

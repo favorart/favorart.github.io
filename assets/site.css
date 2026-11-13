@@ -5,11 +5,14 @@
 :root {
   --hdr: 62px;
   --bg: #f7f4fb;
-  --m1: #ffc9da; --m2: #c9dcff; --m3: #c9f0da; --m4: #ffe3a8; --m5: #ddd0ff;
+  --m1: #ffd9e4; --m2: #d9e6ff; --m3: #dff5e8; --m4: #fff0cf; --m5: #e8dcff;
+  --sun-core: rgba(255, 206, 112, .72);
   --sun: #f7a823;
   --sun-ink: #3a2500;
   --sun-glow: rgba(255, 196, 84, .55);
-  --link: #9a5600;
+  --link: #8a4a00;
+  --link-rest: #a15f14;
+  --sheen: #ffd27a;
   --text: #25222e;
   --muted: #645f72;
   --line: rgba(60, 50, 90, .12);
@@ -23,17 +26,20 @@
   --code-bg: #fbf8f1;
   --th: #f1ecfa;
   --cover-filter: none;
-  --frost: rgba(255, 255, 255, .14);
+  --frost: rgba(255, 255, 255, .05);
   --frost-edge: rgba(255, 255, 255, .9);
 }
 @media (prefers-color-scheme: dark) {
   :root {
     --bg: #15131c;
-    --m1: #4a2540; --m2: #1f3360; --m3: #1a4434; --m4: #5a4214; --m5: #33255a;
+    --m1: #3a2433; --m2: #1e2a44; --m3: #1b3329; --m4: #3a2f17; --m5: #2b2142;
+    --sun-core: rgba(255, 176, 64, .26);
     --sun: #ffb84a;
     --sun-ink: #2a1a00;
     --sun-glow: rgba(255, 170, 60, .22);
-    --link: #ffc56e;
+    --link: #ffcf85;
+    --link-rest: #e3b26a;
+    --sheen: #fff4dc;
     --text: #efecf5;
     --muted: #aaa4b9;
     --line: rgba(255, 255, 255, .09);
@@ -47,7 +53,7 @@
     --code-bg: #0f0e15;
     --th: rgba(255, 255, 255, .06);
     --cover-filter: saturate(.85) brightness(.78);
-    --frost: rgba(20, 18, 30, .12);
+    --frost: rgba(20, 18, 30, .06);
     --frost-edge: rgba(255, 255, 255, .38);
   }
 }
@@ -59,33 +65,46 @@ body {
   font: 16px/1.6 "Plus Jakarta Sans", Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
   -webkit-font-smoothing: antialiased; overflow-x: hidden; padding-top: var(--hdr);
 }
-/* links: accent colour + medium weight, no underline; on hover a sunny marker grows behind the lower half */
-a {
-  color: var(--link); font-weight: 500; text-decoration: none; border-radius: 3px;
-  background: linear-gradient(color-mix(in srgb, var(--sun) 40%, transparent), color-mix(in srgb, var(--sun) 40%, transparent)) no-repeat 0 100% / 100% 0;
-  -webkit-box-decoration-break: clone; box-decoration-break: clone; transition: background-size .25s ease, color .2s;
+a { color: var(--link); text-decoration: none; }
+a:focus-visible { outline: 2px solid var(--sun); outline-offset: 2px; border-radius: 4px; }
+/* text links "develop" like a photo behind glass: at rest slightly faded with a frosted halo,
+   on hover they turn crisp and a short sheen sweeps across. No underlines. */
+:is(.prose, .lead, .note, .job, .cv-preview, .article-foot, .byline, footer, #contact-fallback, .kicker, .cap) a:not(.btn, .stretch, h3 a),
+a.src, a.demo {
+  color: var(--link-rest); font-weight: 500;
+  text-shadow: 0 0 6px color-mix(in srgb, var(--link) 40%, transparent);
+  transition: color .35s ease, text-shadow .35s ease;
 }
-a:hover { background-size: 100% 48%; }
-a:focus-visible { outline: 2px solid var(--sun); outline-offset: 2px; }
+:is(.prose, .lead, .note, .job, .cv-preview, .article-foot, .byline, footer, #contact-fallback, .kicker, .cap) a:not(.btn, .stretch, h3 a):hover,
+a.src:hover, a.demo:hover { color: var(--link); text-shadow: none; }
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  :is(.prose, .lead, .note, .job, .cv-preview, .article-foot, .byline, footer, #contact-fallback, .kicker, .cap) a:not(.btn, .stretch, h3 a):hover,
+  a.src:hover, a.demo:hover {
+    color: transparent;
+    background: linear-gradient(100deg, var(--link) 0 40%, var(--sheen) 50%, var(--link) 60% 100%) 100% 0 / 260% 100% no-repeat;
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-box-decoration-break: clone; box-decoration-break: clone;
+    animation: sheen .8s ease forwards;
+  }
+}
+@keyframes sheen { to { background-position: 0 0; } }
 h1 a, h2 a, h3 a, h4 a { font-weight: inherit; }
 code { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: .9em; }
 
-/* ---- fixed colourful layer behind everything: this is what the glass blurs ---- */
-.bg { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none;
+/* ---- fixed background layer (mockup A): soft pastel mesh + a warm "sun" in the middle of the viewport ---- */
+.bg { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; background: var(--bg); }
+.bg::before {
+  content: ""; position: absolute; inset: -20vmax; filter: blur(10px);
   background:
-    radial-gradient(45vmax 45vmax at 10% 15%, var(--m1), transparent 62%),
-    radial-gradient(42vmax 42vmax at 92% 8%, var(--m2), transparent 62%),
-    radial-gradient(46vmax 46vmax at 78% 82%, var(--m3), transparent 62%),
-    radial-gradient(36vmax 36vmax at 12% 90%, var(--m5), transparent 62%),
-    var(--bg); }
-.bg i { position: absolute; border-radius: 50%; filter: blur(28px); opacity: .9; }
-.bg .b1 { width: 30vmax; height: 30vmax; left: -6vmax; top: 8vh; background: var(--m1); }
-.bg .b2 { width: 26vmax; height: 26vmax; right: -4vmax; top: 30vh; background: var(--m2); }
-.bg .b3 { width: 24vmax; height: 24vmax; right: 18vw; bottom: -8vmax; background: var(--m3); }
-.bg .b4 { width: 20vmax; height: 20vmax; left: 22vw; bottom: 6vh; background: var(--m5); }
-.bg .sun { /* the warm accent glow in the centre */
-  width: 46vmax; height: 46vmax; left: 50%; top: 46%; transform: translate(-50%, -50%); filter: none; opacity: 1;
-  background: radial-gradient(circle, var(--m4) 0, var(--sun-glow) 22%, transparent 62%); }
+    radial-gradient(40vmax 40vmax at 12% 18%, var(--m1), transparent 60%),
+    radial-gradient(38vmax 38vmax at 85% 10%, var(--m2), transparent 60%),
+    radial-gradient(42vmax 42vmax at 70% 75%, var(--m3), transparent 60%),
+    radial-gradient(30vmax 30vmax at 20% 85%, var(--m5), transparent 60%);
+}
+.bg .sun {
+  position: absolute; left: 50%; top: 50%; width: 56vmax; height: 56vmax; transform: translate(-50%, -50%); border-radius: 50%;
+  background: radial-gradient(circle, var(--sun-core) 0, var(--m4) 34%, transparent 68%);
+}
 
 /* ---- glass surfaces ---- */
 .glass, .card, .snav, header.top {
@@ -102,7 +121,7 @@ code { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: .9em; 
 header.top { position: fixed; top: 0; left: 0; right: 0; z-index: 30; border-width: 0 0 1px; border-radius: 0; box-shadow: var(--glass-hi); }
 .bar { max-width: 1240px; margin: 0 auto; padding: 11px 24px; display: flex; align-items: center; gap: 16px; }
 .who { display: flex; align-items: center; gap: 12px; min-width: 0; color: var(--text); }
-.who, .who:hover { background: none; }
+
 .avatar { width: 38px; height: 38px; border-radius: 12px; flex: none; display: grid; place-items: center; font-weight: 800; font-size: 13px;
   background: linear-gradient(135deg, var(--m1), var(--m4) 50%, var(--m2)); border: 1px solid var(--glass-line); color: var(--text); }
 .who b { display: block; font-size: 15px; line-height: 1.2; font-weight: 800; letter-spacing: -.01em; }
@@ -175,12 +194,12 @@ header.hero { border-radius: 30px; padding: 44px 40px; }
 .post .thumb { position: relative; aspect-ratio: 1200 / 630; overflow: hidden;
   background: linear-gradient(135deg, var(--m1), var(--m4) 45%, var(--m2)); }
 .post .thumb::before { content: ""; position: absolute; inset: 0; background: inherit; transition: transform .6s ease; }
-.post .cover { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: var(--cover-filter); transition: transform .6s ease; }
+.post .cover { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; filter: var(--cover-filter); transition: transform .6s ease; }
 /* a pane of frosted glass over every cover: unifies the pictures; on hover it slides down, clearing the top */
 .post .frost {
   position: absolute; inset: 0;
-  background: linear-gradient(160deg, color-mix(in srgb, var(--m2) 32%, transparent), color-mix(in srgb, var(--m1) 26%, transparent) 55%, color-mix(in srgb, var(--m4) 32%, transparent)), var(--frost);
-  -webkit-backdrop-filter: blur(8px) saturate(130%); backdrop-filter: blur(8px) saturate(130%);
+  background: linear-gradient(160deg, color-mix(in srgb, var(--m2) 18%, transparent), color-mix(in srgb, var(--m1) 14%, transparent) 55%, color-mix(in srgb, var(--m4) 18%, transparent)), var(--frost);
+  -webkit-backdrop-filter: blur(1.5px) saturate(115%); backdrop-filter: blur(1.5px) saturate(115%);
   border-top: 1px solid var(--frost-edge); box-shadow: 0 -1px 10px var(--frost-edge), inset 0 1px 0 var(--frost-edge);
   transition: transform .6s ease;
 }
@@ -194,15 +213,30 @@ header.hero { border-radius: 30px; padding: 44px 40px; }
   -webkit-backdrop-filter: blur(14px) saturate(150%); backdrop-filter: blur(14px) saturate(150%);
 }
 .post .body { padding: 16px 20px 20px; }
-.cap .src, .kicker .src { color: var(--link); font-weight: 600; }
+.cap .src, .kicker .src { font-weight: 600; }
 .post h3 { font-size: 18px; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   /* "animation effects" off (Windows) / reduce motion: a gentle, short version instead of none */
   .post .cover, .post .thumb::before, .post .frost, .btn .arr { transition-duration: .2s; }
+  a:hover { animation: none !important; background-position: 0 0 !important; }
   .post:hover .cover, .post:focus-within .cover, .post:hover .thumb::before { transform: scale(1.04); }
 }
 
+/* .linked: the whole panel is clickable through its .stretch link; other links inside stay separate */
+.linked { position: relative; transition: box-shadow .25s; }
+.linked .stretch::after { content: ""; position: absolute; inset: 0; z-index: 1; border-radius: 22px; }
+.linked a:not(.stretch) { position: relative; z-index: 2; }
+.linked:hover { box-shadow: var(--shadow), var(--glass-hi), 0 0 0 2px color-mix(in srgb, var(--sun) 45%, transparent); }
+.linked:has(.stretch:focus-visible) { outline: 3px solid var(--sun); outline-offset: 2px; }
+.lecturer .stretch { color: var(--text); font-size: 16px; }
+.lecturer .stretch b { font-weight: 700; }
+.lecturer ul { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 6px; }
+.lecturer li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 16px; font-size: 15px; }
+.lecturer li span { font: 12.5px/1.6 "JetBrains Mono", monospace; color: var(--muted); }
+.place { display: flex; align-items: center; gap: 10px; margin: 0 0 14px; font-weight: 600; }
+.place::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--sun); box-shadow: 0 0 0 5px color-mix(in srgb, var(--sun) 25%, transparent); }
+.page-head .place { margin-top: 14px; }
 .note { border-radius: 20px; padding: 16px 20px; margin: 16px 0 0; font-size: 15px; color: var(--muted); }
 .note b { color: var(--text); }
 
@@ -246,7 +280,7 @@ section.cv { padding-top: 0; }
 
 /* ---- long-form text: a calmer, almost opaque reading panel ---- */
 .reader { background: var(--reader); border-radius: 28px; padding: 40px 48px 32px; max-width: 860px; }
-.hero-cover { display: block; width: 100%; height: auto; aspect-ratio: 1200 / 630; object-fit: cover; border-radius: 20px; margin: 0 0 28px; border: 1px solid var(--line); filter: var(--cover-filter); }
+.hero-cover { display: block; width: 100%; height: auto; max-height: 640px; object-fit: contain; background: var(--th); border-radius: 20px; margin: 0 0 28px; border: 1px solid var(--line); filter: var(--cover-filter); }
 .article-head { padding: 0 0 26px; margin-bottom: 30px; border-bottom: 1px solid var(--line); }
 .article-head h1 { font-size: clamp(30px, 4.6vw, 44px); }
 .prose { max-width: 68ch; font-family: "Source Serif 4", Georgia, serif; font-size: 19px; line-height: 1.72; overflow-wrap: break-word; }
@@ -259,7 +293,6 @@ section.cv { padding-top: 0; }
 .prose h4, .prose h5, .prose h6 { font-size: 17px; font-weight: 700; }
 .prose li { margin: .3em 0; }
 .prose li > p { margin: 0 0 .4em; }
-.prose a { font-weight: 500; }
 .prose img { max-width: 100%; height: auto; border-radius: 14px; }
 .prose blockquote { margin-left: 0; padding: 10px 18px; border-left: 3px solid var(--sun); border-radius: 0 14px 14px 0; background: color-mix(in srgb, var(--m4) 35%, transparent); color: var(--muted); }
 .prose hr { border: 0; border-top: 1px solid var(--line); margin: 2em 0; }
@@ -273,25 +306,31 @@ section.cv { padding-top: 0; }
 .prose tr:last-child td { border-bottom: 0; }
 .prose th { background: var(--th); font-weight: 700; }
 .prose tbody tr:nth-child(even) td { background: color-mix(in srgb, var(--th) 50%, transparent); }
-.article-foot { max-width: 68ch; margin-top: 36px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 15px; }
+.article-foot { max-width: none; margin-top: 36px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 15px; }
 .article-foot .origin { font-weight: 600; }
-.article-foot .cta { margin: 0 0 20px; }
+.foot-actions { display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; }
+.foot-actions .btn { flex: 0 1 320px; justify-content: center; }
+.btn.calm { background: var(--glass-strong); color: var(--text); box-shadow: var(--glass-hi); border: 1px solid var(--line); }
+.btn.calm:hover { background: var(--chip); color: var(--text); }
+.btn:hover .arr.back { transform: translateX(-5px); }
 .article-foot .chips { margin: 0 0 14px; }
 
 /* ---- cover chooser ---- */
 .cover-group { padding: 28px 0; }
 .cover-group h2 { font-size: 20px; margin: 0 0 4px; }
 .cover-group .hint { color: var(--muted); font-size: 14px; margin: 0 0 16px; }
-.options { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+.options { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 480px), 1fr)); gap: 14px; }
 .option { margin: 0; background: var(--glass-strong); border: 1px solid var(--glass-line); border-radius: 16px; overflow: hidden; }
 .option.selected { outline: 3px solid var(--sun); }
+.option { display: grid; grid-template-columns: 1fr 1fr; }
+.option figcaption { grid-column: 1 / -1; }
 .option img { display: block; width: 100%; height: auto; }
+.option img + img { border-left: 1px solid var(--line); }
 .option figcaption { padding: 8px 12px; font-size: 13px; color: var(--muted); }
 .option .tag { margin-left: 4px; }
 
 footer { margin-top: 64px; padding: 28px 4px 44px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
 footer .copy { flex-basis: 100%; margin: 0; display: grid; gap: 2px; font-size: 12.5px; line-height: 1.55; color: var(--muted); opacity: .85; max-width: 760px; }
-footer .copy a { color: var(--link); }
 
 /* ---- tablet / mobile: side nav becomes pills under the header ---- */
 @media (max-width: 960px) {
@@ -314,6 +353,8 @@ footer .copy a { color: var(--link); }
   section { padding-top: 44px; }
   .panel, .contact { padding: 20px; }
   .cv-preview { grid-template-columns: 1fr; padding: 22px 20px; }
+  .foot-actions { flex-direction: column; }
+  .foot-actions .btn { flex: none; width: 100%; }
   .job { grid-template-columns: 1fr; }
   .when span { display: inline; }
   .when span + span::before { content: " · "; }

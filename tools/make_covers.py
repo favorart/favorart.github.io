@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """Generate 3 SVG cover options (1200x630) for an article or course.
 
-Usage: python tools/make_covers.py <out_dir> <motif> "<title>" ["<kicker>"]
+Usage: python tools/make_covers.py [--plain-only] <out_dir> <motif> "<title>" ["<kicker>"]
   motif: pi | robot | tree | cpp | cpu | code
-Writes <out_dir>/cover-1.svg, cover-2.svg, cover-3.svg:
+Writes <out_dir>/cover-1.svg, cover-2.svg, cover-3.svg (with the title: for cards and lists)
+and cover-1-plain.svg ... cover-3-plain.svg (illustration only: above the title on the article page;
+the site picks the -plain twin of the chosen cover automatically). --plain-only writes just the latter.
   1 "paper"     light background, motif on the right
   2 "night"     dark background, large faint motif behind the title
   3 "blueprint" accent background with a grid, white line-art
@@ -147,7 +149,11 @@ def svg(body, bg):
             '<rect width="%d" height="%d" fill="%s"/>\n%s\n</svg>\n' % (W, H, W, H, W, H, bg, body))
 
 
-def cover_paper(motif, title, kicker):
+def cover_paper(motif, title, kicker, plain=False):
+    if plain:
+        body = [motif(330, 100, 540, 430, "#5d6470", "#004f90"),
+                '<rect x="0" y="0" width="12" height="630" fill="#004f90"/>']
+        return svg("\n".join(body), "#fbfaf7")
     body = [motif(700, 120, 430, 390, "#5d6470", "#004f90"),
             '<rect x="0" y="0" width="12" height="630" fill="#004f90"/>',
             kicker_text(kicker, 72, 120, "#004f90"),
@@ -156,7 +162,11 @@ def cover_paper(motif, title, kicker):
     return svg("\n".join(body), "#fbfaf7")
 
 
-def cover_night(motif, title, kicker):
+def cover_night(motif, title, kicker, plain=False):
+    if plain:
+        body = ['<g opacity=".75">%s</g>' % motif(300, 70, 600, 490, "#9aa3ae", "#6aaef0"),
+                '<line x1="72" y1="560" x2="200" y2="560" stroke="#6aaef0" stroke-width="4"/>']
+        return svg("\n".join(body), "#111418")
     body = ['<g opacity=".35">%s</g>' % motif(560, 40, 600, 520, "#9aa3ae", "#6aaef0"),
             '<rect x="0" y="0" width="1200" height="630" fill="url(#fade)"/>',
             kicker_text(kicker, 72, 360, "#6aaef0"),
@@ -168,12 +178,16 @@ def cover_night(motif, title, kicker):
     return svg(defs + "\n" + "\n".join(body), "#111418")
 
 
-def cover_blueprint(motif, title, kicker):
+def cover_blueprint(motif, title, kicker, plain=False):
     grid = []
     for gx in range(0, W + 1, 40):
         grid.append('<line x1="%d" y1="0" x2="%d" y2="%d" stroke="#ffffff" stroke-opacity="%s"/>' % (gx, gx, H, ".16" if gx % 200 == 0 else ".06"))
     for gy in range(0, H + 1, 40):
         grid.append('<line x1="0" y1="%d" x2="%d" y2="%d" stroke="#ffffff" stroke-opacity="%s"/>' % (gy, W, gy, ".16" if gy % 200 == 0 else ".06"))
+    if plain:
+        body = ["\n".join(grid), motif(340, 130, 520, 380, "#ffffff", "#9fd0ff"),
+                '<rect x="60" y="60" width="1080" height="510" fill="none" stroke="#ffffff" stroke-opacity=".5" stroke-width="2"/>']
+        return svg("\n".join(body), "#004f90")
     body = ["\n".join(grid),
             motif(640, 200, 480, 360, "#ffffff", "#9fd0ff"),
             '<rect x="60" y="60" width="1080" height="510" fill="none" stroke="#ffffff" stroke-opacity=".5" stroke-width="2"/>',
@@ -183,16 +197,20 @@ def cover_blueprint(motif, title, kicker):
 
 
 def main():
-    if len(sys.argv) < 4:
+    args = [a for a in sys.argv[1:] if a != "--plain-only"]
+    plain_only = len(args) != len(sys.argv) - 1
+    if len(args) < 3:
         sys.exit(__doc__)
-    out_dir, motif_name, title = sys.argv[1], sys.argv[2], sys.argv[3]
-    kicker = sys.argv[4] if len(sys.argv) > 4 else "Kirill Golikov"
+    out_dir, motif_name, title = args[0], args[1], args[2]
+    kicker = args[3] if len(args) > 3 else "Kirill Golikov"
     motif = MOTIFS[motif_name]
     os.makedirs(out_dir, exist_ok=True)
     for n, fn in enumerate((cover_paper, cover_night, cover_blueprint), 1):
-        with open(os.path.join(out_dir, "cover-%d.svg" % n), "w", encoding="utf-8", newline="\n") as f:
-            f.write(fn(motif, title, kicker))
-    print("wrote 3 covers to", out_dir)
+        variants = [("-plain", True)] if plain_only else [("", False), ("-plain", True)]
+        for suffix, plain in variants:
+            with open(os.path.join(out_dir, "cover-%d%s.svg" % (n, suffix)), "w", encoding="utf-8", newline="\n") as f:
+                f.write(fn(motif, title, kicker, plain))
+    print("wrote %s covers to %s" % ("3 text-free" if plain_only else "3 + 3 text-free", out_dir))
 
 
 if __name__ == "__main__":

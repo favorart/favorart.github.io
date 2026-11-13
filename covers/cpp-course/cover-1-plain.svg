@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<rect width="1200" height="630" fill="#fbfaf7"/>
+<text x="330.0" y="150.6" font-family="'JetBrains Mono', Consolas, monospace" font-size="31" fill="#004f90" xml:space="preserve">template &lt;typename T&gt;</text>
+<text x="330.0" y="201.2" font-family="'JetBrains Mono', Consolas, monospace" font-size="31" fill="#5d6470" xml:space="preserve">class Pool {</text>
+<text x="330.0" y="251.8" font-family="'JetBrains Mono', Consolas, monospace" font-size="31" fill="#5d6470" xml:space="preserve">  alignas(64) T* data_;</text>
+<text x="330.0" y="302.4" font-family="'JetBrains Mono', Consolas, monospace" font-size="31" fill="#5d6470" xml:space="preserve">  size_t size_;</text>
+<text x="330.0" y="352.9" font-family="'JetBrains Mono', Consolas, monospace" font-size="31" fill="#5d6470" xml:space="preserve">public:</text>
+<text x="330.0" y="403.5" font-family="'JetBrains Mono', Consolas, monospace" font-size="31" fill="#004f90" xml:space="preserve">  T&amp; operator[](size_t i)</text>
+<text x="330.0" y="454.1" font-family="'JetBrains Mono', Consolas, monospace" font-size="31" fill="#5d6470" xml:space="preserve">    noexcept { return data_[i]; }</text>
+<text x="330.0" y="504.7" font-family="'JetBrains Mono', Consolas, monospace" font-size="31" fill="#5d6470" xml:space="preserve">};</text>
+<rect x="0" y="0" width="12" height="630" fill="#004f90"/>
+</svg>
