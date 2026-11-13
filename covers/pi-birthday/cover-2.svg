@@ -137,5 +137,4 @@
 <text x="72" y="360" font-family="'JetBrains Mono', Consolas, monospace" font-size="22" letter-spacing="2" fill="#6aaef0">ARTICLE · PYTHON</text>
 <text x="72" y="440" font-family="'Source Serif 4', Georgia, serif" font-weight="600" font-size="52" fill="#e7e9ec">Your birthday in the digits of</text>
 <text x="72" y="498" font-family="'Source Serif 4', Georgia, serif" font-weight="600" font-size="52" fill="#e7e9ec">π</text>
-<line x1="72" y1="320" x2="200" y2="320" stroke="#6aaef0" stroke-width="4"/>
 </svg>

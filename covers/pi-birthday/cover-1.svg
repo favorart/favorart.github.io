@@ -132,7 +132,6 @@
 <text x="1053.2" y="497.0" text-anchor="middle" font-family="'JetBrains Mono', Consolas, monospace" font-size="23" fill="#5d6470" opacity=".55">3</text>
 <text x="1083.9" y="497.0" text-anchor="middle" font-family="'JetBrains Mono', Consolas, monospace" font-size="23" fill="#5d6470" opacity=".55">8</text>
 <text x="1114.6" y="497.0" text-anchor="middle" font-family="'JetBrains Mono', Consolas, monospace" font-size="23" fill="#5d6470" opacity=".55">4</text>
-<rect x="0" y="0" width="12" height="630" fill="#004f90"/>
 <text x="72" y="120" font-family="'JetBrains Mono', Consolas, monospace" font-size="22" letter-spacing="2" fill="#004f90">ARTICLE · PYTHON</text>
 <text x="72" y="210" font-family="'Source Serif 4', Georgia, serif" font-weight="600" font-size="60" fill="#1c1f24">Your birthday in</text>
 <text x="72" y="277" font-family="'Source Serif 4', Georgia, serif" font-weight="600" font-size="60" fill="#1c1f24">the digits of π</text>

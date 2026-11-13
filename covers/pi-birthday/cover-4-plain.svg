@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<defs><linearGradient id="pg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd6c9"/><stop offset="1" stop-color="#d9d2ff"/></linearGradient></defs>
+<rect width="1200" height="630" fill="url(#pg)"/>
+<circle cx="890" cy="190" r="257" fill="#ffffff" opacity=".35"/>
+<circle cx="890" cy="190" r="154" fill="none" stroke="#ffffff" stroke-width="3" opacity=".7"/>
+<text x="-14" y="154" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="75" fill="#7a5fa8" opacity=".35">3.14159 26535 89793</text>
+<text x="-14" y="257" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="75" fill="#7a5fa8" opacity=".25">23846 26433 83279</text>
+<text x="-14" y="360" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="75" fill="#7a5fa8" opacity=".15">50288 41971 69399</text>
+<text x="806" y="257" font-family="Georgia, 'Times New Roman', serif" font-size="206" fill="#ffffff" opacity=".9">π</text>
+</svg>
