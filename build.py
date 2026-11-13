@@ -217,6 +217,41 @@ def rewrite_relative(html_text, entry, page_of):
     return ATTR_RE.sub(fix, html_text)
 
 
+TOKEN_RE = re.compile(r"(<[^>]+>)")
+BARE_URL_RE = re.compile(r"https?://[^\s<>\"']+")
+
+
+def short_url(url, limit=42):
+    """Readable label for a bare URL: domain + path, trimmed."""
+    parts = urllib.parse.urlsplit(url)
+    label = (parts.netloc[4:] if parts.netloc.startswith("www.") else parts.netloc) + parts.path.rstrip("/")
+    if len(label) > limit:
+        label = label[:limit].rsplit("/", 1)[0] + "/…"
+    return label
+
+
+def linkify_bare(html_text):
+    """External content: turn bare URLs in text (not in links/code) into short links."""
+    out, skip = [], 0
+    for tok in TOKEN_RE.split(html_text):
+        if tok.startswith("<"):
+            m = re.match(r"<(/?)(a|pre|code)", tok, re.I)
+            if m:
+                skip += -1 if m.group(1) else 1
+            out.append(tok)
+        elif skip or "http" not in tok:
+            out.append(tok)
+        else:
+            def link(m):
+                url = html.unescape(m.group(0))
+                tail = ""
+                while url and url[-1] in ".,;:!?)]}":
+                    tail, url = url[-1] + tail, url[:-1]
+                return '<a href="%s">%s</a>%s' % (esc(url, quote=True), esc(short_url(url)), esc(tail))
+            out.append(BARE_URL_RE.sub(link, tok))
+    return "".join(out)
+
+
 # ---------------------------------------------------------------- loading content
 
 def load_posts():
@@ -286,7 +321,7 @@ def load_external(offline):
             m = re.match(r"\A\s*#\s+(.+?)\s*#*\s*\n", raw)
             if m:  # the source's own H1 becomes the subtitle; the page H1 is the manifest title
                 item["subtitle"], raw = m.group(1).strip(), raw[m.end():]
-            item["body_html"] = rewrite_relative(render_markdown(raw), item, page_of)
+            item["body_html"] = linkify_bare(rewrite_relative(render_markdown(raw), item, page_of))
         items.append(item)
     return items
 
@@ -317,7 +352,11 @@ def item_url(item, t=None):
 
 
 def kind_of(item, t):
-    return esc(item["kind"]) if item.get("kind") else S(t, "linkedin_post")
+    """Label of the item; for a LinkedIn post it links to the original post."""
+    label = esc(item["kind"]) if item.get("kind") else S(t, "linkedin_post")
+    if item.get("original_url"):
+        return '<a class="src" href="%s">%s</a>' % (esc(item["original_url"]), label)
+    return label
 
 
 def card(item, t):
