@@ -465,12 +465,16 @@ def covers_page(items, t):
                             selected_tag=' <span class="tag">%s</span>' % S(t, "covers_current") if sel else ""))
         groups.append(tpl("cover_group", title=esc(item["title"]), set_in=S(t, "covers_set_in"), where=esc(where),
                           chosen=esc(chosen), options="\n".join(opts)))
-    sample = next((i for i in items if i["list"] and (i.get("card_cover_url") or i.get("cover_url"))), None)
-    demos = "\n".join('<div class="mask-demo" data-cover-mask="%s"><p class="hint"><code>%s</code></p>%s</div>'
-                      % (shape, shape, card(sample, t)) for shape in ("ellipse", "frame", "diagonal")) if sample else ""
+    # 3x3 demo of the cover frost: remaining frosted share x softness of the diagonal edge
+    with_cover = [i for i in items if i["list"] and (i.get("card_cover_url") or i.get("cover_url"))]
+    sample = next((i for i in with_cover if (i.get("cover_url") or "").endswith(RASTER)), with_cover[0] if with_cover else None)
+    demos = "\n".join(
+        '<div class="fx-tile" style="--cover-frost-left: %s; --cover-frost-soft: %s"><p class="hint">%d%% · %s</p>%s</div>'
+        % (left, soft, round(float(left) * 100), name, card(sample, t))
+        for left in (".3", ".2", ".1") for name, soft in (("strict", "2%"), ("medium", "10%"), ("wide", "25%"))) if sample else ""
     body = tpl("covers", kicker=S(t, "covers_kicker"), title=S(t, "covers_title"), lead=S(t, "covers_lead"),
                groups="\n".join(groups), mask_title=S(t, "covers_mask_title"), mask_hint=S(t, "covers_mask_hint"),
-               mask_demos=demos)
+               mask_demos=demos, play_all=S(t, "covers_play_all"), stop_all=S(t, "covers_stop_all"))
     return page(t, "%s — %s" % (t["covers_title"], t["author"]), body, "/writing/covers/", noindex=True,
                 section="writing")
 

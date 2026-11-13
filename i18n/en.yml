@@ -64,5 +64,7 @@ covers_set_in: Set in
 covers_current: current
 covers_option: Option
 covers_plain: Text-free variant for the article page
-covers_mask_title: Hover effect on covers
-covers_mask_hint: "Hover each card: the frost clears in the middle and stays at the edges. The shape is set by data-cover-mask on the body tag in templates/base.html: ellipse (default), frame or diagonal."
+covers_mask_title: Cover frost on hover
+covers_mask_hint: "Rows: how much of the cover stays frosted after hover (bottom-right corner). Columns: softness of the diagonal edge. Hover a tile or press Play all. The site default (20% · medium) is set by --cover-frost-left and --cover-frost-soft in assets/site.css."
+covers_play_all: ▶ Play all
+covers_stop_all: ■ Stop
