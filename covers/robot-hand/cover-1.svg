@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<rect width="1200" height="630" fill="#fbfaf7"/>
+<rect x="717.4" y="484.8" width="120" height="18" rx="4" fill="#5d6470" opacity=".5"/>
+<line x1="777.4" y1="478.8" x2="829.0" y2="268.2" stroke="#5d6470" stroke-width="16" stroke-linecap="round"/>
+<line x1="829.0" y1="268.2" x2="983.8" y2="190.2" stroke="#5d6470" stroke-width="16" stroke-linecap="round"/>
+<line x1="983.8" y1="190.2" x2="1061.2" y2="299.4" stroke="#5d6470" stroke-width="16" stroke-linecap="round"/>
+<circle cx="777.4" cy="478.8" r="13" fill="none" stroke="#004f90" stroke-width="5"/>
+<circle cx="829.0" cy="268.2" r="13" fill="none" stroke="#004f90" stroke-width="5"/>
+<circle cx="983.8" cy="190.2" r="13" fill="none" stroke="#004f90" stroke-width="5"/>
+<circle cx="1061.2" cy="299.4" r="13" fill="none" stroke="#004f90" stroke-width="5"/>
+<path d="M1061.2 299.4 Q 975.2 375.4 1087.0 451.5" fill="none" stroke="#004f90" stroke-width="4" stroke-dasharray="10 10"/>
+<circle cx="1087.0" cy="451.5" r="22" fill="none" stroke="#004f90" stroke-width="4"/>
+<path d="M1057.0 451.5h60M1087.0 421.5v60" stroke="#004f90" stroke-width="4"/>
+<rect x="0" y="0" width="12" height="630" fill="#004f90"/>
+<text x="72" y="120" font-family="'JetBrains Mono', Consolas, monospace" font-size="22" letter-spacing="2" fill="#004f90">RESEARCH · 2016</text>
+<text x="72" y="210" font-family="'Source Serif 4', Georgia, serif" font-weight="600" font-size="60" fill="#1c1f24">Point-to-point</text>
+<text x="72" y="277" font-family="'Source Serif 4', Georgia, serif" font-weight="600" font-size="60" fill="#1c1f24">motion of a robot</text>
+<text x="72" y="344" font-family="'Source Serif 4', Georgia, serif" font-weight="600" font-size="60" fill="#1c1f24">arm with discrete</text>
+<text x="72" y="411" font-family="'Source Serif 4', Georgia, serif" font-weight="600" font-size="60" fill="#1c1f24">control</text>
+<text x="72" y="560" font-family="Inter, Arial, sans-serif" font-size="24" fill="#5d6470">Kirill Golikov · favorart.github.io</text>
+</svg>

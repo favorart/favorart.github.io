@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<rect width="1200" height="630" fill="#111418"/>
+<defs><linearGradient id="fade" x1="0" x2="1"><stop offset="0" stop-color="#111418"/><stop offset=".55" stop-color="#111418" stop-opacity=".6"/><stop offset="1" stop-color="#111418" stop-opacity="0"/></linearGradient></defs>
+<g opacity=".35"><rect x="560.0" y="40.0" width="600.0" height="520.0" rx="18" fill="none" stroke="#9aa3ae" stroke-width="5"/>
+<rect x="584.0" y="64.0" width="120.0" height="107.0" rx="8" fill="#6aaef0" opacity=".25"/>
+<text x="594.0" y="90.0" font-family="'JetBrains Mono', Consolas, monospace" font-size="18" fill="#9aa3ae">L1</text>
+<rect x="728.0" y="64.0" width="120.0" height="107.0" rx="8" fill="#6aaef0" opacity=".85"/>
+<text x="738.0" y="90.0" font-family="'JetBrains Mono', Consolas, monospace" font-size="18" fill="#9aa3ae">L1</text>
+<rect x="872.0" y="64.0" width="120.0" height="107.0" rx="8" fill="#6aaef0" opacity=".25"/>
+<text x="882.0" y="90.0" font-family="'JetBrains Mono', Consolas, monospace" font-size="18" fill="#9aa3ae">L1</text>
+<rect x="1016.0" y="64.0" width="120.0" height="107.0" rx="8" fill="#6aaef0" opacity=".25"/>
+<text x="1026.0" y="90.0" font-family="'JetBrains Mono', Consolas, monospace" font-size="18" fill="#9aa3ae">L1</text>
+<rect x="584.0" y="195.0" width="120.0" height="107.0" rx="8" fill="#6aaef0" opacity=".25"/>
+<text x="594.0" y="221.0" font-family="'JetBrains Mono', Consolas, monospace" font-size="18" fill="#9aa3ae">L1</text>
+<rect x="728.0" y="195.0" width="120.0" height="107.0" rx="8" fill="#6aaef0" opacity=".25"/>
+<text x="738.0" y="221.0" font-family="'JetBrains Mono', Consolas, monospace" font-size="18" fill="#9aa3ae">L1</text>
+<rect x="872.0" y="195.0" width="120.0" height="107.0" rx="8" fill="#6aaef0" opacity=".25"/>
+<text x="882.0" y="221.0" font-family="'JetBrains Mono', Consolas, monospace" font-size="18" fill="#9aa3ae">L1</text>
+<rect x="1016.0" y="195.0" width="120.0" height="107.0" rx="8" fill="#6aaef0" opacity=".25"/>
+<text x="1026.0" y="221.0" font-family="'JetBrains Mono', Consolas, monospace" font-size="18" fill="#9aa3ae">L1</text>
+<rect x="584.0" y="332.0" width="552.0" height="93.6" rx="8" fill="none" stroke="#6aaef0" stroke-width="4"/>
+<text x="598.0" y="389.2" font-family="'JetBrains Mono', Consolas, monospace" font-size="22" fill="#9aa3ae">L3 cache</text>
+<line x1="590.0" y1="560.0" x2="590.0" y2="582.0" stroke="#9aa3ae" stroke-width="5"/>
+<line x1="650.0" y1="560.0" x2="650.0" y2="582.0" stroke="#9aa3ae" stroke-width="5"/>
+<line x1="710.0" y1="560.0" x2="710.0" y2="582.0" stroke="#9aa3ae" stroke-width="5"/>
+<line x1="770.0" y1="560.0" x2="770.0" y2="582.0" stroke="#9aa3ae" stroke-width="5"/>
+<line x1="830.0" y1="560.0" x2="830.0" y2="582.0" stroke="#9aa3ae" stroke-width="5"/>
+<line x1="890.0" y1="560.0" x2="890.0" y2="582.0" stroke="#9aa3ae" stroke-width="5"/>
+<line x1="950.0" y1="560.0" x2="950.0" y2="582.0" stroke="#9aa3ae" stroke-width="5"/>
+<line x1="1010.0" y1="560.0" x2="1010.0" y2="582.0" stroke="#9aa3ae" stroke-width="5"/>
+<line x1="1070.0" y1="560.0" x2="1070.0" y2="582.0" stroke="#9aa3ae" stroke-width="5"/>
+<line x1="1130.0" y1="560.0" x2="1130.0" y2="582.0" stroke="#9aa3ae" stroke-width="5"/></g>
+<rect x="0" y="0" width="1200" height="630" fill="url(#fade)"/>
+<text x="72" y="360" font-family="'JetBrains Mono', Consolas, monospace" font-size="22" letter-spacing="2" fill="#6aaef0">COURSE · MSU</text>
+<text x="72" y="440" font-family="'Source Serif 4', Georgia, serif" font-weight="600" font-size="52" fill="#e7e9ec">Architecture and Software of</text>
+<text x="72" y="498" font-family="'Source Serif 4', Georgia, serif" font-weight="600" font-size="52" fill="#e7e9ec">High-Performance Systems</text>
+<line x1="72" y1="320" x2="200" y2="320" stroke="#6aaef0" stroke-width="4"/>
+</svg>

@@ -1,0 +1,45 @@
+# UI strings for English. To add a language, copy this file to i18n/<lang>.yml,
+# set `lang` and `prefix` (e.g. /ru), translate the strings and add content/home.<lang>.html.
+# The default language (prefix "") is served at the site root.
+lang: en
+prefix: ""
+name: English
+author: Kirill Golikov
+months: [Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec]
+
+home_title: Kirill Golikov
+home_description: Kirill Golikov — Senior Software Engineer. C++, performance optimization, ML infrastructure, systems. Bilbao, Spain.
+home_og_title: Kirill Golikov — Senior Software Engineer
+home_og_description: C++, performance optimization, ML infrastructure, systems. Bilbao, Spain.
+
+nav_writing: Writing
+nav_courses: Courses
+nav_contact: Contact
+footer_contact: Contact
+
+all_writing: All writing →
+all_courses: All courses →
+back_to_writing: ← All writing
+back_to_courses: ← All courses
+
+writing_kicker: Writing
+writing_title: Posts & articles
+writing_lead: LinkedIn posts and longer articles on C++, performance, ML and the projects behind them.
+writing_description: Posts and articles by Kirill Golikov.
+
+courses_kicker: Teaching
+courses_title: Courses
+courses_lead: Lecture courses I created and taught at Lomonosov MSU (in Russian), with videos and slides.
+courses_description: Lecture courses by Kirill Golikov.
+
+source: Source
+originally_on: Originally published on
+live_demo: Live demo →
+linkedin_post: LinkedIn post
+
+covers_kicker: Covers
+covers_title: Cover options
+covers_lead: Generated SVG covers for content without its own preview image. Pick one per item by changing its cover field, then commit and push. Option 1 is the default.
+covers_set_in: Set in
+covers_current: current
+covers_option: Option

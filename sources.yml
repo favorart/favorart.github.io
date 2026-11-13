@@ -1,0 +1,95 @@
+# External content. It lives in its own public repos and is fetched at build time
+# (no copies here). Relative links/images are rewritten to absolute GitHub URLs.
+#
+# Sections: `articles` -> /writing/<slug>/ , `courses` -> /courses/<slug>/
+# Fields:
+#   slug        page URL segment
+#   repo        owner/name on GitHub (public)
+#   branch      branch to read from
+#   path        Markdown file inside the repo
+#   title       card / page title
+#   date        YYYY-MM-DD, used for sorting (newest first)
+#   date_label  optional, shown instead of the date (e.g. "2018 → 2026")
+#   kind        optional label on the card
+#   lang        language of the text: en | ru | ...
+#   summary     one or two sentences for the card
+#   cover       repo-relative path to the preview image (options: see /writing/covers/)
+#   demo_url    optional "Live demo" link on the page
+#   list        false = page is built but has no card of its own (e.g. a translation)
+
+articles:
+  - slug: pi-birthday
+    repo: favorart/pi-birthday
+    branch: main
+    path: article.md
+    title: Your birthday in the digits of π
+    date: 2018-01-01
+    date_label: 2018 → 2026
+    kind: Article · EN / RU
+    lang: en
+    summary: A small GUI app in Python/Tkinter that finds your date of birth among 3 billion digits of π — later rebuilt for the web.
+    cover: covers/pi-birthday/cover-1.svg
+    demo_url: https://favorart.github.io/pi-birthday/
+
+  - slug: pi-birthday-ru
+    repo: favorart/pi-birthday
+    branch: main
+    path: article.ru.md
+    title: День рождения в цифрах числа π
+    date: 2018-01-01
+    date_label: 2018 → 2026
+    kind: Статья · RU
+    lang: ru
+    summary: Небольшое GUI-приложение на Python/Tkinter, которое ищет дату рождения среди 3 миллиардов знаков π.
+    cover: covers/pi-birthday/cover-1.svg
+    demo_url: https://favorart.github.io/pi-birthday/
+    list: false
+
+  - slug: robot-hand
+    repo: favorart/robot-hand
+    branch: master
+    path: README.md
+    title: Point-to-point motion of a robot arm with discrete control
+    date: 2016-01-01
+    date_label: "2016"
+    kind: Research · Master's thesis
+    lang: en
+    summary: Learning algorithms for positioning a robotic arm with discrete control — trial and error instead of a known model.
+    cover: covers/robot-hand/cover-1.svg
+
+  - slug: ipl
+    repo: favorart/IPL
+    branch: master
+    path: docs/ru/README.md
+    title: An interpreter with customizable syntax
+    date: 2013-01-01
+    date_label: "2013"
+    kind: Article · RU
+    lang: ru
+    summary: Bachelor's project — a cross-platform interpreter whose keywords and grammar are configurable.
+    cover: covers/ipl/cover-1.svg
+
+courses:
+  - slug: cpp-course
+    repo: favorart/cpp_course
+    branch: main
+    path: README.md
+    title: Design of Big Systems in C++
+    date: 2019-04-01
+    date_label: 2019 – 2023
+    kind: Course · RU · Lomonosov MSU
+    lang: ru
+    summary: Lecture course for master's students — software design, C++11–20, idioms, memory, concurrency, Boost and networking; videos, slides and self-tests.
+    cover: covers/cpp-course/cover-1.svg
+
+  - slug: arch-course
+    repo: favorart/arch_course
+    branch: main
+    path: README.md
+    title: Architecture and Software of High-Performance Systems
+    date: 2018-12-01
+    date_label: 2018, 2020
+    kind: Course · RU · Lomonosov MSU
+    lang: ru
+    summary: Lecture course on CPU architecture, x86-64, caches, virtual memory, interrupts, OS and high-load systems — with videos and slides.
+    cover: covers/arch-course/cover-1.svg

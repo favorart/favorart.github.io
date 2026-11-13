@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<rect width="1200" height="630" fill="#111418"/>
+<defs><linearGradient id="fade" x1="0" x2="1"><stop offset="0" stop-color="#111418"/><stop offset=".55" stop-color="#111418" stop-opacity=".6"/><stop offset="1" stop-color="#111418" stop-opacity="0"/></linearGradient></defs>
+<g opacity=".35"><text x="560.0" y="101.2" font-family="'JetBrains Mono', Consolas, monospace" font-size="37" fill="#6aaef0" xml:space="preserve">template &lt;typename T&gt;</text>
+<text x="560.0" y="162.4" font-family="'JetBrains Mono', Consolas, monospace" font-size="37" fill="#9aa3ae" xml:space="preserve">class Pool {</text>
+<text x="560.0" y="223.5" font-family="'JetBrains Mono', Consolas, monospace" font-size="37" fill="#9aa3ae" xml:space="preserve">  alignas(64) T* data_;</text>
+<text x="560.0" y="284.7" font-family="'JetBrains Mono', Consolas, monospace" font-size="37" fill="#9aa3ae" xml:space="preserve">  size_t size_;</text>
+<text x="560.0" y="345.9" font-family="'JetBrains Mono', Consolas, monospace" font-size="37" fill="#9aa3ae" xml:space="preserve">public:</text>
+<text x="560.0" y="407.1" font-family="'JetBrains Mono', Consolas, monospace" font-size="37" fill="#6aaef0" xml:space="preserve">  T&amp; operator[](size_t i)</text>
+<text x="560.0" y="468.2" font-family="'JetBrains Mono', Consolas, monospace" font-size="37" fill="#9aa3ae" xml:space="preserve">    noexcept { return data_[i]; }</text>
+<text x="560.0" y="529.4" font-family="'JetBrains Mono', Consolas, monospace" font-size="37" fill="#9aa3ae" xml:space="preserve">};</text></g>
+<rect x="0" y="0" width="1200" height="630" fill="url(#fade)"/>
+<text x="72" y="360" font-family="'JetBrains Mono', Consolas, monospace" font-size="22" letter-spacing="2" fill="#6aaef0">COURSE · MSU</text>
+<text x="72" y="440" font-family="'Source Serif 4', Georgia, serif" font-weight="600" font-size="52" fill="#e7e9ec">Design of Big Systems in C++</text>
+<line x1="72" y1="320" x2="200" y2="320" stroke="#6aaef0" stroke-width="4"/>
+</svg>
