@@ -6,8 +6,6 @@
   --hdr: 62px;
   --bg: #f7f4fb;
   --m1: #ffd9e4; --m2: #d9e6ff; --m3: #dff5e8; --m4: #fff0cf; --m5: #e8dcff;
-  --sun-core: rgba(255, 227, 168, .9);
-  --sun-glow: rgba(255, 196, 84, .48);
   --sun: #f7a823;
   --sun-ink: #3a2500;
   --link: #a65200;
@@ -35,8 +33,6 @@
   :root {
     --bg: #15131c;
     --m1: #3a2433; --m2: #1e2a44; --m3: #1b3329; --m4: #3a2f17; --m5: #2b2142;
-    --sun-core: rgba(90, 66, 20, .85);
-    --sun-glow: rgba(255, 170, 60, .19);
     --sun: #ffb84a;
     --sun-ink: #2a1a00;
     --link: #ffb13d;
@@ -96,7 +92,8 @@ a.src:hover, a.demo:hover { color: var(--link); text-shadow: 0 0 0 transparent; 
 h1 a, h2 a, h3 a, h4 a { font-weight: inherit; }
 code { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: .9em; }
 
-/* ---- fixed background layer (mockup A): soft pastel mesh + a warm "sun" in the middle of the viewport ---- */
+/* ---- fixed background layer: exactly the body::before mesh of design mockup A (a.html),
+   the "sun" is its warm m4 spot near the centre ---- */
 .bg { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; background: var(--bg); }
 .bg::before {
   content: ""; position: absolute; inset: -20vmax; filter: blur(10px);
@@ -104,11 +101,8 @@ code { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: .9em; 
     radial-gradient(40vmax 40vmax at 12% 18%, var(--m1), transparent 60%),
     radial-gradient(38vmax 38vmax at 85% 10%, var(--m2), transparent 60%),
     radial-gradient(42vmax 42vmax at 70% 75%, var(--m3), transparent 60%),
-    radial-gradient(30vmax 30vmax at 20% 85%, var(--m5), transparent 60%);
-}
-.bg .sun {
-  position: absolute; left: 50%; top: 50%; width: 46vmax; height: 46vmax; transform: translate(-50%, -50%); border-radius: 50%;
-  background: radial-gradient(circle, var(--sun-core) 0, var(--sun-glow) 22%, transparent 62%);
+    radial-gradient(30vmax 30vmax at 20% 85%, var(--m5), transparent 60%),
+    radial-gradient(22vmax 22vmax at 50% 45%, var(--m4), transparent 60%);
 }
 
 /* ---- glass surfaces ---- */
