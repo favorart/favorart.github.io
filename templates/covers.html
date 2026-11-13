@@ -4,10 +4,25 @@
   <p class="lead">$lead</p>
 </header>
 <section class="cover-group">
-  <h2>$mask_title</h2>
+  <div class="fx-head"><h2>$mask_title</h2><button class="btn big calm" type="button" id="fx-play">$play_all</button></div>
   <p class="hint">$mask_hint</p>
-  <div class="mask-demos">
+  <div class="fx-grid" id="fx-grid">
 $mask_demos
   </div>
 </section>
 $groups
+<script>
+  // "Play all": hover-in, hold 1 s, hover-out, repeat
+  (function () {
+    var btn = document.getElementById('fx-play'), grid = document.getElementById('fx-grid'), timer = null;
+    var play = btn.textContent, stop = '$stop_all';
+    function cycle() {
+      grid.classList.add('on');
+      timer = setTimeout(function () { grid.classList.remove('on'); timer = setTimeout(cycle, 1200); }, 1600);
+    }
+    btn.addEventListener('click', function () {
+      if (timer) { clearTimeout(timer); timer = null; grid.classList.remove('on'); btn.textContent = play; }
+      else { btn.textContent = stop; cycle(); }
+    });
+  })();
+</script>
