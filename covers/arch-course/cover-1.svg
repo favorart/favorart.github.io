@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<rect width="1200" height="630" fill="#fbfaf7"/>
+<rect x="700.0" y="120.0" width="430.0" height="390.0" rx="18" fill="none" stroke="#5d6470" stroke-width="5"/>
+<rect x="724.0" y="144.0" width="77.5" height="71.3" rx="8" fill="#004f90" opacity=".25"/>
+<text x="734.0" y="170.0" font-family="'JetBrains Mono', Consolas, monospace" font-size="18" fill="#5d6470">L1</text>
+<rect x="825.5" y="144.0" width="77.5" height="71.3" rx="8" fill="#004f90" opacity=".85"/>
+<text x="835.5" y="170.0" font-family="'JetBrains Mono', Consolas, monospace" font-size="18" fill="#5d6470">L1</text>
+<rect x="927.0" y="144.0" width="77.5" height="71.3" rx="8" fill="#004f90" opacity=".25"/>
+<text x="937.0" y="170.0" font-family="'JetBrains Mono', Consolas, monospace" font-size="18" fill="#5d6470">L1</text>
+<rect x="1028.5" y="144.0" width="77.5" height="71.3" rx="8" fill="#004f90" opacity=".25"/>
+<text x="1038.5" y="170.0" font-family="'JetBrains Mono', Consolas, monospace" font-size="18" fill="#5d6470">L1</text>
+<rect x="724.0" y="239.2" width="77.5" height="71.3" rx="8" fill="#004f90" opacity=".25"/>
+<text x="734.0" y="265.2" font-family="'JetBrains Mono', Consolas, monospace" font-size="18" fill="#5d6470">L1</text>
+<rect x="825.5" y="239.2" width="77.5" height="71.3" rx="8" fill="#004f90" opacity=".25"/>
+<text x="835.5" y="265.2" font-family="'JetBrains Mono', Consolas, monospace" font-size="18" fill="#5d6470">L1</text>
+<rect x="927.0" y="239.2" width="77.5" height="71.3" rx="8" fill="#004f90" opacity=".25"/>
+<text x="937.0" y="265.2" font-family="'JetBrains Mono', Consolas, monospace" font-size="18" fill="#5d6470">L1</text>
+<rect x="1028.5" y="239.2" width="77.5" height="71.3" rx="8" fill="#004f90" opacity=".25"/>
+<text x="1038.5" y="265.2" font-family="'JetBrains Mono', Consolas, monospace" font-size="18" fill="#5d6470">L1</text>
+<rect x="724.0" y="340.5" width="382.0" height="70.2" rx="8" fill="none" stroke="#004f90" stroke-width="4"/>
+<text x="738.0" y="383.4" font-family="'JetBrains Mono', Consolas, monospace" font-size="22" fill="#5d6470">L3 cache</text>
+<line x1="730.0" y1="510.0" x2="730.0" y2="532.0" stroke="#5d6470" stroke-width="5"/>
+<line x1="771.1" y1="510.0" x2="771.1" y2="532.0" stroke="#5d6470" stroke-width="5"/>
+<line x1="812.2" y1="510.0" x2="812.2" y2="532.0" stroke="#5d6470" stroke-width="5"/>
+<line x1="853.3" y1="510.0" x2="853.3" y2="532.0" stroke="#5d6470" stroke-width="5"/>
+<line x1="894.4" y1="510.0" x2="894.4" y2="532.0" stroke="#5d6470" stroke-width="5"/>
+<line x1="935.6" y1="510.0" x2="935.6" y2="532.0" stroke="#5d6470" stroke-width="5"/>
+<line x1="976.7" y1="510.0" x2="976.7" y2="532.0" stroke="#5d6470" stroke-width="5"/>
+<line x1="1017.8" y1="510.0" x2="1017.8" y2="532.0" stroke="#5d6470" stroke-width="5"/>
+<line x1="1058.9" y1="510.0" x2="1058.9" y2="532.0" stroke="#5d6470" stroke-width="5"/>
+<line x1="1100.0" y1="510.0" x2="1100.0" y2="532.0" stroke="#5d6470" stroke-width="5"/>
+<rect x="0" y="0" width="12" height="630" fill="#004f90"/>
+<text x="72" y="120" font-family="'JetBrains Mono', Consolas, monospace" font-size="22" letter-spacing="2" fill="#004f90">COURSE · MSU</text>
+<text x="72" y="210" font-family="'Source Serif 4', Georgia, serif" font-weight="600" font-size="60" fill="#1c1f24">Architecture and</text>
+<text x="72" y="277" font-family="'Source Serif 4', Georgia, serif" font-weight="600" font-size="60" fill="#1c1f24">Software of</text>
+<text x="72" y="344" font-family="'Source Serif 4', Georgia, serif" font-weight="600" font-size="60" fill="#1c1f24">High-Performance</text>
+<text x="72" y="411" font-family="'Source Serif 4', Georgia, serif" font-weight="600" font-size="60" fill="#1c1f24">Systems</text>
+<text x="72" y="560" font-family="Inter, Arial, sans-serif" font-size="24" fill="#5d6470">Kirill Golikov · favorart.github.io</text>
+</svg>
