@@ -2,7 +2,32 @@
   <div class="kicker">$kicker</div>
   <h1>$title</h1>
   <p class="lead">$lead</p>
+  $filters
 </header>
-<section class="posts">
+<section class="posts" id="cards">
 $cards
 </section>
+<script>
+  // /writing/ filters: All · Posts · Articles · Papers (URL hash keeps the choice; without JS all cards show)
+  (function () {
+    var nav = document.querySelector('.filters'), grid = document.getElementById('cards');
+    if (!nav) return;
+    nav.hidden = false;
+    var map = { '#posts': 'post', '#articles': 'article', '#papers': 'paper' };
+    function apply() {
+      var f = map[location.hash] || '';
+      if (f) grid.setAttribute('data-filter', f); else grid.removeAttribute('data-filter');
+      nav.querySelectorAll('a').forEach(function (a) {
+        if (a.getAttribute('data-filter') === f) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
+      });
+    }
+    nav.addEventListener('click', function (e) {
+      var a = e.target.closest('a'); if (!a) return;
+      e.preventDefault();
+      history.replaceState(null, '', a.getAttribute('href') === '#all' ? location.pathname : a.getAttribute('href'));
+      apply();
+    });
+    window.addEventListener('hashchange', apply);
+    apply();
+  })();
+</script>

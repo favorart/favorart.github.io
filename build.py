@@ -307,7 +307,7 @@ def load_posts():
         if cover:  # the cover is shown above the title; drop the same picture repeated in the text
             body_html = re.sub(r'<p>\s*<img[^>]*\bsrc="%s"[^>]*>\s*</p>\s*' % re.escape(cover), "", body_html)
         items.append({
-            "type": "post", "section": "writing", "slug": slug,
+            "type": "post", "wtype": "post", "section": "writing", "slug": slug,
             "title": str(meta["title"]), "date": as_date(meta["date"], where),
             "date_label": meta.get("date_label"), "lang": meta.get("lang", "ru"),
             "summary": str(meta["summary"]), "kind": meta.get("kind"),
@@ -327,7 +327,7 @@ def load_external(offline):
         return []
     with open(path, encoding="utf-8") as f:
         manifest = yaml.safe_load(f) or {}
-    unknown = set(manifest) - set(SECTIONS)
+    unknown = set(manifest) - set(SECTIONS) - {"papers"}
     if unknown:
         fail("sources.yml: unknown sections %s (known: %s)" % (sorted(unknown), sorted(SECTIONS)))
     entries = [(SECTIONS[key], e) for key in SECTIONS for e in (manifest.get(key) or [])]
@@ -342,7 +342,7 @@ def load_external(offline):
         if cover and not os.path.isfile(os.path.join(ROOT, cover)):
             fail("%s: cover '%s' not found" % (where, cover))
         item = {
-            "type": "external", "section": sec, "slug": e["slug"],
+            "type": "external", "wtype": e.get("type", "article"), "section": sec, "slug": e["slug"],
             "title": str(e["title"]), "date": as_date(e["date"], where),
             "date_label": e.get("date_label"), "lang": e.get("lang", "en"),
             "summary": str(e["summary"]), "kind": e.get("kind"),
@@ -361,7 +361,48 @@ def load_external(offline):
                 item["subtitle"], raw = m.group(1).strip(), raw[m.end():]
             item["body_html"] = linkify_bare(rewrite_relative(render_markdown(raw), item, page_of))
         items.append(item)
+    items += [paper_item(e) for e in manifest.get("papers") or []]
     return items
+
+
+PAPER_LABELS = {"ru": ("Аннотация", "Ключевые слова"), "en": ("Abstract", "Keywords")}
+
+
+def paper_item(e):
+    """A journal publication: bibliographic record + abstracts, the PDF stays on the journal's site."""
+    where = "sources.yml[papers/%s]" % e.get("slug")
+    for key in ("slug", "title", "authors", "journal", "journal_en", "volume", "issue", "year", "pages", "pdf",
+                "summary", "abstract"):
+        if not e.get(key):
+            fail("%s: field '%s' is required" % (where, key))
+    cover = e.get("cover")
+    if cover and not os.path.isfile(os.path.join(ROOT, cover)):
+        fail("%s: cover '%s' not found" % (where, cover))
+    lang, year = e.get("lang", "ru"), int(e["year"])
+    ref = "%s %s // %s. — %d. — Т. %s, вып. %s. — С. %s." % (
+        esc(e["authors"]), esc(e["title"]), esc(e["journal"]), year, e["volume"], e["issue"], esc(str(e["pages"])))
+    body = ['<p class="paper-ref">%s</p>' % ref,
+            '<p class="paper-pdf"><a class="btn sun big" href="%s">PDF <span class="arr">→</span></a></p>' % esc(e["pdf"]),
+            '<h2>%s</h2>' % PAPER_LABELS[lang][0], '<p>%s</p>' % esc(e["abstract"])]
+    if e.get("keywords"):
+        body.append('<p><strong>%s:</strong> %s</p>' % (PAPER_LABELS[lang][1], esc(e["keywords"])))
+    if e.get("abstract_en") and lang != "en":
+        body += ['<h2 lang="en">%s</h2>' % PAPER_LABELS["en"][0],
+                 '<p lang="en"><em>%s</em></p>' % esc(e.get("title_en", "")),
+                 '<p lang="en">%s</p>' % esc(e["abstract_en"])]
+        if e.get("keywords_en"):
+            body.append('<p lang="en"><strong>%s:</strong> %s</p>' % (PAPER_LABELS["en"][1], esc(e["keywords_en"])))
+    return {
+        "type": "paper", "wtype": "paper", "section": "writing", "slug": e["slug"], "title": str(e["title"]),
+        "date": as_date(e.get("date") or "%d-01-01" % year, where), "date_label": "vol. %s(%s)" % (e["volume"], e["issue"]),
+        "lang": lang,
+        "summary": str(e["summary"]), "kind": "Paper · Intelligent Systems · %d" % year,
+        "original_url": e["pdf"], "tags": [], "demo_url": None, "list": e.get("list", True),
+        "cover_url": "/" + cover if cover else None,
+        "options_dir": os.path.join(ROOT, os.path.dirname(cover)) if cover else None,
+        "subtitle": e.get("title_en"), "body_html": "\n".join(body), "paper": e,
+        "source_line": "%s, vol. %s, no. %s, %d, pp. %s" % (e["journal_en"], e["volume"], e["issue"], year, e["pages"]),
+    }
 
 
 # ---------------------------------------------------------------- pages
@@ -438,6 +479,13 @@ def cover_imgs(item, url, cls, lazy=True):
     return html_
 
 
+def type_chip(item, t):
+    """The one type tag of a Writing item: Post / Article / Paper (courses have none)."""
+    if item["section"] != "writing":
+        return ""
+    return '<span class="chip type">%s</span>' % S(t, "type_" + item["wtype"])
+
+
 def card(item, t):
     cover, src = "", item.get("card_cover_url") or item.get("cover_url")
     if src:
@@ -445,13 +493,16 @@ def card(item, t):
     badge = ""
     if item.get("demo_url"):
         badge = '<a class="badge" href="%s">%s</a>' % (esc(item["demo_url"]), S(t, "badge_demo"))
-    return tpl("card", href=item_url(item), cover=cover, badge=badge, kind=kind_of(item, t), date=date_text(item, t),
+    return tpl("card", href=item_url(item), cover=cover, badge=badge, type_chip=type_chip(item, t),
+               wtype=esc(item.get("wtype", "")) if item["section"] == "writing" else "", kind=kind_of(item, t), date=date_text(item, t),
                lang=esc(item["lang"]), title=esc(item["title"]), summary=esc(item["summary"]))
 
 
 def article_page(item, t):
     if item["type"] == "post":
         source_top = '<a href="%s">LinkedIn</a>' % esc(item["original_url"])
+    elif item["type"] == "paper":
+        source_top = '<a href="%s">%s</a>' % (esc(item["original_url"]), esc(item["source_line"]))
     else:
         repo_url = "https://github.com/" + item["repo"]
         file_url = "%s/blob/%s/%s" % (repo_url, item["branch"], item["path"])
@@ -460,10 +511,6 @@ def article_page(item, t):
     demo = ""
     if item.get("demo_url"):
         demo = ' · <a class="demo" href="%s">%s</a>' % (esc(item["demo_url"]), S(t, "live_demo"))
-    tags = ""
-    if item["tags"]:
-        tags = '<div class="chips">%s</div>' % "".join(
-            '<span class="chip">#%s</span>' % esc(str(x)) for x in item["tags"])
     subtitle = '<p class="subtitle">%s</p>' % esc(item["subtitle"]) if item.get("subtitle") else ""
     back = "back_to_courses" if item["section"] == "courses" else "back_to_writing"
     if item["type"] == "post":
@@ -477,7 +524,7 @@ def article_page(item, t):
         hero = cover_imgs(item, page_cover(item), "hero-cover", lazy=False)
     body = tpl("article", hero=hero, kind=kind_of(item, t), date=date_text(item, t), lang=esc(item["lang"]),
                title=esc(item["title"]), subtitle=subtitle, author=S(t, "author"), source_top=source_top,
-               demo=demo, content=item["body_html"], tags=tags, cta=cta,
+               demo=demo, content=item["body_html"], cta=cta, type_chip=type_chip(item, t),
                back_href="%s/%s/" % (t["prefix"], item["section"]), back_text=S(t, back))
     cover = item.get("cover_url") or ""
     return page(t, "%s — %s" % (item["title"], t["author"]), body, item_url(item), description=item["summary"],
@@ -488,8 +535,16 @@ def article_page(item, t):
 def list_page(items, section, t):
     key = "writing" if section == "writing" else "courses"
     cards = "\n".join(card(i, t) for i in items if i["list"] and i["section"] == section)
+    filters = ""
+    if section == "writing":
+        listed = [i for i in items if i["list"] and i["section"] == section]
+        counts = {w: sum(1 for i in listed if i["wtype"] == w) for w in ("post", "article", "paper")}
+        filters = '<nav class="filters" aria-label="%s" hidden>%s</nav>' % (S(t, "filter_label"), "".join(
+            '<a id="%s" href="#%s" data-filter="%s">%s <span class="n">%d</span></a>' % (h, h, f, S(t, "filter_" + h), n)
+            for h, f, n in (("all", "", len(listed)), ("posts", "post", counts["post"]),
+                            ("articles", "article", counts["article"]), ("papers", "paper", counts["paper"]))))
     body = tpl("list", kicker=S(t, key + "_kicker"), title=S(t, key + "_title"), lead=S(t, key + "_lead"),
-               cards=cards)
+               cards=cards, filters=filters)
     return page(t, "%s — %s" % (t[key + "_title"], t["author"]), body, "%s/%s/" % (t["prefix"], section),
                 description=t[key + "_description"], section="writing" if section == "writing" else "teaching")
 

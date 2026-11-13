@@ -71,6 +71,15 @@ originally_on: Originally published on
 live_demo: Live demo →
 badge_demo: Live demo
 linkedin_post: LinkedIn post
+# the one type tag of a Writing item, and the filters on /writing/
+type_post: Post
+type_article: Article
+type_paper: Paper
+filter_label: Filter by type
+filter_all: All
+filter_posts: Posts
+filter_articles: Articles
+filter_papers: Papers
 
 covers_kicker: Covers
 covers_title: Cover options
