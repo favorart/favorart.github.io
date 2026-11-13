@@ -20,6 +20,7 @@ Design lives only in templates/ and assets/site.css; this file is content logic.
 import argparse
 import datetime as dt
 import glob
+import hashlib
 import html
 import os
 import posixpath
@@ -50,6 +51,36 @@ esc = html.escape
 
 def fail(msg):
     raise SystemExit("build error: " + msg)
+
+
+# ---------------------------------------------------------------- cache busting
+# Local CSS / favicon / cover URLs get ?v=<8 hex of sha256 of the file>, so browsers never pair new HTML
+# with a stale cached file. The stylesheet's version is set in main() from its generated text.
+ASSET_V = {}
+
+
+def file_v(path):
+    if path not in ASSET_V:
+        with open(path, "rb") as f:
+            ASSET_V[path] = hashlib.sha256(f.read()).hexdigest()[:8]
+    return ASSET_V[path]
+
+
+def versioned(url, path):
+    return "%s?v=%s" % (url, file_v(path)) if path and os.path.isfile(path) else url
+
+
+def asset_url(name):
+    """/assets/<name>?v=..."""
+    if name == "site.css":
+        return "/assets/site.css?v=" + ASSET_V["site.css"]
+    return versioned("/assets/" + name, os.path.join(ROOT, "assets", name))
+
+
+def cover_file(item, url):
+    """Local file behind a cover URL of an item (its post folder or covers/<slug>/)."""
+    d = item.get("options_dir") or item.get("folder")
+    return os.path.join(d, os.path.basename(url)) if d and url else None
 
 
 # ---------------------------------------------------------------- templates & strings
@@ -345,6 +376,7 @@ def page(t, title, body, path, description="", lang=None, og_image=None, og_type
     return tpl("base", lang=esc(lang or t["lang"]), title=esc(title), og_title=esc(og_title or title),
                description=esc(description), og_type=og_type, url=esc(SITE_URL + path),
                head_extra="\n".join(extra), body_class=body_class, prefix=t["prefix"],
+               css_url=asset_url("site.css"), favicon_url=asset_url("favicon.svg"),
                author=S(t, "author"), role_title=S(t, "role_title"), role_skills=S(t, "role_skills"), lang_soon=S(t, "lang_soon"), section=section,
                theme_label=S(t, "theme_label"), theme_auto=S(t, "theme_auto"), theme_light=S(t, "theme_light"),
                theme_dark=S(t, "theme_dark"),
@@ -399,9 +431,10 @@ def cover_imgs(item, url, cls, lazy=True):
     lz = ' loading="lazy"' if lazy else ""
     dark = dark_twin(item, url)
     html_ = '<img class="%s cover-light%s" src="%s" alt="" width="1200" height="630"%s>' % (
-        cls, " has-dark" if dark else "", esc(url), lz)
+        cls, " has-dark" if dark else "", esc(versioned(url, cover_file(item, url))), lz)
     if dark:
-        html_ += '<img class="%s cover-dark" src="%s" alt="" width="1200" height="630" loading="lazy">' % (cls, esc(dark))
+        html_ += '<img class="%s cover-dark" src="%s" alt="" width="1200" height="630" loading="lazy">' % (
+            cls, esc(versioned(dark, cover_file(item, dark))))
     return html_
 
 
@@ -487,9 +520,9 @@ def covers_page(items, t):
             plain_html = ""
             if os.path.isfile(os.path.join(d, plain)):
                 plain_html = '<img src="%s" alt="%s" width="1200" height="630" loading="lazy">' % (
-                    esc(base_url + "/" + plain), S(t, "covers_plain"))
+                    esc(versioned(base_url + "/" + plain, os.path.join(d, plain))), S(t, "covers_plain"))
             opts.append(tpl("cover_option", selected_class=" selected" if sel else "", plain=plain_html,
-                            src=esc(base_url + "/" + name), label="%s %d" % (S(t, "covers_option"), n),
+                            src=esc(versioned(base_url + "/" + name, opt)), label="%s %d" % (S(t, "covers_option"), n),
                             name=esc(name),
                             selected_tag=' <span class="tag">%s</span>' % S(t, "covers_current") if sel else ""))
         groups.append(tpl("cover_group", title=esc(item["title"]), set_in=S(t, "covers_set_in"), where=esc(where),
@@ -595,7 +628,9 @@ def main():
     os.makedirs(out)
     open(os.path.join(out, ".nojekyll"), "w").close()
     shutil.copytree(os.path.join(ROOT, "assets"), os.path.join(out, "assets"))
-    write(os.path.join(out, "assets", "site.css"), stylesheet())
+    css = stylesheet()
+    ASSET_V["site.css"] = hashlib.sha256(css.encode("utf-8")).hexdigest()[:8]
+    write(os.path.join(out, "assets", "site.css"), css)
     if os.path.isdir(os.path.join(ROOT, "covers")):
         shutil.copytree(os.path.join(ROOT, "covers"), os.path.join(out, "covers"))
 
