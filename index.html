@@ -97,6 +97,13 @@
   .skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 22px 28px; }
   .skills h3 { margin: 0 0 10px; font-size: 15px; font-weight: 600; }
 
+  .posts { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; }
+  .post { display: block; color: var(--text); transition: border-color .15s, transform .15s; }
+  .post:hover { text-decoration: none; border-color: var(--accent); transform: translateY(-2px); }
+  .post .meta { display: flex; justify-content: space-between; font: 12px/1 "JetBrains Mono", monospace; color: var(--accent); margin-bottom: 10px; }
+  .post h3 { font-size: 17px; }
+  .post .sub { display: block; margin-top: 6px; }
+
   .contact { display: grid; gap: 14px; max-width: 640px; }
   .contact .row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
   .contact label { display: grid; gap: 6px; font-size: 13px; font-weight: 500; color: var(--muted); }
@@ -149,6 +156,32 @@
     <div class="card"><h3>Performance engineering</h3><p>Profiling and optimizing hot paths: fps, micro-freezes, startup time, crash rate, GPU acceleration.</p></div>
     <div class="card"><h3>ML infrastructure</h3><p>Neural-network runtimes in C++/CUDA: Transformer, Attention, LoRA in the open-source NeoML framework; ONNX.</p></div>
     <div class="card"><h3>Systems &amp; storage</h3><p>SSD firmware, content-defined chunking for deduplication, data-reduction estimation for cloud storage.</p></div>
+  </div>
+</section>
+
+<section id="writing">
+  <h2>Writing</h2>
+  <div class="posts">
+    <a class="post card" href="https://www.linkedin.com/posts/golikovkirill_cpp-performance-simd-share-7525284047959457792-a7Ea/">
+      <div class="meta"><span>LinkedIn post</span><span>2026</span></div>
+      <h3>C++ performance with SIMD</h3>
+      <p>A post on speeding up C++ code with SIMD instructions.</p>
+    </a>
+    <a class="post card" href="https://github.com/favorart/pi-birthday/blob/main/article.md">
+      <div class="meta"><span>Article · EN / RU</span><span>2018 → 2026</span></div>
+      <h3>Your birthday in the digits of π</h3>
+      <p>A small GUI app in Python/Tkinter, later rebuilt for the web — with a live demo.</p>
+    </a>
+    <a class="post card" href="https://github.com/favorart/robot-hand#readme">
+      <div class="meta"><span>Research · Master's thesis</span><span>2016</span></div>
+      <h3>Point-to-point motion of a robot arm with discrete control</h3>
+      <p>Learning algorithms for positioning a robotic arm with discrete control.</p>
+    </a>
+    <a class="post card" href="https://github.com/favorart/IPL/blob/master/docs/ru/README.md">
+      <div class="meta"><span>Article · RU</span><span>2013</span></div>
+      <h3>An interpreter with customizable syntax</h3>
+      <p>Bachelor's project: a cross-platform interpreter whose keywords and grammar are configurable.</p>
+    </a>
   </div>
 </section>
 
