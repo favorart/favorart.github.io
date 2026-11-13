@@ -9,7 +9,8 @@ GitHub Actions (`.github/workflows/pages.yml`) on every push to `main`, daily, a
 
 | Path | What |
 |---|---|
-| `content/home.en.html` | home page body (CV, contact form) |
+| `content/home.en.html` | home page body (sections, CV preview, contact form) |
+| `content/cv.en.html` | the full CV page `/cv/` |
 | `i18n/en.yml` | UI strings; one file per language (`prefix: /ru` etc. for non-default ones) |
 | `templates/` | base layout and partials — the design lives here and in `assets/site.css` |
 | `assets/site.css` | the one stylesheet |
