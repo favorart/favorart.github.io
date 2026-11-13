@@ -143,18 +143,20 @@ def m_cpu(x, y, w, h, s, a):
     return "\n".join(out)
 
 
-def cover_pastel_pi(motif, title, kicker, plain=False):
-    """The pi tile of design mockup A, scaled to 1200x630 (digits run off the left edge)."""
+def cover_pastel_pi(motif, title, kicker, plain=False, dark=False):
+    """The pi tile of design mockup A, scaled to 1200x630 (digits run off the left edge).
+    dark=True: the same picture for the dark theme (written as cover-4-dark.svg)."""
     mono = "'JetBrains Mono', Consolas, 'Courier New', monospace"
+    g1, g2, ink, glass, ring = ("#3a2433", "#2b2142", "#b6a6f5", ".08", ".35") if dark else ("#ffd6c9", "#d9d2ff", "#7a5fa8", ".35", ".7")
     rows = [("3.14159 26535 89793", ".35"), ("23846 26433 83279", ".25"), ("50288 41971 69399", ".15")]
-    body = ['<defs><linearGradient id="pg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd6c9"/>'
-            '<stop offset="1" stop-color="#d9d2ff"/></linearGradient></defs>',
+    body = ['<defs><linearGradient id="pg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="%s"/>'
+            '<stop offset="1" stop-color="%s"/></linearGradient></defs>' % (g1, g2),
             '<rect width="1200" height="630" fill="url(#pg)"/>',
-            '<circle cx="890" cy="190" r="257" fill="#ffffff" opacity=".35"/>',
-            '<circle cx="890" cy="190" r="154" fill="none" stroke="#ffffff" stroke-width="3" opacity=".7"/>']
+            '<circle cx="890" cy="190" r="257" fill="#ffffff" opacity="%s"/>' % glass,
+            '<circle cx="890" cy="190" r="154" fill="none" stroke="#ffffff" stroke-width="3" opacity="%s"/>' % ring]
     for i, (row, op) in enumerate(rows):
-        body.append('<text x="-14" y="%d" font-family="%s" font-size="75" fill="#7a5fa8" opacity="%s">%s</text>'
-                    % (154 + i * 103, mono, op, row))
+        body.append('<text x="-14" y="%d" font-family="%s" font-size="75" fill="%s" opacity="%s">%s</text>'
+                    % (154 + i * 103, mono, ink, op, row))
     body.append('<text x="806" y="257" font-family="Georgia, \'Times New Roman\', serif" font-size="206" fill="#ffffff" opacity=".9">π</text>')
     return ('<svg xmlns="http://www.w3.org/2000/svg" width="%d" height="%d" viewBox="0 0 %d %d">\n%s\n</svg>\n'
             % (W, H, W, H, "\n".join(body)))
@@ -227,6 +229,10 @@ def main():
             with open(os.path.join(out_dir, "cover-%d%s.svg" % (n, suffix)), "w", encoding="utf-8", newline="\n") as f:
                 f.write(fn(motif, title, kicker, plain))
     k = len(styles)
+    if motif_name == "pi":  # dark-theme twin of the pastel style
+        for suffix, plain in variants:
+            with open(os.path.join(out_dir, "cover-4-dark%s.svg" % suffix), "w", encoding="utf-8", newline="\n") as f:
+                f.write(cover_pastel_pi(motif, title, kicker, plain, dark=True))
     print("wrote %s covers to %s" % ("%d text-free" % k if plain_only else "%d + %d text-free" % (k, k), out_dir))
 
 

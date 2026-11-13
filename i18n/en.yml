@@ -8,12 +8,27 @@ author: Kirill Golikov
 months: [Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec]
 
 home_title: Kirill Golikov
-home_description: "Kirill Golikov — Principal Software Engineer | C/C++ | Python | ML | AI. Performance optimization, ML infrastructure, systems. Bilbao, Spain."
+home_description: "Kirill Golikov — Principal Software Engineer — C++ · Python · ML · AI. Performance optimization, ML infrastructure, systems. Bilbao, Spain."
 home_og_title: Kirill Golikov — Principal Software Engineer
-home_og_description: "Principal Software Engineer | C/C++ | Python | ML | AI. Bilbao, Spain."
+home_og_description: "Principal Software Engineer — C++ · Python · ML · AI. Bilbao, Spain."
 
-tagline: "Principal Software Engineer | C/C++ | Python | ML | AI"
+# the title in two lines: role, then skills
+role_title: Principal Software Engineer
+role_skills: C++ · Python · ML · AI
+# hero: "Also:" + one of these, changing every few seconds
+also: "Also:"
+fun_roles:
+  - AI enthusiast
+  - Profiling specialist
+  - Performance optimizer
+  - Head of Slop Review
+  - Cache-miss hunter
+  - Chief Benchmark Skeptic
 lang_soon: coming soon
+theme_label: "Theme: auto, light or dark"
+theme_auto: "Theme: auto (follows the system)"
+theme_light: "Theme: light"
+theme_dark: "Theme: dark"
 
 nav_home: Home
 nav_writing: Writing
@@ -35,7 +50,7 @@ all_courses: All {n} courses
 all_writing_two: Both articles
 all_courses_two: Both courses
 cv_title: CV
-cv_description: "CV of Kirill Golikov — Principal Software Engineer | C/C++ | Python | ML | AI. Bilbao, Spain."
+cv_description: "CV of Kirill Golikov — Principal Software Engineer — C++ · Python · ML · AI. Bilbao, Spain."
 comment_on_linkedin: Leave a comment on LinkedIn
 send_feedback: Send feedback
 back_to_writing: All articles

@@ -345,7 +345,9 @@ def page(t, title, body, path, description="", lang=None, og_image=None, og_type
     return tpl("base", lang=esc(lang or t["lang"]), title=esc(title), og_title=esc(og_title or title),
                description=esc(description), og_type=og_type, url=esc(SITE_URL + path),
                head_extra="\n".join(extra), body_class=body_class, prefix=t["prefix"],
-               author=S(t, "author"), tagline=S(t, "tagline"), lang_soon=S(t, "lang_soon"), section=section,
+               author=S(t, "author"), role_title=S(t, "role_title"), role_skills=S(t, "role_skills"), lang_soon=S(t, "lang_soon"), section=section,
+               theme_label=S(t, "theme_label"), theme_auto=S(t, "theme_auto"), theme_light=S(t, "theme_light"),
+               theme_dark=S(t, "theme_dark"),
                nav_items=tpl("nav", prefix=t["prefix"], **{k: S(t, k) for k in (
                    "nav_home", "nav_writing", "nav_teaching", "nav_about", "nav_contact")}),
                footer_contact=S(t, "footer_contact"),
@@ -376,10 +378,37 @@ def page_cover(item):
     return url
 
 
+def dark_twin(item, url):
+    """Dark-theme twin of an SVG cover: cover-N-dark[-plain].svg if it exists, otherwise the "night" style
+    (cover-2[-plain].svg) for the other generated styles. Photos have no twin."""
+    if not url or not url.endswith(".svg") or not item.get("options_dir"):
+        return None
+    name = os.path.basename(url)
+    m = re.match(r"cover-(\d+)(-plain)?\.svg$", name)
+    if not m:
+        return None
+    plain = m.group(2) or ""
+    for cand in ("cover-%s-dark%s.svg" % (m.group(1), plain), "cover-2%s.svg" % plain):
+        if cand != name and os.path.isfile(os.path.join(item["options_dir"], cand)):
+            return url.rsplit("/", 1)[0] + "/" + cand
+    return None
+
+
+def cover_imgs(item, url, cls, lazy=True):
+    """<img> for the cover, plus its dark twin (CSS shows one of them by theme)."""
+    lz = ' loading="lazy"' if lazy else ""
+    dark = dark_twin(item, url)
+    html_ = '<img class="%s cover-light%s" src="%s" alt="" width="1200" height="630"%s>' % (
+        cls, " has-dark" if dark else "", esc(url), lz)
+    if dark:
+        html_ += '<img class="%s cover-dark" src="%s" alt="" width="1200" height="630" loading="lazy">' % (cls, esc(dark))
+    return html_
+
+
 def card(item, t):
     cover, src = "", item.get("card_cover_url") or item.get("cover_url")
     if src:
-        cover = '<img class="cover" src="%s" alt="" loading="lazy" width="1200" height="630">' % esc(src)
+        cover = cover_imgs(item, src, "cover")
     badge = ""
     if item.get("demo_url"):
         badge = '<a class="badge" href="%s">%s</a>' % (esc(item["demo_url"]), S(t, "badge_demo"))
@@ -412,7 +441,7 @@ def article_page(item, t):
             t["prefix"], S(t, "send_feedback"))
     hero = ""
     if page_cover(item):
-        hero = '<img class="hero-cover" src="%s" alt="" width="1200" height="630">' % esc(page_cover(item))
+        hero = cover_imgs(item, page_cover(item), "hero-cover", lazy=False)
     body = tpl("article", hero=hero, kind=kind_of(item, t), date=date_text(item, t), lang=esc(item["lang"]),
                title=esc(item["title"]), subtitle=subtitle, author=S(t, "author"), source_top=source_top,
                demo=demo, content=item["body_html"], tags=tags, cta=cta,
@@ -438,7 +467,7 @@ def covers_page(items, t):
         d = item.get("options_dir")
         if not d or d in seen or not item.get("cover_url"):
             continue
-        options = sorted(o for o in glob.glob(os.path.join(d, "cover-*.svg")) if not o.endswith("-plain.svg"))
+        options = sorted(o for o in glob.glob(os.path.join(d, "cover-*.svg")) if re.search(r"cover-\d+\.svg$", o))
         if not options:
             continue
         seen.add(d)
@@ -482,6 +511,16 @@ def all_label(t, key, n):
     return S(t, key).replace("{n}", str(n))
 
 
+def fun_roles(t):
+    """'Also: <role>' line of the hero; templates/base.html rotates the roles (all shown inline without JS)."""
+    roles = [esc(str(r)) for r in t.get("fun_roles") or []]
+    if not roles:
+        return ""
+    spans = "".join('<span class="role">%s</span>' % r for r in roles)
+    return ('<p class="also">%s <span class="roles" aria-hidden="true">%s</span>'
+            '<span class="sr-only">%s</span></p>' % (S(t, "also"), spans, ", ".join(roles)))
+
+
 def home_page(items, t):
     path = os.path.join(ROOT, "content", "home.%s.html" % t["lang"])
     with open(path, encoding="utf-8") as f:
@@ -493,6 +532,7 @@ def home_page(items, t):
 
     try:
         body = content.substitute(prefix=t["prefix"], writing_cards=grid("writing"), course_cards=grid("courses"),
+                                  role_title=S(t, "role_title"), role_skills=S(t, "role_skills"), fun_roles=fun_roles(t),
                                   all_writing=all_label(t, "all_writing", len(listed["writing"])),
                                   all_courses=all_label(t, "all_courses", len(listed["courses"])))
     except KeyError as e:
@@ -506,7 +546,7 @@ def cv_page(t):
     with open(path, encoding="utf-8") as f:
         content = string.Template(f.read())
     try:
-        body = content.substitute(prefix=t["prefix"])
+        body = content.substitute(prefix=t["prefix"], role_title=S(t, "role_title"), role_skills=S(t, "role_skills"))
     except KeyError as e:
         fail("%s: unknown placeholder $%s" % (path, e.args[0]))
     return page(t, "%s — %s" % (t["cv_title"], t["author"]), body, t["prefix"] + "/cv/",
@@ -517,11 +557,13 @@ def stylesheet():
     with open(os.path.join(ROOT, "assets", "site.css"), encoding="utf-8") as f:
         css = f.read()
     light = HtmlFormatter(style="friendly").get_style_defs(".codehilite")
-    dark = HtmlFormatter(style="github-dark").get_style_defs(".codehilite")
-    dark = "\n".join("  " + line for line in dark.splitlines())
+    dark_os = HtmlFormatter(style="github-dark").get_style_defs(':root:not([data-theme="light"]) .codehilite')
+    dark_os = "\n".join("  " + line for line in dark_os.splitlines())
+    dark_forced = HtmlFormatter(style="github-dark").get_style_defs(':root[data-theme="dark"] .codehilite')
     return (css + "\n/* ---- code colours: generated by build.py from Pygments ---- */\n%s\n"
-            "@media (prefers-color-scheme: dark) {\n%s\n}\n"
-            ".prose .codehilite, .prose .codehilite pre { background: var(--code-bg) !important; }\n" % (light, dark))
+            "@media (prefers-color-scheme: dark) {\n%s\n}\n%s\n"
+            ".prose .codehilite, .prose .codehilite pre { background: var(--code-bg) !important; }\n"
+            % (light, dark_os, dark_forced))
 
 
 # ---------------------------------------------------------------- main
