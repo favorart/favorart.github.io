@@ -6,9 +6,11 @@ Usage: python tools/make_covers.py [--plain-only] <out_dir> <motif> "<title>" ["
 Writes <out_dir>/cover-1.svg, cover-2.svg, cover-3.svg (with the title: for cards and lists)
 and cover-1-plain.svg ... cover-3-plain.svg (illustration only: above the title on the article page;
 the site picks the -plain twin of the chosen cover automatically). --plain-only writes just the latter.
-  1 "paper"     light background, motif on the right
+  1 "paper"     light background, motif on the right (no accent stripes on any variant)
   2 "night"     dark background, large faint motif behind the title
   3 "blueprint" accent background with a grid, white line-art
+  4 "pastel"    (motif pi only) peach-lavender gradient, fading rows of digits, a big π in a glass circle;
+                it has no title, so cover-4-plain.svg is the same picture
 """
 import math
 import os
@@ -141,6 +143,23 @@ def m_cpu(x, y, w, h, s, a):
     return "\n".join(out)
 
 
+def cover_pastel_pi(motif, title, kicker, plain=False):
+    """The pi tile of design mockup A, scaled to 1200x630 (digits run off the left edge)."""
+    mono = "'JetBrains Mono', Consolas, 'Courier New', monospace"
+    rows = [("3.14159 26535 89793", ".35"), ("23846 26433 83279", ".25"), ("50288 41971 69399", ".15")]
+    body = ['<defs><linearGradient id="pg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd6c9"/>'
+            '<stop offset="1" stop-color="#d9d2ff"/></linearGradient></defs>',
+            '<rect width="1200" height="630" fill="url(#pg)"/>',
+            '<circle cx="890" cy="190" r="257" fill="#ffffff" opacity=".35"/>',
+            '<circle cx="890" cy="190" r="154" fill="none" stroke="#ffffff" stroke-width="3" opacity=".7"/>']
+    for i, (row, op) in enumerate(rows):
+        body.append('<text x="-14" y="%d" font-family="%s" font-size="75" fill="#7a5fa8" opacity="%s">%s</text>'
+                    % (154 + i * 103, mono, op, row))
+    body.append('<text x="806" y="257" font-family="Georgia, \'Times New Roman\', serif" font-size="206" fill="#ffffff" opacity=".9">π</text>')
+    return ('<svg xmlns="http://www.w3.org/2000/svg" width="%d" height="%d" viewBox="0 0 %d %d">\n%s\n</svg>\n'
+            % (W, H, W, H, "\n".join(body)))
+
+
 MOTIFS = {"pi": m_pi, "robot": m_robot, "tree": m_tree, "cpp": m_cpp, "cpu": m_cpu, "code": m_code}
 
 
@@ -151,11 +170,9 @@ def svg(body, bg):
 
 def cover_paper(motif, title, kicker, plain=False):
     if plain:
-        body = [motif(330, 100, 540, 430, "#5d6470", "#004f90"),
-                '<rect x="0" y="0" width="12" height="630" fill="#004f90"/>']
+        body = [motif(330, 100, 540, 430, "#5d6470", "#004f90")]
         return svg("\n".join(body), "#fbfaf7")
     body = [motif(700, 120, 430, 390, "#5d6470", "#004f90"),
-            '<rect x="0" y="0" width="12" height="630" fill="#004f90"/>',
             kicker_text(kicker, 72, 120, "#004f90"),
             title_block(title, 72, 210, 60, "#1c1f24", 18),
             '<text x="72" y="560" font-family="Inter, Arial, sans-serif" font-size="24" fill="#5d6470">Kirill Golikov · favorart.github.io</text>']
@@ -164,14 +181,12 @@ def cover_paper(motif, title, kicker, plain=False):
 
 def cover_night(motif, title, kicker, plain=False):
     if plain:
-        body = ['<g opacity=".75">%s</g>' % motif(300, 70, 600, 490, "#9aa3ae", "#6aaef0"),
-                '<line x1="72" y1="560" x2="200" y2="560" stroke="#6aaef0" stroke-width="4"/>']
+        body = ['<g opacity=".75">%s</g>' % motif(300, 70, 600, 490, "#9aa3ae", "#6aaef0")]
         return svg("\n".join(body), "#111418")
     body = ['<g opacity=".35">%s</g>' % motif(560, 40, 600, 520, "#9aa3ae", "#6aaef0"),
             '<rect x="0" y="0" width="1200" height="630" fill="url(#fade)"/>',
             kicker_text(kicker, 72, 360, "#6aaef0"),
-            title_block(title, 72, 440, 52, "#e7e9ec", 30),
-            '<line x1="72" y1="320" x2="200" y2="320" stroke="#6aaef0" stroke-width="4"/>']
+            title_block(title, 72, 440, 52, "#e7e9ec", 30)]
     defs = ('<defs><linearGradient id="fade" x1="0" x2="1"><stop offset="0" stop-color="#111418"/>'
             '<stop offset=".55" stop-color="#111418" stop-opacity=".6"/><stop offset="1" stop-color="#111418" stop-opacity="0"/>'
             '</linearGradient></defs>')
@@ -205,12 +220,14 @@ def main():
     kicker = args[3] if len(args) > 3 else "Kirill Golikov"
     motif = MOTIFS[motif_name]
     os.makedirs(out_dir, exist_ok=True)
-    for n, fn in enumerate((cover_paper, cover_night, cover_blueprint), 1):
+    styles = [cover_paper, cover_night, cover_blueprint] + ([cover_pastel_pi] if motif_name == "pi" else [])
+    for n, fn in enumerate(styles, 1):
         variants = [("-plain", True)] if plain_only else [("", False), ("-plain", True)]
         for suffix, plain in variants:
             with open(os.path.join(out_dir, "cover-%d%s.svg" % (n, suffix)), "w", encoding="utf-8", newline="\n") as f:
                 f.write(fn(motif, title, kicker, plain))
-    print("wrote %s covers to %s" % ("3 text-free" if plain_only else "3 + 3 text-free", out_dir))
+    k = len(styles)
+    print("wrote %s covers to %s" % ("%d text-free" % k if plain_only else "%d + %d text-free" % (k, k), out_dir))
 
 
 if __name__ == "__main__":

@@ -12,5 +12,4 @@
 <rect x="0" y="0" width="1200" height="630" fill="url(#fade)"/>
 <text x="72" y="360" font-family="'JetBrains Mono', Consolas, monospace" font-size="22" letter-spacing="2" fill="#6aaef0">COURSE · MSU</text>
 <text x="72" y="440" font-family="'Source Serif 4', Georgia, serif" font-weight="600" font-size="52" fill="#e7e9ec">Design of Big Systems in C++</text>
-<line x1="72" y1="320" x2="200" y2="320" stroke="#6aaef0" stroke-width="4"/>
 </svg>

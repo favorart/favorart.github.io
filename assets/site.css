@@ -6,12 +6,13 @@
   --hdr: 62px;
   --bg: #f7f4fb;
   --m1: #ffd9e4; --m2: #d9e6ff; --m3: #dff5e8; --m4: #fff0cf; --m5: #e8dcff;
-  --sun-core: rgba(255, 206, 112, .72);
+  --sun-core: rgba(255, 227, 168, .9);
+  --sun-glow: rgba(255, 196, 84, .48);
   --sun: #f7a823;
   --sun-ink: #3a2500;
-  --sun-glow: rgba(255, 196, 84, .55);
-  --link: #8a4a00;
-  --link-rest: #a15f14;
+  --link: #a65200;
+  --link-rest: #8a6246;
+  --link-glow: rgba(255, 255, 255, .95);
   --sheen: #ffd27a;
   --text: #25222e;
   --muted: #645f72;
@@ -33,12 +34,13 @@
   :root {
     --bg: #15131c;
     --m1: #3a2433; --m2: #1e2a44; --m3: #1b3329; --m4: #3a2f17; --m5: #2b2142;
-    --sun-core: rgba(255, 176, 64, .26);
+    --sun-core: rgba(90, 66, 20, .85);
+    --sun-glow: rgba(255, 170, 60, .19);
     --sun: #ffb84a;
     --sun-ink: #2a1a00;
-    --sun-glow: rgba(255, 170, 60, .22);
-    --link: #ffcf85;
-    --link-rest: #e3b26a;
+    --link: #ffb13d;
+    --link-rest: #d9bc9c;
+    --link-glow: rgba(21, 19, 28, .95);
     --sheen: #fff4dc;
     --text: #efecf5;
     --muted: #aaa4b9;
@@ -72,16 +74,17 @@ a:focus-visible { outline: 2px solid var(--sun); outline-offset: 2px; border-rad
 :is(.prose, .lead, .note, .job, .cv-preview, .article-foot, .byline, footer, #contact-fallback, .kicker, .cap) a:not(.btn, .stretch, h3 a),
 a.src, a.demo {
   color: var(--link-rest); font-weight: 500;
-  text-shadow: 0 0 6px color-mix(in srgb, var(--link) 40%, transparent);
+  /* frosted: desaturated letters in a soft halo of the panel colour */
+  text-shadow: 0 0 6px var(--link-glow), 0 0 12px var(--link-glow);
   transition: color .35s ease, text-shadow .35s ease;
 }
 :is(.prose, .lead, .note, .job, .cv-preview, .article-foot, .byline, footer, #contact-fallback, .kicker, .cap) a:not(.btn, .stretch, h3 a):hover,
-a.src:hover, a.demo:hover { color: var(--link); text-shadow: none; }
+a.src:hover, a.demo:hover { color: var(--link); text-shadow: 0 0 0 transparent; }
 @supports ((-webkit-background-clip: text) or (background-clip: text)) {
   :is(.prose, .lead, .note, .job, .cv-preview, .article-foot, .byline, footer, #contact-fallback, .kicker, .cap) a:not(.btn, .stretch, h3 a):hover,
   a.src:hover, a.demo:hover {
     color: transparent;
-    background: linear-gradient(100deg, var(--link) 0 40%, var(--sheen) 50%, var(--link) 60% 100%) 100% 0 / 260% 100% no-repeat;
+    background: linear-gradient(100deg, var(--link) 0 38%, var(--sheen) 50%, var(--link) 62% 100%) 100% 0 / 280% 100% no-repeat;
     -webkit-background-clip: text; background-clip: text;
     -webkit-box-decoration-break: clone; box-decoration-break: clone;
     animation: sheen .8s ease forwards;
@@ -102,8 +105,8 @@ code { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: .9em; 
     radial-gradient(30vmax 30vmax at 20% 85%, var(--m5), transparent 60%);
 }
 .bg .sun {
-  position: absolute; left: 50%; top: 50%; width: 56vmax; height: 56vmax; transform: translate(-50%, -50%); border-radius: 50%;
-  background: radial-gradient(circle, var(--sun-core) 0, var(--m4) 34%, transparent 68%);
+  position: absolute; left: 50%; top: 50%; width: 46vmax; height: 46vmax; transform: translate(-50%, -50%); border-radius: 50%;
+  background: radial-gradient(circle, var(--sun-core) 0, var(--sun-glow) 22%, transparent 62%);
 }
 
 /* ---- glass surfaces ---- */
@@ -185,7 +188,7 @@ header.hero { border-radius: 30px; padding: 44px 40px; }
 
 /* ---- cards with covers (writing, courses): a fixed frame, the picture zooms inside ---- */
 .posts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr)); gap: 16px; }
-.post { position: relative; display: flex; flex-direction: column; padding: 0; overflow: hidden; isolation: isolate; color: var(--text); }
+.post { transition: box-shadow .25s; position: relative; display: flex; flex-direction: column; padding: 0; overflow: hidden; isolation: isolate; color: var(--text); }
 /* the whole card is clickable through the title link; the source label above it is its own link */
 .post .stretch { color: inherit; }
 .post .stretch::after { content: ""; position: absolute; inset: 0; z-index: 1; border-radius: inherit; }
@@ -195,16 +198,36 @@ header.hero { border-radius: 30px; padding: 44px 40px; }
   background: linear-gradient(135deg, var(--m1), var(--m4) 45%, var(--m2)); }
 .post .thumb::before { content: ""; position: absolute; inset: 0; background: inherit; transition: transform .6s ease; }
 .post .cover { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; filter: var(--cover-filter); transition: transform .6s ease; }
-/* a pane of frosted glass over every cover: unifies the pictures; on hover it slides down, clearing the top */
+/* a pane of frosted glass over every cover: unifies the pictures. On hover the picture "develops" in place:
+   the frost clears in the middle through an animated mask and stays as a matte rim at the edges.
+   Shape of the clearing: data-cover-mask on <body> (or any ancestor) = ellipse (default) | frame | diagonal;
+   demo of all three on /writing/covers/. The animated values are registered custom properties. */
+@property --fx-clear { syntax: "<percentage>"; inherits: false; initial-value: -20%; }
+@property --fx-rim { syntax: "<percentage>"; inherits: false; initial-value: 60%; }
+@property --fx-diag { syntax: "<percentage>"; inherits: false; initial-value: -10%; }
 .post .frost {
   position: absolute; inset: 0;
-  background: linear-gradient(160deg, color-mix(in srgb, var(--m2) 18%, transparent), color-mix(in srgb, var(--m1) 14%, transparent) 55%, color-mix(in srgb, var(--m4) 18%, transparent)), var(--frost);
+  background: linear-gradient(160deg, color-mix(in srgb, var(--m2) 22%, transparent), color-mix(in srgb, var(--m1) 18%, transparent) 55%, color-mix(in srgb, var(--m4) 22%, transparent)), var(--frost);
   -webkit-backdrop-filter: blur(1.5px) saturate(115%); backdrop-filter: blur(1.5px) saturate(115%);
-  border-top: 1px solid var(--frost-edge); box-shadow: 0 -1px 10px var(--frost-edge), inset 0 1px 0 var(--frost-edge);
-  transition: transform .6s ease;
+  box-shadow: inset 0 1px 0 var(--frost-edge);
+  /* (a) ellipse: clear centre, frosted rim of ~14% at the sides */
+  --fx-mask: radial-gradient(ellipse closest-side at 50% 50%, transparent var(--fx-clear), #000 calc(var(--fx-clear) + 16%));
+  -webkit-mask-image: var(--fx-mask); mask-image: var(--fx-mask);
+  transition: --fx-clear .6s ease, --fx-rim .6s ease, --fx-diag .6s ease;
 }
 .post:hover .cover, .post:focus-within .cover, .post:hover .thumb::before { transform: scale(1.1); }
-.post:hover .frost, .post:focus-within .frost { transform: translateY(60%); }
+.post:hover .frost, .post:focus-within .frost { --fx-clear: 56%; --fx-rim: 13%; --fx-diag: 75%; }
+/* (b) frame: an even frosted border, a rounded-rectangle clearing (four edge bands, united) */
+[data-cover-mask="frame"] .post .frost {
+  --fx-mask: linear-gradient(to right, #000 var(--fx-rim), transparent calc(var(--fx-rim) + 7%)),
+             linear-gradient(to left, #000 var(--fx-rim), transparent calc(var(--fx-rim) + 7%)),
+             linear-gradient(to bottom, #000 var(--fx-rim), transparent calc(var(--fx-rim) + 12%)),
+             linear-gradient(to top, #000 var(--fx-rim), transparent calc(var(--fx-rim) + 12%));
+}
+/* (c) diagonal: clears from the top-left with a straight diagonal edge, stops at ~75% */
+[data-cover-mask="diagonal"] .post .frost {
+  --fx-mask: linear-gradient(135deg, transparent var(--fx-diag), #000 calc(var(--fx-diag) + 2%));
+}
 .post .cap { /* frosted caption over the image */
   position: absolute; z-index: 2; left: 10px; right: 10px; bottom: 10px; display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap;
   padding: 8px 12px; border-radius: 14px; font: 500 11px/1.35 "JetBrains Mono", monospace; color: var(--text);
@@ -213,12 +236,16 @@ header.hero { border-radius: 30px; padding: 44px 40px; }
   -webkit-backdrop-filter: blur(14px) saturate(150%); backdrop-filter: blur(14px) saturate(150%);
 }
 .post .body { padding: 16px 20px 20px; }
+.post .badge { position: absolute; z-index: 2; top: 12px; left: 12px; font: 600 11px/1 "JetBrains Mono", monospace; letter-spacing: .04em;
+  color: var(--sun-ink); background: var(--sun); padding: 7px 10px; border-radius: 999px; box-shadow: 0 4px 14px -6px var(--sun); transition: filter .2s; }
+.post .badge:hover { filter: brightness(1.08); }
 .cap .src, .kicker .src { font-weight: 600; }
 .post h3 { font-size: 18px; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   /* "animation effects" off (Windows) / reduce motion: a gentle, short version instead of none */
   .post .cover, .post .thumb::before, .post .frost, .btn .arr { transition-duration: .2s; }
+  .post, .linked { transition-duration: .1s; }
   a:hover { animation: none !important; background-position: 0 0 !important; }
   .post:hover .cover, .post:focus-within .cover, .post:hover .thumb::before { transform: scale(1.04); }
 }
@@ -227,7 +254,7 @@ header.hero { border-radius: 30px; padding: 44px 40px; }
 .linked { position: relative; transition: box-shadow .25s; }
 .linked .stretch::after { content: ""; position: absolute; inset: 0; z-index: 1; border-radius: 22px; }
 .linked a:not(.stretch) { position: relative; z-index: 2; }
-.linked:hover { box-shadow: var(--shadow), var(--glass-hi), 0 0 0 2px color-mix(in srgb, var(--sun) 45%, transparent); }
+.linked:hover, .post:hover, .post:focus-within { box-shadow: var(--shadow), var(--glass-hi), 0 0 0 2px color-mix(in srgb, var(--sun) 45%, transparent); }
 .linked:has(.stretch:focus-visible) { outline: 3px solid var(--sun); outline-offset: 2px; }
 .lecturer .stretch { color: var(--text); font-size: 16px; }
 .lecturer .stretch b { font-weight: 700; }
@@ -317,6 +344,8 @@ section.cv { padding-top: 0; }
 
 /* ---- cover chooser ---- */
 .cover-group { padding: 28px 0; }
+.mask-demos { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 16px; }
+.mask-demos .hint code { color: var(--text); }
 .cover-group h2 { font-size: 20px; margin: 0 0 4px; }
 .cover-group .hint { color: var(--muted); font-size: 14px; margin: 0 0 16px; }
 .options { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 480px), 1fr)); gap: 14px; }

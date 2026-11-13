@@ -28,7 +28,7 @@ articles:
     kind: Article · EN / RU
     lang: en
     summary: A small GUI app in Python/Tkinter that finds your date of birth among 3 billion digits of π — later rebuilt for the web.
-    cover: covers/pi-birthday/cover-1.svg
+    cover: covers/pi-birthday/cover-4.svg
     demo_url: https://favorart.github.io/pi-birthday/
 
   - slug: pi-birthday-ru
@@ -41,7 +41,7 @@ articles:
     kind: Статья · RU
     lang: ru
     summary: Небольшое GUI-приложение на Python/Tkinter, которое ищет дату рождения среди 3 миллиардов знаков π.
-    cover: covers/pi-birthday/cover-1.svg
+    cover: covers/pi-birthday/cover-4.svg
     demo_url: https://favorart.github.io/pi-birthday/
     list: false
 

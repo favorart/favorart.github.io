@@ -54,6 +54,7 @@ courses_description: Lecture courses by Kirill Golikov.
 source: Source
 originally_on: Originally published on
 live_demo: Live demo →
+badge_demo: Live demo
 linkedin_post: LinkedIn post
 
 covers_kicker: Covers
@@ -63,3 +64,5 @@ covers_set_in: Set in
 covers_current: current
 covers_option: Option
 covers_plain: Text-free variant for the article page
+covers_mask_title: Hover effect on covers
+covers_mask_hint: "Hover each card: the frost clears in the middle and stays at the edges. The shape is set by data-cover-mask on the body tag in templates/base.html: ellipse (default), frame or diagonal."

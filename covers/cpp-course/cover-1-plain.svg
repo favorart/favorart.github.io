@@ -8,5 +8,4 @@
 <text x="330.0" y="403.5" font-family="'JetBrains Mono', Consolas, monospace" font-size="31" fill="#004f90" xml:space="preserve">  T&amp; operator[](size_t i)</text>
 <text x="330.0" y="454.1" font-family="'JetBrains Mono', Consolas, monospace" font-size="31" fill="#5d6470" xml:space="preserve">    noexcept { return data_[i]; }</text>
 <text x="330.0" y="504.7" font-family="'JetBrains Mono', Consolas, monospace" font-size="31" fill="#5d6470" xml:space="preserve">};</text>
-<rect x="0" y="0" width="12" height="630" fill="#004f90"/>
 </svg>
