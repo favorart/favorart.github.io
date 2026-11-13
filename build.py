@@ -37,6 +37,7 @@ from pygments.formatters import HtmlFormatter
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 SITE_URL = "https://favorart.github.io"
+LICENSE_URL = "https://github.com/favorart/favorart.github.io/blob/main/LICENSE"
 DEFAULT_LANG = "en"
 HOME_LATEST = 4
 RASTER = (".jpg", ".jpeg", ".png", ".gif", ".webp", ".avif")
@@ -293,7 +294,7 @@ def load_external(offline):
 # ---------------------------------------------------------------- pages
 
 def page(t, title, body, path, description="", lang=None, og_image=None, og_type="website",
-         noindex=False, body_class="", og_title=None):
+         noindex=False, body_class="", og_title=None, section=""):
     extra = []
     if og_image:
         extra.append('<meta property="og:image" content="%s">' % esc(SITE_URL + og_image))
@@ -302,8 +303,12 @@ def page(t, title, body, path, description="", lang=None, og_image=None, og_type
     return tpl("base", lang=esc(lang or t["lang"]), title=esc(title), og_title=esc(og_title or title),
                description=esc(description), og_type=og_type, url=esc(SITE_URL + path),
                head_extra="\n".join(extra), body_class=body_class, prefix=t["prefix"],
-               author=S(t, "author"), nav_writing=S(t, "nav_writing"), nav_courses=S(t, "nav_courses"),
-               nav_contact=S(t, "nav_contact"), footer_contact=S(t, "footer_contact"),
+               author=S(t, "author"), tagline=S(t, "tagline"), lang_soon=S(t, "lang_soon"), section=section,
+               nav_items=tpl("nav", prefix=t["prefix"], **{k: S(t, k) for k in (
+                   "nav_home", "nav_writing", "nav_teaching", "nav_about", "nav_contact")}),
+               footer_contact=S(t, "footer_contact"),
+               footer_copy="".join("<span>%s</span>" % str(line).replace("{mit}", esc(LICENSE_URL))
+                                   for line in t["footer_copy"]),
                year=dt.date.today().year, body=body)
 
 
@@ -343,13 +348,17 @@ def article_page(item, t):
             '<span class="chip">#%s</span>' % esc(str(x)) for x in item["tags"])
     subtitle = '<p class="subtitle">%s</p>' % esc(item["subtitle"]) if item.get("subtitle") else ""
     back = "back_to_courses" if item["section"] == "courses" else "back_to_writing"
-    body = tpl("article", kind=kind_of(item, t), date=date_text(item, t), lang=esc(item["lang"]),
+    hero = ""
+    if item.get("cover_url"):
+        hero = '<img class="hero-cover" src="%s" alt="" width="1200" height="630">' % esc(item["cover_url"])
+    body = tpl("article", hero=hero, kind=kind_of(item, t), date=date_text(item, t), lang=esc(item["lang"]),
                title=esc(item["title"]), subtitle=subtitle, author=S(t, "author"), source_top=source_top,
                demo=demo, content=item["body_html"], tags=tags, source_bottom=source_bottom,
                back_href="%s/%s/" % (t["prefix"], item["section"]), back_text=S(t, back))
     cover = item.get("cover_url") or ""
     return page(t, "%s — %s" % (item["title"], t["author"]), body, item_url(item), description=item["summary"],
-                lang=item["lang"], og_image=cover if cover.lower().endswith(RASTER) else None, og_type="article")
+                lang=item["lang"], og_image=cover if cover.lower().endswith(RASTER) else None, og_type="article",
+                section="teaching" if item["section"] == "courses" else "writing")
 
 
 def list_page(items, section, t):
@@ -358,7 +367,7 @@ def list_page(items, section, t):
     body = tpl("list", kicker=S(t, key + "_kicker"), title=S(t, key + "_title"), lead=S(t, key + "_lead"),
                cards=cards)
     return page(t, "%s — %s" % (t[key + "_title"], t["author"]), body, "%s/%s/" % (t["prefix"], section),
-                description=t[key + "_description"])
+                description=t[key + "_description"], section="writing" if section == "writing" else "teaching")
 
 
 def covers_page(items, t):
@@ -389,7 +398,8 @@ def covers_page(items, t):
                           chosen=esc(chosen), options="\n".join(opts)))
     body = tpl("covers", kicker=S(t, "covers_kicker"), title=S(t, "covers_title"), lead=S(t, "covers_lead"),
                groups="\n".join(groups))
-    return page(t, "%s — %s" % (t["covers_title"], t["author"]), body, "/writing/covers/", noindex=True)
+    return page(t, "%s — %s" % (t["covers_title"], t["author"]), body, "/writing/covers/", noindex=True,
+                section="writing")
 
 
 def home_page(items, t):
@@ -398,12 +408,15 @@ def home_page(items, t):
         content = string.Template(f.read())
     latest = [i for i in items if i["list"] and i["section"] == "writing"][:HOME_LATEST]
     cards = '<div class="posts">\n%s\n  </div>' % "\n".join(card(i, t) for i in latest)
+    courses = [i for i in items if i["list"] and i["section"] == "courses"]
+    course_cards = '<div class="posts">\n%s\n  </div>' % "\n".join(card(i, t) for i in courses)
     try:
-        body = content.substitute(prefix=t["prefix"], writing_cards=cards, all_writing=S(t, "all_writing"))
+        body = content.substitute(prefix=t["prefix"], writing_cards=cards, all_writing=S(t, "all_writing"),
+                                  course_cards=course_cards, all_courses=S(t, "all_courses"))
     except KeyError as e:
         fail("%s: unknown placeholder $%s" % (path, e.args[0]))
     return page(t, t["home_title"], body, t["prefix"] + "/", description=t["home_description"],
-                og_title=t["home_og_title"], og_type="profile", body_class="home")
+                og_title=t["home_og_title"], og_type="profile", body_class="home", section="home")
 
 
 def stylesheet():
