@@ -65,6 +65,6 @@ covers_current: current
 covers_option: Option
 covers_plain: Text-free variant for the article page
 covers_mask_title: Cover frost on hover
-covers_mask_hint: "Rows: how much of the cover stays frosted after hover (bottom-right corner). Columns: softness of the diagonal edge. Hover a tile or press Play all. The site default (20% · medium) is set by --cover-frost-left and --cover-frost-soft in assets/site.css."
+covers_mask_hint: "At rest the cover is behind frosted glass with a clear corner; on hover the frost fades out and the picture zooms. Hover a card or press Play all. Corner, size and edge: --cover-peek-corner, --cover-peek-size, --cover-peek-soft in assets/site.css."
 covers_play_all: ▶ Play all
 covers_stop_all: ■ Stop

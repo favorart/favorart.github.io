@@ -15,7 +15,8 @@
   --text: #25222e;
   --muted: #645f72;
   --line: rgba(60, 50, 90, .12);
-  --glass: rgba(255, 255, 255, .58);
+  --glass: rgba(255, 255, 255, .5);
+  --sun-spot: #ffe4b0;
   --glass-strong: rgba(255, 255, 255, .72);
   --glass-line: rgba(255, 255, 255, .78);
   --glass-hi: inset 0 1px 0 rgba(255, 255, 255, .85);
@@ -25,8 +26,7 @@
   --code-bg: #fbf8f1;
   --th: #f1ecfa;
   --cover-filter: none;
-  --frost: rgba(255, 255, 255, .05);
-  --frost-strong: rgba(255, 255, 255, .22);
+  --frost: rgba(255, 255, 255, .14);
   --frost-edge: rgba(255, 255, 255, .9);
 }
 @media (prefers-color-scheme: dark) {
@@ -42,7 +42,8 @@
     --text: #efecf5;
     --muted: #aaa4b9;
     --line: rgba(255, 255, 255, .09);
-    --glass: rgba(30, 27, 40, .55);
+    --glass: rgba(30, 27, 40, .48);
+    --sun-spot: #4d3a17;
     --glass-strong: rgba(30, 27, 40, .72);
     --glass-line: rgba(255, 255, 255, .1);
     --glass-hi: inset 0 1px 0 rgba(255, 255, 255, .06);
@@ -52,8 +53,7 @@
     --code-bg: #0f0e15;
     --th: rgba(255, 255, 255, .06);
     --cover-filter: saturate(.85) brightness(.78);
-    --frost: rgba(20, 18, 30, .06);
-    --frost-strong: rgba(255, 255, 255, .1);
+    --frost: rgba(255, 255, 255, .06);
     --frost-edge: rgba(255, 255, 255, .38);
   }
 }
@@ -92,8 +92,8 @@ a.src:hover, a.demo:hover { color: var(--link); text-shadow: 0 0 0 transparent; 
 h1 a, h2 a, h3 a, h4 a { font-weight: inherit; }
 code { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: .9em; }
 
-/* ---- fixed background layer: exactly the body::before mesh of design mockup A (a.html),
-   the "sun" is its warm m4 spot near the centre ---- */
+/* ---- fixed background layer: the body::before mesh of design mockup A (a.html); the "sun" spot is a bit
+   larger (30vmax) and warmer than in A so it shows around and through the panels ---- */
 .bg { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; background: var(--bg); }
 .bg::before {
   content: ""; position: absolute; inset: -20vmax; filter: blur(10px);
@@ -102,7 +102,7 @@ code { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: .9em; 
     radial-gradient(38vmax 38vmax at 85% 10%, var(--m2), transparent 60%),
     radial-gradient(42vmax 42vmax at 70% 75%, var(--m3), transparent 60%),
     radial-gradient(30vmax 30vmax at 20% 85%, var(--m5), transparent 60%),
-    radial-gradient(22vmax 22vmax at 50% 45%, var(--m4), transparent 60%);
+    radial-gradient(30vmax 30vmax at 50% 45%, var(--sun-spot), transparent 60%);
 }
 
 /* ---- glass surfaces ---- */
@@ -194,34 +194,26 @@ header.hero { border-radius: 30px; padding: 44px 40px; }
   background: linear-gradient(135deg, var(--m1), var(--m4) 45%, var(--m2)); }
 .post .thumb::before { content: ""; position: absolute; inset: 0; background: inherit; transition: transform .6s ease; }
 .post .cover { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; filter: var(--cover-filter); transition: transform .6s ease; }
-/* Frosted glass over every cover, split by a FIXED diagonal (top-left -> bottom-right):
-   .frost        light frost over the clearing zone; on hover it fades out (opacity 1 -> 0) while the picture zooms;
-   .frost-corner stronger frost in the bottom-right corner, always there.
+/* Frosted glass over every cover with a clear "peek window" in one corner (fixed diagonal edge).
+   On hover the whole frost fades out (opacity 1 -> 0) and the picture zooms; nothing moves.
    Tuning, in one place (:root) or per element:
-   --cover-frost-left  share of the cover area that stays frosted after hover (0.3 / 0.2 / 0.1)
-   --cover-frost-soft  width of the diagonal boundary (2% strict, 10% medium, 25% wide)
-   The boundary position for a 1200x630 cover: 1 - 0.672 * sqrt(left) along the 135deg gradient line. */
-:root { --cover-frost-left: .2; --cover-frost-soft: 10%; }
-.post .frost, .post .frost-corner {
-  position: absolute; inset: 0; pointer-events: none;
-  --fx-edge: calc((1 - .672 * sqrt(var(--cover-frost-left))) * 100%);
-}
+   --cover-peek-corner  direction of the diagonal: 135deg = top-left (default), 225deg = top-right,
+                        315deg = bottom-right, 45deg = bottom-left
+   --cover-peek-size    share of the cover area left clear at rest (.1 = 10%)
+   --cover-peek-soft    width of the diagonal edge (10% = medium)
+   Edge position for a 1200x630 cover: 0.672 * sqrt(size) along the gradient line. */
+:root { --cover-peek-corner: 135deg; --cover-peek-size: .1; --cover-peek-soft: 10%; }
 .post .frost {
-  background: linear-gradient(160deg, color-mix(in srgb, var(--m2) 22%, transparent), color-mix(in srgb, var(--m1) 18%, transparent) 55%, color-mix(in srgb, var(--m4) 22%, transparent)), var(--frost);
-  -webkit-backdrop-filter: blur(1px) saturate(115%); backdrop-filter: blur(1px) saturate(115%);
-  --fx-mask: linear-gradient(135deg, #000 calc(var(--fx-edge) - var(--cover-frost-soft) / 2), transparent calc(var(--fx-edge) + var(--cover-frost-soft) / 2));
+  position: absolute; inset: 0; pointer-events: none;
+  --fx-edge: calc(.672 * sqrt(var(--cover-peek-size)) * 100%);
+  background: linear-gradient(160deg, color-mix(in srgb, var(--m2) 30%, transparent), color-mix(in srgb, var(--m1) 26%, transparent) 55%, color-mix(in srgb, var(--m4) 30%, transparent)), var(--frost);
+  -webkit-backdrop-filter: blur(4px) saturate(125%); backdrop-filter: blur(4px) saturate(125%);
+  --fx-mask: linear-gradient(var(--cover-peek-corner), transparent calc(var(--fx-edge) - var(--cover-peek-soft) / 2), #000 calc(var(--fx-edge) + var(--cover-peek-soft) / 2));
   -webkit-mask-image: var(--fx-mask); mask-image: var(--fx-mask);
   transition: opacity .6s ease;
 }
-.post .frost-corner {
-  background: linear-gradient(160deg, color-mix(in srgb, var(--m2) 45%, transparent), color-mix(in srgb, var(--m1) 40%, transparent) 55%, color-mix(in srgb, var(--m4) 45%, transparent)), var(--frost-strong);
-  -webkit-backdrop-filter: blur(7px) saturate(135%); backdrop-filter: blur(7px) saturate(135%);
-  --fx-mask: linear-gradient(135deg, transparent calc(var(--fx-edge) - var(--cover-frost-soft) / 2), #000 calc(var(--fx-edge) + var(--cover-frost-soft) / 2));
-  -webkit-mask-image: var(--fx-mask); mask-image: var(--fx-mask);
-}
-.post:hover .cover, .post:focus-within .cover, .post:hover .thumb::before { transform: scale(1.1); }
+.post:hover .cover, .post:focus-within .cover, .post:hover .thumb::before, .fx-grid.on .post .cover { transform: scale(1.1); }
 .post:hover .frost, .post:focus-within .frost, .fx-grid.on .post .frost { opacity: 0; }
-.fx-grid.on .post .cover { transform: scale(1.1); }
 .post .cap { /* frosted caption over the image */
   position: absolute; z-index: 2; left: 10px; right: 10px; bottom: 10px; display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap;
   padding: 8px 12px; border-radius: 14px; font: 500 11px/1.35 "JetBrains Mono", monospace; color: var(--text);
@@ -338,7 +330,7 @@ section.cv { padding-top: 0; }
 
 /* ---- cover chooser ---- */
 .cover-group { padding: 28px 0; }
-/* covers page: 3x3 grid of frost variants */
+/* covers page: demo of the cover effect */
 .fx-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 .fx-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 8px; }
 .fx-grid .post .body { display: none; }
