@@ -269,6 +269,12 @@ def load_posts():
         cover = meta.get("cover")
         if cover and not os.path.isfile(os.path.join(folder, cover)):
             fail("%s: cover file '%s' not found next to index.md" % (where, cover))
+        card_cover = meta.get("card_cover")  # optional: a different picture for cards (e.g. a portrait photo)
+        if card_cover and not os.path.isfile(os.path.join(folder, card_cover)):
+            fail("%s: card_cover file '%s' not found next to index.md" % (where, card_cover))
+        body_html = render_markdown(body)
+        if cover:  # the cover is shown above the title; drop the same picture repeated in the text
+            body_html = re.sub(r'<p>\s*<img[^>]*\bsrc="%s"[^>]*>\s*</p>\s*' % re.escape(cover), "", body_html)
         items.append({
             "type": "post", "section": "writing", "slug": slug,
             "title": str(meta["title"]), "date": as_date(meta["date"], where),
@@ -276,8 +282,9 @@ def load_posts():
             "summary": str(meta["summary"]), "kind": meta.get("kind"),
             "original_url": meta["original_url"], "tags": meta.get("tags") or [],
             "cover_url": "/writing/%s/%s" % (slug, cover) if cover else None,
+            "card_cover_url": "/writing/%s/%s" % (slug, card_cover) if card_cover else None,
             "folder": folder, "options_dir": folder,
-            "body_html": render_markdown(body), "subtitle": None, "demo_url": meta.get("demo_url"),
+            "body_html": body_html, "subtitle": None, "demo_url": meta.get("demo_url"),
             "list": meta.get("list", True),
         })
     return items
@@ -359,10 +366,20 @@ def kind_of(item, t):
     return label
 
 
+def page_cover(item):
+    """Cover above the article title: an SVG cover's text-free variant (cover-N-plain.svg) when it exists."""
+    url = item.get("cover_url")
+    if url and url.endswith(".svg") and item.get("options_dir"):
+        plain = os.path.basename(url)[:-4] + "-plain.svg"
+        if os.path.isfile(os.path.join(item["options_dir"], plain)):
+            return url.rsplit("/", 1)[0] + "/" + plain
+    return url
+
+
 def card(item, t):
-    cover = ""
-    if item.get("cover_url"):
-        cover = '<img class="cover" src="%s" alt="" loading="lazy" width="1200" height="630">' % esc(item["cover_url"])
+    cover, src = "", item.get("card_cover_url") or item.get("cover_url")
+    if src:
+        cover = '<img class="cover" src="%s" alt="" loading="lazy" width="1200" height="630">' % esc(src)
     return tpl("card", href=item_url(item), cover=cover, kind=kind_of(item, t), date=date_text(item, t),
                lang=esc(item["lang"]), title=esc(item["title"]), summary=esc(item["summary"]))
 
@@ -370,14 +387,11 @@ def card(item, t):
 def article_page(item, t):
     if item["type"] == "post":
         source_top = '<a href="%s">LinkedIn</a>' % esc(item["original_url"])
-        source_bottom = '<p class="origin">%s <a href="%s">LinkedIn →</a></p>' % (
-            S(t, "originally_on"), esc(item["original_url"]))
     else:
         repo_url = "https://github.com/" + item["repo"]
         file_url = "%s/blob/%s/%s" % (repo_url, item["branch"], item["path"])
-        source_top = '%s: <a href="%s">%s</a>' % (S(t, "source"), esc(repo_url), esc(item["repo"]))
-        source_bottom = '<p class="origin">%s: <a href="%s">%s</a> · <a href="%s">%s</a></p>' % (
-            S(t, "source"), esc(repo_url), esc(repo_url[len("https://"):]), esc(file_url), esc(item["path"]))
+        source_top = '%s: <a href="%s">%s</a> · <a href="%s">%s</a>' % (
+            S(t, "source"), esc(repo_url), esc(item["repo"]), esc(file_url), esc(posixpath.basename(item["path"])))
     demo = ""
     if item.get("demo_url"):
         demo = ' · <a class="demo" href="%s">%s</a>' % (esc(item["demo_url"]), S(t, "live_demo"))
@@ -394,11 +408,11 @@ def article_page(item, t):
         cta = '<a class="btn sun big" href="%s/#contact">%s <span class="arr">→</span></a>' % (
             t["prefix"], S(t, "send_feedback"))
     hero = ""
-    if item.get("cover_url"):
-        hero = '<img class="hero-cover" src="%s" alt="" width="1200" height="630">' % esc(item["cover_url"])
+    if page_cover(item):
+        hero = '<img class="hero-cover" src="%s" alt="" width="1200" height="630">' % esc(page_cover(item))
     body = tpl("article", hero=hero, kind=kind_of(item, t), date=date_text(item, t), lang=esc(item["lang"]),
                title=esc(item["title"]), subtitle=subtitle, author=S(t, "author"), source_top=source_top,
-               demo=demo, content=item["body_html"], tags=tags, cta=cta, source_bottom=source_bottom,
+               demo=demo, content=item["body_html"], tags=tags, cta=cta,
                back_href="%s/%s/" % (t["prefix"], item["section"]), back_text=S(t, back))
     cover = item.get("cover_url") or ""
     return page(t, "%s — %s" % (item["title"], t["author"]), body, item_url(item), description=item["summary"],
@@ -421,21 +435,28 @@ def covers_page(items, t):
         d = item.get("options_dir")
         if not d or d in seen or not item.get("cover_url"):
             continue
-        options = sorted(glob.glob(os.path.join(d, "cover-*.svg")))
+        options = sorted(o for o in glob.glob(os.path.join(d, "cover-*.svg")) if not o.endswith("-plain.svg"))
         if not options:
             continue
         seen.add(d)
-        base_url = item["cover_url"].rsplit("/", 1)[0]
-        chosen = os.path.basename(item["cover_url"])
+        card_url = item.get("card_cover_url") or item["cover_url"]
+        base_url = card_url.rsplit("/", 1)[0]
+        chosen = os.path.basename(card_url)
         if item["type"] == "post":
-            where = "posts/%s/index.md → cover" % os.path.basename(item["folder"])
+            where = "posts/%s/index.md → %s" % (os.path.basename(item["folder"]),
+                                                 "card_cover" if item.get("card_cover_url") else "cover")
         else:
             where = "sources.yml → %s → cover" % item["slug"]
         opts = []
         for n, opt in enumerate(options, 1):
             name = os.path.basename(opt)
             sel = name == chosen
-            opts.append(tpl("cover_option", selected_class=" selected" if sel else "",
+            plain = name[:-4] + "-plain.svg"
+            plain_html = ""
+            if os.path.isfile(os.path.join(d, plain)):
+                plain_html = '<img src="%s" alt="%s" width="1200" height="630" loading="lazy">' % (
+                    esc(base_url + "/" + plain), S(t, "covers_plain"))
+            opts.append(tpl("cover_option", selected_class=" selected" if sel else "", plain=plain_html,
                             src=esc(base_url + "/" + name), label="%s %d" % (S(t, "covers_option"), n),
                             name=esc(name),
                             selected_tag=' <span class="tag">%s</span>' % S(t, "covers_current") if sel else ""))
@@ -445,6 +466,13 @@ def covers_page(items, t):
                groups="\n".join(groups))
     return page(t, "%s — %s" % (t["covers_title"], t["author"]), body, "/writing/covers/", noindex=True,
                 section="writing")
+
+
+def all_label(t, key, n):
+    """'All {n} courses', or the '<key>_two' wording ('Both courses') when there are exactly two."""
+    if n == 2 and t.get(key + "_two"):
+        return S(t, key + "_two")
+    return S(t, key).replace("{n}", str(n))
 
 
 def home_page(items, t):
@@ -458,8 +486,8 @@ def home_page(items, t):
 
     try:
         body = content.substitute(prefix=t["prefix"], writing_cards=grid("writing"), course_cards=grid("courses"),
-                                  all_writing=S(t, "all_writing").replace("{n}", str(len(listed["writing"]))),
-                                  all_courses=S(t, "all_courses").replace("{n}", str(len(listed["courses"]))))
+                                  all_writing=all_label(t, "all_writing", len(listed["writing"])),
+                                  all_courses=all_label(t, "all_courses", len(listed["courses"])))
     except KeyError as e:
         fail("%s: unknown placeholder $%s" % (path, e.args[0]))
     return page(t, t["home_title"], body, t["prefix"] + "/", description=t["home_description"],

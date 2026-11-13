@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<rect width="1200" height="630" fill="#fbfaf7"/>
+<line x1="600.0" y1="131.0" x2="465.0" y2="247.1" stroke="#5d6470" stroke-width="4" opacity=".7"/>
+<line x1="600.0" y1="131.0" x2="735.0" y2="247.1" stroke="#5d6470" stroke-width="4" opacity=".7"/>
+<line x1="465.0" y1="247.1" x2="394.8" y2="370.9" stroke="#5d6470" stroke-width="4" opacity=".7"/>
+<line x1="465.0" y1="247.1" x2="535.2" y2="370.9" stroke="#5d6470" stroke-width="4" opacity=".7"/>
+<line x1="735.0" y1="247.1" x2="664.8" y2="370.9" stroke="#5d6470" stroke-width="4" opacity=".7"/>
+<line x1="735.0" y1="247.1" x2="805.2" y2="370.9" stroke="#5d6470" stroke-width="4" opacity=".7"/>
+<line x1="805.2" y1="370.9" x2="762.0" y2="475.4" stroke="#5d6470" stroke-width="4" opacity=".7"/>
+<line x1="805.2" y1="370.9" x2="848.4" y2="475.4" stroke="#5d6470" stroke-width="4" opacity=".7"/>
+<rect x="552.0" y="107.0" width="96" height="48" rx="12" fill="none" stroke="#5d6470" stroke-width="4"/>
+<text x="600.0" y="139.0" text-anchor="middle" font-family="'JetBrains Mono', Consolas, monospace" font-size="22" fill="#5d6470">stmt</text>
+<rect x="417.0" y="223.1" width="96" height="48" rx="12" fill="#004f90" stroke="#004f90" stroke-width="4"/>
+<text x="465.0" y="255.1" text-anchor="middle" font-family="'JetBrains Mono', Consolas, monospace" font-size="22" fill="#ffffff">if</text>
+<rect x="687.0" y="223.1" width="96" height="48" rx="12" fill="#004f90" stroke="#004f90" stroke-width="4"/>
+<text x="735.0" y="255.1" text-anchor="middle" font-family="'JetBrains Mono', Consolas, monospace" font-size="22" fill="#ffffff">=</text>
+<rect x="346.8" y="346.9" width="96" height="48" rx="12" fill="none" stroke="#5d6470" stroke-width="4"/>
+<text x="394.8" y="378.9" text-anchor="middle" font-family="'JetBrains Mono', Consolas, monospace" font-size="22" fill="#5d6470">cond</text>
+<rect x="487.2" y="346.9" width="96" height="48" rx="12" fill="none" stroke="#5d6470" stroke-width="4"/>
+<text x="535.2" y="378.9" text-anchor="middle" font-family="'JetBrains Mono', Consolas, monospace" font-size="22" fill="#5d6470">then</text>
+<rect x="616.8" y="346.9" width="96" height="48" rx="12" fill="none" stroke="#5d6470" stroke-width="4"/>
+<text x="664.8" y="378.9" text-anchor="middle" font-family="'JetBrains Mono', Consolas, monospace" font-size="22" fill="#5d6470">x</text>
+<rect x="757.2" y="346.9" width="96" height="48" rx="12" fill="none" stroke="#5d6470" stroke-width="4"/>
+<text x="805.2" y="378.9" text-anchor="middle" font-family="'JetBrains Mono', Consolas, monospace" font-size="22" fill="#5d6470">+</text>
+<rect x="714.0" y="451.4" width="96" height="48" rx="12" fill="none" stroke="#5d6470" stroke-width="4"/>
+<text x="762.0" y="483.4" text-anchor="middle" font-family="'JetBrains Mono', Consolas, monospace" font-size="22" fill="#5d6470">a</text>
+<rect x="800.4" y="451.4" width="96" height="48" rx="12" fill="none" stroke="#5d6470" stroke-width="4"/>
+<text x="848.4" y="483.4" text-anchor="middle" font-family="'JetBrains Mono', Consolas, monospace" font-size="22" fill="#5d6470">1</text>
+<rect x="0" y="0" width="12" height="630" fill="#004f90"/>
+</svg>

@@ -43,6 +43,7 @@ python -m http.server -d _site 8000
    source: linkedin
    original_url: https://www.linkedin.com/posts/...
    cover: cover.jpg          # an image in this folder; omit and run tools/make_covers.py for SVG options
+   card_cover: cover-1.svg   # optional: another picture for cards (e.g. when cover.jpg is a portrait photo)
    tags: [cpp, performance]  # optional, the post's hashtags
    ---
 
@@ -59,3 +60,5 @@ with `repo`, `branch`, `path`, `title`, `date`, `summary`. Nothing is copied: th
 build time and its relative links/images point back to the source repo. For a cover run
 `python tools/make_covers.py covers/<slug> <motif> "<title>" "<kicker>"` (motifs: pi, robot, tree, cpp,
 cpu, code), set `cover: covers/<slug>/cover-1.svg`, then pick the final option on `/writing/covers/`.
+The tool also writes text-free twins (`cover-N-plain.svg`); the article page shows the twin of the chosen cover
+above the title (`--plain-only` regenerates just the twins).
