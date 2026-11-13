@@ -12,10 +12,21 @@ home_description: Kirill Golikov — Senior Software Engineer. C++, performance 
 home_og_title: Kirill Golikov — Senior Software Engineer
 home_og_description: C++, performance optimization, ML infrastructure, systems. Bilbao, Spain.
 
+tagline: Senior Software Engineer · Bilbao, Spain
+lang_soon: coming soon
+
+nav_home: Home
 nav_writing: Writing
-nav_courses: Courses
+nav_teaching: Teaching
+nav_about: About / CV
 nav_contact: Contact
 footer_contact: Contact
+# footer lines, HTML allowed; {mit} is replaced with the LICENSE URL
+footer_copy:
+  - '© 2026 Kirill Golikov'
+  - 'Built by Claude while a human picked colors.'
+  - 'All rights reserved and instantly given away under the <a href="{mit}">MIT license</a>: take it, nobody minds.'
+  - 'The work experience itself is non-transferable.'
 
 all_writing: All writing →
 all_courses: All courses →
