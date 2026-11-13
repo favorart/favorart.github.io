@@ -24,168 +24,31 @@
 
 
 <section id="writing" data-nav="writing">
-  <div class="shead"><h2><small>Writing</small>Posts &amp; articles</h2><a class="more" href="$prefix/writing/">$all_writing</a></div>
+  <div class="shead"><h2><small>Writing</small>Posts &amp; articles</h2></div>
   $writing_cards
+  <p class="all"><a class="btn sun big" href="$prefix/writing/">$all_writing <span class="arr">→</span></a></p>
 </section>
 
 <section id="teaching" data-nav="teaching">
-  <div class="shead"><h2><small>Teaching</small>Lecture courses</h2><a class="more" href="$prefix/courses/">$all_courses</a></div>
+  <div class="shead"><h2><small>Teaching</small>Lecture courses</h2></div>
   $course_cards
   <p class="note glass"><b>University Lecturer at <a href="https://math.msu.ru">Lomonosov MSU</a>, 2016 — 2023.</b> Applied Mathematics and Computer Science: <em>Design of Big Systems in C++</em> (2019, 2020, 2021, 2023), <em>Architecture and Software of High-Performance Systems</em> (2018, 2020); assisted <em>Practice in Computer Science</em> (2018–2020).</p>
+  <p class="all"><a class="btn sun big" href="$prefix/courses/">$all_courses <span class="arr">→</span></a></p>
 </section>
 
 <section id="about" data-nav="about">
-  <div class="shead"><h2><small>About / CV</small>Experience &amp; skills</h2></div>
-  <div class="focus">
-    <div class="card"><h3>Performance engineering</h3><p>Profiling and optimizing hot paths: fps, micro-freezes, startup time, crash rate, GPU acceleration.</p></div>
-    <div class="card"><h3>ML infrastructure</h3><p>Neural-network runtimes in C++/CUDA: Transformer, Attention, LoRA in the open-source NeoML framework; ONNX.</p></div>
-    <div class="card"><h3>Systems &amp; storage</h3><p>SSD firmware, content-defined chunking for deduplication, data-reduction estimation for cloud storage.</p></div>
-  </div>
-
-
-  <div id="experience" class="panel glass">
-  <h3 class="ptitle">Experience</h3>
-
-  <div class="job">
-    <div class="when"><span>May 2026 — now</span><span>Bilbao</span></div>
+  <div class="shead"><h2><small>About / CV</small>Who I am</h2></div>
+  <div class="panel glass cv-preview">
     <div>
-      <h3><a href="https://www.artificialseed.io">Artificial Seed</a><span class="tag">current</span></h3>
-      <div class="role">Senior Software Engineer · Dev team</div>
-      <ul>
-        <li>System design &amp; performance optimizations</li>
-        <li>CI/CD: automated testing infrastructure for complex ML analysis simulations</li>
-      </ul>
-      <div class="chips"><span class="chip">c++26</span><span class="chip">cmake</span><span class="chip">conan</span><span class="chip">onnx</span><span class="chip">python</span><span class="chip">perf</span><span class="chip">gitlab</span><span class="chip">ai-agents</span></div>
-    </div>
-  </div>
-
-  <div class="job">
-    <div class="when"><span>Mar 2025 — Oct 2025</span><span>Remote</span></div>
-    <div>
-      <h3><a href="https://playrix.com">Playrix</a></h3>
-      <div class="role">Senior Software Engineer · Game Quality team</div>
-      <ul>
-        <li>Performance optimizations of mobile games: fps, micro-freezes, starting time, crash rate</li>
-      </ul>
-      <div class="chips"><span class="chip">c++20</span><span class="chip">tracy</span><span class="chip">profiling</span><span class="chip">cmake</span><span class="chip">teamcity</span><span class="chip">ios</span><span class="chip">android</span><span class="chip">macos</span></div>
-    </div>
-  </div>
-
-  <div class="job">
-    <div class="when"><span>Sep 2022 — Nov 2024</span><span>Remote</span></div>
-    <div>
-      <h3><a href="https://www.abbyy.com">ABBYY</a></h3>
-      <div class="role">Principal Software Engineer · Common Libraries, NLP department</div>
-      <ul>
-        <li>Contributed to the open-source <a href="https://github.com/neoml-lib/neoml">NeoML</a> framework: Transformer, Attention, Embeddings, LoRA</li>
-        <li>Performance optimizations for ANN computing infrastructure, including GPU acceleration</li>
-        <li>Mentored an intern for a year</li>
-      </ul>
-      <div class="chips"><span class="chip">c++17</span><span class="chip">cuda</span><span class="chip">onnx-runtime</span><span class="chip">neural-networks</span><span class="chip">research</span></div>
-    </div>
-  </div>
-
-  <div class="job">
-    <div class="when"><span>Aug 2020 — Sep 2022</span><span>Moscow</span></div>
-    <div>
-      <h3><a href="https://career.huawei.ru/rri/en/zadachi-nashego-instituta/data-storage">Huawei</a></h3>
-      <div class="role">Senior Software Engineer · Storage team, Intellect Systems &amp; Data Science lab</div>
-      <ul>
-        <li><em>Estimation Tool</em> predicting data reduction of Ocean Cloud Storage</li>
-        <li><em>Content-Defined Chunking</em> — high-performance deduplication detection in bit-streams</li>
-        <li><em>Unstructured Data Reduction</em> for medical image compression</li>
-      </ul>
-      <div class="chips"><span class="chip">c++14</span><span class="chip">boost</span><span class="chip">intel-intrinsics</span><span class="chip">x86-64</span><span class="chip">arm</span><span class="chip">python</span><span class="chip">ml</span></div>
-    </div>
-  </div>
-
-  <div class="job">
-    <div class="when"><span>Oct 2017 — Sep 2022</span><span>Moscow</span></div>
-    <div>
-      <h3><a href="https://kraftway.ru/company/issledovaniya-i-razrabotki.php">Kraftway</a></h3>
-      <div class="role">Senior Software Engineer · SSD Firmware team</div>
-      <ul>
-        <li>Firmware for 2 generations of SSD prototypes</li>
-        <li><em>Temperature Detector</em> — monitoring sector rewrite frequencies</li>
-        <li><em>QATC</em> — controlling read / write / trim request queues and tables</li>
-        <li><em>Validity Module</em> — garbage-collector component tracking sector rewrites in blocks scheduled for erase</li>
-      </ul>
-      <div class="chips"><span class="chip">c++11</span><span class="chip">nvme</span><span class="chip">micro-controllers</span><span class="chip">xilinx-sdk</span></div>
-    </div>
-  </div>
-
-  <div class="job">
-    <div class="when"><span>Jul 2017 — Oct 2017</span><span>Moscow</span></div>
-    <div>
-      <h3><a href="https://vk.company/en/company/about/">VK</a> <span style="color:var(--muted);font-weight:400;font-size:15px">(ex Mail.ru Group)</span></h3>
-      <div class="role">Software Engineer · ICQ Messenger back-end</div>
-      <ul><li>Add-in allowing users to create custom emojis</li></ul>
-      <div class="chips"><span class="chip">c++11</span><span class="chip">linux</span><span class="chip">micro-services</span><span class="chip">high-load</span></div>
-    </div>
-  </div>
-
-  <div class="job">
-    <div class="when"><span>Jun 2015 — Jul 2017</span><span>Moscow</span></div>
-    <div>
-      <h3>VK &amp; Lomonosov MSU</h3>
-      <div class="role">Junior Researcher · Data Science lab, CM&amp;C faculty</div>
-      <ul><li>Automated website parsing and text analysis</li></ul>
-      <div class="chips"><span class="chip">python</span><span class="chip">sklearn</span><span class="chip">beautiful-soup</span></div>
-    </div>
-  </div>
-
-  <div class="job">
-    <div class="when"><span>Jun 2013 — Aug 2014</span><span>Tashkent</span></div>
-    <div>
-      <h3><a href="https://saesp.uz/">SAESP</a></h3>
-      <div class="role">Engineer · Secondary Circuits department</div>
-      <ul><li>Automated drafting of power line and substation drawings</li></ul>
-      <div class="chips"><span class="chip">c#</span><span class="chip">wpf</span><span class="chip">autocad objectarx</span></div>
-    </div>
-  </div>
-  </div>
-
-  <div id="education" class="panel glass">
-  <h3 class="ptitle">Education</h3>
-  <div class="job">
-    <div class="when"><span>2016 — 2020</span></div>
-    <div>
-      <h3>Postgraduate · Discrete Mathematics and Cybernetics</h3>
-      <div class="role">Lomonosov Moscow State University</div>
-      <ul>
-        <li>Learning algorithms for planar robot models with discrete control</li>
-        <li>Publications: <a href="http://intsysjournal.ru/pdfs/23-1/Golikov.pdf">#1</a>, <a href="http://intsysjournal.ru/pdfs/22-4/Golikov.pdf">#2</a></li>
+      <p class="intro">Senior C++ engineer who makes systems fast: profiling, performance optimization and system design, from SSD firmware and storage deduplication to neural-network runtimes and mobile games.</p>
+      <ul class="facts">
+        <li><span>Now</span><b>Senior Software Engineer at Artificial Seed</b></li>
+        <li><span>Experience</span><b>In industry since 2013</b></li>
+        <li><span>Location</span><b>Bilbao, Spain</b></li>
+        <li><span>Teaching</span><b>Lomonosov MSU, 2016 — 2023</b></li>
       </ul>
     </div>
-  </div>
-  <div class="job">
-    <div class="when"><span>2014 — 2016</span></div>
-    <div>
-      <h3>M.Sc. · Mathematics and Computer Science</h3>
-      <div class="role">Lomonosov Moscow State University · GPA 4.77/5</div>
-      <ul><li><a href="https://github.com/favorart/robot-hand">Learning algorithms for positioning a robotic arm with discrete control</a></li></ul>
-    </div>
-  </div>
-  <div class="job">
-    <div class="when"><span>2009 — 2013</span></div>
-    <div>
-      <h3>B.Sc. · Applied Mathematics and Computer Science</h3>
-      <div class="role">Lomonosov Moscow State University · GPA 4.95/5</div>
-      <ul><li><a href="https://github.com/favorart/IPL">Cross-platform interpreter for a language with customizable syntax</a></li></ul>
-    </div>
-  </div>
-  </div>
-
-  <div id="skills" class="panel glass">
-  <h3 class="ptitle">Skills</h3>
-  <div class="skills">
-    <div><h3>Languages</h3><div class="chips"><span class="chip">C++ 11–26</span><span class="chip">Python</span><span class="chip">CUDA</span><span class="chip">C#</span></div></div>
-    <div><h3>Performance</h3><div class="chips"><span class="chip">perf</span><span class="chip">Tracy</span><span class="chip">intrinsics</span><span class="chip">GPU</span><span class="chip">profiling</span></div></div>
-    <div><h3>Build &amp; CI</h3><div class="chips"><span class="chip">CMake</span><span class="chip">Conan</span><span class="chip">GitLab CI</span><span class="chip">TeamCity</span><span class="chip">git</span></div></div>
-    <div><h3>ML</h3><div class="chips"><span class="chip">ONNX</span><span class="chip">NeoML</span><span class="chip">Transformers</span><span class="chip">sklearn</span></div></div>
-    <div><h3>Platforms</h3><div class="chips"><span class="chip">Linux</span><span class="chip">Windows</span><span class="chip">macOS</span><span class="chip">iOS</span><span class="chip">Android</span><span class="chip">ARM</span></div></div>
-    <div><h3>Spoken</h3><div class="chips"><span class="chip">English — full professional</span><span class="chip">Russian — native</span></div></div>
-  </div>
+    <a class="btn sun big" href="$prefix/cv/">Open full CV <span class="arr">→</span></a>
   </div>
 </section>
 

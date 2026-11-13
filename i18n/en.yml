@@ -28,8 +28,13 @@ footer_copy:
   - 'All rights reserved and instantly given away under the <a href="{mit}">MIT license</a>: take it, nobody minds.'
   - 'The work experience itself is non-transferable.'
 
-all_writing: All writing →
-all_courses: All courses →
+# {n} = number of items in the list
+all_writing: All {n} articles
+all_courses: All {n} courses
+cv_title: CV
+cv_description: CV of Kirill Golikov — Senior Software Engineer. C++, performance optimization, ML infrastructure, systems.
+comment_on_linkedin: Leave a comment on LinkedIn
+send_feedback: Send feedback
 back_to_writing: ← All writing
 back_to_courses: ← All courses
 

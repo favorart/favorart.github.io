@@ -39,7 +39,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 SITE_URL = "https://favorart.github.io"
 LICENSE_URL = "https://github.com/favorart/favorart.github.io/blob/main/LICENSE"
 DEFAULT_LANG = "en"
-HOME_LATEST = 4
+HOME_LATEST = 2  # cards per section on the home page
 RASTER = (".jpg", ".jpeg", ".png", ".gif", ".webp", ".avif")
 IMAGE_EXT = RASTER + (".svg",)
 # content sections: manifest key -> URL segment
@@ -387,12 +387,18 @@ def article_page(item, t):
             '<span class="chip">#%s</span>' % esc(str(x)) for x in item["tags"])
     subtitle = '<p class="subtitle">%s</p>' % esc(item["subtitle"]) if item.get("subtitle") else ""
     back = "back_to_courses" if item["section"] == "courses" else "back_to_writing"
+    if item["type"] == "post":
+        cta = '<a class="btn sun big" href="%s">%s <span class="arr">→</span></a>' % (
+            esc(item["original_url"]), S(t, "comment_on_linkedin"))
+    else:
+        cta = '<a class="btn sun big" href="%s/#contact">%s <span class="arr">→</span></a>' % (
+            t["prefix"], S(t, "send_feedback"))
     hero = ""
     if item.get("cover_url"):
         hero = '<img class="hero-cover" src="%s" alt="" width="1200" height="630">' % esc(item["cover_url"])
     body = tpl("article", hero=hero, kind=kind_of(item, t), date=date_text(item, t), lang=esc(item["lang"]),
                title=esc(item["title"]), subtitle=subtitle, author=S(t, "author"), source_top=source_top,
-               demo=demo, content=item["body_html"], tags=tags, source_bottom=source_bottom,
+               demo=demo, content=item["body_html"], tags=tags, cta=cta, source_bottom=source_bottom,
                back_href="%s/%s/" % (t["prefix"], item["section"]), back_text=S(t, back))
     cover = item.get("cover_url") or ""
     return page(t, "%s — %s" % (item["title"], t["author"]), body, item_url(item), description=item["summary"],
@@ -445,17 +451,31 @@ def home_page(items, t):
     path = os.path.join(ROOT, "content", "home.%s.html" % t["lang"])
     with open(path, encoding="utf-8") as f:
         content = string.Template(f.read())
-    latest = [i for i in items if i["list"] and i["section"] == "writing"][:HOME_LATEST]
-    cards = '<div class="posts">\n%s\n  </div>' % "\n".join(card(i, t) for i in latest)
-    courses = [i for i in items if i["list"] and i["section"] == "courses"]
-    course_cards = '<div class="posts">\n%s\n  </div>' % "\n".join(card(i, t) for i in courses)
+    listed = {sec: [i for i in items if i["list"] and i["section"] == sec] for sec in SECTIONS.values()}
+
+    def grid(sec):
+        return '<div class="posts">\n%s\n  </div>' % "\n".join(card(i, t) for i in listed[sec][:HOME_LATEST])
+
     try:
-        body = content.substitute(prefix=t["prefix"], writing_cards=cards, all_writing=S(t, "all_writing"),
-                                  course_cards=course_cards, all_courses=S(t, "all_courses"))
+        body = content.substitute(prefix=t["prefix"], writing_cards=grid("writing"), course_cards=grid("courses"),
+                                  all_writing=S(t, "all_writing").replace("{n}", str(len(listed["writing"]))),
+                                  all_courses=S(t, "all_courses").replace("{n}", str(len(listed["courses"]))))
     except KeyError as e:
         fail("%s: unknown placeholder $%s" % (path, e.args[0]))
     return page(t, t["home_title"], body, t["prefix"] + "/", description=t["home_description"],
                 og_title=t["home_og_title"], og_type="profile", body_class="home", section="home")
+
+
+def cv_page(t):
+    path = os.path.join(ROOT, "content", "cv.%s.html" % t["lang"])
+    with open(path, encoding="utf-8") as f:
+        content = string.Template(f.read())
+    try:
+        body = content.substitute(prefix=t["prefix"])
+    except KeyError as e:
+        fail("%s: unknown placeholder $%s" % (path, e.args[0]))
+    return page(t, "%s — %s" % (t["cv_title"], t["author"]), body, t["prefix"] + "/cv/",
+                description=t["cv_description"], og_type="profile", section="about")
 
 
 def stylesheet():
@@ -508,6 +528,9 @@ def main():
         if not os.path.isfile(os.path.join(ROOT, "content", "home.%s.html" % t["lang"])):
             fail("content/home.%s.html is missing for i18n/%s.yml" % (t["lang"], t["lang"]))
         write(os.path.join(root, "index.html"), home_page(items, t))
+        if not os.path.isfile(os.path.join(ROOT, "content", "cv.%s.html" % t["lang"])):
+            fail("content/cv.%s.html is missing for i18n/%s.yml" % (t["lang"], t["lang"]))
+        write(os.path.join(root, "cv", "index.html"), cv_page(t))
         for section in SECTIONS.values():
             write(os.path.join(root, section, "index.html"), list_page(items, section, t))
 
