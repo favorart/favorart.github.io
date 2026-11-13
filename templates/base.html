@@ -65,10 +65,11 @@ $body
       show(next);
     });
   })();
-  // hero "Also:" roles: one at a time, fading through frosted glass (all inline without JS or with reduced motion)
+  // hero "Also:" roles: one at a time, fading through frosted glass (reduced motion: a short plain cross-fade, see CSS;
+  // without JS all roles stay inline)
   (function () {
     var box = document.querySelector('.also .roles');
-    if (!box || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+    if (!box) return;
     var roles = box.querySelectorAll('.role'), i = 0;
     box.classList.add('cycle'); roles[0].classList.add('on');
     setInterval(function () {

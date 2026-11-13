@@ -290,6 +290,7 @@ img.cover-dark { filter: none !important; }
   /* "animation effects" off (Windows) / reduce motion: a gentle, short version instead of none */
   .post .cover, .post .thumb::before, .post .frost, .btn .arr { transition-duration: .2s; }
   .post, .linked { transition-duration: .1s; }
+  .also .roles.cycle .role { filter: none; transition: opacity .2s linear; }
   a:hover { animation: none !important; background-position: 0 0 !important; }
   .post:hover .cover, .post:focus-within .cover, .post:hover .thumb::before { transform: scale(1.04); }
 }
