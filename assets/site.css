@@ -148,27 +148,34 @@ header.hero { border-radius: 30px; padding: 44px 40px; }
 
 /* ---- cards with covers (writing, courses): a fixed frame, the picture zooms inside ---- */
 .posts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr)); gap: 16px; }
-.post { display: flex; flex-direction: column; padding: 0; overflow: hidden; isolation: isolate; color: var(--text); }
-.post:hover { text-decoration: none; }
-.post .thumb { position: relative; aspect-ratio: 1200 / 630; overflow: hidden; isolation: isolate;
+.post { position: relative; display: flex; flex-direction: column; padding: 0; overflow: hidden; isolation: isolate; color: var(--text); }
+/* the whole card is clickable through the title link; the source label above it is its own link */
+.post .stretch { color: inherit; }
+.post .stretch::after { content: ""; position: absolute; inset: 0; z-index: 1; border-radius: inherit; }
+.post .stretch:hover { text-decoration: none; }
+.post .stretch:focus-visible { outline: none; }
+.post:has(.stretch:focus-visible) { outline: 3px solid var(--sun); outline-offset: 2px; }
+.post .thumb { position: relative; aspect-ratio: 1200 / 630; overflow: hidden;
   background: linear-gradient(135deg, var(--m1), var(--m4) 45%, var(--m2)); }
-.post .thumb::before { content: ""; position: absolute; inset: 0; z-index: -1; background: inherit; transition: transform .6s ease; }
+.post .thumb::before { content: ""; position: absolute; inset: 0; background: inherit; transition: transform .6s ease; }
 .post .cover { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: var(--cover-filter); transition: transform .6s ease; }
-.post:hover .cover, .post:focus-visible .cover, .post:hover .thumb::before { transform: scale(1.1); }
+.post:hover .cover, .post:focus-within .cover, .post:hover .thumb::before { transform: scale(1.1); }
 .post .cap { /* frosted caption over the image */
-  position: absolute; left: 10px; right: 10px; bottom: 10px; display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap;
+  position: absolute; z-index: 2; left: 10px; right: 10px; bottom: 10px; display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap;
   padding: 8px 12px; border-radius: 14px; font: 500 11px/1.35 "JetBrains Mono", monospace; color: var(--text);
   text-transform: uppercase; letter-spacing: .05em;
   background: var(--glass-strong); border: 1px solid var(--glass-line); box-shadow: var(--glass-hi);
   -webkit-backdrop-filter: blur(14px) saturate(150%); backdrop-filter: blur(14px) saturate(150%);
 }
 .post .body { padding: 16px 20px 20px; }
+.cap .src, .kicker .src { color: inherit; text-decoration: underline; text-decoration-color: var(--sun); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.cap .src:hover, .kicker .src:hover { color: var(--link); }
 .post h3 { font-size: 18px; }
 .post:hover h3 { text-decoration: underline; text-decoration-color: var(--sun); text-underline-offset: 4px; text-decoration-thickness: 2px; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .post .cover, .post .thumb::before { transition: none; }
-  .post:hover .cover, .post:focus-visible .cover, .post:hover .thumb::before { transform: none; }
+  .post:hover .cover, .post:focus-within .cover, .post:hover .thumb::before { transform: none; }
 }
 
 .note { border-radius: 20px; padding: 16px 20px; margin: 16px 0 0; font-size: 15px; color: var(--muted); }

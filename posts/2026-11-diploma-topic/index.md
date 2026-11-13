@@ -38,7 +38,7 @@ cover: cover.jpg
 
 Репозитории:
 
-- \#IPL — <https://github.com/favorart/IPL>
-- \#RobotHand — <https://github.com/favorart/robot-hand>
+- \#IPL — [GitHub: favorart/IPL — Interpreted Programming Language](https://github.com/favorart/IPL)
+- \#RobotHand — [GitHub: favorart/robot-hand — Emulator Robot Hand WindowsApp](https://github.com/favorart/robot-hand)
 
 ![Изображение из поста](cover.jpg)

@@ -33,8 +33,8 @@ tags: [cpp, performance, simd, avx512, ml]
 
 Почитать:
 
-- <https://blog.cloudflare.com/on-the-dangers-of-intels-frequency-scaling/>
-- <https://travisdowns.github.io/blog/2020/01/17/avxfreq1.html>
-- <https://lemire.me/blog/2018/09/07/avx-512-when-and-how-to-use-these-new-instructions>
+- [Cloudflare Blog: On the dangers of Intel's frequency scaling](https://blog.cloudflare.com/on-the-dangers-of-intels-frequency-scaling/)
+- [Travis Downs, Performance Matters: Gathering Intel on Intel AVX-512 Transitions](https://travisdowns.github.io/blog/2020/01/17/avxfreq1.html)
+- [Daniel Lemire's blog: AVX-512: when and how to use these new instructions](https://lemire.me/blog/2018/09/07/avx-512-when-and-how-to-use-these-new-instructions)
 
 ![Изображение из поста](cover.jpg)
