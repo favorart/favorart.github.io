@@ -14,18 +14,18 @@ try { var t = localStorage.getItem("theme"); if (t === "light" || t === "dark") 
 <meta property="og:url" content="$url">
 $head_extra
 <link rel="canonical" href="$url">
-<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="$favicon_url" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="$css_url">
 </head>
 <body class="$body_class" data-section="$section" id="top">
 <div class="bg" aria-hidden="true"></div>
 
 <header class="top">
   <div class="bar">
-    <a class="who" href="$prefix/"><img class="logo" src="/assets/favicon.svg" alt="" width="40" height="40"><span><b>$author</b><small>$role_title</small><small class="sub">$role_skills</small></span></a>
+    <a class="who" href="$prefix/"><img class="logo" src="$favicon_url" alt="" width="40" height="40"><span><b>$author</b><small>$role_title</small><small class="sub">$role_skills</small></span></a>
     <nav class="lang" aria-label="Language">
       <a href="$prefix/" aria-current="true" lang="en">EN</a><span title="$lang_soon" lang="es">ES</span><span title="$lang_soon" lang="ru">RU</span><span title="$lang_soon" lang="sr">SR</span><span title="$lang_soon" lang="uz">UZ</span>
     </nav>
