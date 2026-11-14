@@ -71,31 +71,32 @@ python -m http.server -d _site 8000
 ## Translations
 
 The site is in en / es / ru / sr / uz. The page around every text is translated (`i18n/`, `content/`); posts
-and articles (Writing) are translated into the other languages through a **versioned cache**:
+and articles (Writing), and the abstracts of papers, are translated into the other languages and kept as **one
+file per text and language**, updated in place (older versions exist only in git history):
 
 ```
-translations/<section>/<slug>/<lang>.<hash>.md
+translations/<slug>/<lang>.md
 ```
 
-`<hash>` is the version of the original the translation was made from (`source_hash` in build.py: sha256 of the
-normalized Markdown, 12 hex digits). Front matter: `title`, `summary`, `source`, `source_lang`, `source_hash`,
-`translated`, `translator`, `reviewed` (date of the independent review — files without it are not published).
+`source_hash` in its front matter is the version of the original it was translated from (build.py
+`source_hash`: sha256 of the normalized Markdown, 8 hex digits). Front matter: `title`, `summary`, `source`,
+`source_lang`, `source_hash`, `translated`, `translator`, `reviewed` (date of the independent review — files
+without it are not published); for a paper also `keywords`, and the body is the abstract.
 
 On every build, for each text × language:
 
-| Cache has | Page shows |
+| File | Page shows |
 |---|---|
-| a reviewed translation of the current version | the translation, with "Translated … Original: <language>" |
-| only reviewed translations of older versions | the newest of them + "The original has been updated since this translation" |
-| nothing reviewed | the original text |
+| reviewed, `source_hash` = current original | the translation, with "Translated … Original: <language>" |
+| reviewed, original changed since | the translation + "The original has been updated since this translation" |
+| missing or not reviewed | the original text |
 
 The build prints `translations: N up to date, M outdated, K missing`. Tools:
 
 ```sh
-python tools/translations.py status          # table: ok / missing / outdated / unreviewed
-python tools/translations.py source <slug>   # the original + its hash
-python tools/translations.py new <slug> <lang>   # creates the file for the current version
-python tools/translations.py prune           # removes versions superseded by a reviewed current one
+python tools/translations.py status              # table: ok / missing / outdated / unreviewed
+python tools/translations.py source <slug>       # the original + its hash
+python tools/translations.py new <slug> <lang>   # creates the file, or re-stamps an outdated one in place
 ```
 
 When a post or article is added or changed, every missing/outdated translation is made and reviewed in the

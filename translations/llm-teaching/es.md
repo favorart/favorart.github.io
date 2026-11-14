@@ -3,12 +3,12 @@ title: "Cómo noté que los LLM habían llegado a mi vida"
 summary: "Un primer curso en viaje de trabajo, luego clases online y tests, y tras la llegada de los agentes omniscientes: yo hice como que enseñaba y los estudiantes hicieron como que aprendían."
 source: posts/2026-01-llm-teaching/index.md
 source_lang: ru
-source_hash: 587ef8d614b4
+source_hash: 587ef8d6
 translated: 2026-11-14
 translator: Claude
 reviewed: 2026-11-14
 ---
-\#¿Cómo notasteis que el mundo había cambiado y que los LLM habían llegado a vuestra vida?
+\#¿Cómo notaron ustedes que el mundo había cambiado y que los LLM habían llegado a su vida?
 
 Hace unos años tuve la oportunidad de probar suerte como profesor.
 

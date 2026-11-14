@@ -3,14 +3,15 @@
 
     python tools/translations.py status [--offline]      what is up to date / outdated / missing / unreviewed
     python tools/translations.py source <slug>           print the original (Markdown) and its version hash
-    python tools/translations.py new <slug> <lang>       create translations/<section>/<slug>/<lang>.<hash>.md
-    python tools/translations.py prune                   delete versions superseded by a reviewed current one
+    python tools/translations.py new <slug> <lang>       create translations/<slug>/<lang>.md, or re-stamp an
+                                                          outdated one for the current version of the original
 
-A translation file is valid for one version of the original: its name and `source_hash` carry
-build.source_hash() of the original text it was made from. When the original changes, the build keeps showing
-the newest reviewed version with an "original updated" note until a translation of the new version is added.
+One file per text and language, updated in place; older versions live only in git history. `source_hash` in
+its front matter is build.source_hash() of the original it was made from. When the original changes, the build
+keeps showing the reviewed translation with an "original updated" note until it is updated and reviewed again.
 """
 import argparse
+import re
 import datetime as dt
 import os
 import sys
@@ -40,30 +41,27 @@ def find(slug, offline=False):
 
 
 def state(item, lang):
-    cur = build.source_hash(item["source_md"])
-    files = build.translation_files(item, lang)
-    reviewed = [f for f in files if build.read_translation(f)[0].get("reviewed")]
-    if any(f.endswith(".%s.md" % cur) for f in reviewed):
-        return "ok"
-    if any(f.endswith(".%s.md" % cur) for f in files):
-        return "unreviewed"
-    if reviewed:
+    path = build.translation_path(item, lang)
+    if not os.path.isfile(path):
+        return "missing"
+    meta = build.read_translation(path)[0]
+    if str(meta.get("source_hash")) != build.source_hash(item["source_md"]):
         return "outdated"
-    return "missing"
+    return "ok" if meta.get("reviewed") else "unreviewed"
 
 
 def cmd_status(args):
     its, langs = items(args.offline)
     codes = list(langs)
-    print("%-36s %-4s %s" % ("item", "orig", "  ".join("%-10s" % c for c in codes)))
+    print("%-52s %-4s %s" % ("item", "orig", "  ".join("%-10s" % c for c in codes)))
     totals = {}
     for i in its:
         cells = []
         for c in codes:
-            st = "original" if c == i["lang"] else state(i, c)
+            st = "original" if c == i["lang"] else "provided" if c in i.get("provided", ()) else state(i, c)
             totals[st] = totals.get(st, 0) + 1
             cells.append("%-10s" % st)
-        print("%-36s %-4s %s" % ((i["section"] + "/" + i["slug"])[:36], i["lang"], "  ".join(cells)))
+        print("%-52s %-4s %s" % ((i["section"] + "/" + i["slug"])[:52], i["lang"], "  ".join(cells)))
     print("\n" + ", ".join("%s: %d" % kv for kv in sorted(totals.items())))
 
 
@@ -80,14 +78,22 @@ def cmd_new(args):
     i, langs = find(args.slug, args.offline)
     if args.lang not in langs:
         build.fail("unknown language '%s' (have: %s)" % (args.lang, ", ".join(langs)))
-    if args.lang == i["lang"]:
-        build.fail("'%s' is already in %s" % (args.slug, args.lang))
-    h = build.source_hash(i["source_md"])
-    d = os.path.join(build.ROOT, "translations", i["section"], i["slug"])
-    path = os.path.join(d, "%s.%s.md" % (args.lang, h))
-    if os.path.exists(path):
-        build.fail("%s already exists" % os.path.relpath(path, build.ROOT))
-    os.makedirs(d, exist_ok=True)
+    if args.lang == i["lang"] or args.lang in i.get("provided", ()):
+        build.fail("'%s' already has %s (original or provided by the source)" % (args.slug, args.lang))
+    h, today = build.source_hash(i["source_md"]), dt.date.today().isoformat()
+    path = build.translation_path(i, args.lang)
+    rel = os.path.relpath(path, build.ROOT)
+    if os.path.exists(path):  # outdated: keep the text, stamp the new version, ask for a new review
+        with open(path, encoding="utf-8") as f:
+            text = f.read()
+        text = re.sub(r"(?m)^source_hash:.*$", "source_hash: %s" % h, text, count=1)
+        text = re.sub(r"(?m)^translated:.*$", "translated: %s" % today, text, count=1)
+        text = re.sub(r"(?m)^reviewed:.*$", "reviewed:            # set after the independent review", text, count=1)
+        with open(path, "w", encoding="utf-8", newline="\n") as f:
+            f.write(text)
+        print("%s  (re-stamped for the current original: update the text to match it, then review)" % rel)
+        return
+    os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8", newline="\n") as f:
         f.write("---\n"
                 "title: \"\"\n"
@@ -98,26 +104,8 @@ def cmd_new(args):
                 "translated: %s\n"
                 "translator: Claude\n"
                 "reviewed:            # date of the independent review; the build ignores the file until it is set\n"
-                "---\n\n" % (i["source_ref"], i["lang"], h, dt.date.today().isoformat()))
-    print(os.path.relpath(path, build.ROOT))
-
-
-def cmd_prune(args):
-    its, langs = items(args.offline)
-    removed = 0
-    for i in its:
-        cur = build.source_hash(i["source_md"])
-        for c in langs:
-            files = build.translation_files(i, c)
-            current_ok = [f for f in files if f.endswith(".%s.md" % cur) and build.read_translation(f)[0].get("reviewed")]
-            if not current_ok:
-                continue
-            for f in files:
-                if f not in current_ok:
-                    os.remove(f)
-                    removed += 1
-                    print("removed", os.path.relpath(f, build.ROOT))
-    print("%d superseded version(s) removed (they stay in git history)" % removed)
+                "---\n\n" % (i["source_ref"], i["lang"], h, today))
+    print(rel)
 
 
 def main():
@@ -127,9 +115,8 @@ def main():
     sub.add_parser("status")
     p = sub.add_parser("source"); p.add_argument("slug")
     p = sub.add_parser("new"); p.add_argument("slug"); p.add_argument("lang")
-    sub.add_parser("prune")
     args = ap.parse_args()
-    {"status": cmd_status, "source": cmd_source, "new": cmd_new, "prune": cmd_prune}[args.cmd](args)
+    {"status": cmd_status, "source": cmd_source, "new": cmd_new}[args.cmd](args)
 
 
 if __name__ == "__main__":

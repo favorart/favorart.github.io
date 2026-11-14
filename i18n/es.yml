@@ -108,3 +108,7 @@ paper_source: "{j}, vol. {v}, n.º {i}, {y}, págs. {p}"
 # note above a translated article (followed by a link to the original) and the out-of-date warning
 translation_note: "Traducido por Claude y revisado de forma independiente. Original:"
 translation_stale: "El original se ha actualizado después de esta traducción."
+
+# paper page labels
+paper_abstract: Resumen
+paper_keywords: Palabras clave

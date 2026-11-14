@@ -112,3 +112,7 @@ paper_source: "{j}, tom {v}, br. {i}, {y}, str. {p}"
 # note above a translated article (followed by a link to the original) and the out-of-date warning
 translation_note: "Prevod: Claude, nezavisno proveren. Original:"
 translation_stale: "Original je izmenjen posle ovog prevoda."
+
+# paper page labels
+paper_abstract: Apstrakt
+paper_keywords: Ključne reči

@@ -1,7 +1,7 @@
 # Translation glossary
 
 Terms the author has decided on. Every translation (UI, CV, articles, posts) uses them; a new decision is added
-here first. Languages: en (source of the UI), es (Spain), ru, sr (**Latin script**, ekavian), uz (**Latin script**,
+here first. Languages: en (source of the UI), es (neutral, for readers on every continent; Spain-only realia explained), ru, sr (**Latin script**, ekavian), uz (**Latin script**,
 ʻ U+02BB in oʻ/gʻ, ʼ U+02BC for the apostrophe — never ASCII `'` or `’`).
 
 ## Writing: content types (tags are short, one word)
@@ -42,5 +42,17 @@ uz Postlar/Qaydlar/Maqolalar.
 - Translate meaning, not words; keep the author's voice: irony and jokes stay jokes.
 - Keep Markdown structure, links, images, code blocks and inline code exactly; never translate code,
   identifiers, URLs, hashtags in `tags`.
+- Inline code that is a human-readable message (a TODO, a printed string) may be translated; identifiers,
+  commands and real code may not. Hashtags inside the text are prose and are translated; `tags` are not.
+- Spanish addresses readers with **ustedes** (works on every continent), never vosotros.
 - Typography of the target language: ru «ёлочки», — with spaces, – without spaces in ranges (2016–2023),
   nbsp after short abbreviations; sr „…“; es «…» or "…" as in the source, inverted ¿¡.
+
+## Other agreed terms
+
+| ru | es | sr | uz | en |
+|---|---|---|---|---|
+| Аннотация (paper) | Resumen | Apstrakt | Annotatsiya | Abstract |
+| ВНЖ / ПМЖ | permiso de residencia / residencia permanente | boravišna dozvola / stalni boravak | yashash uchun ruxsatnoma / doimiy yashash uchun ruxsatnoma | residence permit / permanent residence |
+| РУз | Uzbekistán | Uzbekistan | OʻzR | Uzbekistan |
+| госуслуги | servicios públicos en línea | e-uprava | davlat xizmatlari | e-government services |
