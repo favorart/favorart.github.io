@@ -343,7 +343,7 @@ def load_posts():
             "cover_url": "/writing/%s/%s" % (slug, cover) if cover else None,
             "card_cover_url": "/writing/%s/%s" % (slug, card_cover) if card_cover else None,
             "folder": folder, "options_dir": folder,
-            "body_html": body_html, "subtitle": None, "demo_url": meta.get("demo_url"),
+            "body_html": mark_link_langs(body_html), "subtitle": None, "demo_url": meta.get("demo_url"),
             "list": meta.get("list", True),
             "source_md": source_md, "source_ref": where, "cover_file": cover,
         })
@@ -361,6 +361,10 @@ def load_external(offline):
         fail("sources.yml: unknown sections %s (known: %s)" % (sorted(unknown), sorted(SECTIONS)))
     entries = [(SECTIONS[key], e) for key in SECTIONS for e in (manifest.get(key) or [])]
     page_of = {(e["repo"], e["path"]): "/%s/%s/" % (sec, e["slug"]) for sec, e in entries}
+    for sec, e in entries:  # the same text in another language, kept in the repo next to the original
+        for code, path in (e.get("translation_files") or {}).items():
+            pre = LANGS[code]["prefix"] if code in LANGS else ""
+            page_of[(e["repo"], path)] = "%s/%s/%s/" % (pre, sec, e["slug"])
     items = []
     for sec, e in entries:
         where = "sources.yml[%s]" % e.get("slug")
@@ -390,7 +394,7 @@ def load_external(offline):
             m = re.match(r"\A\s*#\s+(.+?)\s*#*\s*\n", raw)
             if m:  # the source's own H1 becomes the subtitle; the page H1 is the manifest title
                 item["subtitle"], raw = m.group(1).strip(), raw[m.end():]
-            item["body_html"] = linkify_bare(rewrite_relative(render_markdown(raw), item, page_of))
+            item["body_html"] = mark_link_langs(linkify_bare(rewrite_relative(render_markdown(raw), item, page_of)))
         items.append(item)
     items += [paper_item(e) for e in manifest.get("papers") or []]
     return items
@@ -413,7 +417,8 @@ def paper_item(e):
     ref = "%s %s // %s. — %d. — Т. %s, вып. %s. — С. %s." % (
         esc(e["authors"]), esc(e["title"]), esc(e["journal"]), year, e["volume"], e["issue"], esc(str(e["pages"])))
     body = ['<p class="paper-ref" lang="%s">%s</p>' % (esc(lang), ref),
-            '<p class="paper-pdf"><a class="btn sun big" href="%s">PDF <span class="arr">→</span></a></p>' % esc(e["pdf"])]
+            '<p class="paper-pdf"><a class="btn sun big" href="%s" hreflang="%s">PDF <span class="arr">→</span></a></p>'
+            % (esc(e["pdf"]), esc(lang))]
     src = "# %s\n\n%s\n" % (e["title"], e["abstract"])
     if e.get("keywords"):
         src += "\n%s: %s\n" % (PAPER_LABELS[lang][1], e["keywords"])
@@ -496,8 +501,8 @@ def load_translations(items, langs):
 
 
 def paper_body(item, t, tr):
-    """Record + PDF, then the abstract in the page's language (a reviewed translation, or the journal's English
-    one), then the original abstract; on the original's own page also the English one."""
+    """Record + PDF, then the abstract in the page's language only (the original, a reviewed translation, or the
+    journal's English abstract); the original title stays as the subtitle on other-language pages."""
     e, lang = item["paper"], item["lang"]
     lab = lambda tt, k: esc(str(tt.get("paper_" + k) or PAPER_LABELS.get(tt["lang"], PAPER_LABELS["en"])[k == "keywords"]))
     out = [item["paper_head"]]
@@ -511,20 +516,41 @@ def paper_body(item, t, tr):
             a.append('<p lang="%s"><strong>%s:</strong> %s</p>' % (hl, lab(tt, "keywords"), esc(keywords)))
         return a
 
+    # one abstract per page, in the page's language; the original only when there is no translation
     src_t = LANGS.get(lang, t)
     if t["lang"] == lang:
         out += block(t, src_t["html_lang"], None, e["abstract"], e.get("keywords"))
-        if e.get("abstract_en") and "en" in LANGS:
-            out += block(LANGS["en"], "en", e.get("title_en"), e["abstract_en"], e.get("keywords_en"))
-        return "\n".join(out)
-    if tr:
-        m = tr["meta"]
+    elif tr:
         out.append(tr_note(item, tr, t))
-        out += block(t, t["html_lang"], None, tr["body"].strip(), m.get("keywords"))
+        out += block(t, t["html_lang"], None, tr["body"].strip(), tr["meta"].get("keywords"))
     elif t["lang"] == "en" and e.get("abstract_en"):
         out += block(t, "en", None, e["abstract_en"], e.get("keywords_en"))
-    out += block(src_t, src_t["html_lang"], e["title"], e["abstract"], e.get("keywords"))
+    else:
+        out += block(src_t, src_t["html_lang"], None, e["abstract"], e.get("keywords"))
     return "\n".join(out)
+
+
+RU_HOSTS = ("habr.com", "vk.com", "vk.ru", "ru.wikipedia.org", "coderszone.info", "intsysjournal.ru")
+EN_HOSTS = ("en.wikipedia.org", "stackoverflow.com", "docs.python.org", "reddit.com", "blog.cloudflare.com",
+            "travisdowns.github.io", "lemire.me", "tutorialspoint.com", "effbot.org", "tcl.tk", "zetcode.com",
+            "readthedocs.io", "nmt.edu", "cppreference.com", "isocpp.org", "medium.com")
+A_HREF_RE = re.compile(r'<a\b([^>]*?)\bhref="(https?://[^"]+)"([^>]*)>')
+
+
+def mark_link_langs(html_text):
+    """Links to sites known to be in Russian / English get hreflang="ru" / "en": the page shows a small badge
+    unless it is in that language. Explicit marks ({: hreflang=xx } in Markdown) win."""
+    def sub(m):
+        attrs = m.group(1) + m.group(3)
+        if "hreflang=" in attrs:
+            return m.group(0)
+        host = urllib.parse.urlsplit(html.unescape(m.group(2))).hostname or ""
+        on = lambda hosts: any(host == h or host.endswith("." + h) for h in hosts)
+        code = "ru" if host.endswith((".ru", ".su")) or on(RU_HOSTS) else "en" if on(EN_HOSTS) else None
+        if not code:
+            return m.group(0)
+        return '<a%s href="%s" hreflang="%s"%s>' % (m.group(1), m.group(2), code, m.group(3))
+    return A_HREF_RE.sub(sub, html_text)
 
 
 def tr_of(item, t):
@@ -537,7 +563,7 @@ def tr_body_html(item, tr):
         body_html = re.sub(r'<p>\s*<img[^>]*\bsrc="%s"[^>]*>\s*</p>\s*' % re.escape(item["cover_file"]), "", body_html)
     if item["type"] == "external":
         body_html = linkify_bare(rewrite_relative(body_html, item, item["page_of"]))
-    return body_html
+    return mark_link_langs(body_html)
 
 
 def tr_note(item, tr, t):
@@ -615,13 +641,13 @@ def item_url(item, t=None):
 def kind_of(item, t):
     """Label of the item; for a LinkedIn post it links to the original post."""
     if item.get("paper"):
-        label = "%s · %s · %d" % (S(t, "type_paper"), esc(item["journal_short"]), item["year"])
+        label = "%s · %s · %d" % (S(t, "type_paper"), esc(str(loc(item["journal_short"], t))), item["year"])
     elif item.get("kind"):
         label = esc(str(loc(item["kind"], t)))
     else:
         label = S(t, "linkedin_post")
     if item.get("original_url"):
-        return '<a class="src" href="%s">%s</a>' % (esc(item["original_url"]), label)
+        return '<a class="src" href="%s" hreflang="%s">%s</a>' % (esc(item["original_url"]), esc(item["lang"]), label)
     return label
 
 
@@ -651,10 +677,21 @@ def dark_twin(item, url):
     return None
 
 
-def cover_imgs(item, url, cls, lazy=True):
-    """<img> for the cover, plus its dark twin (CSS shows one of them by theme)."""
+def lang_cover(item, url, t):
+    """cover-N.svg -> cover-N.<lang>.svg when that language version exists (titles in the page's language)."""
+    if not url or not t or not url.endswith(".svg") or not item.get("options_dir"):
+        return url
+    alt = os.path.basename(url)[:-4] + ".%s.svg" % t["lang"]
+    if os.path.isfile(os.path.join(item["options_dir"], alt)):
+        return url.rsplit("/", 1)[0] + "/" + alt
+    return url
+
+
+def cover_imgs(item, url, cls, lazy=True, t=None):
+    """<img> for the cover, plus its dark twin (CSS shows one of them by theme); in t's language if available."""
     lz = ' loading="lazy"' if lazy else ""
     dark = dark_twin(item, url)
+    url, dark = lang_cover(item, url, t), lang_cover(item, dark, t)
     html_ = '<img class="%s cover-light%s" src="%s" alt="" width="1200" height="630"%s>' % (
         cls, " has-dark" if dark else "", esc(versioned(url, cover_file(item, url))), lz)
     if dark:
@@ -686,7 +723,7 @@ def views_tag(item, t):
 def card(item, t):
     cover, src = "", item.get("card_cover_url") or item.get("cover_url")
     if src:
-        cover = cover_imgs(item, src, "cover")
+        cover = cover_imgs(item, src, "cover", t=t)
     badge = ""
     if item.get("demo_url"):
         badge = '<a class="badge" href="%s">%s</a>' % (esc(item["demo_url"]), S(t, "badge_demo"))
@@ -701,25 +738,26 @@ def card(item, t):
 
 def article_page(item, t):
     if item["type"] == "post":
-        source_top = '<a href="%s">LinkedIn</a>' % esc(item["original_url"])
+        source_top = '<a href="%s" hreflang="%s">LinkedIn</a>' % (esc(item["original_url"]), esc(item["lang"]))
     elif item["type"] == "paper":
         e = item["paper"]
         line = str(t.get("paper_source", "{j}, vol. {v}, no. {i}, {y}, pp. {p}")).format(
             j=e["journal"] if t["lang"] == item["lang"] and e.get("journal") else e["journal_en"], v=e["volume"], i=e["issue"], y=item["year"], p=e["pages"])
-        source_top = '<a href="%s">%s</a>' % (esc(item["original_url"]), esc(line))
+        source_top = '<a href="%s" hreflang="%s">%s</a>' % (esc(item["original_url"]), esc(item["lang"]), esc(line))
     else:
         repo_url = "https://github.com/" + item["repo"]
         file_url = "%s/blob/%s/%s" % (repo_url, item["branch"], item["path"])
-        source_top = '%s: <a href="%s">%s</a> · <a href="%s">%s</a>' % (
-            S(t, "source"), esc(repo_url), esc(item["repo"]), esc(file_url), esc(posixpath.basename(item["path"])))
+        source_top = '%s: <a href="%s">%s</a> · <a href="%s" hreflang="%s">%s</a>' % (
+            S(t, "source"), esc(repo_url), esc(item["repo"]), esc(file_url), esc(item["lang"]),
+            esc(posixpath.basename(item["path"])))
     demo = ""
     if item.get("demo_url"):
         demo = ' · <a class="demo" href="%s">%s</a>' % (esc(item["demo_url"]), S(t, "live_demo"))
     subtitle = '<p class="subtitle">%s</p>' % esc(item["subtitle"]) if item.get("subtitle") else ""
     back = "back_to_courses" if item["section"] == "courses" else "back_to_writing"
     if item["type"] == "post":
-        cta = '<a class="btn sun big" href="%s">%s <span class="arr">→</span></a>' % (
-            esc(item["original_url"]), S(t, "comment_on_linkedin"))
+        cta = '<a class="btn sun big" href="%s" hreflang="%s">%s <span class="arr">→</span></a>' % (
+            esc(item["original_url"]), esc(item["lang"]), S(t, "comment_on_linkedin"))
     else:
         cta = '<a class="btn sun big" href="%s/#contact">%s <span class="arr">→</span></a>' % (
             t["prefix"], S(t, "send_feedback"))
@@ -732,10 +770,12 @@ def article_page(item, t):
     if item["type"] == "paper":
         if tr:
             title, title_lang, summary = str(tr["meta"]["title"]), t["html_lang"], str(tr["meta"]["summary"])
-        orig = item["paper"]["title"] if t["lang"] != item["lang"] else item["paper"].get("title_en")
-        orig_lang = item["lang"] if t["lang"] != item["lang"] else "en"
+        orig = item["paper"]["title"] if t["lang"] != item["lang"] else None  # original title, in its language
+        orig_lang = item["lang"]
         subtitle = '<p class="subtitle" lang="%s">%s</p>' % (esc(orig_lang), esc(orig)) if orig else ""
         content, text_lang_, canonical = paper_body(item, t, tr), t["html_lang"], None
+    elif item["section"] == "courses" and t["lang"] != item["lang"] and t.get("course_lang_note"):
+        content = '<p class="tr-note">%s</p>' % S(t, "course_lang_note") + content  # courses are not translated
     elif tr:  # a reviewed translation of the text into this UI language
         title, title_lang, summary = str(tr["meta"]["title"]), t["html_lang"], str(tr["meta"]["summary"])
         text_lang_, canonical = t["html_lang"], None

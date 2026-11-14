@@ -24,7 +24,7 @@ Hoy abro la terminal, le escribo a un agente de IA en mi idioma de todos los dí
 
 Mi suposición especulativa (de entonces, pero en la que hoy creo todavía más): el lenguaje natural debe convertirse en el principal lenguaje de programación. Los lenguajes de programación formales pasarán a la historia, como pasaron el código máquina y el ensamblador.
 
-El agente me corrige: «no desaparecerán, sino que bajarán por el stack», y sostiene que en ellos la gente escribe drivers, cargadores de arranque y bucles calientes; simplemente la mayoría no los ve. Y estoy de acuerdo: a los lenguajes formales (a algunos) (por ahora) todavía se los ve al depurar y en las revisiones de código.  😅
+El agente me corrige: «no desaparecerán, sino que bajarán a las capas inferiores de la pila», y sostiene que en ellos la gente escribe controladores, cargadores de arranque y bucles calientes; simplemente la mayoría no los ve. Y estoy de acuerdo: a los lenguajes formales (a algunos) (por ahora) todavía se los ve al depurar y en las revisiones de código.  😅
 
 **El máster: una novedad científica a la que le queda una semana**
 
@@ -38,7 +38,7 @@ A este trabajo todavía le queda una pizca de novedad. Pero, siendo sinceros, te
 
 Repositorios:
 
-- \#IPL — [GitHub: favorart/IPL — Interpreted Programming Language](https://github.com/favorart/IPL)
-- \#RobotHand — [GitHub: favorart/robot-hand — Emulator Robot Hand WindowsApp](https://github.com/favorart/robot-hand)
+- \#IPL — [GitHub: favorart/IPL — Interpreted Programming Language](https://github.com/favorart/IPL){: hreflang=ru }
+- \#RobotHand — [GitHub: favorart/robot-hand — Emulator Robot Hand WindowsApp](https://github.com/favorart/robot-hand){: hreflang=en }
 
 ![Imagen del post](cover.jpg)

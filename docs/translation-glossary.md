@@ -42,6 +42,8 @@ uz Postlar/Qaydlar/Maqolalar.
 - Translate meaning, not words; keep the author's voice: irony and jokes stay jokes.
 - Keep Markdown structure, links, images, code blocks and inline code exactly; never translate code,
   identifiers, URLs, hashtags in `tags`.
+- A link to a page in another language than the text gets a mark: [text](url){: hreflang=ru } (shown as a
+  small "RU" badge). Linked pages themselves are not translated.
 - Inline code that is a human-readable message (a TODO, a printed string) may be translated; identifiers,
   commands and real code may not. Hashtags inside the text are prose and are translated; `tags` are not.
 - Spanish addresses readers with **ustedes** (works on every continent), never vosotros.

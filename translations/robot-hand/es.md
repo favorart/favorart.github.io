@@ -146,7 +146,7 @@ Así, el movimiento se desplazará en línea recta hacia el punto buscado, y su 
 Gracias al teorema de Taylor, el algoritmo de posicionamiento puede alcanzar el punto buscado desde un punto lo bastante cercano, desplazando sucesivamente la trayectoria con el punto final más próximo
 en línea recta hasta que termine en el punto buscado.
 
-**Teorema de Taylor**: si la función real $f(х)$ tiene derivada en el punto $a$, entonces admite una aproximación lineal en el punto $a$:
+**Teorema de Taylor**: si la función real $f(x)$ tiene derivada en el punto $a$, entonces admite una aproximación lineal en el punto $a$:
 
 $$ 𝑓(𝑥) = 𝑓(𝑎) + 𝑓'(𝑎)(𝑥 − 𝑎) + h_1(𝑥 − 𝑎) \tag{1}$$
 
@@ -296,13 +296,13 @@ Se quiere que la base de datos de un robot incluya la experiencia acumulada por 
 7. Кудрявцев В.Б., Алешин С.В., Подколзин А.С. - Введение в теорию автоматов – М.: Наука. Гл. ред. физ.-мат. лит., 1985. – 320 с.
 8. Никифоров С.О., Мархадаев Б.Е., Сумкин А.Г. - Экстремальные свойства стационарных движений двухшарнирного манипулятора // Изд. СО АН СССР, 1985. - №6. – Вып. .3. Сер. техн. наук,- 99 с.
 9. Физиология человека: Учебник / Под ред. Покровского В.М., Коротько Г.Ф. - 2-е изд., перераб. и доп. - М.:Медицина, 2003. – 656 с.. ил. – (Учеб.лит. Для студ. мед. вузов). — ISBN 5-225-04729-7.
-10. [Linear approximation - Wikipedia](https://en.wikipedia.org/wiki/Linear_approximation)
-11. [Ильва Эллнеби. Моторные движения](http://www.childneurologyinfo.com/sensory-text-breaking3.php)
-12. [Тарабарин В.Б. Конспект лекций по курсу ТММ](http://www.tmm-umk.bmstu.ru/lectures)
-13. [Golikov K.A. - Learning algorithm of systems with discrete control](http://intsysjournal.ru/pdfs/23-1/Golikov.pdf)
-14. [Golikov K.A. - Learning systems with descrete control](http://intsysjournal.ru/pdfs/22-4/Golikov.pdf)
+10. [Linear approximation - Wikipedia](https://en.wikipedia.org/wiki/Linear_approximation){: hreflang=en }
+11. [Ильва Эллнеби. Моторные движения](http://www.childneurologyinfo.com/sensory-text-breaking3.php){: hreflang=ru }
+12. [Тарабарин В.Б. Конспект лекций по курсу ТММ](http://www.tmm-umk.bmstu.ru/lectures){: hreflang=ru }
+13. [Golikov K.A. - Learning algorithm of systems with discrete control](http://intsysjournal.ru/pdfs/23-1/Golikov.pdf){: hreflang=ru }
+14. [Golikov K.A. - Learning systems with descrete control](http://intsysjournal.ru/pdfs/22-4/Golikov.pdf){: hreflang=ru }
 
 
 ### CÓDIGO FUENTE
 
-[El código fuente en С++ está disponible en GitHub](https://github.com/favorart/robot-hand/)
+[El código fuente en C++ está disponible en GitHub](https://github.com/favorart/robot-hand/){: hreflang=en }

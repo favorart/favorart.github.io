@@ -12,7 +12,7 @@ reviewed: 2026-11-14
 
 [Kirill Anatólievich Golikov](https://github.com/favorart)
 
-Director: [Pável Aleksándrovich Aliséichik](http://intsys.msu.ru/staff/aliseychik/)
+Director: [Pável Aleksándrovich Aliséichik](http://intsys.msu.ru/staff/aliseychik/){: hreflang=ru }
 
 Universidad Estatal de Moscú (MSU)
 
@@ -100,7 +100,7 @@ Los bloques de declaración de variables pueden estar en cualquier parte del pro
 las expresiones se separan lógicamente de acuerdo con la intuición.
 Una expresión algebraica se considera terminada si aparecen seguidos elementos que no son operadores del lenguaje:
 
-$$ а=1+2 \hspace{10pt} [;] \hspace{10pt} b=2+4 $$
+$$ a=1+2 \hspace{10pt} [;] \hspace{10pt} b=2+4 $$
 
 En `interpreter.Syntax` hay opciones (listado 1.3) que definen las variantes de escritura de las construcciones del lenguaje.
 
@@ -162,7 +162,7 @@ Después vienen sus elementos, y así se va anidando recursivamente el programa 
 |:-----------------------------:|:-------------------:|:---------------------:|:------------------|
 |en qué tabla hash se buscará   |desde el inicio de la tabla hash|en el elemento de la tabla hash|
 | [ sizeof (int) ]              | [ sizeof (int) ]    | [ sizeof (int) ]      |
-| PreComp                       | 0                   | number of elements    |expresión del lenguaje (lista)
+| PreComp                       | 0                   | número de elementos   |expresión del lenguaje (lista)
 | Constant                      | 476                 | 0                     |valor de la constante
 | Variable                      | 165                 | 0                     |variable del lenguaje
 | RegWord                       | 634                 | 2                     |palabra reservada del lenguaje
@@ -286,7 +286,7 @@ Los tipos integrados del lenguaje se presentan en la tabla 3.1.
 |:-------------------------|:-----------------------------------:|
 | número entero            | de -2 147 483 647 a 2 147 483 647
 | número de coma flotante  | de 1E-37 a 1E+37
-| cadena                   | secuencia de caracteres ASСII
+| cadena                   | secuencia de caracteres ASCII
 | función                  |
 | contenedor               | lista o array
 | diccionario              | análogo dinámico de una estructura
@@ -354,16 +354,16 @@ _____________________
 
 * [1]	Шилдт Г. Язык С для профессиональных программистов. / Born to Code in C. – Osborne, 1989
 * [2]	Керниган Б., Ритчи Д. Язык программирования С. / The C Programming Language. – Prentice Hall, 1988
-* [3]	[Ejemplo de cómo escribir un intérprete sencillo (en ruso)](http://rsdn.ru/forum/alg/5018812.all)
-* [4]	[Tu propio intérprete (en ruso)](http://coderszone.info/339-sam-sebe-interpretator.html)
-* [5]	[Tipado dinámico (Wikipedia en ruso)](http://ru.wikipedia.org/wiki/Динамическая_типизация)
+* [3]	[Ejemplo de cómo escribir un intérprete sencillo](http://rsdn.ru/forum/alg/5018812.all){: hreflang=ru }
+* [4]	[Tu propio intérprete](http://coderszone.info/339-sam-sebe-interpretator.html){: hreflang=ru }
+* [5]	[Tipado dinámico (Wikipedia)](http://ru.wikipedia.org/wiki/Динамическая_типизация){: hreflang=ru }
 
 
 ### Algoritmos utilizados
 
-*	{1}	[Cálculo de la suma hash SHA256 de un archivo (Ch. Devine, 2003)](http://patux.net/crypto_programs/hash/sha-2/sha256.c.html)
-*	{2}	[Descenso recursivo](http://en.wikipedia.org/wiki/Recursive_descent_parser)
-*	{3}	[Construcción de la notación polaca directa mediante una pila (en ruso)](http://algolist.manual.ru/maths/misc/revpn.php)
+*	{1}	[Cálculo de la suma hash SHA256 de un archivo (Ch. Devine, 2003)](http://patux.net/crypto_programs/hash/sha-2/sha256.c.html){: hreflang=en }
+*	{2}	[Descenso recursivo](http://en.wikipedia.org/wiki/Recursive_descent_parser){: hreflang=en }
+*	{3}	[Construcción de la notación polaca directa mediante una pila](http://algolist.manual.ru/maths/misc/revpn.php){: hreflang=ru }
 *	{4}	Construcción de tablas hash
 *	Dirección hash igual al resto de la división por un número primo (A. Dumey, 1956)
 *	Encadenamiento (H. P. Luhn, 1953)

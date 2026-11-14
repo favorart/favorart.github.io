@@ -12,7 +12,7 @@ reviewed: 2026-11-14
 
 [Kirill Anatolyevich Golikov](https://github.com/favorart)
 
-Academic supervisor: [Pavel Aleksandrovich Aliseychik](http://intsys.msu.ru/staff/aliseychik/)
+Academic supervisor: [Pavel Aleksandrovich Aliseychik](http://intsys.msu.ru/staff/aliseychik/){: hreflang=ru }
 
 Lomonosov Moscow State University
 
@@ -354,16 +354,16 @@ _____________________
 
 * [1]	Schildt H. Born to Code in C. – Osborne, 1989
 * [2]	Kernighan B., Ritchie D. The C Programming Language. – Prentice Hall, 1988
-* [3]	[An example of writing a simple interpreter (in Russian)](http://rsdn.ru/forum/alg/5018812.all)
-* [4]	[Your own interpreter (in Russian)](http://coderszone.info/339-sam-sebe-interpretator.html)
-* [5]	[Dynamic typing (in Russian)](http://ru.wikipedia.org/wiki/Динамическая_типизация)
+* [3]	[An example of writing a simple interpreter](http://rsdn.ru/forum/alg/5018812.all){: hreflang=ru }
+* [4]	[Your own interpreter](http://coderszone.info/339-sam-sebe-interpretator.html){: hreflang=ru }
+* [5]	[Dynamic typing](http://ru.wikipedia.org/wiki/Динамическая_типизация){: hreflang=ru }
 
 
 ### Algorithms used
 
 *	{1}	[SHA256 file hash computation (Ch. Devine, 2003)](http://patux.net/crypto_programs/hash/sha-2/sha256.c.html)
 *	{2}	[Recursive descent](http://en.wikipedia.org/wiki/Recursive_descent_parser)
-*	{3}	[Building Polish (prefix) notation with a stack (in Russian)](http://algolist.manual.ru/maths/misc/revpn.php)
+*	{3}	[Building Polish (prefix) notation with a stack](http://algolist.manual.ru/maths/misc/revpn.php){: hreflang=ru }
 *	{4}	Building hash tables
 *	Hash address equal to the remainder of division by a prime (A. Dumey, 1956)
 *	Separate chaining (H. P. Luhn, 1953)

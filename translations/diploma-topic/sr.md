@@ -38,7 +38,7 @@ A da li vi imate studentski rad koji se za par godina iz nauke pretvorio u rutin
 
 Repozitorijumi:
 
-- \#IPL — [GitHub: favorart/IPL — Interpreted Programming Language](https://github.com/favorart/IPL)
-- \#RobotHand — [GitHub: favorart/robot-hand — Emulator Robot Hand WindowsApp](https://github.com/favorart/robot-hand)
+- \#IPL — [GitHub: favorart/IPL — Interpreted Programming Language](https://github.com/favorart/IPL){: hreflang=en }
+- \#RobotHand — [GitHub: favorart/robot-hand — Emulator Robot Hand WindowsApp](https://github.com/favorart/robot-hand){: hreflang=en }
 
 ![Slika iz posta](cover.jpg)

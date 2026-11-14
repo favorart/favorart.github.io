@@ -144,7 +144,7 @@ Shunday qilib, bu harakat maqsad tomon toʻgʻri chiziq boʻylab siljiydi. Demak
 Teylor teoremasidan foydalanib, pozitsiyalash algoritmi yetarlicha yaqin nuqtadan maqsad nuqtasiga, oxirgi nuqtasi eng yaqin boʻlgan trayektoriyani
 maqsaddagi yakun tomon toʻgʻri chiziq boʻylab ketma-ket siljitib, yetib borishi mumkin.
 
-**Teylor teoremasi**: agar $f(х)$ ratsional funksiya $a$ nuqtada hosilaga ega boʻlsa, u holda u $a$ nuqtada chiziqli approksimatsiyaga ega:
+**Teylor teoremasi**: agar $f(x)$ ratsional funksiya $a$ nuqtada hosilaga ega boʻlsa, u holda u $a$ nuqtada chiziqli approksimatsiyaga ega:
 
 $$ 𝑓(𝑥) = 𝑓(𝑎) + 𝑓'(𝑎)(𝑥 − 𝑎) + h_1(𝑥 − 𝑎) \tag{1}$$
 
@@ -293,13 +293,13 @@ Bir robotning maʼlumotlar bazasiga boshqalar toʻplagan tajribani ham kiritish 
 7. Кудрявцев В.Б., Алешин С.В., Подколзин А.С. - Введение в теорию автоматов – М.: Наука. Гл. ред. физ.-мат. лит., 1985. – 320 с.
 8. Никифоров С.О., Мархадаев Б.Е., Сумкин А.Г. - Экстремальные свойства стационарных движений двухшарнирного манипулятора // Изд. СО АН СССР, 1985. - №6. – Вып. .3. Сер. техн. наук,- 99 с.
 9. Физиология человека: Учебник / Под ред. Покровского В.М., Коротько Г.Ф. - 2-е изд., перераб. и доп. - М.:Медицина, 2003. – 656 с.. ил. – (Учеб.лит. Для студ. мед. вузов). — ISBN 5-225-04729-7.
-10. [Linear approximation - Wikipedia](https://en.wikipedia.org/wiki/Linear_approximation)
-11. [Ильва Эллнеби. Моторные движения](http://www.childneurologyinfo.com/sensory-text-breaking3.php)
-12. [Тарабарин В.Б. Конспект лекций по курсу ТММ](http://www.tmm-umk.bmstu.ru/lectures)
-13. [Golikov K.A. - Learning algorithm of systems with discrete control](http://intsysjournal.ru/pdfs/23-1/Golikov.pdf)
-14. [Golikov K.A. - Learning systems with descrete control](http://intsysjournal.ru/pdfs/22-4/Golikov.pdf)
+10. [Linear approximation - Wikipedia](https://en.wikipedia.org/wiki/Linear_approximation){: hreflang=en }
+11. [Ильва Эллнеби. Моторные движения](http://www.childneurologyinfo.com/sensory-text-breaking3.php){: hreflang=ru }
+12. [Тарабарин В.Б. Конспект лекций по курсу ТММ](http://www.tmm-umk.bmstu.ru/lectures){: hreflang=ru }
+13. [Golikov K.A. - Learning algorithm of systems with discrete control](http://intsysjournal.ru/pdfs/23-1/Golikov.pdf){: hreflang=ru }
+14. [Golikov K.A. - Learning systems with descrete control](http://intsysjournal.ru/pdfs/22-4/Golikov.pdf){: hreflang=ru }
 
 
 ### MANBA KODI
 
-[C++dagi manba kodi GitHubda mavjud](https://github.com/favorart/robot-hand/)
+[C++dagi manba kodi GitHubda mavjud](https://github.com/favorart/robot-hand/){: hreflang=en }

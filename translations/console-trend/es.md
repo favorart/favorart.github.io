@@ -16,13 +16,13 @@ Conscientes de ello, unos marketeros listos nos pusieron delante la GUI: ¡un le
 
 Aunque yo sí escribo con los 10 dedos, la consola no me gusta. La antipatía prejuiciosa que me inculcaron en mis años de formación se mantiene firme hasta hoy.
 
-Mientras tanto, para no cargarnos a nosotros, los humanos, el ordenador se pasó todo este tiempo intentando aprender nuestro idioma: tooltips, T9, Siri, el clip de Office… Se esforzaban, y todo el mundo los odiaba.
+Mientras tanto, para no cargarnos a nosotros, los humanos, el ordenador se pasó todo este tiempo intentando aprender nuestro idioma: descripciones emergentes, T9, Siri, el clip de Office… Se esforzaban, y todo el mundo los odiaba.
 
 Y de repente la máquina empezó a entender el habla normal, y con ello volvió la consola. ¡Treinta años después por fin apareció una interfaz que no tiene nada que envidiarle a vim! El camarero simplemente aprendió nuestro idioma, y las fotos del menú dejaron de hacer falta.
 
 ¿No será que hoy Markdown florece porque los botones están perdiendo terreno? En los 2000 el estándar era Word y ningún otro editor de texto, gracias a su argumento irrefutable: el corrector ortográfico. Luego el corrector llegó a «cualquier campo de texto», y se pudo dar formato en todas partes (a veces incluso sin botones). Es como si hubieran vuelto aquellos tiempos horribles de los 80, cuando mi madre, en algún editor de texto de DOS, metía caracteres no imprimibles directamente en el texto para imprimir una página con formato, solo que ahora ya no da tanto miedo, ¿o sí? No se engañen: los únicos a los que no asusta son los especialistas y quienes tienen sus botoncitos de siempre al lado de «cualquier campo de texto».
 
-Se ve que simplemente vivo en una burbuja: me rodea gente capaz de conectar por su cuenta un agente (con ayuda de un agente) a los servicios que necesita y montarse una «ventana única inteligente» de acceso a todo, y a esa gente le gusta la consola. ¿Resulta entonces que la consola ha vuelto a estar de moda entre los especialistas junto con la buena y vieja filosofía Unix: herramientas pequeñas, pipes, secuencias y una interfaz de texto común? (¿Exactamente como en los 80?) Un momento, ¡si para ellos eso nunca se fue!
+Se ve que simplemente vivo en una burbuja: me rodea gente capaz de conectar por su cuenta un agente (con ayuda de un agente) a los servicios que necesita y montarse una «ventana única inteligente» de acceso a todo, y a esa gente le gusta la consola. ¿Resulta entonces que la consola ha vuelto a estar de moda entre los especialistas junto con la buena y vieja filosofía Unix: herramientas pequeñas, tuberías (pipes), secuencias y una interfaz de texto común? (¿Exactamente como en los 80?) Un momento, ¡si para ellos eso nunca se fue!
 
 ¡Y para los usuarios de a pie y para mí quedarán las ventanitas y los botoncitos, las muletas y los pasamanos!
 

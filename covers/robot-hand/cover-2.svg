@@ -14,7 +14,6 @@
 <path d="M1070.0 482.0h60M1100.0 452.0v60" stroke="#6aaef0" stroke-width="4"/></g>
 <rect x="0" y="0" width="1200" height="630" fill="url(#fade)"/>
 <text x="72" y="360" font-family="'JetBrains Mono', Consolas, monospace" font-size="22" letter-spacing="2" fill="#6aaef0">RESEARCH · 2016</text>
-<text x="72" y="440" font-family="'Source Serif 4', Georgia, serif" font-weight="600" font-size="52" fill="#e7e9ec">Point-to-point motion of a</text>
-<text x="72" y="498" font-family="'Source Serif 4', Georgia, serif" font-weight="600" font-size="52" fill="#e7e9ec">robot arm with discrete</text>
-<text x="72" y="556" font-family="'Source Serif 4', Georgia, serif" font-weight="600" font-size="52" fill="#e7e9ec">control</text>
+<text x="72" y="440" font-family="'Source Serif 4', Georgia, serif" font-weight="600" font-size="48" fill="#e7e9ec">Point-to-point motion of a robot</text>
+<text x="72" y="493" font-family="'Source Serif 4', Georgia, serif" font-weight="600" font-size="48" fill="#e7e9ec">arm with discrete control</text>
 </svg>

@@ -146,7 +146,7 @@ Tako će se ovaj pokret pomeriti duž prave linije ka cilju. Tada bi zaustavljan
 Koristeći Tejlorovu teoremu, algoritam pozicioniranja može da dostigne ciljnu tačku iz dovoljno bliske tačke, uzastopno pomerajući putanju sa najbližom krajnjom tačkom
 duž prave linije ka cilju.
 
-**Tejlorova teorema**: ako racionalna funkcija $f(х)$ ima izvod u tački $a$, onda ona ima linearnu aproksimaciju u tački $a$:
+**Tejlorova teorema**: ako racionalna funkcija $f(x)$ ima izvod u tački $a$, onda ona ima linearnu aproksimaciju u tački $a$:
 
 $$ 𝑓(𝑥) = 𝑓(𝑎) + 𝑓'(𝑎)(𝑥 − 𝑎) + h_1(𝑥 − 𝑎) \tag{1}$$
 
@@ -296,13 +296,13 @@ zbog sitnih razlika u naleganju i montaži, koje ne utiču na njihovu pouzdanost
 7. Кудрявцев В.Б., Алешин С.В., Подколзин А.С. - Введение в теорию автоматов – М.: Наука. Гл. ред. физ.-мат. лит., 1985. – 320 с.
 8. Никифоров С.О., Мархадаев Б.Е., Сумкин А.Г. - Экстремальные свойства стационарных движений двухшарнирного манипулятора // Изд. СО АН СССР, 1985. - №6. – Вып. .3. Сер. техн. наук,- 99 с.
 9. Физиология человека: Учебник / Под ред. Покровского В.М., Коротько Г.Ф. - 2-е изд., перераб. и доп. - М.:Медицина, 2003. – 656 с.. ил. – (Учеб.лит. Для студ. мед. вузов). — ISBN 5-225-04729-7.
-10. [Linear approximation - Wikipedia](https://en.wikipedia.org/wiki/Linear_approximation)
-11. [Ильва Эллнеби. Моторные движения](http://www.childneurologyinfo.com/sensory-text-breaking3.php)
-12. [Тарабарин В.Б. Конспект лекций по курсу ТММ](http://www.tmm-umk.bmstu.ru/lectures)
-13. [Golikov K.A. - Learning algorithm of systems with discrete control](http://intsysjournal.ru/pdfs/23-1/Golikov.pdf)
-14. [Golikov K.A. - Learning systems with descrete control](http://intsysjournal.ru/pdfs/22-4/Golikov.pdf)
+10. [Linear approximation - Wikipedia](https://en.wikipedia.org/wiki/Linear_approximation){: hreflang=en }
+11. [Ильва Эллнеби. Моторные движения](http://www.childneurologyinfo.com/sensory-text-breaking3.php){: hreflang=en }
+12. [Тарабарин В.Б. Конспект лекций по курсу ТММ](http://www.tmm-umk.bmstu.ru/lectures){: hreflang=ru }
+13. [Golikov K.A. - Learning algorithm of systems with discrete control](http://intsysjournal.ru/pdfs/23-1/Golikov.pdf){: hreflang=ru }
+14. [Golikov K.A. - Learning systems with descrete control](http://intsysjournal.ru/pdfs/22-4/Golikov.pdf){: hreflang=ru }
 
 
 ### IZVORNI KOD
 
-[Izvorni kod na C++ dostupan je na GitHub-u](https://github.com/favorart/robot-hand/)
+[Izvorni kod na C++ dostupan je na GitHub-u](https://github.com/favorart/robot-hand/){: hreflang=en }

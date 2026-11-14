@@ -38,7 +38,7 @@ Sizda bir-ikki yil ichida fandan rutinaga aylangan talabalik ishingiz bormi?
 
 Repozitoriylar:
 
-- \#IPL — [GitHub: favorart/IPL — Interpreted Programming Language](https://github.com/favorart/IPL)
-- \#RobotHand — [GitHub: favorart/robot-hand — Emulator Robot Hand WindowsApp](https://github.com/favorart/robot-hand)
+- \#IPL — [GitHub: favorart/IPL — Interpreted Programming Language](https://github.com/favorart/IPL){: hreflang=ru }
+- \#RobotHand — [GitHub: favorart/robot-hand — Emulator Robot Hand WindowsApp](https://github.com/favorart/robot-hand){: hreflang=en }
 
 ![Post rasmi](cover.jpg)

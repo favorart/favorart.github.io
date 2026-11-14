@@ -12,7 +12,7 @@ reviewed: 2026-11-14
 
 [Golikov Kirill Anatolyevich](https://github.com/favorart)
 
-Ilmiy rahbar: [Aliseychik Pavel Aleksandrovich](http://intsys.msu.ru/staff/aliseychik/)
+Ilmiy rahbar: [Aliseychik Pavel Aleksandrovich](http://intsys.msu.ru/staff/aliseychik/){: hreflang=ru }
 
 M. V. Lomonosov nomidagi MDU
 
@@ -100,7 +100,7 @@ Oʻzgaruvchilarni eʼlon qilish bloklari dasturning istalgan joyida boʻlishi mu
 ifodalarning mantiqiy ajralishi intuitiv tushunishga muvofiq sodir boʻladi.
 Agar ketma-ket til operatorlari boʻlmagan elementlar kelsa, algebraik ifoda tugallangan hisoblanadi:
 
-$$ а=1+2 \hspace{10pt} [;] \hspace{10pt} b=2+4 $$
+$$ a=1+2 \hspace{10pt} [;] \hspace{10pt} b=2+4 $$
 
 `interpreter.Syntax`da til konstruksiyalarini yozish variantlarini belgilaydigan sozlamalar bor (1.3-listing).
 
@@ -161,7 +161,7 @@ Keyin uning elementlari va hokazo — dastur rekursiv ravishda ichma-ich joylash
 |:-----------------------------:|:-------------------:|:---------------------:|:------------------|
 |qaysi xesh-jadvalda qidiriladi|xesh-jadval boshidan|xesh-jadval elementida|
 | [ sizeof (int) ]              | [ sizeof (int) ]    | [ sizeof (int) ]      |
-| PreComp                       | 0                   | number of elements    |til ifodasi (roʻyxat)
+| PreComp                       | 0                   | elementlar soni       |til ifodasi (roʻyxat)
 | Constant                      | 476                 | 0                     |konstanta qiymati
 | Variable                      | 165                 | 0                     |til oʻzgaruvchisi
 | RegWord                       | 634                 | 2                     |tilning muntazam soʻzi
@@ -285,7 +285,7 @@ Tilning oʻrnatilgan turlari 3.1-jadvalda keltirilgan.
 |:-------------------------|:-----------------------------------:|
 | butun son                | -2 147 483 647 dan 2 147 483 647 gacha
 | suzuvchi nuqtali son     | 1E-37 dan 1E+37 gacha
-| satr                     | ASСII belgilar ketma-ketligi
+| satr                     | ASCII belgilar ketma-ketligi
 | funksiya                 |
 | konteyner                | roʻyxat yoki massiv
 | lugʻat                   | tuzilmaning dinamik analogi
@@ -353,16 +353,16 @@ _____________________
 
 * [1]	Шилдт Г. Язык С для профессиональных программистов. / Born to Code in C. – Osborne, 1989
 * [2]	Керниган Б., Ритчи Д. Язык программирования С. / The C Programming Language. – Prentice Hall, 1988
-* [3]	[Пример написания простого интерпретатора](http://rsdn.ru/forum/alg/5018812.all)
-* [4]	[Сам себе интерпретатор](http://coderszone.info/339-sam-sebe-interpretator.html)
-* [5]	[Динамическая типизация данных](http://ru.wikipedia.org/wiki/Динамическая_типизация)
+* [3]	[Пример написания простого интерпретатора](http://rsdn.ru/forum/alg/5018812.all){: hreflang=ru }
+* [4]	[Сам себе интерпретатор](http://coderszone.info/339-sam-sebe-interpretator.html){: hreflang=ru }
+* [5]	[Динамическая типизация данных](http://ru.wikipedia.org/wiki/Динамическая_типизация){: hreflang=ru }
 
 
 ### Foydalanilgan algoritmlar
 
-*	{1}	[Fayl xesh-summasini SHA256 bilan hisoblash usuli (Ch. Devine, 2003)](http://patux.net/crypto_programs/hash/sha-2/sha256.c.html)
-*	{2}	[Rekursiv tushish usuli](http://en.wikipedia.org/wiki/Recursive_descent_parser)
-*	{3}	[Dasturiy stek usuli bilan toʻgʻri polyak notatsiyasini qurish](http://algolist.manual.ru/maths/misc/revpn.php)
+*	{1}	[Fayl xesh-summasini SHA256 bilan hisoblash usuli (Ch. Devine, 2003)](http://patux.net/crypto_programs/hash/sha-2/sha256.c.html){: hreflang=en }
+*	{2}	[Rekursiv tushish usuli](http://en.wikipedia.org/wiki/Recursive_descent_parser){: hreflang=en }
+*	{3}	[Dasturiy stek usuli bilan toʻgʻri polyak notatsiyasini qurish](http://algolist.manual.ru/maths/misc/revpn.php){: hreflang=ru }
 *	{4}	Xesh-jadvallarni qurish
 *	Xesh-manzil tub songa boʻlishdagi qoldiqqa teng (A. Dumey, 1956)
 *	Zanjirlar usuli (H. P. Luhn, 1953)

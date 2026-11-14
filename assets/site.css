@@ -489,3 +489,16 @@ footer .copy { flex-basis: 100%; margin: 0; display: grid; gap: 2px; font-size: 
 .prose .tr-note { text-align: left; font: 500 13px/1.5 Inter, sans-serif; color: var(--muted, inherit); margin: 0 0 .6em; }
 .prose .tr-note.stale { color: var(--text); padding: 8px 12px; border-radius: 12px; background: var(--glass-strong);
   border: 1px solid var(--glass-line); }
+
+/* link-lang badge: a link to a page in another language gets a small "RU" / "EN" mark, so readers know before
+   they go. Set it in Markdown as [text](url){: hreflang=ru }; hidden when it matches the page's language. */
+:is(.prose, .paper-pdf, .kicker, .byline, .cap, .foot-actions) a[hreflang]::after {
+  content: attr(hreflang); display: inline-block; margin-left: .3em; padding: 1px 5px; border-radius: 6px;
+  font: 600 10px/1.4 "JetBrains Mono", monospace; letter-spacing: .04em; text-transform: uppercase;
+  vertical-align: 1px; color: var(--muted); border: 1px solid var(--glass-line); background: var(--glass-strong);
+}
+:root[lang|="en"] :is(.prose, .paper-pdf) a[hreflang|="en"]::after,
+:root[lang|="es"] :is(.prose, .paper-pdf) a[hreflang|="es"]::after,
+:root[lang|="ru"] :is(.prose, .paper-pdf) a[hreflang|="ru"]::after,
+:root[lang|="sr"] :is(.prose, .paper-pdf) a[hreflang|="sr"]::after,
+:root[lang|="uz"] :is(.prose, .paper-pdf) a[hreflang|="uz"]::after { content: none; }
