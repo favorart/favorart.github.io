@@ -13,12 +13,12 @@ aria_language: Язык
 aria_sections: Разделы
 
 home_title: Кирилл Голиков
-home_description: "Кирилл Голиков — Principal Software Engineer — C++ · Python · ML · AI. Оптимизация производительности, ML-инфраструктура, системное программирование. Бильбао, Испания."
-home_og_title: Кирилл Голиков — Principal Software Engineer
-home_og_description: "Principal Software Engineer — C++ · Python · ML · AI. Бильбао, Испания."
+home_description: "Кирилл Голиков, главный инженер-программист: C++ · Python · ML · AI. Оптимизация производительности, ML-инфраструктура, системное программирование. Бильбао, Испания."
+home_og_title: Кирилл Голиков — главный инженер-программист
+home_og_description: "Главный инженер-программист: C++ · Python · ML · AI. Бильбао, Испания."
 
 # the title in two lines: role, then skills
-role_title: Principal Software Engineer
+role_title: Главный инженер-программист
 role_skills: C++ · Python · ML · AI
 # hero: "Also:" + one of these, changing every few seconds
 also: "А ещё:"
@@ -63,7 +63,7 @@ all_courses:
 all_writing_two: Обе публикации
 all_courses_two: Оба курса
 cv_title: CV
-cv_description: "CV Кирилла Голикова — Principal Software Engineer — C++ · Python · ML · AI. Бильбао, Испания."
+cv_description: "CV Кирилла Голикова, главного инженера-программиста: C++ · Python · ML · AI. Бильбао, Испания."
 comment_on_linkedin: Оставить комментарий в LinkedIn
 send_feedback: Написать отзыв
 back_to_writing: Все публикации
@@ -106,3 +106,4 @@ covers_mask_title: Cover frost on hover
 covers_mask_hint: "At rest the cover is behind frosted glass with a clear corner; on hover the frost fades out and the picture zooms. Hover a card or press Play all. Corner, size and edge: --cover-peek-corner, --cover-peek-size, --cover-peek-soft in assets/site.css."
 covers_play_all: ▶ Play all
 covers_stop_all: ■ Stop
+paper_source: "{j}, т. {v}, вып. {i}, {y}, с. {p}"

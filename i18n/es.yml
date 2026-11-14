@@ -9,12 +9,12 @@ author: Kirill Golikov
 months: [ene, feb, mar, abr, may, jun, jul, ago, sep, oct, nov, dic]
 
 home_title: Kirill Golikov
-home_description: "Kirill Golikov — Principal Software Engineer — C++ · Python · ML · AI. Optimización del rendimiento, infraestructura de ML, sistemas. Bilbao, España."
-home_og_title: Kirill Golikov — Principal Software Engineer
-home_og_description: "Principal Software Engineer — C++ · Python · ML · AI. Bilbao, España."
+home_description: "Kirill Golikov — ingeniero de software principal — C++ · Python · ML · AI. Optimización del rendimiento, infraestructura de ML, sistemas. Bilbao, España."
+home_og_title: Kirill Golikov — ingeniero de software principal
+home_og_description: "Ingeniero de software principal — C++ · Python · ML · AI. Bilbao, España."
 
 # the title in two lines: role, then skills
-role_title: Principal Software Engineer
+role_title: Ingeniero de software principal
 role_skills: C++ · Python · ML · AI
 # hero: "Also:" + one of these, changing every few seconds
 also: "Y además:"
@@ -55,7 +55,7 @@ all_courses:
 all_writing_two: Ver las dos publicaciones
 all_courses_two: Ver los dos cursos
 cv_title: CV
-cv_description: "CV de Kirill Golikov — Principal Software Engineer — C++ · Python · ML · AI. Bilbao, España."
+cv_description: "CV de Kirill Golikov — ingeniero de software principal — C++ · Python · ML · AI. Bilbao, España."
 comment_on_linkedin: Deja un comentario en LinkedIn
 send_feedback: Enviar comentarios
 back_to_writing: Todas las publicaciones
@@ -80,12 +80,12 @@ linkedin_post: Post de LinkedIn
 # the one type tag of a Writing item, and the filters on /writing/
 type_post: Post
 type_article: Artículo
-type_paper: Paper
+type_paper: Artículo científico
 filter_label: Filtrar por tipo
 filter_all: Todo
 filter_posts: Posts
 filter_articles: Artículos
-filter_papers: Papers
+filter_papers: Artículos científicos
 
 covers_kicker: Covers
 covers_title: Cover options
@@ -103,3 +103,4 @@ covers_stop_all: ■ Stop
 aria_language: Idioma
 aria_sections: Secciones
 paper_issue: "vol. {v}({i})"
+paper_source: "{j}, vol. {v}, n.º {i}, {y}, págs. {p}"
