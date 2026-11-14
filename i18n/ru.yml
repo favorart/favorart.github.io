@@ -88,12 +88,12 @@ linkedin_post: Пост в LinkedIn
 # the one type tag of a Writing item, and the filters on /writing/
 type_post: Пост
 type_article: Статья
-type_paper: Научная статья
+type_paper: Пейпер
 filter_label: Фильтр по типу
 filter_all: Все
 filter_posts: Посты
 filter_articles: Статьи
-filter_papers: Научные статьи
+filter_papers: Пейперы
 
 covers_kicker: Covers
 covers_title: Cover options

@@ -83,12 +83,12 @@ linkedin_post: Post na LinkedIn-u
 # the one type tag of a Writing item, and the filters on /writing/
 type_post: Post
 type_article: Članak
-type_paper: Naučni rad
+type_paper: Paper
 filter_label: Filtriraj po tipu
 filter_all: Sve
 filter_posts: Postovi
 filter_articles: Članci
-filter_papers: Naučni radovi
+filter_papers: Papers
 
 covers_kicker: Covers
 covers_title: Cover options

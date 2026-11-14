@@ -75,12 +75,12 @@ linkedin_post: LinkedIn posti
 # the one type tag of a Writing item, and the filters on /writing/
 type_post: Post
 type_article: Maqola
-type_paper: Ilmiy maqola
+type_paper: Paper
 filter_label: Tur boʻyicha filtrlash
 filter_all: Hammasi
 filter_posts: Postlar
 filter_articles: Maqolalar
-filter_papers: Ilmiy maqolalar
+filter_papers: Papers
 
 covers_kicker: Covers
 covers_title: Cover options
