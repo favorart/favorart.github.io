@@ -304,6 +304,10 @@ img.cover-dark { filter: none !important; }
   color: var(--sun-ink); background: var(--sun); padding: 7px 10px; border-radius: 999px; box-shadow: 0 4px 14px -6px var(--sun); transition: filter .2s; }
 .post .badge:hover { filter: brightness(1.08); }
 .cap .src, .kicker .src { font-weight: 600; }
+/* view counter (GoatCounter): eye + number, inherits the caption/kicker type */
+.views { white-space: nowrap; }
+.views svg { vertical-align: -2px; opacity: .75; }
+.views b { font-weight: 600; }
 .post h3 { font-size: 18px; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
