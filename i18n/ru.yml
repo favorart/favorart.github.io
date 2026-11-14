@@ -70,9 +70,9 @@ back_to_writing: Все публикации
 back_to_courses: Все курсы
 
 writing_kicker: Публикации
-writing_title: Посты и статьи
-writing_lead: Посты в LinkedIn и статьи подлиннее — о C++, производительности, ML и проектах, которые за ними стоят.
-writing_description: Посты и статьи Кирилла Голикова.
+writing_title: Посты, заметки и статьи
+writing_lead: Посты в LinkedIn, заметки подлиннее и научные статьи — о C++, производительности, ML и проектах, которые за ними стоят.
+writing_description: Посты, заметки и статьи Кирилла Голикова.
 
 courses_kicker: Преподавание
 courses_title: Курсы
@@ -87,13 +87,13 @@ badge_demo: Живое демо
 linkedin_post: Пост в LinkedIn
 # the one type tag of a Writing item, and the filters on /writing/
 type_post: Пост
-type_article: Статья
-type_paper: Пейпер
+type_article: Заметка
+type_paper: Статья
 filter_label: Фильтр по типу
 filter_all: Все
 filter_posts: Посты
-filter_articles: Статьи
-filter_papers: Пейперы
+filter_articles: Заметки
+filter_papers: Статьи
 
 covers_kicker: Covers
 covers_title: Cover options

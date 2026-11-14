@@ -62,9 +62,9 @@ back_to_writing: Todas las publicaciones
 back_to_courses: Todos los cursos
 
 writing_kicker: Publicaciones
-writing_title: Posts y artículos
-writing_lead: Posts de LinkedIn y artículos más extensos sobre C++, rendimiento, ML y los proyectos que hay detrás.
-writing_description: Posts y artículos de Kirill Golikov.
+writing_title: Posts, notas y artículos
+writing_lead: Posts de LinkedIn, notas más extensas y artículos científicos sobre C++, rendimiento, ML y los proyectos que hay detrás.
+writing_description: Posts, notas y artículos de Kirill Golikov.
 
 courses_kicker: Docencia
 courses_title: Cursos
@@ -79,13 +79,13 @@ badge_demo: Demo en vivo
 linkedin_post: Post de LinkedIn
 # the one type tag of a Writing item, and the filters on /writing/
 type_post: Post
-type_article: Artículo
-type_paper: Paper
+type_article: Nota
+type_paper: Artículo
 filter_label: Filtrar por tipo
 filter_all: Todo
 filter_posts: Posts
-filter_articles: Artículos
-filter_papers: Papers
+filter_articles: Notas
+filter_papers: Artículos
 
 covers_kicker: Covers
 covers_title: Cover options
