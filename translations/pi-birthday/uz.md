@@ -10,9 +10,9 @@ reviewed: 2026-11-14
 ---
 # Pythonda GUI-ilova
 
-**English** · [Русский](article.ru.md)
+**English** · [Русский](article.ru.md){: hreflang=ru }
 
-_Birinchi, desktop versiyasi (Python 2.7 + Tkinter) haqidagi 2018-yilgi maqola, rus tilidan tarjima. Asl nashr: https://vk.ru/@33453621-pi-gui-python. Toʻliq kod: [legacy/pi.py](legacy/pi.py); uni bugun ishga tushirish uchun [legacy/run.sh](legacy/run.sh)dan foydalaning._
+_Birinchi, desktop versiyasi (Python 2.7 + Tkinter) haqidagi 2018-yilgi maqola, rus tilidan tarjima. Asl nashr: [vk.ru/@33453621-pi-gui-python](https://vk.ru/@33453621-pi-gui-python){: hreflang=ru }. Toʻliq kod: [legacy/pi.py](legacy/pi.py); uni bugun ishga tushirish uchun [legacy/run.sh](legacy/run.sh)dan foydalaning._
 
 Vaqti-vaqti bilan menga kichik oynali ilova yozish kerak boʻlib qoladi. Odatda ilovalarni C++da yozaman. Bir paytlar Qt oʻrniga Windows APIni oʻrgangandim, chunki oynalarim doim Windows uchun boʻlardi, va men nativ interfeys har doim eng yaxshisi deb hisoblayman. Hammasi organik koʻrinishini xohlayman. WinAPI Windows qila oladigan hamma narsani qilishga imkon beradi, lekin koʻp narsani qoʻlda yozishga toʻgʻri keladi, qandaydir qoʻngʻiroqchalar va hushtakchalar esa doim kerak boʻladi.
 
@@ -140,7 +140,7 @@ Vizual interfeys dizaynerini izlab WinAPIdan jon holatda qochgan edim. Maʼlum b
 
 ### Geometriya menejerlari
 
-\[Manba: https://habr.com/post/133337/\]
+\[Manba: [habr.com/post/133337](https://habr.com/post/133337/){: hreflang=ru }\]
 
 **1 pack()** — joylashtiruvchi (packer) yoki geometriya menejeri deb ataladigan funksiya. U vidjetlar asosiy oynada qanday joylashishini hal qiladi. Joylashtiruvchini har bir vidjet uchun chaqirish kerak, aks holda vidjet koʻrinmaydi. Jami uchta joylashtiruvchi bor:
 
@@ -203,17 +203,17 @@ Vidjet uchun joylashtiruvchi chaqirilmaguncha u, tabiiyki, koʻrinmaydi.
 
 Endi amalga oshirilishi haqida aytib bermoqchi boʻlgan misol haqida.
 
-π [normal son](http://www.etudes.ru/ru/sketches/normal-number-pi) ekanligi, yaʼni unda istalgan berilgan chekli raqamlar ketma-ketligini topish mumkinligi haqida gipoteza bor.
+π [normal son](http://www.etudes.ru/ru/sketches/normal-number-pi){: hreflang=ru } ekanligi, yaʼni unda istalgan berilgan chekli raqamlar ketma-ketligini topish mumkinligi haqida gipoteza bor.
 
-[Fan festivali](http://www.festivalnauki.ru)da bolalar va kattalarni hayratda qoldirish uchun biz bu [attraksionni](http://www.etudes.ru/ru/sketches/normal-number-pi/) oʻzlashtirdik: _siz tugʻilgan sanangizni kiritasiz, dastur esa uni π sonining nechanchi raqamidan topish mumkinligini aytadi_.
+[Fan festivali](http://www.festivalnauki.ru){: hreflang=ru }da bolalar va kattalarni hayratda qoldirish uchun biz bu [attraksionni](http://www.etudes.ru/ru/sketches/normal-number-pi/){: hreflang=ru } oʻzlashtirdik: _siz tugʻilgan sanangizni kiritasiz, dastur esa uni π sonining nechanchi raqamidan topish mumkinligini aytadi_.
 
 Shunday qilib, π sonini ancha koʻp raqamgacha hisoblash, milodiy 1-yildan milodiy 9999-yilgacha boʻlgan barcha sanalarni aylanib chiqish va ularning π raqamlaridagi birinchi siljishlarini topish kerak edi.
 
 ### π sonini hisoblash
 
-π sonini hisoblash uchun tayyor dastur [internetdan](http://www.cyberforum.ru/qbasic/thread1923079.html#post10542354) topildi. U oʻnlik nuqtadan keyin 3 milliard raqamni hisobladi. Natijada qariyb 3 GBlik matnli fayl hosil boʻldi.
+π sonini hisoblash uchun tayyor dastur [internetdan](http://www.cyberforum.ru/qbasic/thread1923079.html#post10542354){: hreflang=ru } topildi. U oʻnlik nuqtadan keyin 3 milliard raqamni hisobladi. Natijada qariyb 3 GBlik matnli fayl hosil boʻldi.
 
-Keyin maʼlum boʻldiki, men odatda kichik dasturlarni yozadigan Python 2.7 1900-yilgacha boʻlgan sanalar bilan [chiqisha olmas ekan](https://ozymaxx.github.io/blog/2018/05/29/python-strftime). Sanalarni sanab chiqish uchun [arrow](http://arrow.readthedocs.io) kutubxonasini oldim, u bu ishni aʼlo darajada uddaladi:
+Keyin maʼlum boʻldiki, men odatda kichik dasturlarni yozadigan Python 2.7 1900-yilgacha boʻlgan sanalar bilan [chiqisha olmas ekan](https://ozymaxx.github.io/blog/2018/05/29/python-strftime){: hreflang=en }. Sanalarni sanab chiqish uchun [arrow](http://arrow.readthedocs.io){: hreflang=en } kutubxonasini oldim, u bu ishni aʼlo darajada uddaladi:
 
 ```python
 start_date = arrow.Arrow(0001, 1, 1), end_date = arrow.Arrow(9999, 12, 30)
@@ -226,7 +226,7 @@ Bu kabisa yillari va boshqalarni hisobga olgan holda, toʻrt xonali musbat yilli
 
 Keyin sanalar lugʻat kalitlariga aylanishi kerak edi; soʻng π sonining barcha qism satrlarini aylanib chiqib, qiymat sifatida har bir sana birinchi uchragan joyning (oʻnlik nuqtaga nisbatan) siljishini saqlash kerak edi.
 
-Maʼlum boʻlishicha, Python 2.7 [`range()`](https://stackoverflow.com/questions/39470012/python-overflow-error-iter-index-too-large) operatorining iterator qiymatini ham cheklar ekan, shuning uchun kod quyidagicha chiqdi:
+Maʼlum boʻlishicha, Python 2.7 [`range()`](https://stackoverflow.com/questions/39470012/python-overflow-error-iter-index-too-large){: hreflang=en } operatorining iterator qiymatini ham cheklar ekan, shuning uchun kod quyidagicha chiqdi:
 
 ```python
 def window(seq, n=2):
@@ -294,7 +294,7 @@ Manba: [legacy/pi.py, 206–207-qatorlar](legacy/pi.py#L206-L207)
 
 Sanani kiritish uchun `Entry` vidjetini (WinAPIdagi Textbox analogi) tanladim. "Faqat milodiy sanalar" kiritilishini belgilarni yoʻl-yoʻlakay tekshirish orqali oʻzim amalga oshirishga qaror qildim.
 
-Istalgan Tk vidjetiga foydalanuvchi matn kiritishini tekshirishning [umumiy sxemasi](https://stackoverflow.com/questions/4140437/interactively-validating-entry-widget-content-in-tkinter) misoli:
+Istalgan Tk vidjetiga foydalanuvchi matn kiritishini tekshirishning [umumiy sxemasi](https://stackoverflow.com/questions/4140437/interactively-validating-entry-widget-content-in-tkinter){: hreflang=en } misoli:
 
 ```python
 class Example(tk.Frame):
@@ -350,7 +350,7 @@ Toʻliq sana uchun oʻsha arrow kutubxonasidan foydalanamiz. Hosil boʻlgan `Dat
 
 Avvaliga π sonini koʻrsatish uchun statik matndan foydalanishni rejalashtirgandim. U foydalanuvchilarga koʻrsatilgan matnni belgilash, nusxalash yoki oʻzgartirishni taqiqlash kerak boʻlganda yaxshi mos keladi.
 
-Tayyor holda `Label` matnni belgilar boʻyicha yangi qatorlarga koʻchira olmaydi. Harflar boʻyicha koʻchirishning [usulini](https://www.reddit.com/r/learnpython/comments/6dndqz/how_would_you_make_text_that_automatically_wraps) topdim — majburiy koʻchirish uzunligi vidjet kengligiga tenglashtiriladi:
+Tayyor holda `Label` matnni belgilar boʻyicha yangi qatorlarga koʻchira olmaydi. Harflar boʻyicha koʻchirishning [usulini](https://www.reddit.com/r/learnpython/comments/6dndqz/how_would_you_make_text_that_automatically_wraps){: hreflang=en } topdim — majburiy koʻchirish uzunligi vidjet kengligiga tenglashtiriladi:
 
 ```python
 class WrappingLabel(tk.Label):
@@ -418,7 +418,7 @@ Uf…
 
 `Text` — matn sohalarini formatlash va nozikroq boshqaruvga ega kuchliroq vidjet.
 
-Barcha narsalarning zulmati va hafsalasi pirligi ichida [barcha dasturchilarning yoʻlchi yulduzi va yagona nur shuʼlasi](http://stackoverflow.com) tufayli — u yerda meni oldingi boʻlimda boshlagan holatimga oʻxshash [postga](https://stackoverflow.com/questions/40992931/python-easiest-way-to-define-multiple-global-variables) va Tkinter [hujjatlariga](https://www.tutorialspoint.com/python/tk_text.htm) yoʻnaltirishdi — orzuim roʻyobga chiqdi:
+Barcha narsalarning zulmati va hafsalasi pirligi ichida [barcha dasturchilarning yoʻlchi yulduzi va yagona nur shuʼlasi](http://stackoverflow.com){: hreflang=en } tufayli — u yerda meni oldingi boʻlimda boshlagan holatimga oʻxshash [postga](https://stackoverflow.com/questions/40992931/python-easiest-way-to-define-multiple-global-variables){: hreflang=en } va Tkinter [hujjatlariga](https://www.tutorialspoint.com/python/tk_text.htm){: hreflang=en } yoʻnaltirishdi — orzuim roʻyobga chiqdi:
 
 ```python
 class WrappingLabel(tk.Text):

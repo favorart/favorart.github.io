@@ -63,7 +63,7 @@ writing_description: Kirill Golikovning postlari, qaydlari va maqolalari.
 
 courses_kicker: Oʻqituvchilik
 courses_title: Kurslar
-courses_lead: Lomonosov nomidagi MDUda men yaratgan va oʻqigan maʼruza kurslari (rus tilida) — videolar va slaydlar bilan.
+courses_lead: M. V. Lomonosov nomidagi MDUda men yaratgan va oʻqigan maʼruza kurslari (rus tilida) — videolar va slaydlar bilan.
 courses_description: Kirill Golikovning maʼruza kurslari.
 
 source: Manba
@@ -107,3 +107,6 @@ translation_stale: "Ushbu tarjimadan keyin asl matn yangilangan."
 # paper page labels
 paper_abstract: Annotatsiya
 paper_keywords: Kalit soʻzlar
+
+# above a course page in another language than the course itself
+course_lang_note: "Bu kurs rus tilida oʻqitilgan, shuning uchun quyidagi materiallar rus tilida."

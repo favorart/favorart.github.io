@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """Generate 3 SVG cover options (1200x630) for an article or course.
 
-Usage: python tools/make_covers.py [--plain-only] <out_dir> <motif> "<title>" ["<kicker>"]
+Usage: python tools/make_covers.py [--plain-only] [--lang xx --author "Name"] <out_dir> <motif> "<title>" ["<kicker>"]
+  --lang xx  writes only the titled covers, as cover-N.xx.svg: the version of a cover for the xx pages
+             (the site picks it by language; text-free twins are shared by all languages)
   motif: pi | robot | tree | cpp | cpu | code
 Writes <out_dir>/cover-1.svg, cover-2.svg, cover-3.svg (with the title: for cards and lists)
 and cover-1-plain.svg ... cover-3-plain.svg (illustration only: above the title on the article page;
@@ -34,8 +36,13 @@ def wrap(text, width):
     return lines
 
 
-def title_block(title, x, y, size, color, width):
+def title_block(title, x, y, size, color, width, bottom=500):
+    """Title lines from baseline y; a long title gets smaller (and wider lines) so the last baseline stays
+    above `bottom`."""
     out = []
+    while size > 30 and y + (len(wrap(title, width)) - 1) * size * 1.12 > bottom:
+        size -= 4
+        width = int(width * 1.1) + 1
     for i, line in enumerate(wrap(title, width)):
         out.append('<text x="%d" y="%d" font-family="\'Source Serif 4\', Georgia, serif" font-weight="600" '
                    'font-size="%d" fill="%s">%s</text>' % (x, y + i * size * 1.12, size, color, escape(line)))
@@ -135,8 +142,8 @@ def m_cpu(x, y, w, h, s, a):
     ly = y + h * .55 + 6
     out.append('<rect x="%.1f" y="%.1f" width="%.1f" height="%.1f" rx="8" fill="none" stroke="%s" stroke-width="4"/>'
                % (x + pad, ly, w - 2 * pad, h * .18, a))
-    out.append('<text x="%.1f" y="%.1f" font-family="\'JetBrains Mono\', Consolas, monospace" font-size="22" fill="%s">L3 cache</text>'
-               % (x + pad + 14, ly + h * .11, s))
+    out.append('<text x="%.1f" y="%.1f" font-family="\'JetBrains Mono\', Consolas, monospace" font-size="22" fill="%s">%s</text>'
+               % (x + pad + 14, ly + h * .11, s, escape(CACHE_LABEL.get(LANG, "L3 cache"))))
     for i in range(10):  # pins
         px = x + 30 + i * (w - 60) / 9
         out.append('<line x1="%.1f" y1="%.1f" x2="%.1f" y2="%.1f" stroke="%s" stroke-width="5"/>' % (px, y + h, px, y + h + 22, s))
@@ -177,7 +184,7 @@ def cover_paper(motif, title, kicker, plain=False):
     body = [motif(700, 120, 430, 390, "#5d6470", "#004f90"),
             kicker_text(kicker, 72, 120, "#004f90"),
             title_block(title, 72, 210, 60, "#1c1f24", 18),
-            '<text x="72" y="560" font-family="Inter, Arial, sans-serif" font-size="24" fill="#5d6470">Kirill Golikov · favorart.github.io</text>']
+            '<text x="72" y="560" font-family="Inter, Arial, sans-serif" font-size="24" fill="#5d6470">%s · favorart.github.io</text>' % escape(AUTHOR) + '']
     return svg("\n".join(body), "#fbfaf7")
 
 
@@ -213,9 +220,25 @@ def cover_blueprint(motif, title, kicker, plain=False):
     return svg("\n".join(body), "#004f90")
 
 
+AUTHOR = "Kirill Golikov"
+LANG = "en"
+CACHE_LABEL = {"en": "L3 cache", "es": "caché L3", "ru": "кэш L3", "sr": "L3 keš", "uz": "L3 kesh"}
+
+
 def main():
-    args = [a for a in sys.argv[1:] if a != "--plain-only"]
-    plain_only = len(args) != len(sys.argv) - 1
+    global AUTHOR, LANG
+    argv, lang = sys.argv[1:], None
+    for opt in ("--lang", "--author"):
+        if opt in argv:
+            k = argv.index(opt)
+            val = argv[k + 1]
+            del argv[k:k + 2]
+            if opt == "--lang":
+                lang = LANG = val
+            else:
+                AUTHOR = val
+    args = [a for a in argv if a != "--plain-only"]
+    plain_only = len(args) != len(argv)
     if len(args) < 3:
         sys.exit(__doc__)
     out_dir, motif_name, title = args[0], args[1], args[2]
@@ -225,6 +248,8 @@ def main():
     styles = [cover_paper, cover_night, cover_blueprint] + ([cover_pastel_pi] if motif_name == "pi" else [])
     for n, fn in enumerate(styles, 1):
         variants = [("-plain", True)] if plain_only else [("", False), ("-plain", True)]
+        if lang:
+            variants = [("." + lang, False)]
         for suffix, plain in variants:
             with open(os.path.join(out_dir, "cover-%d%s.svg" % (n, suffix)), "w", encoding="utf-8", newline="\n") as f:
                 f.write(fn(motif, title, kicker, plain))

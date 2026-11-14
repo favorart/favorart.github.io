@@ -1,4 +1,4 @@
-# UI strings for Spanish (Spain). Copy of i18n/en.yml with the same keys.
+# UI strings for neutral Spanish (ustedes). Copy of i18n/en.yml with the same keys.
 # The default language (prefix "") is served at the site root.
 lang: es
 prefix: /es
@@ -20,10 +20,10 @@ role_skills: C++ · Python · ML · AI
 also: "Y además:"
 fun_roles:
   - Entusiasta de la IA
-  - Profiler con patas
+  - Perfilador con patas
   - Optimizador compulsivo
   - Head of Slop Review
-  - Cazador de cache misses
+  - Cazador de fallos de caché
   - Escéptico jefe de benchmarks
 lang_soon: próximamente
 theme_label: "Tema: automático, claro u oscuro"
@@ -41,7 +41,7 @@ footer_contact: Contacto
 footer_copy:
   - '© 2026 Kirill Golikov'
   - 'Hecho por Claude mientras un humano elegía los colores.'
-  - 'Todos los derechos reservados y regalados al instante bajo la <a href="{mit}">licencia MIT</a>: llévatelo, nadie se va a quejar.'
+  - 'Todos los derechos reservados y regalados al instante bajo la <a href="{mit}">licencia MIT</a>: llévenselo, nadie se va a quejar.'
   - 'La experiencia laboral, eso sí, no es transferible.'
 
 # {n} = number of items in the list
@@ -56,7 +56,7 @@ all_writing_two: Ver las dos publicaciones
 all_courses_two: Ver los dos cursos
 cv_title: CV
 cv_description: "CV de Kirill Golikov — ingeniero de software principal — C++ · Python · ML · AI. Bilbao, España."
-comment_on_linkedin: Deja un comentario en LinkedIn
+comment_on_linkedin: Comentar en LinkedIn
 send_feedback: Enviar comentarios
 back_to_writing: Todas las publicaciones
 back_to_courses: Todos los cursos
@@ -112,3 +112,6 @@ translation_stale: "El original se ha actualizado después de esta traducción."
 # paper page labels
 paper_abstract: Resumen
 paper_keywords: Palabras clave
+
+# above a course page in another language than the course itself
+course_lang_note: "Este curso se impartió en ruso, por eso sus materiales están en ruso."

@@ -34,6 +34,10 @@ history is git's job. Before committing such a change:
    `python tools/check_links.py _site`.
 5. Commit the original change and its translations **in the same commit**.
 
-Papers: the body of the file is the abstract, plus `keywords` in front matter; the English abstract comes from
+Papers: one abstract per page, in the page's language. The file body is the abstract, plus `keywords` in front
+matter; the English abstract comes from
 the journal (`abstract_en` in sources.yml) and is not translated. Courses are not translated (lectures are in
 Russian). CV/home are translated by hand in `content/`.
+
+Covers with text (SVG made by `tools/make_covers.py`) exist per language: `cover-N.<lang>.svg` next to
+`cover-N.svg` (`--lang xx --author "Name"`); the build picks the one for the page's language.

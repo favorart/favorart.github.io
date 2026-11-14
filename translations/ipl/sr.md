@@ -12,7 +12,7 @@ reviewed: 2026-11-14
 
 [Golikov Kiril Anatoljevič](https://github.com/favorart)
 
-Mentor: [Alisejčik Pavel Aleksandrovič](http://intsys.msu.ru/staff/aliseychik/)
+Mentor: [Alisejčik Pavel Aleksandrovič](http://intsys.msu.ru/staff/aliseychik/){: hreflang=ru }
 
 MGU „M. V. Lomonosov“
 
@@ -100,7 +100,7 @@ Blokovi deklaracije promenljivih mogu se nalaziti bilo gde u programu. U listing
 izrazi se logički razdvajaju u skladu sa intuitivnim razumevanjem. 
 Algebarski izraz se smatra završenim ako zaredom slede elementi koji nisu operatori jezika: 
 
-$$ а=1+2 \hspace{10pt} [;] \hspace{10pt} b=2+4 $$
+$$ a=1+2 \hspace{10pt} [;] \hspace{10pt} b=2+4 $$
 
 U `interpreter.Syntax` postoje podešavanja (listing 1.3) koja zadaju varijacije pisanja jezičkih konstrukcija. 
 
@@ -162,7 +162,7 @@ Zatim slede njeni elementi itd. – program se rekurzivno ugnežđuje (tabela 2.
 |:-----------------------------:|:-------------------:|:---------------------:|:------------------|
 |u kojoj heš-tabeli se traži    |od početka heš-tabele|na elementu heš-tabele |
 | [ sizeof (int) ]              | [ sizeof (int) ]    | [ sizeof (int) ]      |
-| PreComp                       | 0                   | number of elements    |izraz jezika (lista)
+| PreComp                       | 0                   | broj elemenata        |izraz jezika (lista)
 | Constant                      | 476                 | 0                     |vrednost konstante
 | Variable                      | 165                 | 0                     |promenljiva jezika
 | RegWord                       | 634                 | 2                     |regularna reč jezika
@@ -286,7 +286,7 @@ Ugrađeni tipovi jezika prikazani su u tabeli 3.1.
 |:-------------------------|:-----------------------------------:|
 | ceo broj                 | od -2 147 483 647 do 2 147 483 647
 | broj u pokretnom zarezu  | 1E-37 do 1E+37
-| string                   | niz ASСII znakova
+| string                   | niz ASCII znakova
 | funkcija                 |
 | kontejner                | lista ili niz
 | rečnik                   | dinamički analog strukture
@@ -352,18 +352,18 @@ _____________________
 
 ## Spisak korišćene literature
 
-* [1]	Šilt H. Jezik C za profesionalne programere. / Born to Code in C. – Osborne, 1989
-* [2]	Kernigen B., Riči D. Programski jezik C. / The C Programming Language. – Prentice Hall, 1988
-* [3]	[Primer pisanja jednostavnog interpretera](http://rsdn.ru/forum/alg/5018812.all)
-* [4]	[Sam svoj interpreter](http://coderszone.info/339-sam-sebe-interpretator.html)
-* [5]	[Dinamička tipizacija podataka](http://ru.wikipedia.org/wiki/Динамическая_типизация)
+* [1]	Шилдт Г. Язык С для профессиональных программистов. / Born to Code in C. – Osborne, 1989
+* [2]	Керниган Б., Ритчи Д. Язык программирования С. / The C Programming Language. – Prentice Hall, 1988
+* [3]	[Пример написания простого интерпретатора](http://rsdn.ru/forum/alg/5018812.all){: hreflang=ru }
+* [4]	[Сам себе интерпретатор](http://coderszone.info/339-sam-sebe-interpretator.html){: hreflang=ru }
+* [5]	[Динамическая типизация данных](http://ru.wikipedia.org/wiki/Динамическая_типизация){: hreflang=ru }
 
 
 ### Korišćeni algoritmi
 
-*	{1}	[Metod izračunavanja SHA256 heš-sume datoteke (Ch. Devine, 2003)](http://patux.net/crypto_programs/hash/sha-2/sha256.c.html)
-*	{2}	[Metod rekurzivnog spusta](http://en.wikipedia.org/wiki/Recursive_descent_parser)
-*	{3}	[Konstruisanje prefiksne poljske notacije metodom programskog steka](http://algolist.manual.ru/maths/misc/revpn.php)
+*	{1}	[Metod izračunavanja SHA256 heš-sume datoteke (Ch. Devine, 2003)](http://patux.net/crypto_programs/hash/sha-2/sha256.c.html){: hreflang=en }
+*	{2}	[Metod rekurzivnog spusta](http://en.wikipedia.org/wiki/Recursive_descent_parser){: hreflang=en }
+*	{3}	[Konstruisanje prefiksne poljske notacije metodom programskog steka](http://algolist.manual.ru/maths/misc/revpn.php){: hreflang=ru }
 *	{4}	Konstruisanje heš-tabela
 *	Heš-adresa jednaka ostatku pri deljenju prostim brojem (A. Dumey, 1956)
 *	Metod lanaca (H. P. Luhn, 1953)

@@ -17,7 +17,9 @@
 #   summary     one or two sentences for the card
 #   cover       repo-relative path to the preview image (options: see /writing/covers/)
 #   demo_url    optional "Live demo" link on the page
-#   list        false = page is built but has no card of its own (e.g. a translation)
+#   list        false = page is built but has no card of its own
+#   translation_files  {lang: path} other-language versions of the text in the same repo; links to them
+#               lead to this page in that language (the text itself comes from translations/)
 #
 # `papers`: journal publications -> /writing/<slug>/ (type Paper). Nothing is fetched: the page shows the
 # bibliographic record, the abstracts (copied from the paper itself) and a link to the journal's PDF.
@@ -45,20 +47,8 @@ articles:
       uz: "Python/Tkinter asosidagi kichik GUI ilova: tugʻilgan sanangizni π sonining 3 milliard raqami orasidan topadi — keyinroq veb uchun qayta yaratilgan."
     cover: covers/pi-birthday/cover-4.svg
     demo_url: https://favorart.github.io/pi-birthday/
+    translation_files: {ru: article.ru.md}   # links to these files go to the page in that language
 
-  - slug: pi-birthday-ru
-    repo: favorart/pi-birthday
-    branch: main
-    path: article.ru.md
-    title: День рождения в цифрах числа π
-    date: 2018-01-01
-    date_label: 2018 → 2026
-    kind: Заметка · RU
-    lang: ru
-    summary: Небольшое GUI-приложение на Python/Tkinter, которое ищет дату рождения среди 3 миллиардов знаков π.
-    cover: covers/pi-birthday/cover-4.svg
-    demo_url: https://favorart.github.io/pi-birthday/
-    list: false
 
   - slug: robot-hand
     repo: favorart/robot-hand
@@ -163,6 +153,7 @@ papers:
     authors_en: Golikov K.A.
     journal: Интеллектуальные системы. Теория и приложения
     journal_en: Intelligent Systems. Theory and Applications
+    journal_short: {en: Intelligent Systems, ru: Интеллектуальные системы}
     volume: 23
     issue: 1
     year: 2019
@@ -192,6 +183,7 @@ papers:
     authors_en: Golikov K.A.
     journal: Интеллектуальные системы. Теория и приложения
     journal_en: Intelligent Systems. Theory and Applications
+    journal_short: {en: Intelligent Systems, ru: Интеллектуальные системы}
     volume: 22
     issue: 4
     year: 2018

@@ -24,7 +24,7 @@ fun_roles:
   - Profajler po pozivu
   - Ubrzivač svega što koči
   - Head of Slop Review
-  - Lovac na cache miss-ove
+  - Lovac na keš-promašaje
   - Glavni benčmark-skeptik
 lang_soon: uskoro
 theme_label: "Tema: automatska, svetla ili tamna"
@@ -116,3 +116,6 @@ translation_stale: "Original je izmenjen posle ovog prevoda."
 # paper page labels
 paper_abstract: Apstrakt
 paper_keywords: Ključne reči
+
+# above a course page in another language than the course itself
+course_lang_note: "Ovaj kurs je predavan na ruskom, pa su materijali u nastavku na ruskom."

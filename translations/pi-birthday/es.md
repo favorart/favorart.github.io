@@ -10,9 +10,9 @@ reviewed: 2026-11-14
 ---
 # Una aplicación gráfica en Python
 
-**English** · [Русский](article.ru.md)
+**Español** · [Русский](article.ru.md){: hreflang=ru }
 
-_Artículo de 2018 sobre la primera versión, de escritorio (Python 2.7 + Tkinter), traducido del ruso. Publicación original: https://vk.ru/@33453621-pi-gui-python. Código completo: [legacy/pi.py](legacy/pi.py); para ejecutarlo hoy, usen [legacy/run.sh](legacy/run.sh)._
+_Artículo de 2018 sobre la primera versión, de escritorio (Python 2.7 + Tkinter), traducido del ruso. Publicación original: [vk.ru/@33453621-pi-gui-python](https://vk.ru/@33453621-pi-gui-python){: hreflang=ru }. Código completo: [legacy/pi.py](legacy/pi.py); para ejecutarlo hoy, usen [legacy/run.sh](legacy/run.sh)._
 
 De vez en cuando me toca escribir una pequeña aplicación con ventanas. Normalmente escribo aplicaciones en C++. En su día, en lugar de Qt aprendí la API de Windows, porque mis ventanas siempre eran para Windows, y creo que la interfaz nativa siempre es la mejor. Quiero que todo se vea orgánico. WinAPI permite hacer todo lo que puede hacer Windows, pero hay mucho que escribir a mano, y siempre hacen falta algunos adornos.
 
@@ -140,7 +140,7 @@ Había huido desesperado de WinAPI en busca de un diseñador visual de interface
 
 ### Gestores de geometría
 
-\[Fuente: https://habr.com/post/133337/\]
+\[Fuente: [habr.com/post/133337](https://habr.com/post/133337/){: hreflang=ru }\]
 
 **1 pack()** es una función que se llama empaquetador o gestor de geometría. Decide cómo se disponen los widgets en la ventana principal. Hay que llamar al empaquetador para cada widget; si no, el widget no se muestra. Hay tres empaquetadores en total:
 
@@ -203,17 +203,17 @@ Mientras no se llame a un empaquetador para un widget, este, naturalmente, no se
 
 Ahora, sobre el ejemplo cuya implementación les quiero contar.
 
-Existe la hipótesis de que π es un [número normal](http://www.etudes.ru/ru/sketches/normal-number-pi), es decir, que en él se puede encontrar cualquier secuencia finita de cifras.
+Existe la hipótesis de que π es un [número normal](http://www.etudes.ru/ru/sketches/normal-number-pi){: hreflang=ru }, es decir, que en él se puede encontrar cualquier secuencia finita de cifras.
 
-Para asombrar a niños y mayores en un [festival de ciencia](http://www.festivalnauki.ru), tomamos prestada esta [atracción](http://www.etudes.ru/ru/sketches/normal-number-pi/): _introduces tu fecha de nacimiento y el programa te dice en qué cifra de π se encuentra_.
+Para asombrar a niños y mayores en un [festival de ciencia](http://www.festivalnauki.ru){: hreflang=ru }, tomamos prestada esta [atracción](http://www.etudes.ru/ru/sketches/normal-number-pi/){: hreflang=ru }: _introduces tu fecha de nacimiento y el programa te dice en qué cifra de π se encuentra_.
 
 Así que tuvimos que calcular π con bastantes cifras, recorrer todas las fechas desde el año 1 d. C. hasta el 9999 d. C. y encontrar su primera posición en las cifras de π.
 
 ### Calcular π
 
-Encontramos [en internet](http://www.cyberforum.ru/qbasic/thread1923079.html#post10542354) un programa ya hecho para calcular π. Calculó 3000 millones de cifras decimales. El resultado fue un archivo de texto de casi 3 GB.
+Encontramos [en internet](http://www.cyberforum.ru/qbasic/thread1923079.html#post10542354){: hreflang=ru } un programa ya hecho para calcular π. Calculó 3000 millones de cifras decimales. El resultado fue un archivo de texto de casi 3 GB.
 
-Luego resultó que Python 2.7, en el que suelo escribir programas pequeños, [no se lleva bien](https://ozymaxx.github.io/blog/2018/05/29/python-strftime) con las fechas anteriores a 1900. Para enumerar las fechas usé la biblioteca [arrow](http://arrow.readthedocs.io), que lo resolvió a la perfección:
+Luego resultó que Python 2.7, en el que suelo escribir programas pequeños, [no se lleva bien](https://ozymaxx.github.io/blog/2018/05/29/python-strftime){: hreflang=en } con las fechas anteriores a 1900. Para enumerar las fechas usé la biblioteca [arrow](http://arrow.readthedocs.io){: hreflang=en }, que lo resolvió a la perfección:
 
 ```python
 start_date = arrow.Arrow(0001, 1, 1), end_date = arrow.Arrow(9999, 12, 30)
@@ -226,7 +226,7 @@ Esto generó un archivo con todas las fechas posibles con año positivo de cuatr
 
 Después, las fechas tenían que convertirse en claves de un diccionario; luego había que recorrer todas las subcadenas de π y guardar como valores las posiciones (respecto a la coma decimal) de la primera aparición de cada fecha.
 
-Resultó que Python 2.7 también limita el valor del iterador del operador [`range()`](https://stackoverflow.com/questions/39470012/python-overflow-error-iter-index-too-large), así que el código quedó así:
+Resultó que Python 2.7 también limita el valor del iterador del operador [`range()`](https://stackoverflow.com/questions/39470012/python-overflow-error-iter-index-too-large){: hreflang=en }, así que el código quedó así:
 
 ```python
 def window(seq, n=2):
@@ -269,7 +269,7 @@ Solo queda una minucia: la interfaz gráfica.
 
 El plan de la interfaz:
 
-<img width="807" height="579" alt="plan" src="https://github.com/user-attachments/assets/a718d644-af95-4aa8-8da3-48d56f8265bd" />
+<img width="807" height="579" alt="plan de la interfaz" src="https://github.com/user-attachments/assets/a718d644-af95-4aa8-8da3-48d56f8265bd" />
 
 1.  Fijar el tamaño mínimo de la ventana.
 2.  Entrada de fecha validada, para que no se pueda introducir una fecha no válida.
@@ -294,7 +294,7 @@ Fuente: [legacy/pi.py, líneas 206–207](legacy/pi.py#L206-L207)
 
 Para introducir la fecha elegí el widget `Entry` (el equivalente del Textbox de WinAPI). Decidí implementar yo mismo la entrada de «solo fechas d. C.» validando los caracteres sobre la marcha.
 
-Una ilustración del [esquema general de validación](https://stackoverflow.com/questions/4140437/interactively-validating-entry-widget-content-in-tkinter) de la entrada de texto del usuario en cualquier widget de Tk:
+Una ilustración del [esquema general de validación](https://stackoverflow.com/questions/4140437/interactively-validating-entry-widget-content-in-tkinter){: hreflang=en } de la entrada de texto del usuario en cualquier widget de Tk:
 
 ```python
 class Example(tk.Frame):
@@ -350,7 +350,7 @@ Para la fecha completa usamos la misma biblioteca arrow. El widget `DateEntry` r
 
 Al principio pensaba usar texto estático para mostrar π. Va bien cuando hay que impedir que los usuarios seleccionen, copien o cambien el texto mostrado.
 
-De serie, `Label` no sabe partir el texto en líneas carácter a carácter. Encontré una [forma](https://www.reddit.com/r/learnpython/comments/6dndqz/how_would_you_make_text_that_automatically_wraps) de partirlo por letras: la longitud de salto forzado se iguala a la anchura del widget:
+De serie, `Label` no sabe partir el texto en líneas carácter a carácter. Encontré una [forma](https://www.reddit.com/r/learnpython/comments/6dndqz/how_would_you_make_text_that_automatically_wraps){: hreflang=en } de partirlo por letras: la longitud de salto forzado se iguala a la anchura del widget:
 
 ```python
 class WrappingLabel(tk.Label):
@@ -418,7 +418,7 @@ Uf…
 
 `Text` es un widget más potente, con formato para regiones del texto y un control más fino.
 
-Gracias al [hilo conductor de todos los programadores y único rayo de luz](http://stackoverflow.com) en la oscuridad y la decepción de todas las cosas, donde me señalaron un [post](https://stackoverflow.com/questions/40992931/python-easiest-way-to-define-multiple-global-variables) con un caso parecido al que había empezado en el apartado anterior, y a la [documentación](https://www.tutorialspoint.com/python/tk_text.htm) de Tkinter, mi sueño se hizo realidad:
+Gracias al [hilo conductor de todos los programadores y único rayo de luz](http://stackoverflow.com){: hreflang=en } en la oscuridad y la decepción de todas las cosas, donde me señalaron un [post](https://stackoverflow.com/questions/40992931/python-easiest-way-to-define-multiple-global-variables){: hreflang=en } con un caso parecido al que había empezado en el apartado anterior, y a la [documentación](https://www.tutorialspoint.com/python/tk_text.htm){: hreflang=en } de Tkinter, mi sueño se hizo realidad:
 
 ```python
 class WrappingLabel(tk.Text):
@@ -503,7 +503,7 @@ Fuente: [legacy/pi.py, línea 107](legacy/pi.py#L107)
 
 El coeficiente lleva el final del texto lo más cerca posible del final del widget, pero, claro, a veces falla:
 
-<img width="1071" height="105" alt="font_height" src="https://github.com/user-attachments/assets/c2254737-5e6c-4251-9eeb-fe905d76fc0d" />
+<img width="1071" height="105" alt="altura de la fuente" src="https://github.com/user-attachments/assets/c2254737-5e6c-4251-9eeb-fe905d76fc0d" />
 
 3\. `Text` sabe partir las líneas por caracteres él solo.
 
@@ -859,44 +859,44 @@ Solo queda generar un .exe, que se hace con un comando de consola (si tienen Ana
 pyinstaller --onefile pi.py --noconsole
 ```
 
-noconsole: Tk se lanza desde una consola, así que antes del formulario aparece una terminal; no la necesitamos, y este flag la quita.
+noconsole: Tk se lanza desde una consola, así que antes del formulario aparece una terminal; no la necesitamos, y esta opción la quita.
 
 ### Referencias
 
--   https://stackoverflow.com/questions/30257574/how-to-get-the-widgets-current-x-and-y-coordinates
--   https://docs.python.org/2.7/library/ttk.html#label-options
--   https://www.tcl.tk/man/tcl/TkCmd/event.htm
--   https://stackoverflow.com/questions/3842155/is-there-a-way-to-make-the-tkinter-text-widget-read-only
--   http://effbot.org/tkinterbook/text.htm
--   https://www.tutorialspoint.com/python/tk\_text.htm
--   https://www.tutorialspoint.com/python/tk\_button.htm
--   https://www.tutorialspoint.com/python/tk\_entry.htm
--   https://www.tutorialspoint.com/python/tk\_frame.htm
--   https://www.tutorialspoint.com/python/tk\_label.htm
--   https://www.tutorialspoint.com/python/tk\_pack.htm
--   https://www.tutorialspoint.com/python/tk\_grid.htm
--   https://stackoverflow.com/questions/52062162/python-tkinter-how-to-count-the-quantity-of-characters-can-be-shown-in-expandi/52066664#52066664
--   http://zetcode.com/gui/tkinter/layout/
--   https://stackoverflow.com/questions/3950687/how-to-find-out-the-current-widget-size-in-tkinter
--   https://stackoverflow.com/questions/4140437/interactively-validating-entry-widget-content-in-tkinter
--   http://effbot.org/tkinterbook/label.htm
--   https://www.reddit.com/r/learnpython/comments/6dndqz/how\_would\_you\_make\_text\_that\_automatically\_wraps/
--   https://stackoverflow.com/questions/25936958/tkinter-entry-validation-not-working
--   http://effbot.org/tkinterbook/variable.htm
--   http://infohost.nmt.edu/tcc/help/pubs/tkinter/web/entry-validation.html
--   https://stackoverflow.com/questions/13242970/tkinter-entry-box-formatted-for-date
--   https://stackoverflow.com/questions/51143777/display-three-dots-in-the-end-of-a-tkinter-label-text
--   https://stackoverflow.com/questions/42146482/using-bisect-on-list-of-tuples-but-compare-using-first-value-only
--   http://effbot.org/tkinterbook/tkinter-events-and-bindings.htm
--   https://stackoverflow.com/questions/48726956/measure-the-height-of-a-string-in-tkinter-python
--   https://stackoverflow.com/questions/270648/tkinter-invoke-event-in-main-loop
--   https://arrow.readthedocs.io/en/latest/#arrow.arrow.Arrow
--   https://docs.python.org/2/library/bisect.html
--   https://www.tutorialspoint.com/python/file\_seek.htm
--   https://stackoverflow.com/questions/10624937/convert-datetime-object-to-a-string-of-date-only-in-python
--   https://stackoverflow.com/questions/14288498/creating-a-loop-for-two-dates/14288620
--   https://stackoverflow.com/questions/39470012/python-overflow-error-iter-index-too-large
--   https://scorython.wordpress.com/2016/06/27/multithreading-with-tkinter/
--   https://stackoverflow.com/questions/42589372/pythontkinter-how-to-run-in-background-independant-of-tk-frontend
--   https://docs.python.org/2/library/threading.html
--   http://www.cyberforum.ru/qbasic/thread1923079.html#post10542354
+-   [stackoverflow.com/questions/30257574/…](https://stackoverflow.com/questions/30257574/how-to-get-the-widgets-current-x-and-y-coordinates){: hreflang=en }
+-   [docs.python.org/2.7/library/ttk.html](https://docs.python.org/2.7/library/ttk.html#label-options){: hreflang=en }
+-   [tcl.tk/man/tcl/TkCmd/event.htm](https://www.tcl.tk/man/tcl/TkCmd/event.htm){: hreflang=en }
+-   [stackoverflow.com/questions/3842155/…](https://stackoverflow.com/questions/3842155/is-there-a-way-to-make-the-tkinter-text-widget-read-only){: hreflang=en }
+-   [effbot.org/tkinterbook/text.htm](http://effbot.org/tkinterbook/text.htm){: hreflang=en }
+-   [tutorialspoint.com/python/tk_text.htm](https://www.tutorialspoint.com/python/tk_text.htm){: hreflang=en }
+-   [tutorialspoint.com/python/tk_button.htm](https://www.tutorialspoint.com/python/tk_button.htm){: hreflang=en }
+-   [tutorialspoint.com/python/tk_entry.htm](https://www.tutorialspoint.com/python/tk_entry.htm){: hreflang=en }
+-   [tutorialspoint.com/python/tk_frame.htm](https://www.tutorialspoint.com/python/tk_frame.htm){: hreflang=en }
+-   [tutorialspoint.com/python/tk_label.htm](https://www.tutorialspoint.com/python/tk_label.htm){: hreflang=en }
+-   [tutorialspoint.com/python/tk_pack.htm](https://www.tutorialspoint.com/python/tk_pack.htm){: hreflang=en }
+-   [tutorialspoint.com/python/tk_grid.htm](https://www.tutorialspoint.com/python/tk_grid.htm){: hreflang=en }
+-   [stackoverflow.com/questions/52062162/…](https://stackoverflow.com/questions/52062162/python-tkinter-how-to-count-the-quantity-of-characters-can-be-shown-in-expandi/52066664#52066664){: hreflang=en }
+-   [zetcode.com/gui/tkinter/layout](http://zetcode.com/gui/tkinter/layout/){: hreflang=en }
+-   [stackoverflow.com/questions/3950687/…](https://stackoverflow.com/questions/3950687/how-to-find-out-the-current-widget-size-in-tkinter){: hreflang=en }
+-   [stackoverflow.com/questions/4140437/…](https://stackoverflow.com/questions/4140437/interactively-validating-entry-widget-content-in-tkinter){: hreflang=en }
+-   [effbot.org/tkinterbook/label.htm](http://effbot.org/tkinterbook/label.htm){: hreflang=en }
+-   [reddit.com/r/learnpython/comments/6dndqz/…](https://www.reddit.com/r/learnpython/comments/6dndqz/how_would_you_make_text_that_automatically_wraps/){: hreflang=en }
+-   [stackoverflow.com/questions/25936958/…](https://stackoverflow.com/questions/25936958/tkinter-entry-validation-not-working){: hreflang=en }
+-   [effbot.org/tkinterbook/variable.htm](http://effbot.org/tkinterbook/variable.htm){: hreflang=en }
+-   [infohost.nmt.edu/tcc/help/pubs/tkinter/…](http://infohost.nmt.edu/tcc/help/pubs/tkinter/web/entry-validation.html){: hreflang=en }
+-   [stackoverflow.com/questions/13242970/…](https://stackoverflow.com/questions/13242970/tkinter-entry-box-formatted-for-date){: hreflang=en }
+-   [stackoverflow.com/questions/51143777/…](https://stackoverflow.com/questions/51143777/display-three-dots-in-the-end-of-a-tkinter-label-text){: hreflang=en }
+-   [stackoverflow.com/questions/42146482/…](https://stackoverflow.com/questions/42146482/using-bisect-on-list-of-tuples-but-compare-using-first-value-only){: hreflang=en }
+-   [effbot.org/tkinterbook/…](http://effbot.org/tkinterbook/tkinter-events-and-bindings.htm){: hreflang=en }
+-   [stackoverflow.com/questions/48726956/…](https://stackoverflow.com/questions/48726956/measure-the-height-of-a-string-in-tkinter-python){: hreflang=en }
+-   [stackoverflow.com/questions/270648/…](https://stackoverflow.com/questions/270648/tkinter-invoke-event-in-main-loop){: hreflang=en }
+-   [arrow.readthedocs.io/en/latest](https://arrow.readthedocs.io/en/latest/#arrow.arrow.Arrow){: hreflang=en }
+-   [docs.python.org/2/library/bisect.html](https://docs.python.org/2/library/bisect.html){: hreflang=en }
+-   [tutorialspoint.com/python/file_seek.htm](https://www.tutorialspoint.com/python/file_seek.htm){: hreflang=en }
+-   [stackoverflow.com/questions/10624937/…](https://stackoverflow.com/questions/10624937/convert-datetime-object-to-a-string-of-date-only-in-python){: hreflang=en }
+-   [stackoverflow.com/questions/14288498/…](https://stackoverflow.com/questions/14288498/creating-a-loop-for-two-dates/14288620){: hreflang=en }
+-   [stackoverflow.com/questions/39470012/…](https://stackoverflow.com/questions/39470012/python-overflow-error-iter-index-too-large){: hreflang=en }
+-   [scorython.wordpress.com/2016/06/27/…](https://scorython.wordpress.com/2016/06/27/multithreading-with-tkinter/){: hreflang=en }
+-   [stackoverflow.com/questions/42589372/…](https://stackoverflow.com/questions/42589372/pythontkinter-how-to-run-in-background-independant-of-tk-frontend){: hreflang=en }
+-   [docs.python.org/2/library/threading.html](https://docs.python.org/2/library/threading.html){: hreflang=en }
+-   [cyberforum.ru/qbasic/thread1923079.html](http://www.cyberforum.ru/qbasic/thread1923079.html#post10542354){: hreflang=ru }
