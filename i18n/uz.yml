@@ -31,7 +31,7 @@ theme_light: "Mavzu: yorugʻ"
 theme_dark: "Mavzu: qorongʻi"
 
 nav_home: Bosh sahifa
-nav_writing: Maqolalar
+nav_writing: Nashrlar
 nav_teaching: Oʻqituvchilik
 nav_about: Men haqimda / Rezyume
 nav_contact: Aloqa
@@ -44,22 +44,22 @@ footer_copy:
   - 'Ish tajribasining oʻzini esa birovga oʻtkazib boʻlmaydi.'
 
 # {n} = number of items in the list (Uzbek nouns stay singular after numerals)
-all_writing: Barcha {n} ta maqola
+all_writing: Barcha {n} ta nashr
 all_courses: Barcha {n} ta kurs
 # used instead when there are exactly two
-all_writing_two: Ikkala maqola
+all_writing_two: Ikkala nashr
 all_courses_two: Ikkala kurs
 cv_title: Rezyume
 cv_description: "Kirill Golikov rezyumesi — bosh dasturiy taʼminot muhandisi — C++ · Python · ML · AI. Bilbao, Ispaniya."
 comment_on_linkedin: LinkedIn sahifasida izoh qoldirish
 send_feedback: Fikr-mulohaza yuborish
-back_to_writing: Barcha maqolalar
+back_to_writing: Barcha nashrlar
 back_to_courses: Barcha kurslar
 
-writing_kicker: Maqolalar
-writing_title: Postlar va maqolalar
-writing_lead: C++, unumdorlik, ML va ularning ortidagi loyihalar haqida LinkedIn postlari va batafsil maqolalar.
-writing_description: Kirill Golikovning postlari va maqolalari.
+writing_kicker: Nashrlar
+writing_title: Postlar, qaydlar va maqolalar
+writing_lead: C++, unumdorlik, ML va ularning ortidagi loyihalar haqida LinkedIn postlari, batafsilroq qaydlar va ilmiy maqolalar.
+writing_description: Kirill Golikovning postlari, qaydlari va maqolalari.
 
 courses_kicker: Oʻqituvchilik
 courses_title: Kurslar
@@ -74,13 +74,13 @@ badge_demo: Jonli demo
 linkedin_post: LinkedIn posti
 # the one type tag of a Writing item, and the filters on /writing/
 type_post: Post
-type_article: Maqola
-type_paper: Paper
+type_article: Qayd
+type_paper: Maqola
 filter_label: Tur boʻyicha filtrlash
 filter_all: Hammasi
 filter_posts: Postlar
-filter_articles: Maqolalar
-filter_papers: Papers
+filter_articles: Qaydlar
+filter_papers: Maqolalar
 
 covers_kicker: Covers
 covers_title: Cover options

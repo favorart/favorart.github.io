@@ -35,7 +35,7 @@ articles:
       uz: Tugʻilgan kuningiz π raqamlarida
     date: 2018-01-01
     date_label: 2018 → 2026
-    kind: {en: Article · EN / RU, es: Artículo · EN / RU, ru: Статья · EN / RU, sr: Članak · EN / RU, uz: Maqola · EN / RU}
+    kind: {en: Article · EN / RU, es: Nota · EN / RU, ru: Заметка · EN / RU, sr: Zapis · EN / RU, uz: Qayd · EN / RU}
     lang: en
     summary:
       en: A small GUI app in Python/Tkinter that finds your date of birth among 3 billion digits of π — later rebuilt for the web.
@@ -53,7 +53,7 @@ articles:
     title: День рождения в цифрах числа π
     date: 2018-01-01
     date_label: 2018 → 2026
-    kind: Статья · RU
+    kind: Заметка · RU
     lang: ru
     summary: Небольшое GUI-приложение на Python/Tkinter, которое ищет дату рождения среди 3 миллиардов знаков π.
     cover: covers/pi-birthday/cover-4.svg
@@ -99,7 +99,7 @@ articles:
       uz: Sintaksisi sozlanadigan interpretator
     date: 2013-01-01
     date_label: "2013"
-    kind: {en: Article · RU, es: Artículo · RU, ru: Статья · RU, sr: Članak · RU, uz: Maqola · RU}
+    kind: {en: Article · RU, es: Nota · RU, ru: Заметка · RU, sr: Zapis · RU, uz: Qayd · RU}
     lang: ru
     summary:
       en: Bachelor's project — a cross-platform interpreter whose keywords and grammar are configurable.

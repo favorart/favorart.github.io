@@ -65,9 +65,9 @@ back_to_writing: Svi tekstovi
 back_to_courses: Svi kursevi
 
 writing_kicker: Tekstovi
-writing_title: Postovi i članci
-writing_lead: Postovi sa LinkedIn-a i duži članci o C++-u, performansama, ML-u i projektima iza njih.
-writing_description: Postovi i članci Kirila Golikova.
+writing_title: Postovi, zapisi i radovi
+writing_lead: Postovi sa LinkedIn-a, duži zapisi i naučni radovi o C++-u, performansama, ML-u i projektima iza njih.
+writing_description: Postovi, zapisi i radovi Kirila Golikova.
 
 courses_kicker: Nastava
 courses_title: Kursevi
@@ -82,13 +82,13 @@ badge_demo: Demo uživo
 linkedin_post: Post na LinkedIn-u
 # the one type tag of a Writing item, and the filters on /writing/
 type_post: Post
-type_article: Članak
-type_paper: Paper
+type_article: Zapis
+type_paper: Rad
 filter_label: Filtriraj po tipu
 filter_all: Sve
 filter_posts: Postovi
-filter_articles: Članci
-filter_papers: Papers
+filter_articles: Zapisi
+filter_papers: Radovi
 
 covers_kicker: Covers
 covers_title: Cover options
