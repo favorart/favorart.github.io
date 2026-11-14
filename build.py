@@ -432,6 +432,7 @@ def page(t, title, body, path, description="", lang=None, og_image=None, og_type
                footer_contact=S(t, "footer_contact"),
                footer_copy="".join("<span>%s</span>" % str(line).replace("{mit}", esc(LICENSE_URL))
                                    for line in t["footer_copy"]),
+               gc_counter=("https://%s.goatcounter.com/counter/" % GOATCOUNTER_CODE) if GOATCOUNTER_CODE else "",
                year=dt.date.today().year, body=body)
 
 
@@ -492,6 +493,19 @@ def type_chip(item, t):
     return '<span class="chip type">%s</span>' % S(t, "type_" + item["wtype"])
 
 
+EYE_SVG = ('<svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path fill="none" stroke="currentColor" '
+           'stroke-width="2" d="M1.5 12S5.5 5 12 5s10.5 7 10.5 7-4 7-10.5 7S1.5 12 1.5 12z"/>'
+           '<circle cx="12" cy="12" r="3" fill="currentColor"/></svg>')
+
+
+def views_tag(item, t):
+    """Placeholder filled by base.html JS from GoatCounter's public counter; stays hidden on failure."""
+    if not GOATCOUNTER_CODE:
+        return ""
+    return ('<span class="views" data-views="%s" title="%s" hidden> · %s <b></b></span>'
+            % (esc(item_url(item)), S(t, "views"), EYE_SVG))
+
+
 def card(item, t):
     cover, src = "", item.get("card_cover_url") or item.get("cover_url")
     if src:
@@ -501,6 +515,7 @@ def card(item, t):
         badge = '<a class="badge" href="%s">%s</a>' % (esc(item["demo_url"]), S(t, "badge_demo"))
     return tpl("card", href=item_url(item), cover=cover, badge=badge, type_chip=type_chip(item, t),
                wtype=esc(item.get("wtype", "")) if item["section"] == "writing" else "", kind=kind_of(item, t), date=date_text(item, t),
+               views=views_tag(item, t),
                lang=esc(item["lang"]), title=esc(item["title"]), summary=esc(item["summary"]))
 
 
@@ -528,7 +543,7 @@ def article_page(item, t):
     hero = ""
     if page_cover(item):
         hero = cover_imgs(item, page_cover(item), "hero-cover", lazy=False)
-    body = tpl("article", hero=hero, kind=kind_of(item, t), date=date_text(item, t), lang=esc(item["lang"]),
+    body = tpl("article", hero=hero, kind=kind_of(item, t), date=date_text(item, t), views=views_tag(item, t), lang=esc(item["lang"]),
                title=esc(item["title"]), subtitle=subtitle, author=S(t, "author"), source_top=source_top,
                demo=demo, content=item["body_html"], cta=cta, type_chip=type_chip(item, t),
                back_href="%s/%s/" % (t["prefix"], item["section"]), back_text=S(t, back))

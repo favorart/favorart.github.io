@@ -86,6 +86,21 @@ $body
     }, { rootMargin: '-35% 0px -60% 0px' });
     document.querySelectorAll('[data-nav]').forEach(function (s) { io.observe(s); });
   })();
+  // view counts from GoatCounter's public counter API (hidden when unavailable)
+  (function () {
+    var base = '$gc_counter', els = document.querySelectorAll('[data-views]');
+    if (!base || !els.length || !window.fetch) return;
+    var byPath = {};
+    els.forEach(function (el) { (byPath[el.getAttribute('data-views')] = byPath[el.getAttribute('data-views')] || []).push(el); });
+    Object.keys(byPath).forEach(function (path) {
+      fetch(base + encodeURIComponent(path) + '.json').then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (d) {
+          var n = d && d.count ? String(d.count).trim() : '';
+          if (!n || n === '0') return;
+          byPath[path].forEach(function (el) { el.querySelector('b').textContent = n; el.hidden = false; });
+        }).catch(function () {});
+    });
+  })();
 </script>
 </body>
 </html>
