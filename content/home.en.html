@@ -1,6 +1,6 @@
 <!-- Home page content (English). Wrapped by templates/base.html.
      Placeholders: $$prefix (URL language prefix), $$writing_cards, $$all_writing,
-     $$course_cards, $$all_courses, $$role_title, $$role_skills, $$fun_roles. Sections with data-nav are tracked by the side navigation. -->
+     $$course_cards, $$all_courses, $$project_cards, $$all_projects, $$role_title, $$role_skills, $$fun_roles. Sections with data-nav are tracked by the side navigation. -->
 <header class="hero glass" data-nav="home">
   <div class="kicker title2"><span>$role_title</span><span class="sub">$role_skills</span></div>
   <h1>Kirill Golikov</h1>
@@ -29,6 +29,12 @@
   <div class="shead"><h2><small>Writing</small>Posts &amp; articles</h2></div>
   $writing_cards
   <p class="all"><a class="btn sun big" href="$prefix/writing/">$all_writing <span class="arr">→</span></a></p>
+</section>
+
+<section id="projects" data-nav="projects">
+  <div class="shead"><h2><small>Projects</small>Open-source code</h2></div>
+  $project_cards
+  <p class="all"><a class="btn sun big" href="$prefix/projects/">$all_projects <span class="arr">→</span></a></p>
 </section>
 
 <section id="teaching" data-nav="teaching">

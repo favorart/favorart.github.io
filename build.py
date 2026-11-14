@@ -9,6 +9,7 @@ Inputs
   posts/*/index.md          LinkedIn posts: YAML front matter + Markdown, images next to them
   sources.yml               external articles/courses, fetched from other public repos
   covers/<slug>/            cover options for external content
+  projects/<slug>/          projects: project.yml (links, date, cover) + <lang>.md (title/summary/kind + page text)
 
 Output: _site/  (deployed by .github/workflows/pages.yml)
 
@@ -50,6 +51,8 @@ RASTER = (".jpg", ".jpeg", ".png", ".gif", ".webp", ".avif")
 IMAGE_EXT = RASTER + (".svg",)
 # content sections: manifest key -> URL segment
 SECTIONS = {"articles": "writing", "courses": "courses"}
+ALL_SECTIONS = list(SECTIONS.values()) + ["projects"]  # every list page; projects come from projects/, not sources.yml
+NAV_OF = {"writing": "writing", "courses": "teaching", "projects": "projects"}  # side-navigation item of a section
 
 esc = html.escape
 
@@ -400,6 +403,43 @@ def load_external(offline):
     return items
 
 
+def load_projects():
+    """Projects: projects/<slug>/project.yml (links, date, cover, demo) and one <lang>.md per UI language
+    (front matter title / summary / kind, body = the page text). The text is written per language, so every
+    language must have its file."""
+    items = []
+    for d in sorted(glob.glob(os.path.join(ROOT, "projects", "*", "project.yml"))):
+        folder, slug = os.path.dirname(d), os.path.basename(os.path.dirname(d))
+        where = os.path.relpath(d, ROOT)
+        with open(d, encoding="utf-8") as f:
+            e = yaml.safe_load(f) or {}
+        for key in ("date", "links"):
+            if not e.get(key):
+                fail("%s: field '%s' is required" % (where, key))
+        cover = e.get("cover")
+        if cover and not os.path.isfile(os.path.join(ROOT, cover)):
+            fail("%s: cover '%s' not found" % (where, cover))
+        item = {"type": "project", "wtype": "project", "section": "projects", "slug": slug, "lang": DEFAULT_LANG,
+                "date": as_date(e["date"], where), "date_label": e.get("date_label"), "links": e["links"],
+                "demo_url": e.get("demo_url"), "tags": [], "list": e.get("list", True), "subtitle": None,
+                "cover_url": "/" + cover if cover else None,
+                "options_dir": os.path.join(ROOT, os.path.dirname(cover)) if cover else None,
+                "title": {}, "summary": {}, "kind": {}, "body_md": {}, "body_html": ""}
+        for code in LANGS:
+            path = os.path.join(folder, "%s.md" % code)
+            if not os.path.isfile(path):
+                fail("%s is missing (a project page is needed in every language)" % os.path.relpath(path, ROOT))
+            with open(path, encoding="utf-8") as f:
+                meta, body = split_front_matter(f.read(), os.path.relpath(path, ROOT))
+            for key in ("title", "summary", "kind"):
+                if not meta.get(key):
+                    fail("%s: front matter field '%s' is required" % (os.path.relpath(path, ROOT), key))
+                item[key][code] = meta[key]
+            item["body_md"][code] = body
+        items.append(item)
+    return items
+
+
 PAPER_LABELS = {"ru": ("Аннотация", "Ключевые слова"), "en": ("Abstract", "Keywords")}
 
 
@@ -610,7 +650,7 @@ def page(t, title, body, path, description="", lang=None, og_image=None, og_type
         prefixes = "|".join(re.escape(u["prefix"].strip("/")) for u in LANGS.values() if u["prefix"])
         if prefixes:
             extra.append("<script>window.goatcounter = { path: function (p) { return p.replace("
-                         "/^\\/(?:%s)(\\/(?:writing|courses)\\/[^\\/]+\\/)$/, '$1'); } };</script>" % prefixes)
+                         "/^\\/(?:%s)(\\/(?:writing|courses|projects)\\/[^\\/]+\\/)$/, '$1'); } };</script>" % prefixes)
         extra.append('<script data-goatcounter="https://%s.goatcounter.com/count" async '
                      'src="https://gc.zgo.at/count.js"></script>' % esc(GOATCOUNTER_CODE))
     return tpl("base", lang=esc(lang or t["html_lang"]), title=esc(title), og_title=esc(og_title or title),
@@ -625,7 +665,7 @@ def page(t, title, body, path, description="", lang=None, og_image=None, og_type
                theme_label=S(t, "theme_label"), theme_auto=S(t, "theme_auto"), theme_light=S(t, "theme_light"),
                theme_dark=S(t, "theme_dark"),
                nav_items=tpl("nav", prefix=t["prefix"], **{k: S(t, k) for k in (
-                   "nav_home", "nav_writing", "nav_teaching", "nav_about", "nav_contact")}),
+                   "nav_home", "nav_writing", "nav_projects", "nav_teaching", "nav_about", "nav_contact")}),
                footer_contact=S(t, "footer_contact"),
                footer_copy="".join("<span>%s</span>" % str(line).replace("{mit}", esc(LICENSE_URL))
                                    for line in t["footer_copy"]),
@@ -742,6 +782,9 @@ def article_page(item, t):
         line = str(t.get("paper_source", "{j}, vol. {v}, no. {i}, {y}, pp. {p}")).format(
             j=e["journal"] if t["lang"] == item["lang"] and e.get("journal") else e["journal_en"], v=e["volume"], i=e["issue"], y=item["year"], p=e["pages"])
         source_top = '<a href="%s">%s</a>' % (esc(item["original_url"]), esc(line))
+    elif item["type"] == "project":
+        source_top = '%s: %s' % (S(t, "source"), " · ".join('<a href="%s">%s</a>' % (
+            esc(link["url"]), esc(str(loc(link["label"], t)))) for link in item["links"]))
     else:
         repo_url = "https://github.com/" + item["repo"]
         file_url = "%s/blob/%s/%s" % (repo_url, item["branch"], item["path"])
@@ -752,7 +795,7 @@ def article_page(item, t):
     if item.get("demo_url"):
         demo = ' · <a class="demo" href="%s">%s</a>' % (esc(item["demo_url"]), S(t, "live_demo"))
     subtitle = '<p class="subtitle">%s</p>' % esc(item["subtitle"]) if item.get("subtitle") else ""
-    back = "back_to_courses" if item["section"] == "courses" else "back_to_writing"
+    back = {"courses": "back_to_courses", "projects": "back_to_projects"}.get(item["section"], "back_to_writing")
     if item["type"] == "post":
         cta = '<a class="btn sun big" href="%s">%s <span class="arr">→</span></a>' % (
             esc(item["original_url"]), S(t, "comment_on_linkedin"))
@@ -772,6 +815,9 @@ def article_page(item, t):
         orig_lang = item["lang"]
         subtitle = '<p class="subtitle" lang="%s">%s</p>' % (esc(orig_lang), esc(orig)) if orig else ""
         content, text_lang_, canonical = paper_body(item, t, tr), t["html_lang"], None
+    elif item["type"] == "project":  # written in every language: the page is in t's language
+        text_lang_, canonical = t["html_lang"], None
+        content = mark_link_langs(linkify_bare(render_markdown(item["body_md"][t["lang"]])))
     elif item["section"] == "courses" and t["lang"] != item["lang"] and t.get("course_lang_note"):
         content = '<p class="tr-note">%s</p>' % S(t, "course_lang_note") + content  # courses are not translated
     elif tr:  # a reviewed translation of the text into this UI language
@@ -792,11 +838,11 @@ def article_page(item, t):
     return page(t, "%s — %s" % (title, t["author"]), body, item_url(item, t),
                 description=summary,
                 canonical=canonical, og_image=cover if cover.lower().endswith(RASTER) else None, og_type="article",
-                section="teaching" if item["section"] == "courses" else "writing")
+                section=NAV_OF[item["section"]])
 
 
 def list_page(items, section, t):
-    key = "writing" if section == "writing" else "courses"
+    key = section
     cards = "\n".join(card(i, t) for i in items if i["list"] and i["section"] == section)
     filters = ""
     if section == "writing":
@@ -809,7 +855,7 @@ def list_page(items, section, t):
     body = tpl("list", kicker=S(t, key + "_kicker"), title=S(t, key + "_title"), lead=S(t, key + "_lead"),
                cards=cards, filters=filters)
     return page(t, "%s — %s" % (t[key + "_title"], t["author"]), body, "%s/%s/" % (t["prefix"], section),
-                description=t[key + "_description"], section="writing" if section == "writing" else "teaching")
+                description=t[key + "_description"], section=NAV_OF[section])
 
 
 def covers_page(items, t):
@@ -825,7 +871,9 @@ def covers_page(items, t):
         card_url = item.get("card_cover_url") or item["cover_url"]
         base_url = card_url.rsplit("/", 1)[0]
         chosen = os.path.basename(card_url)
-        if item["type"] == "post":
+        if item["type"] == "project":
+            where = "projects/%s/project.yml → cover" % item["slug"]
+        elif item["type"] == "post":
             where = "posts/%s/index.md → %s" % (os.path.basename(item["folder"]),
                                                  "card_cover" if item.get("card_cover_url") else "cover")
         else:
@@ -895,13 +943,15 @@ def home_page(items, t):
     path = os.path.join(ROOT, "content", "home.%s.html" % t["lang"])
     with open(path, encoding="utf-8") as f:
         content = string.Template(f.read())
-    listed = {sec: [i for i in items if i["list"] and i["section"] == sec] for sec in SECTIONS.values()}
+    listed = {sec: [i for i in items if i["list"] and i["section"] == sec] for sec in ALL_SECTIONS}
 
     def grid(sec):
         return '<div class="posts">\n%s\n  </div>' % "\n".join(card(i, t) for i in listed[sec][:HOME_LATEST])
 
     try:
         body = content.substitute(prefix=t["prefix"], writing_cards=grid("writing"), course_cards=grid("courses"),
+                                  project_cards=grid("projects"),
+                                  all_projects=all_label(t, "all_projects", len(listed["projects"])),
                                   role_title=S(t, "role_title"), role_skills=S(t, "role_skills"), fun_roles=fun_roles(t),
                                   all_writing=all_label(t, "all_writing", len(listed["writing"])),
                                   all_courses=all_label(t, "all_courses", len(listed["courses"])))
@@ -954,7 +1004,7 @@ def main():
     langs = load_languages()
     LANGS.update(langs)
     t0 = langs[DEFAULT_LANG]
-    items = load_posts() + load_external(args.offline)
+    items = load_posts() + load_external(args.offline) + load_projects()
     keys = [(i["section"], i["slug"]) for i in items]
     dupes = {k for k in keys if keys.count(k) > 1}
     if dupes or ("writing", "covers") in keys:
@@ -982,7 +1032,7 @@ def main():
         if not os.path.isfile(os.path.join(ROOT, "content", "cv.%s.html" % t["lang"])):
             fail("content/cv.%s.html is missing for i18n/%s.yml" % (t["lang"], t["lang"]))
         write(os.path.join(root, "cv", "index.html"), cv_page(t))
-        for section in SECTIONS.values():
+        for section in ALL_SECTIONS:
             write(os.path.join(root, section, "index.html"), list_page(items, section, t))
 
     # item pages: the text stays in its own language, the page around it exists in every UI language

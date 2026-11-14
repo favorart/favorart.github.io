@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<rect width="1200" height="630" fill="#111418"/>
+<defs><linearGradient id="fade" x1="0" x2="1"><stop offset="0" stop-color="#111418"/><stop offset=".55" stop-color="#111418" stop-opacity=".6"/><stop offset="1" stop-color="#111418" stop-opacity="0"/></linearGradient></defs>
+<g opacity=".35"><line x1="635.0" y1="126.7" x2="785.0" y2="92.0" stroke="#9aa3ae" stroke-width="2" opacity=".45"/>
+<line x1="635.0" y1="126.7" x2="785.0" y2="196.0" stroke="#9aa3ae" stroke-width="2" opacity=".45"/>
+<line x1="635.0" y1="126.7" x2="785.0" y2="300.0" stroke="#9aa3ae" stroke-width="2" opacity=".45"/>
+<line x1="635.0" y1="126.7" x2="785.0" y2="404.0" stroke="#9aa3ae" stroke-width="2" opacity=".45"/>
+<line x1="635.0" y1="126.7" x2="785.0" y2="508.0" stroke="#9aa3ae" stroke-width="2" opacity=".45"/>
+<line x1="635.0" y1="300.0" x2="785.0" y2="92.0" stroke="#9aa3ae" stroke-width="2" opacity=".45"/>
+<line x1="635.0" y1="300.0" x2="785.0" y2="196.0" stroke="#9aa3ae" stroke-width="2" opacity=".45"/>
+<line x1="635.0" y1="300.0" x2="785.0" y2="300.0" stroke="#9aa3ae" stroke-width="2" opacity=".45"/>
+<line x1="635.0" y1="300.0" x2="785.0" y2="404.0" stroke="#9aa3ae" stroke-width="2" opacity=".45"/>
+<line x1="635.0" y1="300.0" x2="785.0" y2="508.0" stroke="#9aa3ae" stroke-width="2" opacity=".45"/>
+<line x1="635.0" y1="473.3" x2="785.0" y2="92.0" stroke="#9aa3ae" stroke-width="2" opacity=".45"/>
+<line x1="635.0" y1="473.3" x2="785.0" y2="196.0" stroke="#9aa3ae" stroke-width="2" opacity=".45"/>
+<line x1="635.0" y1="473.3" x2="785.0" y2="300.0" stroke="#9aa3ae" stroke-width="2" opacity=".45"/>
+<line x1="635.0" y1="473.3" x2="785.0" y2="404.0" stroke="#9aa3ae" stroke-width="2" opacity=".45"/>
+<line x1="635.0" y1="473.3" x2="785.0" y2="508.0" stroke="#9aa3ae" stroke-width="2" opacity=".45"/>
+<line x1="785.0" y1="92.0" x2="935.0" y2="105.0" stroke="#9aa3ae" stroke-width="2" opacity=".45"/>
+<line x1="785.0" y1="92.0" x2="935.0" y2="235.0" stroke="#9aa3ae" stroke-width="2" opacity=".45"/>
+<line x1="785.0" y1="92.0" x2="935.0" y2="365.0" stroke="#9aa3ae" stroke-width="2" opacity=".45"/>
+<line x1="785.0" y1="92.0" x2="935.0" y2="495.0" stroke="#9aa3ae" stroke-width="2" opacity=".45"/>
+<line x1="785.0" y1="196.0" x2="935.0" y2="105.0" stroke="#9aa3ae" stroke-width="2" opacity=".45"/>
+<line x1="785.0" y1="196.0" x2="935.0" y2="235.0" stroke="#9aa3ae" stroke-width="2" opacity=".45"/>
+<line x1="785.0" y1="196.0" x2="935.0" y2="365.0" stroke="#9aa3ae" stroke-width="2" opacity=".45"/>
+<line x1="785.0" y1="196.0" x2="935.0" y2="495.0" stroke="#9aa3ae" stroke-width="2" opacity=".45"/>
+<line x1="785.0" y1="300.0" x2="935.0" y2="105.0" stroke="#9aa3ae" stroke-width="2" opacity=".45"/>
+<line x1="785.0" y1="300.0" x2="935.0" y2="235.0" stroke="#9aa3ae" stroke-width="2" opacity=".45"/>
+<line x1="785.0" y1="300.0" x2="935.0" y2="365.0" stroke="#9aa3ae" stroke-width="2" opacity=".45"/>
+<line x1="785.0" y1="300.0" x2="935.0" y2="495.0" stroke="#9aa3ae" stroke-width="2" opacity=".45"/>
+<line x1="785.0" y1="404.0" x2="935.0" y2="105.0" stroke="#9aa3ae" stroke-width="2" opacity=".45"/>
+<line x1="785.0" y1="404.0" x2="935.0" y2="235.0" stroke="#9aa3ae" stroke-width="2" opacity=".45"/>
+<line x1="785.0" y1="404.0" x2="935.0" y2="365.0" stroke="#9aa3ae" stroke-width="2" opacity=".45"/>
+<line x1="785.0" y1="404.0" x2="935.0" y2="495.0" stroke="#9aa3ae" stroke-width="2" opacity=".45"/>
+<line x1="785.0" y1="508.0" x2="935.0" y2="105.0" stroke="#9aa3ae" stroke-width="2" opacity=".45"/>
+<line x1="785.0" y1="508.0" x2="935.0" y2="235.0" stroke="#9aa3ae" stroke-width="2" opacity=".45"/>
+<line x1="785.0" y1="508.0" x2="935.0" y2="365.0" stroke="#9aa3ae" stroke-width="2" opacity=".45"/>
+<line x1="785.0" y1="508.0" x2="935.0" y2="495.0" stroke="#9aa3ae" stroke-width="2" opacity=".45"/>
+<line x1="935.0" y1="105.0" x2="1085.0" y2="170.0" stroke="#9aa3ae" stroke-width="2" opacity=".45"/>
+<line x1="935.0" y1="105.0" x2="1085.0" y2="430.0" stroke="#9aa3ae" stroke-width="2" opacity=".45"/>
+<line x1="935.0" y1="235.0" x2="1085.0" y2="170.0" stroke="#9aa3ae" stroke-width="2" opacity=".45"/>
+<line x1="935.0" y1="235.0" x2="1085.0" y2="430.0" stroke="#9aa3ae" stroke-width="2" opacity=".45"/>
+<line x1="935.0" y1="365.0" x2="1085.0" y2="170.0" stroke="#9aa3ae" stroke-width="2" opacity=".45"/>
+<line x1="935.0" y1="365.0" x2="1085.0" y2="430.0" stroke="#9aa3ae" stroke-width="2" opacity=".45"/>
+<line x1="935.0" y1="495.0" x2="1085.0" y2="170.0" stroke="#9aa3ae" stroke-width="2" opacity=".45"/>
+<line x1="935.0" y1="495.0" x2="1085.0" y2="430.0" stroke="#9aa3ae" stroke-width="2" opacity=".45"/>
+<circle cx="635.0" cy="126.7" r="24" fill="none" stroke="#9aa3ae" stroke-width="4"/>
+<circle cx="635.0" cy="300.0" r="24" fill="none" stroke="#9aa3ae" stroke-width="4"/>
+<circle cx="635.0" cy="473.3" r="24" fill="none" stroke="#9aa3ae" stroke-width="4"/>
+<circle cx="785.0" cy="92.0" r="24" fill="none" stroke="#9aa3ae" stroke-width="4"/>
+<circle cx="785.0" cy="196.0" r="24" fill="none" stroke="#9aa3ae" stroke-width="4"/>
+<circle cx="785.0" cy="300.0" r="24" fill="#6aaef0" stroke="#6aaef0" stroke-width="4"/>
+<circle cx="785.0" cy="404.0" r="24" fill="none" stroke="#9aa3ae" stroke-width="4"/>
+<circle cx="785.0" cy="508.0" r="24" fill="none" stroke="#9aa3ae" stroke-width="4"/>
+<circle cx="935.0" cy="105.0" r="24" fill="none" stroke="#9aa3ae" stroke-width="4"/>
+<circle cx="935.0" cy="235.0" r="24" fill="#6aaef0" stroke="#6aaef0" stroke-width="4"/>
+<circle cx="935.0" cy="365.0" r="24" fill="none" stroke="#9aa3ae" stroke-width="4"/>
+<circle cx="935.0" cy="495.0" r="24" fill="none" stroke="#9aa3ae" stroke-width="4"/>
+<circle cx="1085.0" cy="170.0" r="24" fill="#6aaef0" stroke="#6aaef0" stroke-width="4"/>
+<circle cx="1085.0" cy="430.0" r="24" fill="none" stroke="#9aa3ae" stroke-width="4"/></g>
+<rect x="0" y="0" width="1200" height="630" fill="url(#fade)"/>
+<text x="72" y="360" font-family="'JetBrains Mono', Consolas, monospace" font-size="22" letter-spacing="2" fill="#6aaef0">DOPRINOS OTVORENOM KODU · C++</text>
+<text x="72" y="440" font-family="'Source Serif 4', Georgia, serif" font-weight="600" font-size="52" fill="#e7e9ec">NeoML: doprinos ABBYY-jevom</text>
+<text x="72" y="498" font-family="'Source Serif 4', Georgia, serif" font-weight="600" font-size="52" fill="#e7e9ec">frejmvorku za mašinsko učenje</text>
+</svg>

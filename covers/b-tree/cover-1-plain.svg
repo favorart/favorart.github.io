@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<rect width="1200" height="630" fill="#fbfaf7"/>
+<rect x="544.0" y="143.0" width="56" height="50" fill="#004f90" stroke="#004f90" stroke-width="4"/>
+<text x="572.0" y="176.0" text-anchor="middle" font-family="'JetBrains Mono', Consolas, monospace" font-size="22" fill="#ffffff">40</text>
+<rect x="600.0" y="143.0" width="56" height="50" fill="#004f90" stroke="#004f90" stroke-width="4"/>
+<text x="628.0" y="176.0" text-anchor="middle" font-family="'JetBrains Mono', Consolas, monospace" font-size="22" fill="#ffffff">80</text>
+<rect x="327.0" y="366.6" width="56" height="50" fill="none" stroke="#5d6470" stroke-width="4"/>
+<text x="355.0" y="399.6" text-anchor="middle" font-family="'JetBrains Mono', Consolas, monospace" font-size="22" fill="#5d6470">12</text>
+<rect x="383.0" y="366.6" width="56" height="50" fill="none" stroke="#5d6470" stroke-width="4"/>
+<text x="411.0" y="399.6" text-anchor="middle" font-family="'JetBrains Mono', Consolas, monospace" font-size="22" fill="#5d6470">25</text>
+<rect x="439.0" y="366.6" width="56" height="50" fill="none" stroke="#5d6470" stroke-width="4"/>
+<text x="467.0" y="399.6" text-anchor="middle" font-family="'JetBrains Mono', Consolas, monospace" font-size="22" fill="#5d6470">31</text>
+<rect x="544.0" y="366.6" width="56" height="50" fill="none" stroke="#5d6470" stroke-width="4"/>
+<text x="572.0" y="399.6" text-anchor="middle" font-family="'JetBrains Mono', Consolas, monospace" font-size="22" fill="#5d6470">47</text>
+<rect x="600.0" y="366.6" width="56" height="50" fill="none" stroke="#5d6470" stroke-width="4"/>
+<text x="628.0" y="399.6" text-anchor="middle" font-family="'JetBrains Mono', Consolas, monospace" font-size="22" fill="#5d6470">63</text>
+<rect x="705.0" y="366.6" width="56" height="50" fill="none" stroke="#5d6470" stroke-width="4"/>
+<text x="733.0" y="399.6" text-anchor="middle" font-family="'JetBrains Mono', Consolas, monospace" font-size="22" fill="#5d6470">85</text>
+<rect x="761.0" y="366.6" width="56" height="50" fill="none" stroke="#5d6470" stroke-width="4"/>
+<text x="789.0" y="399.6" text-anchor="middle" font-family="'JetBrains Mono', Consolas, monospace" font-size="22" fill="#5d6470">91</text>
+<rect x="817.0" y="366.6" width="56" height="50" fill="none" stroke="#5d6470" stroke-width="4"/>
+<text x="845.0" y="399.6" text-anchor="middle" font-family="'JetBrains Mono', Consolas, monospace" font-size="22" fill="#5d6470">97</text>
+<line x1="544.0" y1="193.0" x2="411.0" y2="366.6" stroke="#5d6470" stroke-width="4" opacity=".7"/>
+<line x1="600.0" y1="193.0" x2="600.0" y2="366.6" stroke="#5d6470" stroke-width="4" opacity=".7"/>
+<line x1="656.0" y1="193.0" x2="789.0" y2="366.6" stroke="#5d6470" stroke-width="4" opacity=".7"/>
+<rect x="327.0" y="438.6" width="168.0" height="10" rx="3" fill="#5d6470" opacity=".5"/>
+<rect x="327.0" y="456.6" width="168.0" height="10" rx="3" fill="#5d6470" opacity=".25"/>
+<rect x="327.0" y="474.6" width="168.0" height="10" rx="3" fill="#5d6470" opacity=".25"/>
+<rect x="544.0" y="438.6" width="112.0" height="10" rx="3" fill="#5d6470" opacity=".5"/>
+<rect x="544.0" y="456.6" width="112.0" height="10" rx="3" fill="#5d6470" opacity=".25"/>
+<rect x="544.0" y="474.6" width="112.0" height="10" rx="3" fill="#5d6470" opacity=".25"/>
+<rect x="705.0" y="438.6" width="168.0" height="10" rx="3" fill="#5d6470" opacity=".5"/>
+<rect x="705.0" y="456.6" width="168.0" height="10" rx="3" fill="#5d6470" opacity=".25"/>
+<rect x="705.0" y="474.6" width="168.0" height="10" rx="3" fill="#5d6470" opacity=".25"/>
+</svg>

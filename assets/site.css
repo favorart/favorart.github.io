@@ -174,10 +174,10 @@ aside.side { position: sticky; top: 84px; align-self: start; padding: 28px 0; }
 .snav a, .mnav a { display: flex; align-items: center; gap: 10px; color: var(--muted); font-weight: 600; font-size: 14.5px; border-radius: 14px; padding: 9px 12px; transition: background .2s, color .2s; }
 .snav a i, .mnav a i { width: 8px; height: 8px; border-radius: 50%; background: var(--line); flex: none; transition: background .2s, box-shadow .2s; }
 .snav a:hover, .mnav a:hover { color: var(--text); background: var(--chip); }
-body[data-section="home"] a[data-s="home"], body[data-section="writing"] a[data-s="writing"],
+body[data-section="home"] a[data-s="home"], body[data-section="writing"] a[data-s="writing"], body[data-section="projects"] a[data-s="projects"],
 body[data-section="teaching"] a[data-s="teaching"], body[data-section="about"] a[data-s="about"],
 body[data-section="contact"] a[data-s="contact"] { color: var(--text); background: var(--glass-strong); box-shadow: var(--glass-hi); }
-body[data-section="home"] a[data-s="home"] i, body[data-section="writing"] a[data-s="writing"] i,
+body[data-section="home"] a[data-s="home"] i, body[data-section="writing"] a[data-s="writing"] i, body[data-section="projects"] a[data-s="projects"] i,
 body[data-section="teaching"] a[data-s="teaching"] i, body[data-section="about"] a[data-s="about"] i,
 body[data-section="contact"] a[data-s="contact"] i { background: var(--sun); box-shadow: 0 0 0 4px color-mix(in srgb, var(--sun) 25%, transparent); }
 .mnav { display: none; }

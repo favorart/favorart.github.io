@@ -33,6 +33,7 @@ theme_dark: "Tema: oscuro"
 
 nav_home: Inicio
 nav_writing: Publicaciones
+nav_projects: Proyectos
 nav_teaching: Docencia
 nav_about: Sobre mí / CV
 nav_contact: Contacto
@@ -51,15 +52,20 @@ all_writing:
 all_courses:
   one: "Ver el curso"
   other: "Ver los {n} cursos"
+all_projects:
+  one: "Ver el proyecto"
+  other: "Ver los {n} proyectos"
 # used instead when there are exactly two
 all_writing_two: Ver las dos publicaciones
 all_courses_two: Ver los dos cursos
+all_projects_two: Ver los dos proyectos
 cv_title: CV
 cv_description: "CV de Kirill Golikov — ingeniero de software principal — C++ · Python · ML · AI. Bilbao, España."
 comment_on_linkedin: Comentar en LinkedIn
 send_feedback: Enviar comentarios
 back_to_writing: Todas las publicaciones
 back_to_courses: Todos los cursos
+back_to_projects: Todos los proyectos
 
 writing_kicker: Publicaciones
 writing_title: Posts, notas y artículos
@@ -70,6 +76,11 @@ courses_kicker: Docencia
 courses_title: Cursos
 courses_lead: Cursos que creé e impartí en la Universidad Estatal de Moscú (MSU), en ruso, con vídeos y diapositivas.
 courses_description: Cursos de Kirill Golikov.
+
+projects_kicker: Proyectos
+projects_title: Proyectos de código abierto
+projects_lead: "Bibliotecas y código de sistemas en GitHub: desde una biblioteca en C++20 hasta mis contribuciones al framework NeoML de ABBYY."
+projects_description: Proyectos de código abierto de Kirill Golikov.
 
 source: Fuente
 views: Visualizaciones

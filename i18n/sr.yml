@@ -34,6 +34,7 @@ theme_dark: "Tema: tamna"
 
 nav_home: Početna
 nav_writing: Tekstovi
+nav_projects: Projekti
 nav_teaching: Nastava
 nav_about: O meni / CV
 nav_contact: Kontakt
@@ -54,15 +55,21 @@ all_courses:
   one: "Svi kursevi ({n})"
   few: "Sva {n} kursa"
   other: "Svih {n} kurseva"
+all_projects:
+  one: "Svi projekti ({n})"
+  few: "Sva {n} projekta"
+  other: "Svih {n} projekata"
 # used instead when there are exactly two
 all_writing_two: Oba teksta
 all_courses_two: Oba kursa
+all_projects_two: Oba projekta
 cv_title: CV
 cv_description: "CV Kirila Golikova, glavnog softverskog inženjera — C++ · Python · ML · AI. Bilbao, Španija."
 comment_on_linkedin: Ostavite komentar na LinkedIn-u
 send_feedback: Pošaljite komentar
 back_to_writing: Svi tekstovi
 back_to_courses: Svi kursevi
+back_to_projects: Svi projekti
 
 writing_kicker: Tekstovi
 writing_title: Postovi, zapisi i radovi
@@ -73,6 +80,11 @@ courses_kicker: Nastava
 courses_title: Kursevi
 courses_lead: "Kursevi predavanja koje sam osmislio i držao na Moskovskom državnom univerzitetu „M. V. Lomonosov“ (na ruskom), sa video-snimcima i slajdovima."
 courses_description: Kursevi predavanja Kirila Golikova.
+
+projects_kicker: Projekti
+projects_title: Projekti otvorenog koda
+projects_lead: "Biblioteke i sistemski kod na GitHub-u — od biblioteke u C++20 do mog doprinosa ABBYY-jevom frejmvorku NeoML."
+projects_description: Projekti otvorenog koda Kirila Golikova.
 
 source: Izvor
 views: Pregledi

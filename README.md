@@ -103,12 +103,27 @@ When a post or article is added or changed, every missing/outdated translation i
 same commit — the procedure is in `CLAUDE.md`; agreed terms in `docs/translation-glossary.md`.
 Courses are not translated (their lectures are in Russian); papers have RU + EN abstracts.
 
+## Add a project
+
+Projects (`/projects/<slug>/`) are written for the site itself, in every language:
+
+```
+projects/<slug>/project.yml   # date, date_label, cover, demo_url (optional),
+                              # links: [{url, label}] — label may be {en: …, ru: …}
+projects/<slug>/<lang>.md     # front matter title, summary, kind (card label); body = page text
+```
+
+The build fails if a language file is missing. Write `en.md` first, then the other languages with an
+independent review (as for translations, see `CLAUDE.md`). Covers: `python tools/make_covers.py covers/<slug>
+<motif> "<title>" "<kicker>"` plus `--lang xx --author "Name"` per language (motifs for projects: wave, net,
+btree, heap, cpu, code).
+
 ## Add an external article or course
 
 Add an entry to `sources.yml` (`articles:` → `/writing/<slug>/`, `courses:` → `/courses/<slug>/`)
 with `repo`, `branch`, `path`, `title`, `date`, `summary`. Nothing is copied: the Markdown is fetched at
 build time and its relative links/images point back to the source repo. For a cover run
 `python tools/make_covers.py covers/<slug> <motif> "<title>" "<kicker>"` (motifs: pi, robot, tree, cpp,
-cpu, code), set `cover: covers/<slug>/cover-1.svg`, then pick the final option on `/writing/covers/`.
+cpu, code, wave, net, btree, heap), set `cover: covers/<slug>/cover-1.svg`, then pick the final option on `/writing/covers/`.
 The tool also writes text-free twins (`cover-N-plain.svg`); the article page shows the twin of the chosen cover
 above the title (`--plain-only` regenerates just the twins).

@@ -37,6 +37,7 @@ theme_dark: "Тема: тёмная"
 
 nav_home: Главная
 nav_writing: Публикации
+nav_projects: Проекты
 nav_teaching: Преподавание
 nav_about: Обо мне / CV
 nav_contact: Контакты
@@ -59,15 +60,22 @@ all_courses:
   few: Все {n} курса
   many: Все {n} курсов
   other: Все {n} курса
+all_projects:
+  one: Все {n} проект
+  few: Все {n} проекта
+  many: Все {n} проектов
+  other: Все {n} проекта
 # used instead when there are exactly two
 all_writing_two: Обе публикации
 all_courses_two: Оба курса
+all_projects_two: Оба проекта
 cv_title: CV
 cv_description: "CV Кирилла Голикова, главного инженера-программиста: C++ · Python · ML · AI. Бильбао, Испания."
 comment_on_linkedin: Оставить комментарий в LinkedIn
 send_feedback: Написать отзыв
 back_to_writing: Все публикации
 back_to_courses: Все курсы
+back_to_projects: Все проекты
 
 writing_kicker: Публикации
 writing_title: Посты, заметки и статьи
@@ -78,6 +86,11 @@ courses_kicker: Преподавание
 courses_title: Курсы
 courses_lead: Курсы лекций, которые я создал и читал в МГУ имени М. В. Ломоносова, — с видеозаписями и слайдами.
 courses_description: Курсы лекций Кирилла Голикова.
+
+projects_kicker: Проекты
+projects_title: Открытый код
+projects_lead: "Библиотеки и системный код на GitHub — от библиотеки на C++20 до моего вклада во фреймворк NeoML от ABBYY."
+projects_description: Проекты Кирилла Голикова с открытым кодом.
 
 source: Исходник
 views: Просмотры

@@ -9,6 +9,8 @@
 - Never put a personal email address into the repo or commits; commit as
   `9784285+favorart@users.noreply.github.com`.
 - A push to `main` deploys the live site.
+- Projects (`projects/<slug>/<lang>.md`) are written per language, not translated at build time: a change to
+  `en.md` is made in every language file in the same commit, with an independent review (README → Add a project).
 
 ## Every commit that adds or changes a post or an article
 

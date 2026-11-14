@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<rect width="1200" height="630" fill="#fbfaf7"/>
+<polyline points="330.0,175.2 375.0,175.2 375.0,121.5 420.0,121.5 420.0,175.2 465.0,175.2 465.0,121.5 510.0,121.5 510.0,175.2 555.0,175.2 555.0,121.5 600.0,121.5 600.0,175.2 645.0,175.2 645.0,121.5 690.0,121.5 690.0,175.2 735.0,175.2 735.0,121.5 780.0,121.5 780.0,175.2 825.0,175.2 825.0,121.5 870.0,121.5" fill="none" stroke="#004f90" stroke-width="4" stroke-linejoin="round"/>
+<polyline points="330.0,282.8 375.0,282.8 420.0,282.8 420.0,229.0 465.0,229.0 510.0,229.0 555.0,229.0 600.0,229.0 645.0,229.0 690.0,229.0 690.0,282.8 735.0,282.8 780.0,282.8 825.0,282.8 870.0,282.8" fill="none" stroke="#5d6470" stroke-width="4" stroke-linejoin="round"/>
+<polyline points="330.0,390.2 375.0,390.2 420.0,390.2 465.0,390.2 510.0,390.2 510.0,336.5 555.0,336.5 600.0,336.5 600.0,390.2 645.0,390.2 690.0,390.2 690.0,336.5 735.0,336.5 780.0,336.5 825.0,336.5 825.0,390.2 870.0,390.2" fill="none" stroke="#5d6470" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="340.0,444.0 455.0,444.0 465.0,470.9 455.0,497.8 340.0,497.8 330.0,470.9" fill="none" stroke="#5d6470" stroke-width="4"/>
+<text x="397.5" y="478.9" text-anchor="middle" font-family="'JetBrains Mono', Consolas, monospace" font-size="24" fill="#5d6470">0a</text>
+<polygon points="475.0,444.0 635.0,444.0 645.0,470.9 635.0,497.8 475.0,497.8 465.0,470.9" fill="none" stroke="#5d6470" stroke-width="4"/>
+<text x="555.0" y="478.9" text-anchor="middle" font-family="'JetBrains Mono', Consolas, monospace" font-size="24" fill="#5d6470">1f</text>
+<polygon points="655.0,444.0 770.0,444.0 780.0,470.9 770.0,497.8 655.0,497.8 645.0,470.9" fill="none" stroke="#5d6470" stroke-width="4"/>
+<text x="712.5" y="478.9" text-anchor="middle" font-family="'JetBrains Mono', Consolas, monospace" font-size="24" fill="#004f90">c3</text>
+<polygon points="790.0,444.0 860.0,444.0 870.0,470.9 860.0,497.8 790.0,497.8 780.0,470.9" fill="none" stroke="#5d6470" stroke-width="4"/>
+<text x="825.0" y="478.9" text-anchor="middle" font-family="'JetBrains Mono', Consolas, monospace" font-size="24" fill="#5d6470">ff</text>
+</svg>

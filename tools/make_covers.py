@@ -4,7 +4,7 @@
 Usage: python tools/make_covers.py [--plain-only] [--lang xx --author "Name"] <out_dir> <motif> "<title>" ["<kicker>"]
   --lang xx  writes only the titled covers, as cover-N.xx.svg: the version of a cover for the xx pages
              (the site picks it by language; text-free twins are shared by all languages)
-  motif: pi | robot | tree | cpp | cpu | code
+  motif: pi | robot | tree | cpp | cpu | code | wave | net | btree | heap
 Writes <out_dir>/cover-1.svg, cover-2.svg, cover-3.svg (with the title: for cards and lists)
 and cover-1-plain.svg ... cover-3-plain.svg (illustration only: above the title on the article page;
 the site picks the -plain twin of the chosen cover automatically). --plain-only writes just the latter.
@@ -169,7 +169,104 @@ def cover_pastel_pi(motif, title, kicker, plain=False, dark=False):
             % (W, H, W, H, "\n".join(body)))
 
 
-MOTIFS = {"pi": m_pi, "robot": m_robot, "tree": m_tree, "cpp": m_cpp, "cpu": m_cpu, "code": m_code}
+MONO = "'JetBrains Mono', Consolas, monospace"
+
+
+def m_wave(x, y, w, h, s, a):
+    """Digital waveforms as in a VCD viewer: a clock, two single-bit signals and an 8-bit bus."""
+    out, rows, step = [], 4, w / 12
+    rh = h / rows
+    bits = {"clk": [i % 2 for i in range(12)], "en": [0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
+            "rdy": [0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0]}
+    for r, (name, seq) in enumerate(bits.items()):
+        hi, lo = y + r * rh + rh * .2, y + r * rh + rh * .7
+        pts, prev = [], None
+        for i, b in enumerate(seq):
+            yy = hi if b else lo
+            if prev is not None and prev != yy:
+                pts.append((x + i * step, prev))
+            pts.append((x + i * step, yy))
+            prev = yy
+        pts.append((x + w, prev))
+        out.append('<polyline points="%s" fill="none" stroke="%s" stroke-width="4" stroke-linejoin="round"/>'
+                   % (" ".join("%.1f,%.1f" % p for p in pts), a if name == "clk" else s))
+    by0, by1, edges = y + 3 * rh + rh * .2, y + 3 * rh + rh * .7, [0, 3, 7, 10, 12]
+    vals = ["0a", "1f", "c3", "ff"]
+    for k in range(len(edges) - 1):
+        x0, x1 = x + edges[k] * step, x + edges[k + 1] * step
+        d = 10
+        out.append('<polygon points="%.1f,%.1f %.1f,%.1f %.1f,%.1f %.1f,%.1f %.1f,%.1f %.1f,%.1f" fill="none" '
+                   'stroke="%s" stroke-width="4"/>' % (x0 + d, by0, x1 - d, by0, x1, (by0 + by1) / 2, x1 - d, by1,
+                                                     x0 + d, by1, x0, (by0 + by1) / 2, s))
+        out.append('<text x="%.1f" y="%.1f" text-anchor="middle" font-family="%s" font-size="24" fill="%s">%s</text>'
+                   % ((x0 + x1) / 2, (by0 + by1) / 2 + 8, MONO, a if k == 2 else s, vals[k]))
+    return "\n".join(out)
+
+
+def m_net(x, y, w, h, s, a):
+    """A small fully connected neural network: 3 - 5 - 4 - 2."""
+    layers = [3, 5, 4, 2]
+    P = [[(x + w * (li + .5) / len(layers), y + h * (ni + .5) / n) for ni in range(n)] for li, n in enumerate(layers)]
+    out = []
+    for li in range(len(layers) - 1):
+        for p in P[li]:
+            for q in P[li + 1]:
+                out.append('<line x1="%.1f" y1="%.1f" x2="%.1f" y2="%.1f" stroke="%s" stroke-width="2" opacity=".45"/>'
+                           % (p + q + (s,)))
+    for li, col in enumerate(P):
+        for ni, (cx, cy) in enumerate(col):
+            hl = (li, ni) in ((1, 2), (2, 1), (3, 0))
+            out.append('<circle cx="%.1f" cy="%.1f" r="24" fill="%s" stroke="%s" stroke-width="4"/>'
+                       % (cx, cy, a if hl else "none", a if hl else s))
+    return "\n".join(out)
+
+
+def m_btree(x, y, w, h, s, a):
+    """A B-tree: a root with two keys, three children with up to three keys each."""
+    kw, kh = 56, 50
+    nodes = [((.5, .1), ["40", "80"], True), ((.15, .62), ["12", "25", "31"], False),
+             ((.5, .62), ["47", "63"], False), ((.85, .62), ["85", "91", "97"], False)]
+    out, boxes = [], []
+    for (u, v), keys, root in nodes:
+        nw = kw * len(keys)
+        bx, by = x + w * u - nw / 2, y + h * v
+        boxes.append((bx, by, nw))
+        for i, k in enumerate(keys):
+            out.append('<rect x="%.1f" y="%.1f" width="%d" height="%d" fill="%s" stroke="%s" stroke-width="4"/>'
+                       % (bx + i * kw, by, kw, kh, a if root else "none", a if root else s))
+            out.append('<text x="%.1f" y="%.1f" text-anchor="middle" font-family="%s" font-size="22" fill="%s">%s</text>'
+                       % (bx + i * kw + kw / 2, by + kh / 2 + 8, MONO, "#ffffff" if root else s, k))
+    rx, ry, rw = boxes[0]
+    for i, (cx, cy, cw) in enumerate(boxes[1:]):
+        out.append('<line x1="%.1f" y1="%.1f" x2="%.1f" y2="%.1f" stroke="%s" stroke-width="4" opacity=".7"/>'
+                   % (rx + i * kw, ry + kh, cx + cw / 2, cy, s))
+    # leaf pages on disk under the children
+    for cx, cy, cw in boxes[1:]:
+        for j in range(3):
+            out.append('<rect x="%.1f" y="%.1f" width="%.1f" height="10" rx="3" fill="%s" opacity="%s"/>'
+                       % (cx, cy + kh + 22 + j * 18, cw, s, ".5" if j == 0 else ".25"))
+    return "\n".join(out)
+
+
+def m_heap(x, y, w, h, s, a):
+    """A memory arena before and after defragmentation: used blocks (accent) and free gaps."""
+    before = [(.0, .14, 1), (.14, .1, 0), (.24, .2, 1), (.44, .16, 0), (.6, .12, 1), (.72, .08, 0), (.8, .2, 1)]
+    after = [(.0, .14, 1), (.14, .2, 1), (.34, .12, 1), (.46, .2, 1), (.66, .34, 0)]
+    out, bh = [], h * .22
+    for row, blocks in ((y + h * .08, before), (y + h * .62, after)):
+        for u, du, used in blocks:
+            out.append('<rect x="%.1f" y="%.1f" width="%.1f" height="%.1f" rx="6" fill="%s" stroke="%s" '
+                       'stroke-width="4" opacity="%s"/>' % (x + w * u + 3, row, w * du - 6, bh, a if used else "none",
+                                                           a if used else s, ".9" if used else ".6"))
+    mx, top, bot = x + w * .5, y + h * .08 + bh + 16, y + h * .62 - 16
+    out.append('<line x1="%.1f" y1="%.1f" x2="%.1f" y2="%.1f" stroke="%s" stroke-width="4" stroke-dasharray="10 8"/>'
+               % (mx, top, mx, bot - 14, s))
+    out.append('<polygon points="%.1f,%.1f %.1f,%.1f %.1f,%.1f" fill="%s"/>' % (mx - 14, bot - 18, mx + 14, bot - 18, mx, bot, s))
+    return "\n".join(out)
+
+
+MOTIFS = {"pi": m_pi, "robot": m_robot, "tree": m_tree, "cpp": m_cpp, "cpu": m_cpu, "code": m_code,
+          "wave": m_wave, "net": m_net, "btree": m_btree, "heap": m_heap}
 
 
 def svg(body, bg):
