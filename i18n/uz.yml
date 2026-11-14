@@ -32,6 +32,7 @@ theme_dark: "Mavzu: qorongʻi"
 
 nav_home: Bosh sahifa
 nav_writing: Nashrlar
+nav_projects: Loyihalar
 nav_teaching: Oʻqituvchilik
 nav_about: Men haqimda / Rezyume
 nav_contact: Aloqa
@@ -46,15 +47,18 @@ footer_copy:
 # {n} = number of items in the list (Uzbek nouns stay singular after numerals)
 all_writing: Barcha {n} ta nashr
 all_courses: Barcha {n} ta kurs
+all_projects: Barcha {n} ta loyiha
 # used instead when there are exactly two
 all_writing_two: Ikkala nashr
 all_courses_two: Ikkala kurs
+all_projects_two: Ikkala loyiha
 cv_title: Rezyume
 cv_description: "Kirill Golikov rezyumesi — bosh dasturiy taʼminot muhandisi — C++ · Python · ML · AI. Bilbao, Ispaniya."
 comment_on_linkedin: LinkedIn sahifasida izoh qoldirish
 send_feedback: Fikr-mulohaza yuborish
 back_to_writing: Barcha nashrlar
 back_to_courses: Barcha kurslar
+back_to_projects: Barcha loyihalar
 
 writing_kicker: Nashrlar
 writing_title: Postlar, qaydlar va maqolalar
@@ -65,6 +69,11 @@ courses_kicker: Oʻqituvchilik
 courses_title: Kurslar
 courses_lead: M. V. Lomonosov nomidagi MDUda men yaratgan va oʻqigan maʼruza kurslari (rus tilida) — videolar va slaydlar bilan.
 courses_description: Kirill Golikovning maʼruza kurslari.
+
+projects_kicker: Loyihalar
+projects_title: Ochiq kodli loyihalar
+projects_lead: "GitHubdagi kutubxonalar va tizimli kod: C++20 kutubxonasidan tortib ABBYY NeoML freymvorkiga qoʻshgan hissamgacha."
+projects_description: Kirill Golikovning ochiq kodli loyihalari.
 
 source: Manba
 views: Koʻrishlar

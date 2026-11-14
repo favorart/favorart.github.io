@@ -1,0 +1,9 @@
+# Project page: shared data. The text is in <lang>.md next to this file, one per site language.
+date: 2024-09-30
+date_label: 2022 – 2024
+cover: covers/neoml/cover-1.svg
+links:
+  - url: https://github.com/neoml-lib/neoml
+    label: neoml-lib/neoml
+  - url: https://github.com/neoml-lib/neoml/commits?author=favorart
+    label: {en: My commits, es: Mis commits, ru: Мои коммиты, sr: Moji komitovi, uz: Mening kommitlarim}

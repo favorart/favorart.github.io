@@ -1,0 +1,9 @@
+# Project page: shared data. The text is in <lang>.md next to this file, one per site language.
+date: 2026-11-09
+date_label: 2017 → 2026
+cover: covers/vcd-writer/cover-1.svg
+links:
+  - url: https://github.com/favorart/vcd-writer
+    label: favorart/vcd-writer
+  - url: https://github.com/favorart/vcd-writer/releases
+    label: {en: Releases, es: Versiones, ru: Релизы, sr: Izdanja, uz: Relizlar}

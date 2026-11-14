@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<rect width="1200" height="630" fill="#fbfaf7"/>
+<rect x="333.0" y="134.4" width="69.6" height="94.6" rx="6" fill="#004f90" stroke="#004f90" stroke-width="4" opacity=".9"/>
+<rect x="408.6" y="134.4" width="48.0" height="94.6" rx="6" fill="none" stroke="#5d6470" stroke-width="4" opacity=".6"/>
+<rect x="462.6" y="134.4" width="102.0" height="94.6" rx="6" fill="#004f90" stroke="#004f90" stroke-width="4" opacity=".9"/>
+<rect x="570.6" y="134.4" width="80.4" height="94.6" rx="6" fill="none" stroke="#5d6470" stroke-width="4" opacity=".6"/>
+<rect x="657.0" y="134.4" width="58.8" height="94.6" rx="6" fill="#004f90" stroke="#004f90" stroke-width="4" opacity=".9"/>
+<rect x="721.8" y="134.4" width="37.2" height="94.6" rx="6" fill="none" stroke="#5d6470" stroke-width="4" opacity=".6"/>
+<rect x="765.0" y="134.4" width="102.0" height="94.6" rx="6" fill="#004f90" stroke="#004f90" stroke-width="4" opacity=".9"/>
+<rect x="333.0" y="366.6" width="69.6" height="94.6" rx="6" fill="#004f90" stroke="#004f90" stroke-width="4" opacity=".9"/>
+<rect x="408.6" y="366.6" width="102.0" height="94.6" rx="6" fill="#004f90" stroke="#004f90" stroke-width="4" opacity=".9"/>
+<rect x="516.6" y="366.6" width="58.8" height="94.6" rx="6" fill="#004f90" stroke="#004f90" stroke-width="4" opacity=".9"/>
+<rect x="581.4" y="366.6" width="102.0" height="94.6" rx="6" fill="#004f90" stroke="#004f90" stroke-width="4" opacity=".9"/>
+<rect x="689.4" y="366.6" width="177.6" height="94.6" rx="6" fill="none" stroke="#5d6470" stroke-width="4" opacity=".6"/>
+<line x1="600.0" y1="245.0" x2="600.0" y2="336.6" stroke="#5d6470" stroke-width="4" stroke-dasharray="10 8"/>
+<polygon points="586.0,332.6 614.0,332.6 600.0,350.6" fill="#5d6470"/>
+</svg>

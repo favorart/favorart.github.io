@@ -58,3 +58,28 @@ uz Postlar/Qaydlar/Maqolalar.
 | ВНЖ / ПМЖ | permiso de residencia / residencia permanente | boravišna dozvola / stalni boravak | yashash uchun ruxsatnoma / doimiy yashash uchun ruxsatnoma | residence permit / permanent residence |
 | РУз | Uzbekistán | Uzbekistan | OʻzR | Uzbekistan |
 | госуслуги | servicios públicos en línea | e-uprava | davlat xizmatlari | e-government services |
+
+## Projects (`projects/<slug>/<lang>.md`)
+
+| en | es | ru | sr | uz |
+|---|---|---|---|---|
+| Projects (menu, section) | Proyectos | Проекты | Projekti | Loyihalar |
+| Open-source code (home section) | Código abierto | Открытый код | Otvoreni kod | Ochiq kod |
+| Library | Biblioteca | Библиотека | Biblioteka | Kutubxona |
+| Open-source contributions | Contribuciones de código abierto | Вклад в открытый код | Doprinos otvorenom kodu | Ochiq kodga hissa |
+| Storage engine | Motor de almacenamiento | Движок хранения | Mehanizam za skladištenje | Saqlash dvigateli |
+| Memory allocator | Asignador de memoria | Аллокатор памяти | Alokator memorije | Xotira allokatori |
+| What is inside | Qué incluye | Что внутри | Šta je unutra | Ichida nima bor |
+| How it works | Cómo funciona | Как это устроено | Kako radi | Qanday ishlaydi |
+| Engineering | Ingeniería | Инженерная часть | Inženjerska strana | Muhandislik |
+| Why it matters | Por qué es importante | Почему это важно | Zašto je to važno | Bu nima uchun muhim |
+| Technosphere (Mail.Ru Group + MSU) | Technosphere | Техносфера | Tehnosfera | Texnosfera |
+
+Technical terms: pull request stays (ru «пул-реквест», sr «pull request-ovi»); framework — es framework, ru
+фреймворк, sr frejmvork, uz freymvork; thread pool — ru «пул потоков», uz «oqimlar puli», es/sr keep "thread
+pool"; smart pointer — es puntero inteligente, ru умный указатель, sr pametni pokazivač, uz aqlli koʻrsatkich;
+key-value store — es almacén clave-valor, ru хранилище «ключ — значение», sr key-value skladište, uz kalit-qiymat
+ombori; waveform — es forma de onda, ru временная диаграмма, sr talasni oblik, uz toʻlqin diagrammasi;
+four-state VCD — ru «VCD с четырёхзначной логикой». "The writer's state" is "the internal state" everywhere
+(es escritor / sr pisač / uz yozuvchi read as a human writer or a printer). Foreign names in sr take a hyphen
+before the ending (README-u, C++-u, ABBYY-ju); in uz the suffix is attached directly (NeoMLga, GitHubdagi).

@@ -34,6 +34,7 @@ theme_dark: "Theme: dark"
 
 nav_home: Home
 nav_writing: Writing
+nav_projects: Projects
 nav_teaching: Teaching
 nav_about: About / CV
 nav_contact: Contact
@@ -48,15 +49,18 @@ footer_copy:
 # {n} = number of items in the list
 all_writing: All {n} articles
 all_courses: All {n} courses
+all_projects: All {n} projects
 # used instead when there are exactly two
 all_writing_two: Both articles
 all_courses_two: Both courses
+all_projects_two: Both projects
 cv_title: CV
 cv_description: "CV of Kirill Golikov — Principal Software Engineer — C++ · Python · ML · AI. Bilbao, Spain."
 comment_on_linkedin: Leave a comment on LinkedIn
 send_feedback: Send feedback
 back_to_writing: All articles
 back_to_courses: All courses
+back_to_projects: All projects
 
 writing_kicker: Writing
 writing_title: Posts & articles
@@ -67,6 +71,11 @@ courses_kicker: Teaching
 courses_title: Courses
 courses_lead: Lecture courses I created and taught at Lomonosov MSU (in Russian), with videos and slides.
 courses_description: Lecture courses by Kirill Golikov.
+
+projects_kicker: Projects
+projects_title: Open-source projects
+projects_lead: "Libraries and systems code on GitHub: from a C++20 library to my contributions to ABBYY's NeoML framework."
+projects_description: Open-source projects by Kirill Golikov.
 
 source: Source
 views: Views
