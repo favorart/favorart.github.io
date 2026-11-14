@@ -646,9 +646,7 @@ def kind_of(item, t):
         label = esc(str(loc(item["kind"], t)))
     else:
         label = S(t, "linkedin_post")
-    if item.get("original_url") and item["type"] != "post":
-        return '<a class="src" href="%s" hreflang="%s">%s</a>' % (esc(item["original_url"]), esc(item["lang"]), label)
-    return label
+    return label  # plain text: a link with a language badge here read as "no translation"
 
 
 def page_cover(item):
@@ -743,7 +741,7 @@ def article_page(item, t):
         e = item["paper"]
         line = str(t.get("paper_source", "{j}, vol. {v}, no. {i}, {y}, pp. {p}")).format(
             j=e["journal"] if t["lang"] == item["lang"] and e.get("journal") else e["journal_en"], v=e["volume"], i=e["issue"], y=item["year"], p=e["pages"])
-        source_top = '<a href="%s" hreflang="%s">%s</a>' % (esc(item["original_url"]), esc(item["lang"]), esc(line))
+        source_top = '<a href="%s">%s</a>' % (esc(item["original_url"]), esc(line))
     else:
         repo_url = "https://github.com/" + item["repo"]
         file_url = "%s/blob/%s/%s" % (repo_url, item["branch"], item["path"])
