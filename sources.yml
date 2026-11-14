@@ -27,12 +27,22 @@ articles:
     repo: favorart/pi-birthday
     branch: main
     path: article.md
-    title: Your birthday in the digits of π
+    title:
+      en: Your birthday in the digits of π
+      es: Tu cumpleaños en las cifras de π
+      ru: День рождения в цифрах числа π
+      sr: Vaš rođendan u ciframa broja π
+      uz: Tugʻilgan kuningiz π raqamlarida
     date: 2018-01-01
     date_label: 2018 → 2026
     kind: {en: Article · EN / RU, es: Artículo · EN / RU, ru: Статья · EN / RU, sr: Članak · EN / RU, uz: Maqola · EN / RU}
     lang: en
-    summary: A small GUI app in Python/Tkinter that finds your date of birth among 3 billion digits of π — later rebuilt for the web.
+    summary:
+      en: A small GUI app in Python/Tkinter that finds your date of birth among 3 billion digits of π — later rebuilt for the web.
+      es: Una pequeña aplicación de escritorio en Python/Tkinter que busca tu fecha de nacimiento entre 3000 millones de cifras de π — más tarde rehecha para la web.
+      ru: Небольшое GUI-приложение на Python/Tkinter, которое ищет дату рождения среди 3 миллиардов знаков π, — позже переделанное для веба.
+      sr: Mala GUI aplikacija u Python-u/Tkinter-u koja pronalazi vaš datum rođenja među 3 milijarde cifara broja π — kasnije prepravljena za veb.
+      uz: "Python/Tkinter asosidagi kichik GUI ilova: tugʻilgan sanangizni π sonining 3 milliard raqami orasidan topadi — keyinroq veb uchun qayta yaratilgan."
     cover: covers/pi-birthday/cover-4.svg
     demo_url: https://favorart.github.io/pi-birthday/
 
@@ -45,7 +55,7 @@ articles:
     date_label: 2018 → 2026
     kind: Статья · RU
     lang: ru
-    summary: Небольшое GUI-приложение на Python/Tkinter, которое ищет дату рождения среди 3 миллиардов знаков π.
+    summary: Небольшое GUI-приложение на Python/Tkinter, которое ищет дату рождения среди 3 миллиардов знаков π.
     cover: covers/pi-birthday/cover-4.svg
     demo_url: https://favorart.github.io/pi-birthday/
     list: false
@@ -54,7 +64,12 @@ articles:
     repo: favorart/robot-hand
     branch: master
     path: README.md
-    title: Point-to-point motion of a robot arm with discrete control
+    title:
+      en: Point-to-point motion of a robot arm with discrete control
+      es: Movimiento punto a punto de un brazo robótico con control discreto
+      ru: Перемещение руки робота из точки в точку при дискретном управлении
+      sr: Kretanje robotske ruke od tačke do tačke sa diskretnim upravljanjem
+      uz: Diskret boshqaruvli robot qoʻlining nuqtadan nuqtaga harakati
     date: 2016-01-01
     date_label: "2016"
     kind:
@@ -64,7 +79,12 @@ articles:
       sr: Istraživanje · Master rad
       uz: Tadqiqot · Magistrlik dissertatsiyasi
     lang: en
-    summary: Learning algorithms for positioning a robotic arm with discrete control — trial and error instead of a known model.
+    summary:
+      en: Learning algorithms for positioning a robotic arm with discrete control — trial and error instead of a known model.
+      es: Algoritmos de aprendizaje para posicionar un brazo robótico con control discreto — ensayo y error en lugar de un modelo conocido.
+      ru: Алгоритмы обучения для позиционирования руки робота с дискретным управлением — метод проб и ошибок вместо известной модели.
+      sr: Algoritmi učenja za pozicioniranje robotske ruke sa diskretnim upravljanjem — pokušaji i greške umesto poznatog modela.
+      uz: Diskret boshqaruvli robot qoʻlini pozitsiyalash uchun oʻqitish algoritmlari — maʼlum model oʻrniga sinov va xatolar usuli.
     cover: covers/robot-hand/cover-1.svg
 
   - slug: ipl
@@ -165,7 +185,7 @@ papers:
 
   - slug: learning-systems-discrete-control
     title: Обучение систем с дискретным управлением
-    title_en: Learning systems with descrete control
+    title_en: Learning systems with discrete control
     authors: Голиков К.А.
     authors_en: Golikov K.A.
     journal: Интеллектуальные системы. Теория и приложения

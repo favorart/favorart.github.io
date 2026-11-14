@@ -579,7 +579,10 @@ def article_page(item, t):
     if item["type"] == "post":
         source_top = '<a href="%s">LinkedIn</a>' % esc(item["original_url"])
     elif item["type"] == "paper":
-        source_top = '<a href="%s">%s</a>' % (esc(item["original_url"]), esc(item["source_line"]))
+        e = item["paper"]
+        line = str(t.get("paper_source", "{j}, vol. {v}, no. {i}, {y}, pp. {p}")).format(
+            j=e["journal"] if t["lang"] == item["lang"] and e.get("journal") else e["journal_en"], v=e["volume"], i=e["issue"], y=item["year"], p=e["pages"])
+        source_top = '<a href="%s">%s</a>' % (esc(item["original_url"]), esc(line))
     else:
         repo_url = "https://github.com/" + item["repo"]
         file_url = "%s/blob/%s/%s" % (repo_url, item["branch"], item["path"])

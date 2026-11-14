@@ -10,12 +10,12 @@ author: Kiril Golikov
 months: [jan, feb, mar, apr, maj, jun, jul, avg, sep, okt, nov, dec]
 
 home_title: Kiril Golikov
-home_description: "Kiril Golikov — Principal Software Engineer — C++ · Python · ML · AI. Optimizacija performansi, ML infrastruktura, sistemi. Bilbao, Španija."
-home_og_title: Kiril Golikov — Principal Software Engineer
-home_og_description: "Principal Software Engineer — C++ · Python · ML · AI. Bilbao, Španija."
+home_description: "Kiril Golikov — glavni softverski inženjer — C++ · Python · ML · AI. Optimizacija performansi, ML infrastruktura, sistemi. Bilbao, Španija."
+home_og_title: Kiril Golikov — glavni softverski inženjer
+home_og_description: "Glavni softverski inženjer — C++ · Python · ML · AI. Bilbao, Španija."
 
 # the title in two lines: role, then skills
-role_title: Principal Software Engineer
+role_title: Glavni softverski inženjer
 role_skills: C++ · Python · ML · AI
 # hero: "Also:" + one of these, changing every few seconds
 also: "Takođe:"
@@ -58,7 +58,7 @@ all_courses:
 all_writing_two: Oba teksta
 all_courses_two: Oba kursa
 cv_title: CV
-cv_description: "CV Kirila Golikova — Principal Software Engineer — C++ · Python · ML · AI. Bilbao, Španija."
+cv_description: "CV Kirila Golikova, glavnog softverskog inženjera — C++ · Python · ML · AI. Bilbao, Španija."
 comment_on_linkedin: Ostavite komentar na LinkedIn-u
 send_feedback: Pošaljite komentar
 back_to_writing: Svi tekstovi
@@ -107,3 +107,4 @@ aria_language: Jezik
 aria_sections: Odeljci
 paper_issue: "tom {v}, br. {i}"
 date_format: "{d}. {m} {y}."
+paper_source: "{j}, tom {v}, br. {i}, {y}, str. {p}"

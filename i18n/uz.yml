@@ -8,12 +8,12 @@ author: Kirill Golikov
 months: [Yan, Fev, Mar, Apr, May, Iyun, Iyul, Avg, Sen, Okt, Noy, Dek]
 
 home_title: Kirill Golikov
-home_description: "Kirill Golikov — Principal Software Engineer — C++ · Python · ML · AI. Unumdorlikni optimallashtirish, ML infratuzilmasi, tizimlar. Bilbao, Ispaniya."
-home_og_title: Kirill Golikov — Principal Software Engineer
-home_og_description: "Principal Software Engineer — C++ · Python · ML · AI. Bilbao, Ispaniya."
+home_description: "Kirill Golikov — bosh dasturiy taʼminot muhandisi — C++ · Python · ML · AI. Unumdorlikni optimallashtirish, ML infratuzilmasi, tizimlar. Bilbao, Ispaniya."
+home_og_title: Kirill Golikov — bosh dasturiy taʼminot muhandisi
+home_og_description: "Bosh dasturiy taʼminot muhandisi — C++ · Python · ML · AI. Bilbao, Ispaniya."
 
 # the title in two lines: role, then skills
-role_title: Principal Software Engineer
+role_title: Bosh dasturiy taʼminot muhandisi
 role_skills: C++ · Python · ML · AI
 # hero: "Also:" + one of these, changing every few seconds
 also: "Shuningdek:"
@@ -50,7 +50,7 @@ all_courses: Barcha {n} ta kurs
 all_writing_two: Ikkala maqola
 all_courses_two: Ikkala kurs
 cv_title: Rezyume
-cv_description: "Kirill Golikov rezyumesi — Principal Software Engineer — C++ · Python · ML · AI. Bilbao, Ispaniya."
+cv_description: "Kirill Golikov rezyumesi — bosh dasturiy taʼminot muhandisi — C++ · Python · ML · AI. Bilbao, Ispaniya."
 comment_on_linkedin: LinkedIn sahifasida izoh qoldirish
 send_feedback: Fikr-mulohaza yuborish
 back_to_writing: Barcha maqolalar
@@ -98,3 +98,4 @@ covers_stop_all: ■ Stop
 aria_language: Til
 aria_sections: Boʻlimlar
 paper_issue: "{v}-jild, {i}-son"
+paper_source: "{j}, {v}-jild, {i}-son, {y}, {p}-betlar"

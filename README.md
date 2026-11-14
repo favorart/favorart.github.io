@@ -53,6 +53,21 @@ python -m http.server -d _site 8000
    Note: a line starting with `#word` is a heading in Markdown — write `\#word` for a hashtag.
 3. Commit and push — the Action rebuilds the site.
 
+### Rules for copying a post
+
+- **Copy the whole post, including its continuation in the comments.** LinkedIn limits a post's length, so a
+  long post often ends with "Продолжение в комментарии…", "Далее ниже…" or similar and goes on in the
+  author's own comments (and replies to them). Collect every such comment by the author, in order, and
+  append each one to the post text as a separate part, with no "from the comments" heading — the reader
+  should get one continuous text. Drop only the "continued below" markers themselves.
+- Comments by other people are not copied.
+- Only some comments are visible without signing in to LinkedIn. If the continuation is hidden, open the
+  post while signed in (or ask the author for the text); never publish a post that stops at "continued in
+  the comments".
+- Keep the text verbatim (fix nothing but obvious Markdown breakage); images of the post go into the
+  folder, the first one as `cover.jpg`.
+- `original_url` is the full `linkedin.com/posts/...` URL without tracking parameters (`?utm_…`, `rcm=`).
+
 ## Add an external article or course
 
 Add an entry to `sources.yml` (`articles:` → `/writing/<slug>/`, `courses:` → `/courses/<slug>/`)
