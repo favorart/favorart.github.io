@@ -1,0 +1,178 @@
+<!-- CV page content (Russian). Wrapped by templates/base.html. Placeholders: $$prefix, $$role_title, $$role_skills. -->
+<header class="page-head">
+  <div class="kicker">Обо мне / CV</div>
+  <h1>Кирилл Голиков</h1>
+  <p class="lead title2"><span>$role_title</span><span class="sub">$role_skills</span></p>
+  <p class="place">Бильбао, Испания</p>
+</header>
+
+<section class="cv">
+  <div class="focus">
+    <div class="card"><h3>Оптимизация производительности</h3><p>Профилирование и оптимизация горячих путей: fps, микрофризы, время запуска, частота падений, ускорение на GPU.</p></div>
+    <div class="card"><h3>ML-инфраструктура</h3><p>Среды выполнения нейросетей на C++/CUDA: Transformer, Attention, LoRA в open-source-фреймворке NeoML; ONNX.</p></div>
+    <div class="card"><h3>Системы и хранение данных</h3><p>Прошивки SSD, content-defined chunking для дедупликации, оценка сокращения объёма данных в облачном хранилище.</p></div>
+  </div>
+
+
+  <div id="experience" class="panel glass">
+  <h3 class="ptitle">Опыт работы</h3>
+
+  <div class="job">
+    <div class="when"><span>Май 2026 — сейчас</span><span>Бильбао</span></div>
+    <div>
+      <h3><a href="https://www.artificialseed.io">Artificial Seed</a><span class="tag">сейчас</span></h3>
+      <div class="role">Senior Software Engineer · команда разработки</div>
+      <ul>
+        <li>Проектирование систем и оптимизация производительности</li>
+        <li>CI/CD: инфраструктура автоматического тестирования для сложных симуляций ML-анализа</li>
+      </ul>
+      <div class="chips"><span class="chip">c++26</span><span class="chip">cmake</span><span class="chip">conan</span><span class="chip">onnx</span><span class="chip">python</span><span class="chip">perf</span><span class="chip">gitlab</span><span class="chip">ai-agents</span></div>
+    </div>
+  </div>
+
+  <div class="job">
+    <div class="when"><span>Мар 2025 — окт 2025</span><span>Удалённо</span></div>
+    <div>
+      <h3><a href="https://playrix.com">Playrix</a></h3>
+      <div class="role">Senior Software Engineer · команда качества игр (Game Quality)</div>
+      <ul>
+        <li>Оптимизация производительности мобильных игр: fps, микрофризы, время запуска, частота падений</li>
+      </ul>
+      <div class="chips"><span class="chip">c++20</span><span class="chip">tracy</span><span class="chip">profiling</span><span class="chip">cmake</span><span class="chip">teamcity</span><span class="chip">ios</span><span class="chip">android</span><span class="chip">macos</span></div>
+    </div>
+  </div>
+
+  <div class="job">
+    <div class="when"><span>Сен 2022 — ноя 2024</span><span>Удалённо</span></div>
+    <div>
+      <h3><a href="https://www.abbyy.com">ABBYY</a></h3>
+      <div class="role">Principal Software Engineer · группа общих библиотек, департамент NLP</div>
+      <ul>
+        <li>Участие в разработке open-source-фреймворка <a href="https://github.com/neoml-lib/neoml">NeoML</a>: Transformer, Attention, Embeddings, LoRA</li>
+        <li>Оптимизация производительности инфраструктуры нейросетевых вычислений, включая ускорение на GPU</li>
+        <li>Наставник стажёра в течение года</li>
+      </ul>
+      <div class="chips"><span class="chip">c++17</span><span class="chip">cuda</span><span class="chip">onnx-runtime</span><span class="chip">neural-networks</span><span class="chip">research</span></div>
+    </div>
+  </div>
+
+  <div class="job">
+    <div class="when"><span>Авг 2020 — сен 2022</span><span>Москва</span></div>
+    <div>
+      <h3><a href="https://career.huawei.ru/rri/en/zadachi-nashego-instituta/data-storage">Huawei</a></h3>
+      <div class="role">Senior Software Engineer · команда систем хранения, лаборатория интеллектуальных систем и Data Science</div>
+      <ul>
+        <li><em>Estimation Tool</em> — прогноз сокращения объёма данных в Ocean Cloud Storage</li>
+        <li><em>Content-Defined Chunking</em> — высокопроизводительный поиск дубликатов в битовых потоках</li>
+        <li><em>Unstructured Data Reduction</em> — сжатие медицинских изображений</li>
+      </ul>
+      <div class="chips"><span class="chip">c++14</span><span class="chip">boost</span><span class="chip">intel-intrinsics</span><span class="chip">x86-64</span><span class="chip">arm</span><span class="chip">python</span><span class="chip">ml</span></div>
+    </div>
+  </div>
+
+  <div class="job">
+    <div class="when"><span>Окт 2017 — сен 2022</span><span>Москва</span></div>
+    <div>
+      <h3><a href="https://kraftway.ru/company/issledovaniya-i-razrabotki.php">Kraftway</a></h3>
+      <div class="role">Senior Software Engineer · команда прошивок SSD</div>
+      <ul>
+        <li>Прошивки для двух поколений прототипов SSD</li>
+        <li><em>Temperature Detector</em> — мониторинг частоты перезаписи секторов</li>
+        <li><em>QATC</em> — управление очередями и таблицами запросов read / write / trim</li>
+        <li><em>Validity Module</em> — компонент сборщика мусора, отслеживающий перезапись секторов в блоках, назначенных на стирание</li>
+      </ul>
+      <div class="chips"><span class="chip">c++11</span><span class="chip">nvme</span><span class="chip">micro-controllers</span><span class="chip">xilinx-sdk</span></div>
+    </div>
+  </div>
+
+  <div class="job">
+    <div class="when"><span>Июл 2017 — окт 2017</span><span>Москва</span></div>
+    <div>
+      <h3><a href="https://vk.company/en/company/about/">VK</a> <span style="color:var(--muted);font-weight:400;font-size:15px">(ранее Mail.ru Group)</span></h3>
+      <div class="role">Software Engineer · бэкенд мессенджера ICQ</div>
+      <ul><li>Расширение, позволяющее пользователям создавать собственные эмодзи</li></ul>
+      <div class="chips"><span class="chip">c++11</span><span class="chip">linux</span><span class="chip">micro-services</span><span class="chip">high-load</span></div>
+    </div>
+  </div>
+
+  <div class="job">
+    <div class="when"><span>Июн 2015 — июл 2017</span><span>Москва</span></div>
+    <div>
+      <h3>VK и МГУ имени М. В. Ломоносова</h3>
+      <div class="role">Junior Researcher · лаборатория Data Science, факультет ВМК</div>
+      <ul><li>Автоматический парсинг сайтов и анализ текстов</li></ul>
+      <div class="chips"><span class="chip">python</span><span class="chip">sklearn</span><span class="chip">beautiful-soup</span></div>
+    </div>
+  </div>
+
+  <div class="job">
+    <div class="when"><span>Июн 2013 — авг 2014</span><span>Ташкент</span></div>
+    <div>
+      <h3><a href="https://saesp.uz/">SAESP</a></h3>
+      <div class="role">Engineer · отдел вторичных цепей</div>
+      <ul><li>Автоматизация выпуска чертежей ЛЭП и подстанций</li></ul>
+      <div class="chips"><span class="chip">c#</span><span class="chip">wpf</span><span class="chip">autocad objectarx</span></div>
+    </div>
+  </div>
+  </div>
+
+  <div id="education" class="panel glass">
+  <h3 class="ptitle">Образование</h3>
+  <div class="job">
+    <div class="when"><span>2016–2020</span></div>
+    <div>
+      <h3>Аспирантура · Дискретная математика и математическая кибернетика</h3>
+      <div class="role">МГУ имени М. В. Ломоносова</div>
+      <ul>
+        <li>Алгоритмы обучения плоских моделей роботов с дискретным управлением</li>
+        <li>Научные публикации — см. ниже</li>
+      </ul>
+    </div>
+  </div>
+  <div class="job">
+    <div class="when"><span>2014–2016</span></div>
+    <div>
+      <h3>Магистратура · Математика и компьютерные науки</h3>
+      <div class="role">МГУ имени М. В. Ломоносова · средний балл 4,77/5</div>
+      <ul><li><a href="https://github.com/favorart/robot-hand">Алгоритмы обучения позиционированию робота-манипулятора с дискретным управлением</a></li></ul>
+    </div>
+  </div>
+  <div class="job">
+    <div class="when"><span>2009–2013</span></div>
+    <div>
+      <h3>Бакалавриат · Прикладная математика и информатика</h3>
+      <div class="role">МГУ имени М. В. Ломоносова · средний балл 4,95/5</div>
+      <ul><li><a href="https://github.com/favorart/IPL">Кроссплатформенный интерпретатор языка с настраиваемым синтаксисом</a></li></ul>
+    </div>
+  </div>
+  </div>
+
+  <div id="publications" class="panel glass">
+  <h3 class="ptitle">Научные публикации</h3>
+  <ol class="pubs">
+    <li>
+      <p lang="ru">Голиков К.А. <a href="$prefix/writing/learning-algorithm-discrete-control/">Алгоритм обучения систем с дискретным управлением</a> // Интеллектуальные системы. Теория и приложения. — 2019. — Т. 23, вып. 1. — С. 7–38.</p>
+      <p class="en">Golikov K.A. Learning algorithm of systems with discrete control. <em>Intelligent Systems. Theory and Applications</em>, 2019, vol. 23, no. 1, pp. 7–38.</p>
+      <p class="links"><a href="$prefix/writing/learning-algorithm-discrete-control/">Страница →</a> · <a href="http://intsysjournal.ru/pdfs/23-1/Golikov.pdf">PDF →</a></p>
+    </li>
+    <li>
+      <p lang="ru">Голиков К.А. <a href="$prefix/writing/learning-systems-discrete-control/">Обучение систем с дискретным управлением</a> // Интеллектуальные системы. Теория и приложения. — 2018. — Т. 22, вып. 4. — С. 143–151.</p>
+      <p class="en">Golikov K.A. Learning systems with descrete control. <em>Intelligent Systems. Theory and Applications</em>, 2018, vol. 22, no. 4, pp. 143–151.</p>
+      <p class="links"><a href="$prefix/writing/learning-systems-discrete-control/">Страница →</a> · <a href="http://intsysjournal.ru/pdfs/22-4/Golikov.pdf">PDF →</a></p>
+    </li>
+  </ol>
+  </div>
+
+  <div id="skills" class="panel glass">
+  <h3 class="ptitle">Навыки</h3>
+  <div class="skills">
+    <div><h3>Языки программирования</h3><div class="chips"><span class="chip">C++ 11–26</span><span class="chip">Python</span><span class="chip">CUDA</span><span class="chip">C#</span></div></div>
+    <div><h3>Производительность</h3><div class="chips"><span class="chip">perf</span><span class="chip">Tracy</span><span class="chip">intrinsics</span><span class="chip">GPU</span><span class="chip">profiling</span></div></div>
+    <div><h3>Сборка и CI</h3><div class="chips"><span class="chip">CMake</span><span class="chip">Conan</span><span class="chip">GitLab CI</span><span class="chip">TeamCity</span><span class="chip">git</span></div></div>
+    <div><h3>ML</h3><div class="chips"><span class="chip">ONNX</span><span class="chip">NeoML</span><span class="chip">Transformers</span><span class="chip">sklearn</span></div></div>
+    <div><h3>Платформы</h3><div class="chips"><span class="chip">Linux</span><span class="chip">Windows</span><span class="chip">macOS</span><span class="chip">iOS</span><span class="chip">Android</span><span class="chip">ARM</span></div></div>
+    <div><h3>Языки общения</h3><div class="chips"><span class="chip">Английский — свободный, рабочий</span><span class="chip">Русский — родной</span></div></div>
+  </div>
+  </div>
+  <p class="all"><a class="btn sun big" href="$prefix/#contact">Напишите мне <span class="arr">→</span></a></p>
+</section>

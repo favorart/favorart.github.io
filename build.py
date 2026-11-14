@@ -40,6 +40,8 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 SITE_URL = "https://favorart.github.io"
 LICENSE_URL = "https://github.com/favorart/favorart.github.io/blob/main/LICENSE"
 DEFAULT_LANG = "en"
+LANG_ORDER = ["en", "es", "ru", "sr", "uz"]  # order in the language switcher
+LANGS = {}  # filled in main(): code -> i18n dict
 HOME_LATEST = 2  # cards per section on the home page
 # GoatCounter site code (https://<code>.goatcounter.com): cookie-free visit counter.
 # Empty string disables the counter. count.js itself ignores localhost and file:// views.
@@ -110,10 +112,12 @@ def load_languages():
         data["prefix"] = (data.get("prefix") or "").rstrip("/")
         if code != DEFAULT_LANG and not data["prefix"]:
             fail("i18n/%s.yml: non-default language needs a prefix like /%s" % (code, code))
+        data.setdefault("html_lang", code)
         langs[code] = data
     if DEFAULT_LANG not in langs:
         fail("i18n/%s.yml is required" % DEFAULT_LANG)
-    return langs
+    order = {c: n for n, c in enumerate(LANG_ORDER)}
+    return dict(sorted(langs.items(), key=lambda kv: (order.get(kv[0], 99), kv[0])))
 
 
 def S(t, key):
@@ -136,11 +140,30 @@ def as_date(value, where):
         fail("%s: bad date %r (expected YYYY-MM-DD)" % (where, value))
 
 
+def loc(value, t):
+    """A value from sources.yml that may be given per UI language: {en: ..., ru: ...} -> the one for t."""
+    if isinstance(value, dict):
+        return value.get(t["lang"]) or value.get(DEFAULT_LANG) or next(iter(value.values()), None)
+    return value
+
+
+def localized(value, t):
+    """True when value has its own version for t's UI language (then it is in that language, not the item's)."""
+    return isinstance(value, dict) and t["lang"] in value
+
+
+def text_lang(item, field, t):
+    return t["html_lang"] if localized(item.get(field), t) else item["lang"]
+
+
 def date_text(item, t):
+    if item.get("paper"):  # journal issue instead of a date: "vol. 23(1)"
+        e = item["paper"]
+        return esc(str(t.get("paper_issue", "vol. {v}({i})")).replace("{v}", str(e["volume"])).replace("{i}", str(e["issue"])))
     if item.get("date_label"):
-        return esc(str(item["date_label"]))
+        return esc(str(loc(item["date_label"], t)))
     d = item["date"]
-    return "%d %s %d" % (d.day, t["months"][d.month - 1], d.year)
+    return esc(str(t.get("date_format", "{d} {m} {y}")).format(d=d.day, m=t["months"][d.month - 1], y=d.year))
 
 
 def split_front_matter(text, where):
@@ -346,9 +369,9 @@ def load_external(offline):
             fail("%s: cover '%s' not found" % (where, cover))
         item = {
             "type": "external", "wtype": e.get("type", "article"), "section": sec, "slug": e["slug"],
-            "title": str(e["title"]), "date": as_date(e["date"], where),
+            "title": e["title"], "date": as_date(e["date"], where),
             "date_label": e.get("date_label"), "lang": e.get("lang", "en"),
-            "summary": str(e["summary"]), "kind": e.get("kind"),
+            "summary": e["summary"], "kind": e.get("kind"),
             "repo": e["repo"], "branch": e["branch"], "path": e["path"],
             "tags": e.get("tags") or [], "demo_url": e.get("demo_url"),
             "cover_url": "/" + cover if cover else None,
@@ -399,7 +422,7 @@ def paper_item(e):
         "type": "paper", "wtype": "paper", "section": "writing", "slug": e["slug"], "title": str(e["title"]),
         "date": as_date(e.get("date") or "%d-01-01" % year, where), "date_label": "vol. %s(%s)" % (e["volume"], e["issue"]),
         "lang": lang,
-        "summary": str(e["summary"]), "kind": "Paper · Intelligent Systems · %d" % year,
+        "summary": e["summary"], "kind": None, "journal_short": e.get("journal_short", "Intelligent Systems"), "year": year,
         "original_url": e["pdf"], "tags": [], "demo_url": None, "list": e.get("list", True),
         "cover_url": "/" + cover if cover else None,
         "options_dir": os.path.join(ROOT, os.path.dirname(cover)) if cover else None,
@@ -410,18 +433,44 @@ def paper_item(e):
 
 # ---------------------------------------------------------------- pages
 
+def lang_nav(t, rel, only_default=False):
+    """Language switcher: the same page in every language (rel = path without the language prefix)."""
+    links = []
+    for code, u in LANGS.items():
+        target = rel if not only_default or code == DEFAULT_LANG else "/writing/"
+        cur = ' aria-current="true"' if code == t["lang"] else ""
+        links.append('<a href="%s%s" hreflang="%s" lang="%s" title="%s"%s>%s</a>' % (
+            u["prefix"], target, esc(u["html_lang"]), esc(u["html_lang"]), esc(str(u["name"])), cur, code.upper()))
+    return "".join(links)
+
+
 def page(t, title, body, path, description="", lang=None, og_image=None, og_type="website",
-         noindex=False, body_class="", og_title=None, section=""):
+         noindex=False, body_class="", og_title=None, section="", canonical=None, only_default=False):
+    rel = path[len(t["prefix"]):] if t["prefix"] and path.startswith(t["prefix"] + "/") else path
     extra = []
+    if not noindex and not only_default and canonical is None:
+        for code, u in LANGS.items():
+            extra.append('<link rel="alternate" hreflang="%s" href="%s">' % (
+                esc(u["html_lang"]), esc(SITE_URL + u["prefix"] + rel)))
+        extra.append('<link rel="alternate" hreflang="x-default" href="%s">' % esc(SITE_URL + rel))
     if og_image:
         extra.append('<meta property="og:image" content="%s">' % esc(SITE_URL + og_image))
     if noindex:
         extra.append('<meta name="robots" content="noindex">')
     if GOATCOUNTER_CODE:
+        # an item page in any UI language counts as one page: /ru/writing/<slug>/ -> /writing/<slug>/
+        prefixes = "|".join(re.escape(u["prefix"].strip("/")) for u in LANGS.values() if u["prefix"])
+        if prefixes:
+            extra.append("<script>window.goatcounter = { path: function (p) { return p.replace("
+                         "/^\\/(?:%s)(\\/(?:writing|courses)\\/[^\\/]+\\/)$/, '$1'); } };</script>" % prefixes)
         extra.append('<script data-goatcounter="https://%s.goatcounter.com/count" async '
                      'src="https://gc.zgo.at/count.js"></script>' % esc(GOATCOUNTER_CODE))
-    return tpl("base", lang=esc(lang or t["lang"]), title=esc(title), og_title=esc(og_title or title),
+    return tpl("base", lang=esc(lang or t["html_lang"]), title=esc(title), og_title=esc(og_title or title),
                description=esc(description), og_type=og_type, url=esc(SITE_URL + path),
+               aria_language=esc(str(t.get("aria_language", "Language"))),
+               aria_sections=esc(str(t.get("aria_sections", "Sections"))),
+               canonical=esc(SITE_URL + (canonical or path)), lang_nav=lang_nav(t, rel, only_default),
+               og_locale=esc(str(t.get("og_locale", "en_US"))),
                head_extra="\n".join(extra), body_class=body_class, prefix=t["prefix"],
                css_url=asset_url("site.css"), favicon_url=asset_url("favicon.svg"),
                author=S(t, "author"), role_title=S(t, "role_title"), role_skills=S(t, "role_skills"), lang_soon=S(t, "lang_soon"), section=section,
@@ -437,12 +486,18 @@ def page(t, title, body, path, description="", lang=None, og_image=None, og_type
 
 
 def item_url(item, t=None):
-    return "/%s/%s/" % (item["section"], item["slug"])
+    """URL of an item's page; with t, the page in that UI language (/ru/writing/<slug>/)."""
+    return "%s/%s/%s/" % (t["prefix"] if t else "", item["section"], item["slug"])
 
 
 def kind_of(item, t):
     """Label of the item; for a LinkedIn post it links to the original post."""
-    label = esc(item["kind"]) if item.get("kind") else S(t, "linkedin_post")
+    if item.get("paper"):
+        label = "%s · %s · %d" % (S(t, "type_paper"), esc(item["journal_short"]), item["year"])
+    elif item.get("kind"):
+        label = esc(str(loc(item["kind"], t)))
+    else:
+        label = S(t, "linkedin_post")
     if item.get("original_url"):
         return '<a class="src" href="%s">%s</a>' % (esc(item["original_url"]), label)
     return label
@@ -513,10 +568,11 @@ def card(item, t):
     badge = ""
     if item.get("demo_url"):
         badge = '<a class="badge" href="%s">%s</a>' % (esc(item["demo_url"]), S(t, "badge_demo"))
-    return tpl("card", href=item_url(item), cover=cover, badge=badge, type_chip=type_chip(item, t),
+    return tpl("card", href=item_url(item, t), cover=cover, badge=badge, type_chip=type_chip(item, t),
                wtype=esc(item.get("wtype", "")) if item["section"] == "writing" else "", kind=kind_of(item, t), date=date_text(item, t),
                views=views_tag(item, t),
-               lang=esc(item["lang"]), title=esc(item["title"]), summary=esc(item["summary"]))
+               lang=esc(text_lang(item, "title", t)), title=esc(str(loc(item["title"], t))),
+               summary_lang=esc(text_lang(item, "summary", t)), summary=esc(str(loc(item["summary"], t))))
 
 
 def article_page(item, t):
@@ -544,12 +600,14 @@ def article_page(item, t):
     if page_cover(item):
         hero = cover_imgs(item, page_cover(item), "hero-cover", lazy=False)
     body = tpl("article", hero=hero, kind=kind_of(item, t), date=date_text(item, t), views=views_tag(item, t), lang=esc(item["lang"]),
-               title=esc(item["title"]), subtitle=subtitle, author=S(t, "author"), source_top=source_top,
+               title=esc(str(loc(item["title"], t))), title_lang=esc(text_lang(item, "title", t)),
+               subtitle=subtitle, author=S(t, "author"), source_top=source_top,
                demo=demo, content=item["body_html"], cta=cta, type_chip=type_chip(item, t),
                back_href="%s/%s/" % (t["prefix"], item["section"]), back_text=S(t, back))
     cover = item.get("cover_url") or ""
-    return page(t, "%s — %s" % (item["title"], t["author"]), body, item_url(item), description=item["summary"],
-                lang=item["lang"], og_image=cover if cover.lower().endswith(RASTER) else None, og_type="article",
+    return page(t, "%s — %s" % (loc(item["title"], t), t["author"]), body, item_url(item, t),
+                description=str(loc(item["summary"], t)),
+                canonical=item_url(item), og_image=cover if cover.lower().endswith(RASTER) else None, og_type="article",
                 section="teaching" if item["section"] == "courses" else "writing")
 
 
@@ -601,7 +659,7 @@ def covers_page(items, t):
                             src=esc(versioned(base_url + "/" + name, opt)), label="%s %d" % (S(t, "covers_option"), n),
                             name=esc(name),
                             selected_tag=' <span class="tag">%s</span>' % S(t, "covers_current") if sel else ""))
-        groups.append(tpl("cover_group", title=esc(item["title"]), set_in=S(t, "covers_set_in"), where=esc(where),
+        groups.append(tpl("cover_group", title=esc(str(loc(item["title"], t))), set_in=S(t, "covers_set_in"), where=esc(where),
                           chosen=esc(chosen), options="\n".join(opts)))
     # demo of the cover effect on a few real covers (hover, or "Play all")
     with_cover = [i for i in items if i["list"] and (i.get("card_cover_url") or i.get("cover_url"))]
@@ -610,14 +668,33 @@ def covers_page(items, t):
                groups="\n".join(groups), mask_title=S(t, "covers_mask_title"), mask_hint=S(t, "covers_mask_hint"),
                mask_demos=demos, play_all=S(t, "covers_play_all"), stop_all=S(t, "covers_stop_all"))
     return page(t, "%s — %s" % (t["covers_title"], t["author"]), body, "/writing/covers/", noindex=True,
-                section="writing")
+                section="writing", only_default=True)
+
+
+def plural_form(lang, n):
+    """CLDR plural category of a whole number n: one / few / many / other."""
+    if lang in ("ru", "uk", "be", "sr", "hr", "bs"):
+        if n % 10 == 1 and n % 100 != 11:
+            return "one"
+        if 2 <= n % 10 <= 4 and not 12 <= n % 100 <= 14:
+            return "few"
+        return "many" if lang in ("ru", "uk", "be") else "other"
+    return "one" if n == 1 else "other"
 
 
 def all_label(t, key, n):
-    """'All {n} courses', or the '<key>_two' wording ('Both courses') when there are exactly two."""
+    """'All {n} courses', or the '<key>_two' wording ('Both courses') when there are exactly two.
+    The string may also be a dict of plural forms {one, few, many, other}."""
     if n == 2 and t.get(key + "_two"):
         return S(t, key + "_two")
-    return S(t, key).replace("{n}", str(n))
+    if key not in t:
+        fail("i18n/%s.yml: missing key '%s'" % (t.get("lang"), key))
+    text = t[key]
+    if isinstance(text, dict):
+        text = text.get(plural_form(t["lang"], n)) or text.get("other")
+        if not text:
+            fail("i18n/%s.yml: %s has no '%s'/'other' form" % (t["lang"], key, plural_form(t["lang"], n)))
+    return esc(str(text)).replace("{n}", str(n))
 
 
 def fun_roles(t):
@@ -691,13 +768,14 @@ def main():
     out = os.path.abspath(args.out)
 
     langs = load_languages()
+    LANGS.update(langs)
     t0 = langs[DEFAULT_LANG]
     items = load_posts() + load_external(args.offline)
     keys = [(i["section"], i["slug"]) for i in items]
     dupes = {k for k in keys if keys.count(k) > 1}
     if dupes or ("writing", "covers") in keys:
         fail("duplicate or reserved slugs: %s" % sorted(dupes | ({("writing", "covers")} & set(keys))))
-    items.sort(key=lambda i: (i["date"], i["title"]), reverse=True)
+    items.sort(key=lambda i: (i["date"], str(loc(i["title"], t0))), reverse=True)
 
     if os.path.isdir(out):
         shutil.rmtree(out)
@@ -722,11 +800,13 @@ def main():
         for section in SECTIONS.values():
             write(os.path.join(root, section, "index.html"), list_page(items, section, t))
 
+    # item pages: the text stays in its own language, the page around it exists in every UI language
     for item in items:
-        dest = os.path.join(out, item["section"], item["slug"])
-        if item["type"] == "post":  # the post's images / attachments go next to its page
-            shutil.copytree(item["folder"], dest, ignore=shutil.ignore_patterns("*.md"))
-        write(os.path.join(dest, "index.html"), article_page(item, t0))
+        for t in langs.values():
+            dest = os.path.join(out, t["prefix"].lstrip("/"), item["section"], item["slug"])
+            if item["type"] == "post":  # the post's images / attachments go next to its page
+                shutil.copytree(item["folder"], dest, ignore=shutil.ignore_patterns("*.md"))
+            write(os.path.join(dest, "index.html"), article_page(item, t))
     write(os.path.join(out, "writing", "covers", "index.html"), covers_page(items, t0))
 
     counts = {}

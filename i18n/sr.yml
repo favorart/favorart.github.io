@@ -1,0 +1,109 @@
+# UI strings for Serbian (Latin script). To add a language, copy this file to i18n/<lang>.yml,
+# set `lang` and `prefix` (e.g. /ru), translate the strings and add content/home.<lang>.html.
+# The default language (prefix "") is served at the site root.
+lang: sr
+prefix: /sr
+name: Srpski
+html_lang: sr-Latn
+og_locale: sr_RS
+author: Kiril Golikov
+months: [jan, feb, mar, apr, maj, jun, jul, avg, sep, okt, nov, dec]
+
+home_title: Kiril Golikov
+home_description: "Kiril Golikov — Principal Software Engineer — C++ · Python · ML · AI. Optimizacija performansi, ML infrastruktura, sistemi. Bilbao, Španija."
+home_og_title: Kiril Golikov — Principal Software Engineer
+home_og_description: "Principal Software Engineer — C++ · Python · ML · AI. Bilbao, Španija."
+
+# the title in two lines: role, then skills
+role_title: Principal Software Engineer
+role_skills: C++ · Python · ML · AI
+# hero: "Also:" + one of these, changing every few seconds
+also: "Takođe:"
+fun_roles:
+  - AI entuzijasta
+  - Profajler po pozivu
+  - Ubrzivač svega što koči
+  - Head of Slop Review
+  - Lovac na cache miss-ove
+  - Glavni benčmark-skeptik
+lang_soon: uskoro
+theme_label: "Tema: automatska, svetla ili tamna"
+theme_auto: "Tema: automatska (prati sistem)"
+theme_light: "Tema: svetla"
+theme_dark: "Tema: tamna"
+
+nav_home: Početna
+nav_writing: Tekstovi
+nav_teaching: Nastava
+nav_about: O meni / CV
+nav_contact: Kontakt
+footer_contact: Kontakt
+# footer lines, HTML allowed; {mit} is replaced with the LICENSE URL
+footer_copy:
+  - '© 2026 Kiril Golikov'
+  - 'Napravio Claude dok je čovek birao boje.'
+  - 'Sva prava zadržana i odmah poklonjena pod <a href="{mit}">MIT licencom</a>: uzmite, niko se ne ljuti.'
+  - 'Samo radno iskustvo nije prenosivo.'
+
+# {n} = number of items in the list
+all_writing:
+  one: "Svi tekstovi ({n})"
+  few: "Sva {n} teksta"
+  other: "Svih {n} tekstova"
+all_courses:
+  one: "Svi kursevi ({n})"
+  few: "Sva {n} kursa"
+  other: "Svih {n} kurseva"
+# used instead when there are exactly two
+all_writing_two: Oba teksta
+all_courses_two: Oba kursa
+cv_title: CV
+cv_description: "CV Kirila Golikova — Principal Software Engineer — C++ · Python · ML · AI. Bilbao, Španija."
+comment_on_linkedin: Ostavite komentar na LinkedIn-u
+send_feedback: Pošaljite komentar
+back_to_writing: Svi tekstovi
+back_to_courses: Svi kursevi
+
+writing_kicker: Tekstovi
+writing_title: Postovi i članci
+writing_lead: Postovi sa LinkedIn-a i duži članci o C++-u, performansama, ML-u i projektima iza njih.
+writing_description: Postovi i članci Kirila Golikova.
+
+courses_kicker: Nastava
+courses_title: Kursevi
+courses_lead: "Kursevi predavanja koje sam osmislio i držao na Moskovskom državnom univerzitetu „M. V. Lomonosov“ (na ruskom), sa video-snimcima i slajdovima."
+courses_description: Kursevi predavanja Kirila Golikova.
+
+source: Izvor
+views: Pregledi
+originally_on: Prvobitno objavljeno na
+live_demo: Demo uživo →
+badge_demo: Demo uživo
+linkedin_post: Post na LinkedIn-u
+# the one type tag of a Writing item, and the filters on /writing/
+type_post: Post
+type_article: Članak
+type_paper: Naučni rad
+filter_label: Filtriraj po tipu
+filter_all: Sve
+filter_posts: Postovi
+filter_articles: Članci
+filter_papers: Naučni radovi
+
+covers_kicker: Covers
+covers_title: Cover options
+covers_lead: Generated SVG covers for content without its own preview image. Each option has a titled version for cards (left) and a text-free one shown above the title on the article page (right). Pick one per item by changing its cover field, then commit and push. Option 1 is the default.
+covers_set_in: Set in
+covers_current: current
+covers_option: Option
+covers_plain: Text-free variant for the article page
+covers_mask_title: Cover frost on hover
+covers_mask_hint: "At rest the cover is behind frosted glass with a clear corner; on hover the frost fades out and the picture zooms. Hover a card or press Play all. Corner, size and edge: --cover-peek-corner, --cover-peek-size, --cover-peek-soft in assets/site.css."
+covers_play_all: ▶ Play all
+covers_stop_all: ■ Stop
+
+# accessibility labels, paper issue and date formats
+aria_language: Jezik
+aria_sections: Odeljci
+paper_issue: "tom {v}, br. {i}"
+date_format: "{d}. {m} {y}."

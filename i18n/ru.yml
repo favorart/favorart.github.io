@@ -1,0 +1,108 @@
+# UI strings for Russian. Same keys as i18n/en.yml.
+lang: ru
+prefix: /ru
+name: Русский
+html_lang: ru
+og_locale: ru_RU
+author: Кирилл Голиков
+# genitive abbreviations: "8 ноя 2026", shown in uppercase in captions
+months: [янв, фев, мар, апр, мая, июн, июл, авг, сен, окт, ноя, дек]
+# journal issue in captions: "т. 23, вып. 1"
+paper_issue: "т. {v}, вып. {i}"
+aria_language: Язык
+aria_sections: Разделы
+
+home_title: Кирилл Голиков
+home_description: "Кирилл Голиков — Principal Software Engineer — C++ · Python · ML · AI. Оптимизация производительности, ML-инфраструктура, системное программирование. Бильбао, Испания."
+home_og_title: Кирилл Голиков — Principal Software Engineer
+home_og_description: "Principal Software Engineer — C++ · Python · ML · AI. Бильбао, Испания."
+
+# the title in two lines: role, then skills
+role_title: Principal Software Engineer
+role_skills: C++ · Python · ML · AI
+# hero: "Also:" + one of these, changing every few seconds
+also: "А ещё:"
+fun_roles:
+  - AI-энтузиаст
+  - Профилировщик со стажем
+  - Оптимизатор всего, что тормозит
+  - Главный ревьюер нейрослопа
+  - Охотник на кэш-промахи
+  - Главный скептик по бенчмаркам
+lang_soon: скоро
+theme_label: "Тема: авто, светлая или тёмная"
+theme_auto: "Тема: авто (как в системе)"
+theme_light: "Тема: светлая"
+theme_dark: "Тема: тёмная"
+
+nav_home: Главная
+nav_writing: Публикации
+nav_teaching: Преподавание
+nav_about: Обо мне / CV
+nav_contact: Контакты
+footer_contact: Контакты
+# footer lines, HTML allowed; {mit} is replaced with the LICENSE URL
+footer_copy:
+  - '© 2026 Кирилл Голиков'
+  - 'Сделано Claude, пока человек подбирал цвета.'
+  - 'Все права защищены и тут же отданы по <a href="{mit}">лицензии MIT</a>: берите, никто не против.'
+  - 'Сам опыт работы передаче не подлежит.'
+
+# {n} = number of items in the list; plural forms: one (21), few (3), many (5)
+all_writing:
+  one: Все {n} публикация
+  few: Все {n} публикации
+  many: Все {n} публикаций
+  other: Все {n} публикации
+all_courses:
+  one: Все {n} курс
+  few: Все {n} курса
+  many: Все {n} курсов
+  other: Все {n} курса
+# used instead when there are exactly two
+all_writing_two: Обе публикации
+all_courses_two: Оба курса
+cv_title: CV
+cv_description: "CV Кирилла Голикова — Principal Software Engineer — C++ · Python · ML · AI. Бильбао, Испания."
+comment_on_linkedin: Оставить комментарий в LinkedIn
+send_feedback: Написать отзыв
+back_to_writing: Все публикации
+back_to_courses: Все курсы
+
+writing_kicker: Публикации
+writing_title: Посты и статьи
+writing_lead: Посты в LinkedIn и статьи подлиннее — о C++, производительности, ML и проектах, которые за ними стоят.
+writing_description: Посты и статьи Кирилла Голикова.
+
+courses_kicker: Преподавание
+courses_title: Курсы
+courses_lead: Курсы лекций, которые я создал и читал в МГУ имени М. В. Ломоносова, — с видеозаписями и слайдами.
+courses_description: Курсы лекций Кирилла Голикова.
+
+source: Исходник
+views: Просмотры
+originally_on: Впервые опубликовано в
+live_demo: Живое демо →
+badge_demo: Живое демо
+linkedin_post: Пост в LinkedIn
+# the one type tag of a Writing item, and the filters on /writing/
+type_post: Пост
+type_article: Статья
+type_paper: Научная статья
+filter_label: Фильтр по типу
+filter_all: Все
+filter_posts: Посты
+filter_articles: Статьи
+filter_papers: Научные статьи
+
+covers_kicker: Covers
+covers_title: Cover options
+covers_lead: Generated SVG covers for content without its own preview image. Each option has a titled version for cards (left) and a text-free one shown above the title on the article page (right). Pick one per item by changing its cover field, then commit and push. Option 1 is the default.
+covers_set_in: Set in
+covers_current: current
+covers_option: Option
+covers_plain: Text-free variant for the article page
+covers_mask_title: Cover frost on hover
+covers_mask_hint: "At rest the cover is behind frosted glass with a clear corner; on hover the frost fades out and the picture zooms. Hover a card or press Play all. Corner, size and edge: --cover-peek-corner, --cover-peek-size, --cover-peek-soft in assets/site.css."
+covers_play_all: ▶ Play all
+covers_stop_all: ■ Stop

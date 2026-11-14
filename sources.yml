@@ -11,6 +11,8 @@
 #   date        YYYY-MM-DD, used for sorting (newest first)
 #   date_label  optional, shown instead of the date (e.g. "2018 → 2026")
 #   kind        optional label on the card
+#               title / summary / kind / date_label may be given per UI language as a mapping
+#               {en: ..., es: ..., ru: ..., sr: ..., uz: ...}; a missing language falls back to en
 #   lang        language of the text: en | ru | ...
 #   summary     one or two sentences for the card
 #   cover       repo-relative path to the preview image (options: see /writing/covers/)
@@ -28,7 +30,7 @@ articles:
     title: Your birthday in the digits of π
     date: 2018-01-01
     date_label: 2018 → 2026
-    kind: Article · EN / RU
+    kind: {en: Article · EN / RU, es: Artículo · EN / RU, ru: Статья · EN / RU, sr: Članak · EN / RU, uz: Maqola · EN / RU}
     lang: en
     summary: A small GUI app in Python/Tkinter that finds your date of birth among 3 billion digits of π — later rebuilt for the web.
     cover: covers/pi-birthday/cover-4.svg
@@ -55,7 +57,12 @@ articles:
     title: Point-to-point motion of a robot arm with discrete control
     date: 2016-01-01
     date_label: "2016"
-    kind: Research · Master's thesis
+    kind:
+      en: Research · Master's thesis
+      es: Investigación · Trabajo de fin de máster
+      ru: Исследование · Магистерская диссертация
+      sr: Istraživanje · Master rad
+      uz: Tadqiqot · Magistrlik dissertatsiyasi
     lang: en
     summary: Learning algorithms for positioning a robotic arm with discrete control — trial and error instead of a known model.
     cover: covers/robot-hand/cover-1.svg
@@ -64,12 +71,22 @@ articles:
     repo: favorart/IPL
     branch: master
     path: docs/ru/README.md
-    title: An interpreter with customizable syntax
+    title:
+      en: An interpreter with customizable syntax
+      es: Un intérprete con sintaxis configurable
+      ru: Интерпретатор с настраиваемым синтаксисом
+      sr: Interpreter sa prilagodljivom sintaksom
+      uz: Sintaksisi sozlanadigan interpretator
     date: 2013-01-01
     date_label: "2013"
-    kind: Article · RU
+    kind: {en: Article · RU, es: Artículo · RU, ru: Статья · RU, sr: Članak · RU, uz: Maqola · RU}
     lang: ru
-    summary: Bachelor's project — a cross-platform interpreter whose keywords and grammar are configurable.
+    summary:
+      en: Bachelor's project — a cross-platform interpreter whose keywords and grammar are configurable.
+      es: Proyecto de fin de grado — un intérprete multiplataforma cuyas palabras clave y gramática se pueden configurar.
+      ru: Бакалаврский проект — кросс-платформенный интерпретатор, в котором можно настраивать ключевые слова и грамматику.
+      sr: Projekat sa osnovnih studija — višeplatformski interpreter čije se ključne reči i gramatika mogu podešavati.
+      uz: Bakalavriat loyihasi — kalit soʻzlari va grammatikasini sozlash mumkin boʻlgan krossplatformali interpretator.
     cover: covers/ipl/cover-1.svg
 
 courses:
@@ -77,24 +94,44 @@ courses:
     repo: favorart/cpp_course
     branch: main
     path: README.md
-    title: Design of Big Systems in C++
+    title:
+      en: Design of Big Systems in C++
+      es: Diseño de grandes sistemas en C++
+      ru: Проектирование больших систем на языке программирования C++
+      sr: Projektovanje velikih sistema u C++-u
+      uz: C++ tilida yirik tizimlarni loyihalash
     date: 2019-04-01
     date_label: 2019 – 2023
-    kind: Course · RU · Lomonosov MSU
+    kind: {en: Course · RU · Lomonosov MSU, es: Curso · RU · MSU, ru: Курс · RU · МГУ, sr: Kurs · RU · MGU, uz: Kurs · RU · MDU}
     lang: ru
-    summary: Lecture course for master's students — software design, C++11–20, idioms, memory, concurrency, Boost and networking; videos, slides and self-tests.
+    summary:
+      en: Lecture course for master's students — software design, C++11–20, idioms, memory, concurrency, Boost and networking; videos, slides and self-tests.
+      es: Curso de máster — diseño de software, C++11–20, modismos, memoria, concurrencia, Boost y redes; con vídeos, diapositivas y tests de autoevaluación.
+      ru: Курс лекций для магистрантов — проектирование ПО, C++11–20, идиомы, память, многопоточность, Boost и работа с сетью; видео, слайды и тесты для самопроверки.
+      sr: Kurs predavanja za master studente — projektovanje softvera, C++11–20, idiomi, memorija, konkurentnost, Boost i mreže; video-snimci, slajdovi i testovi za samoproveru.
+      uz: Magistrantlar uchun maʼruzalar kursi — dasturiy taʼminotni loyihalash, C++11–20, idiomalar, xotira, parallellik, Boost va tarmoq; video, slaydlar va oʻz-oʻzini tekshirish testlari.
     cover: covers/cpp-course/cover-1.svg
 
   - slug: arch-course
     repo: favorart/arch_course
     branch: main
     path: README.md
-    title: Architecture and Software of High-Performance Systems
+    title:
+      en: Architecture and Software of High-Performance Systems
+      es: Arquitectura y software de sistemas de alto rendimiento
+      ru: Архитектура и ПО высокопроизводительных систем
+      sr: Arhitektura i softver sistema visokih performansi
+      uz: Yuqori unumli tizimlarning arxitekturasi va dasturiy taʼminoti
     date: 2018-12-01
     date_label: 2018, 2020
-    kind: Course · RU · Lomonosov MSU
+    kind: {en: Course · RU · Lomonosov MSU, es: Curso · RU · MSU, ru: Курс · RU · МГУ, sr: Kurs · RU · MGU, uz: Kurs · RU · MDU}
     lang: ru
-    summary: Lecture course on CPU architecture, x86-64, caches, virtual memory, interrupts, OS and high-load systems — with videos and slides.
+    summary:
+      en: Lecture course on CPU architecture, x86-64, caches, virtual memory, interrupts, OS and high-load systems — with videos and slides.
+      es: Curso sobre arquitectura de CPU, x86-64, cachés, memoria virtual, interrupciones, sistemas operativos y sistemas de alta carga — con vídeos y diapositivas.
+      ru: Курс лекций об архитектуре процессора, x86-64, кэшах, виртуальной памяти, прерываниях, ОС и высоконагруженных системах — с видео и слайдами.
+      sr: Kurs predavanja o arhitekturi procesora, x86-64, keš-memoriji, virtuelnoj memoriji, prekidima, operativnim sistemima i sistemima pod velikim opterećenjem — sa video-snimcima i slajdovima.
+      uz: Protsessor arxitekturasi, x86-64, kesh, virtual xotira, uzilishlar, operatsion tizimlar va yuqori yuklamali tizimlar haqida maʼruzalar kursi — video va slaydlar bilan.
     cover: covers/arch-course/cover-1.svg
 
 papers:

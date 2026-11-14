@@ -1,0 +1,102 @@
+<!-- Home page content (Spanish). Wrapped by templates/base.html.
+     Placeholders: $$prefix (URL language prefix), $$writing_cards, $$all_writing,
+     $$course_cards, $$all_courses, $$role_title, $$role_skills, $$fun_roles. Sections with data-nav are tracked by the side navigation. -->
+<header class="hero glass" data-nav="home">
+  <div class="kicker title2"><span>$role_title</span><span class="sub">$role_skills</span></div>
+  <h1>Kirill Golikov</h1>
+  $fun_roles
+  <p class="place">Bilbao, España</p>
+  <p class="lead">Hago que los <strong>sistemas en C++ vuelen</strong>: optimización del rendimiento, profiling y diseño de sistemas, desde firmware de SSD y deduplicación de almacenamiento hasta runtimes de redes neuronales y juegos para móviles. Estudios de doctorado en matemática discreta y cibernética y 7 años como profesor en la Universidad Estatal de Moscú (MSU).</p>
+  <div class="links">
+    <a class="btn sun" href="#contact">
+      <svg viewBox="0 0 24 24"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm9 7.2L4 7.3V17h16V7.3l-8 4.9ZM5.2 7 12 11.1 18.8 7H5.2Z"/></svg>
+      Contacto
+    </a>
+    <a class="btn" href="https://www.linkedin.com/in/golikovkirill/" rel="me">
+      <svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg>
+      LinkedIn
+    </a>
+    <a class="btn" href="https://github.com/favorart" rel="me">
+      <svg viewBox="0 0 24 24"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.2.8.8 1.3 1.9 1.3 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1.1.9 2.2v3.3c0 .3.1.7.8.6A12 12 0 0 0 12 .3"/></svg>
+      GitHub
+    </a>
+  </div>
+</header>
+
+
+
+<section id="writing" data-nav="writing">
+  <div class="shead"><h2><small>Publicaciones</small>Posts y artículos</h2></div>
+  $writing_cards
+  <p class="all"><a class="btn sun big" href="$prefix/writing/">$all_writing <span class="arr">→</span></a></p>
+</section>
+
+<section id="teaching" data-nav="teaching">
+  <div class="shead"><h2><small>Docencia</small>Cursos universitarios</h2></div>
+  $course_cards
+  <div class="note glass linked lecturer">
+    <a class="stretch" href="$prefix/courses/"><b>Profesor universitario</b> · Universidad Estatal de Moscú (MSU) · 2016 — 2023</a>
+    <ul>
+      <li><a href="$prefix/courses/cpp-course/">Diseño de grandes sistemas en C++</a><span>2019 — 2023</span></li>
+      <li><a href="$prefix/courses/arch-course/">Arquitectura y software de sistemas de alto rendimiento</a><span>2018, 2020</span></li>
+    </ul>
+  </div>
+  <p class="all"><a class="btn sun big" href="$prefix/courses/">$all_courses <span class="arr">→</span></a></p>
+</section>
+
+<section id="about" data-nav="about">
+  <div class="shead"><h2><small>Sobre mí / CV</small>Quién soy</h2></div>
+  <div class="panel glass cv-preview linked">
+    <div>
+      <p class="intro">Principal Software Engineer que hace que los sistemas vuelen: profiling, optimización del rendimiento y diseño de sistemas, desde firmware de SSD y deduplicación de almacenamiento hasta runtimes de redes neuronales y juegos para móviles.</p>
+      <ul class="facts">
+        <li><span>Ahora</span><b>Senior Software Engineer en Artificial Seed</b></li>
+        <li><span>Experiencia</span><b>En la industria desde 2013</b></li>
+        <li><span>Ubicación</span><b>Bilbao, España</b></li>
+        <li><span>Docencia</span><b>Universidad Estatal de Moscú (MSU), 2016 — 2023</b></li>
+      </ul>
+    </div>
+    <a class="btn sun big stretch" href="$prefix/cv/">Ver el CV completo <span class="arr">→</span></a>
+  </div>
+</section>
+
+<section id="contact" data-nav="contact">
+  <div class="shead"><h2><small>Contacto</small>Hablemos</h2></div>
+  <!-- Formspree: replace YOUR_FORM_ID with the id from formspree.io (e.g. xyzabcde) -->
+  <form id="contact-form" class="card glass contact" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+    <div class="row">
+      <label>Nombre<input name="name" autocomplete="name" required></label>
+      <label>Tu email<input type="email" name="email" autocomplete="email" required></label>
+    </div>
+    <label>Mensaje<textarea name="message" rows="5" required></textarea></label>
+    <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none">
+    <div class="actions">
+      <button class="btn sun" type="submit">Enviar mensaje</button>
+      <span id="form-status" role="status"></span>
+    </div>
+  </form>
+  <p id="contact-fallback" class="card glass" hidden>La mejor forma de contactar conmigo es por <a href="https://www.linkedin.com/in/golikovkirill/">LinkedIn</a>.</p>
+</section>
+
+<script>
+  (function () {
+    var form = document.getElementById('contact-form');
+    var status = document.getElementById('form-status');
+    if (form.action.indexOf('YOUR_FORM_ID') !== -1) {
+      form.hidden = true;
+      document.getElementById('contact-fallback').hidden = false;
+      return;
+    }
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      status.textContent = 'Enviando…';
+      fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } })
+        .then(function (r) {
+          if (!r.ok) throw new Error();
+          form.reset();
+          status.textContent = '¡Gracias! Te responderé pronto.';
+        })
+        .catch(function () { status.textContent = 'Algo ha fallado. Prueba por LinkedIn, por favor.'; });
+    });
+  })();
+</script>
