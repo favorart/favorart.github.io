@@ -646,7 +646,7 @@ def kind_of(item, t):
         label = esc(str(loc(item["kind"], t)))
     else:
         label = S(t, "linkedin_post")
-    if item.get("original_url"):
+    if item.get("original_url") and item["type"] != "post":
         return '<a class="src" href="%s" hreflang="%s">%s</a>' % (esc(item["original_url"]), esc(item["lang"]), label)
     return label
 
@@ -738,7 +738,7 @@ def card(item, t):
 
 def article_page(item, t):
     if item["type"] == "post":
-        source_top = '<a href="%s" hreflang="%s">LinkedIn</a>' % (esc(item["original_url"]), esc(item["lang"]))
+        source_top = '<a href="%s">LinkedIn</a>' % esc(item["original_url"])
     elif item["type"] == "paper":
         e = item["paper"]
         line = str(t.get("paper_source", "{j}, vol. {v}, no. {i}, {y}, pp. {p}")).format(
@@ -756,8 +756,8 @@ def article_page(item, t):
     subtitle = '<p class="subtitle">%s</p>' % esc(item["subtitle"]) if item.get("subtitle") else ""
     back = "back_to_courses" if item["section"] == "courses" else "back_to_writing"
     if item["type"] == "post":
-        cta = '<a class="btn sun big" href="%s" hreflang="%s">%s <span class="arr">→</span></a>' % (
-            esc(item["original_url"]), esc(item["lang"]), S(t, "comment_on_linkedin"))
+        cta = '<a class="btn sun big" href="%s">%s <span class="arr">→</span></a>' % (
+            esc(item["original_url"]), S(t, "comment_on_linkedin"))
     else:
         cta = '<a class="btn sun big" href="%s/#contact">%s <span class="arr">→</span></a>' % (
             t["prefix"], S(t, "send_feedback"))
