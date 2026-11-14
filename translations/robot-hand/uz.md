@@ -6,7 +6,7 @@ source_lang: en
 source_hash: ad3388a2
 translated: 2026-11-14
 translator: Claude
-reviewed:            # date of the independent review; the build ignores the file until it is set
+reviewed: 2026-11-14
 ---
 # Diskret boshqaruvli robot uchun nuqtadan nuqtaga trayektoriya rejimi tizimi
 
@@ -84,7 +84,7 @@ Har bir boʻgʻinga alohida pnevmatik silindr taʼsir qiladi: klapanlar sxemasig
 Goʻyo ikki juft juftlashgan antagonist-mushak bordek.
 
 **Masala** shundan iborat: *manipulyator dinamikasining fizik modeli nomaʼlum boʻlgan sharoitda shunday boshqaruv taʼsirlari toʻplamlarini topishning optimal vaqtini taʼminlash,*
-*ular ushlagich markazini robot ish fazosining qandaydir kichik sohasi ichidagi barcha belgilangan nuqtalarga oldindan berilgan aniqlik (= 1.5 mm) bilan olib borsin*.
+*ular ushlagich markazini robot ish fazosining qandaydir kichik sohasi ichidagi barcha belgilangan nuqtalarga oldindan berilgan aniqlik (= 1,5 mm) bilan olib borsin*.
 **Nishon** — robot ish fazosi ichidagi barcha belgilangan nuqtalarni oʻz ichiga olgan shunday kichik soha.
 
 Ushbu ishda robotning diskret modeli quriladi. «Diskret modellarning oʻziga xos xususiyati — ishlash amalga oshiriladigan diskret vaqt» [7].
@@ -213,7 +213,7 @@ Algoritmning **murakkabligi** — robotning har bir maqsad nuqtasiga tushishi uc
 **Vaqtni baholash usuli**: yelka oʻzining butun yoʻlini diskret vaqtning 700 taktida, tirsak esa 550 taktida bosib oʻtadi.
 Bir takt bir millisekund (1 ms) boʻlsin. Har bir harakat boʻgʻinning toʻliq ochilishi yoki yopilishini talab qilishidan yiroq.
 Qoʻlning bitta harakati taxminan yarim soniyada bajariladi, qoʻlni boshlangʻich nuqtaga qaytarish uchun ham yana shuncha vaqt kerak.
-Shunday qilib, ushlagichni borib-kelishiga oʻrtacha *bir soniya* vaqt sarflanadi.
+Shunday qilib, ushlagichning borib-kelishiga oʻrtacha *bir soniya* vaqt sarflanadi.
 
 Tavsiflangan algoritmning turli parametrlar bilan ishlash natijalari 1–4-jadvallarda keltirilgan.
 Bu jadvallarda turli harakat qonunlariga ega modellar uchun murakkablik va oʻqitish vaqti natijalari berilgan:
@@ -224,19 +224,19 @@ Bu jadvallarda turli harakat qonunlariga ega modellar uchun murakkablik va oʻqi
 
 | Bosqich | Murakkablik | Qamrash qadami | Oʻrt. harakatlar soni | Maqsad nuqtalariga tushish | Vaqt        |
 |:-----:|:----------:|:-------------:|:-------------:|:---------------:|:-----------:|
-| 1     | 1359 harakat | 18.75 mm      | 1             | 1.8%            | 23 daqiqa
+| 1     | 1359 harakat | 18,75 mm      | 1             | 1,8%            | 23 daqiqa
 | 2     | -          | -             | -             | -               | -
 | 3     | 6796 harakat | -             | 21            | 100%            | 114 daqiqa
-| Jami | 8155 harakat |               |               | 100%            | 2.17 soat
+| Jami | 8155 harakat |               |               | 100%            | 2,17 soat
 
 2-jadval
 
 | Bosqich | Murakkablik | Qamrash qadami | Oʻrt. harakatlar soni | Maqsad nuqtalariga tushish | Vaqt        |
 |:-----:|:----------:|:-------------:|:-------------:|:---------------:|:-----------:|
-| 1     | 1359 harakat | 18.75 mm      | 1             | 1.8%            | 23 daqiqa
-| 2     | 4288 harakat | 5.625 mm      | 1             | 28.7%           | 72 daqiqa
+| 1     | 1359 harakat | 18,75 mm      | 1             | 1,8%            | 23 daqiqa
+| 2     | 4288 harakat | 5,625 mm      | 1             | 28,7%           | 72 daqiqa
 | 3     | 2973 harakat | -             | 10            | 100%            | 50 daqiqa
-| Jami | 8620 harakat |               |               | 100%            | 2.25 soat
+| Jami | 8620 harakat |               |               | 100%            | 2,25 soat
 
 ### **MotionLaw**: *ContinuousSlowAcceleration & ContinuousDeceleration*
 
@@ -244,19 +244,19 @@ Bu jadvallarda turli harakat qonunlariga ega modellar uchun murakkablik va oʻqi
 
 | Bosqich | Murakkablik | Qamrash qadami | Oʻrt. harakatlar soni | Maqsad nuqtalariga tushish | Vaqt        |
 |:-----:|:----------:|:-------------:|:-------------:|:---------------:|:-----------:|
-| 1     | 1455 harakat | 18.75 mm      | 1             | 0.3%            | 25 daqiqa
+| 1     | 1455 harakat | 18,75 mm      | 1             | 0,3%            | 25 daqiqa
 | 2     | -          | -             | -             | -               | -
 | 3     | 4563 harakat | -             | 14            | 100%            | 77 daqiqa
-| Jami | 6018 harakat |               |               | 100%            | 1.42 soat
+| Jami | 6018 harakat |               |               | 100%            | 1,42 soat
 
 4-jadval
 
 | Bosqich | Murakkablik | Qamrash qadami | Oʻrt. harakatlar soni | Maqsad nuqtalariga tushish | Vaqt        |
 |:-----:|:----------:|:-------------:|:-------------:|:---------------:|:-----------:|
-| 1     | 1455 harakat | 18.75 mm      | 1             | 0.3%            | 25 daqiqa
-| 2     | 4217 harakat | 5.625 mm      | 1             | 23.1%           | 71 daqiqa
+| 1     | 1455 harakat | 18,75 mm      | 1             | 0,3%            | 25 daqiqa
+| 2     | 4217 harakat | 5,625 mm      | 1             | 23,1%           | 71 daqiqa
 | 3     | 2973 harakat | -             | 5             | 100%            | 28 daqiqa
-| Jami | 8645 harakat |               |               | 100%            | 2.7 soat
+| Jami | 8645 harakat |               |               | 100%            | 2,7 soat
 
 * **Oʻrt. harakatlar soni** — bitta maqsad nuqtasiga tushish uchun zarur boʻlgan harakatlarning oʻrtacha soni.
 
@@ -270,7 +270,7 @@ Ushbu ish robotni pozitsiyalash uchun oldindan oʻrganilgan trayektoriyalardan f
 Ishning natijasi, shuningdek, oʻqitish jarayonining umumiy vaqtini baholash, nishonni belgilangan aniqlik bilan qamrab olish uchun zarur harakatlar soni,
 hamda aniq pozitsiyalash uchun yetarli boʻlgan maʼlumotlar bazasining minimal hajmini baholashdir.
 Oʻqitish algoritmi barcha berilgan nuqtalarga oʻrtacha 15 tadan kam harakat bilan tushishga muvaffaq boʻldi.
-Algoritmni toʻliq oʻqitish taxminan 2.5 soat talab qiladi.
+Algoritmni toʻliq oʻqitish taxminan 2,5 soat talab qiladi.
 
 
 ## KATTA MAQSAD

@@ -6,7 +6,7 @@ source_lang: ru
 source_hash: b2ca507e
 translated: 2026-11-14
 translator: Claude
-reviewed:            # date of the independent review; the build ignores the file until it is set
+reviewed: 2026-11-14
 ---
 # Sozlanadigan sintaksisli interpretatsiya qilinadigan dasturlash tili uchun interpretator
 
@@ -39,7 +39,7 @@ Mavzuning dolzarbligi: amaliyotda dasturiy taʼminot dastlabki kodlarining yuqor
 ## Kirish
 
 Maqolada buyurtmachining dasturchi bilan muloqotini soddalashtiradigan dasturlash tili prototipi koʻrib chiqiladi.
-Bu muloqot usullari allaqachon ishlab chiqilgan boʻlsa-da, masalan, sxemalar, UML-diagrammalar va boshqalar bor, lekin ular mukammal emas, rivojlanish uchun joy bor.
+Bu muloqot usullari allaqachon ishlab chiqilgan boʻlsa-da, masalan, sxemalar, UML-diagrammalar va boshqalar bor, ular mukammal emas, rivojlanish uchun joy bor.
 Ushbu ishning maqsadi — dasturlash tilini tabiiy tilga yaqinlashtirish orqali dasturlarning murakkab dastlabki kodlarini oʻqishni osonlashtirish.
 Ishning gʻoyasi inson va kompyuter oʻzaro taʼsiri uchun “}_$<<;” kabi maxsus belgilarsiz interfeys taqdim etishdan iborat,
 yaʼni kompyuter odam tilida gapirsin, aksincha emas.
@@ -102,7 +102,7 @@ Agar ketma-ket til operatorlari boʻlmagan elementlar kelsa, algebraik ifoda tug
 
 $$ а=1+2 \hspace{10pt} [;] \hspace{10pt} b=2+4 $$
 
-`interpreter.Syntax` da til konstruksiyalarini yozish variantlarini belgilaydigan sozlamalar bor (1.3-listing).
+`interpreter.Syntax`da til konstruksiyalarini yozish variantlarini belgilaydigan sozlamalar bor (1.3-listing).
 
 **1.3-listing.**
 
@@ -144,7 +144,7 @@ Oldindan kompilyatsiya maʼlumotlar bilan uchta fayl va bayt-kodli fayl yaratadi
 
 Bayt-kod yaratilayotganda oʻzgaruvchilarni eʼlon qilishning barcha bloklari tashlab yuboriladi
 va aynan oʻzgaruvchilarning boshlangʻich qiymatlarini saqlash uchun alohida xesh-jadval yaratiladi —
-u `variables.dat` ga yoziladi.
+u `variables.dat` fayliga yoziladi.
 
 Oʻqish boshida bayt-kod fayli va bajarilayotgan dastur dastlabki faylining `{1}` xeshlari solishtiriladi.
 Keyin fayl kodni belgilaydigan toʻrt baytli sonlar uchliklaridan iborat boʻladi.
@@ -175,7 +175,7 @@ bir nechta *soʻz-tarkibiy qismlar*dan (chalkashlikning oldini olish uchun tabii
 shuningdek, notabiiy prefikslar va belgilarga yoʻl qoʻyilmaydi. Shu sababli interpretatorning leksik tahlil mexanizmi
 til ifodasidagi soʻzlar tartibi va kontekstdan taxmin qilish zaruratini hisobga olgan holda yozilgan.
 Matn tahlili ikki bosqichda boradi: avval diskdagi fayl baytlari
-(`TODO: unicode пока не реализован, работа со строками происходит в ASCII`)
+(`TODO: unicode hozircha amalga oshirilmagan, satrlar bilan ishlash ASCIIda bajariladi`)
 soʻzlarning oddiy tarkibiy qismlariga guruhlanadi va ular *normallashtirilgan koʻrinishga* keltiriladi.
 Ularning roʻyxati yuqoriroq bosqichga uzatiladi, u yerda, agar yetarli boʻlsa, ulardan til *atomlari* quriladi,
 aks holda birinchi darajali analizator yana chaqiriladi.
@@ -192,7 +192,7 @@ Unda belgilar 5 ta kesishmaydigan sinfga boʻlinadi: harflar, ishoralar, raqamla
 Belgilarni foydalanuvchi beradi va ular ixtiyoriy boʻlishi mumkin — interpretator aniq harflar va ishoralarga bogʻliq emas.
 
 Yana bir konfiguratsiya fayli — muntazam soʻzlar fayli (`<conf>.txt`).
-U quyidagicha koʻrinadi: soʻz maʼnosining yagona identifikatori (`reg.word.id.txt` dan olingan),
+U quyidagicha koʻrinadi: soʻz maʼnosining yagona identifikatori (`reg.word.id.txt`dan olingan),
 undan keyin vergul bilan shu muntazam soʻzni bildiruvchi sinonimlar, oxirida esa ixtiyoriy tushuntirish izohi.
 Muntazam soʻzlar analizatorga bajarilish vaqtida maʼlum boʻladi.
  Sinonimlar sintaktik analizator tomonidan sinxronlanadi.
@@ -239,7 +239,7 @@ Kod blokini hatto funksiya parametrlari ichida ham ishlatish mumkin, agar u qiym
 
 Interpretator *rekursiv tushish* `{2}` usuli bilan 2.2-rasmda koʻrsatilgan,
 ichma-ich atomlar roʻyxatlaridan iborat bayt-kodni bajaradi.
-Instruksiyalar bajarilganda dastur *yigʻiladi* —
+Instruksiyalar bajarilganda dastur *qisqaradi* —
 qayta ishlanayotgan ifoda roʻyxatdan olinadi va uning oʻrniga natija yoziladi ($1+2 \to 3$).
 Ijrochi tuzilmasida olinadigan elementlar oʻchirilmaydi,
 balki bajarilayotgan ifodadan saqlovchi ifodaga koʻchiriladi.
@@ -259,7 +259,7 @@ Atom nima ekanini sanoq maydonlari koʻrsatadi.
 ![3 1](https://github.com/favorart/IPL/assets/9784285/46fa5a6f-91e1-4ca1-b326-d95c5cc8e87b)
 
 Interpretator maʼlumotlari *nomlar jadvali* (`names_table`) deb ataladigan tuzilmada saqlanadi.
-Interpretator uni ishga tushirishdan boshlanadi va uni tozalash bilan tugaydi.
+Interpretator ishini uni ishga tushirishdan boshlaydi va uni tozalash bilan tugatadi.
 Jadval skript bajarilishining turli bosqichlarida kerak boʻladigan maʼlumotlarni saqlaydi.
 Masalan, leksemalar va sintaksisni shakllantirish bosqichlarida, shuningdek, har doim kerak boʻladigan muhim maʼlumotlarni —
 oʻzgaruvchilar, konstantalar, muntazam soʻzlar va ifodalar lugʻatlarini.
@@ -368,5 +368,5 @@ _____________________
 *	Zanjirlar usuli (H. P. Luhn, 1953)
 *	Ochiq adreslash (zondlash) usuli (A. P. Yershov, 1953), (xorijiy adabiyotda — G. Amdahl, 1957)
 *	{5}	Saralashlar
-*	Tezkor saralash (C. Hoare, 1960), <stdlib.h> dagi amalga oshirish
+*	Tezkor saralash (C. Hoare, 1960), <stdlib.h> kutubxonasidagi amalga oshirish
 *	Roʻyxatlar uchun birlashtirib saralash algoritmi (J. fon Neyman, 1945)

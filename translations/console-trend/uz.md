@@ -6,7 +6,7 @@ source_lang: ru
 source_hash: 062eb5ff
 translated: 2026-11-14
 translator: Claude
-reviewed:            # date of the independent review; the build ignores the file until it is set
+reviewed: 2026-11-14
 ---
 Maʼlum boʻlishicha, 2025-yilda 3 ta yetakchi AI-kompaniya dasturchilar uchun konsol vositalarini chiqargan ekan: fevralda Anthropic Claude Code, aprelda OpenAI Codex CLI, iyunda Google Gemini CLI.
 
@@ -14,7 +14,7 @@ Maʼlum boʻlishicha, 2025-yilda 3 ta yetakchi AI-kompaniya dasturchilar uchun k
 
 Buni tushungan aqlli marketologlar bizga GUIni tutqazishdi — axir bu imo-ishora tili-ku! Kompyuter bilan begona mamlakatda turist ofitsiant bilan gaplashgandek muloqot qilish uchun: menyudagi rasmlarga barmoq bilan nuqib. Hatto nuqish koʻnikmasiga ham bizni ehtiyotkorlik bilan olib kelishdi: Microsoft sichqoncha bilan sudrashga oʻrgatish uchun Windowsga gʻamxoʻrlik bilan «Kosinka»ni, sichqonchaning ham chap, ham oʻng tugmasini oʻzlashtirish uchun esa «Saper»ni joylab qoʻydi.
 
-Garchi 10 barmoq bilan yozsam ham, konsol menga yoqmaydi. Shakllanish yillarimda singdirilgan gʻarazli nafrat bugungi kungacha ishonch bilan saqlanib kelmoqda.
+Garchi 10 barmoq bilan yozsam ham, konsol menga yoqmaydi. Shakllanish yillarimda singdirilgan asossiz nafrat bugungi kungacha ishonch bilan saqlanib kelmoqda.
 
 Bu orada, biz — odamlarni qiynamaslik uchun, kompyuter shu vaqt davomida bizning tilimizni oʻrganishga urinib keldi: qalqib chiquvchi maslahatlar, T9, Siri, Officedagi qisqich — ular jon kuydirishdi, ularni esa yomon koʻrishdi.
 
@@ -22,7 +22,7 @@ Va birdaniga mashina oddiy nutqni tushuna boshladi, shu bilan birga konsol ham q
 
 Bugun Markdown gullab-yashnayotgani tugmalar mavqeini boy berayotgani uchun emasmikan? 2000-yillarda Word standart edi va boshqa hech qanday matn muharriri emas — uning inkor etib boʻlmas dalili, imlo tekshiruvi tufayli. Keyin imlo tekshiruvi «istalgan kiritish maydonida» paydo boʻldi va hamma joyda formatlash mumkin boʻlib qoldi (baʼzan hatto tugmalarsiz ham). Goʻyo 80-yillarning oʻsha dahshatli zamonlari qaytgandek — oyim DOSdagi qandaydir matn muharririda formatlangan sahifani chop etish uchun bosilmaydigan belgilarni toʻgʻridan-toʻgʻri matnga yozardi, — lekin goʻyo endi bu unchalik qoʻrqinchli emasdek!? Aldanmang: bu faqat mutaxassislarni va «istalgan kiritish maydoni» yonida tanish tugmachalari borlarni qoʻrqitmaydi.
 
-Koʻrinishidan, men shunchaki pufak ichidaman: meni agentni (agent yordamida) kerakli servislarga oʻzi ulay oladigan va hamma narsaga kirish uchun «aqlli yagona oyna» yigʻa oladigan odamlar oʻrab turibdi, ularga esa konsol yoqadi. Demak, konsol mutaxassislar uchun eski yaxshi Unix falsafasi bilan birga trendga qaytdimi: kichik vositalar, paypalar, ketma-ketliklar va umumiy matnli interfeys? (Xuddi 80-yillardagidek?) Toʻxtang-chi, ular uchun bu hech qayoqqa ketmagan-ku!
+Koʻrinishidan, men shunchaki pufak ichidaman: meni agentni (agent yordamida) kerakli servislarga oʻzi ulay oladigan va hamma narsaga kirish uchun «aqlli yagona oyna» yigʻa oladigan odamlar oʻrab turibdi, ularga esa konsol yoqadi. Demak, konsol mutaxassislar uchun eski yaxshi Unix falsafasi bilan birga trendga qaytdimi: kichik vositalar, payplar, ketma-ketliklar va umumiy matnli interfeys? (Xuddi 80-yillardagidek?) Toʻxtang-chi, ular uchun bu hech qayoqqa ketmagan-ku!
 
 Oddiy foydalanuvchilar va men uchun esa oynachalar va tugmachalar, qoʻltiqtayoqchalar va tutqichchalar boʻladi!
 
