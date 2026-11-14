@@ -80,12 +80,12 @@ linkedin_post: Post de LinkedIn
 # the one type tag of a Writing item, and the filters on /writing/
 type_post: Post
 type_article: Artículo
-type_paper: Artículo científico
+type_paper: Paper
 filter_label: Filtrar por tipo
 filter_all: Todo
 filter_posts: Posts
 filter_articles: Artículos
-filter_papers: Artículos científicos
+filter_papers: Papers
 
 covers_kicker: Covers
 covers_title: Cover options
