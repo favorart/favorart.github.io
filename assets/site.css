@@ -389,7 +389,13 @@ section.cv { padding-top: 0; }
 .prose h4, .prose h5, .prose h6 { font-size: 17px; font-weight: 700; }
 .prose li { margin: .3em 0; }
 /* justified body text; hyphenation follows the lang attribute of the article */
-.prose p, .prose li { text-align: justify; -webkit-hyphens: auto; hyphens: auto; text-wrap: pretty; }
+/* hyphenate rarely: only words of 10+ letters, at least 4 letters on each side of the break */
+.prose p, .prose li {
+  text-align: justify; -webkit-hyphens: auto; hyphens: auto; text-wrap: pretty;
+  hyphenate-limit-chars: 10 4 4;
+  -webkit-hyphenate-limit-before: 4; -webkit-hyphenate-limit-after: 4;
+  hyphenate-limit-lines: 1; -webkit-hyphenate-limit-lines: 1;
+}
 .prose :is(td, th, blockquote, figcaption) p { text-align: left; }
 @media (max-width: 479px) { .prose p, .prose li { text-align: left; } }
 .prose li > p { margin: 0 0 .4em; }
