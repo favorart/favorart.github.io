@@ -4,6 +4,8 @@
 lang: en
 prefix: ""
 name: English
+html_lang: en
+og_locale: en_US
 author: Kirill Golikov
 months: [Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec]
 

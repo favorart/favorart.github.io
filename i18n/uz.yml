@@ -1,0 +1,100 @@
+# UI strings for Uzbek (Latin script). Copy of i18n/en.yml with the same keys.
+lang: uz
+prefix: /uz
+name: Oʻzbekcha
+html_lang: uz
+og_locale: uz_UZ
+author: Kirill Golikov
+months: [Yan, Fev, Mar, Apr, May, Iyun, Iyul, Avg, Sen, Okt, Noy, Dek]
+
+home_title: Kirill Golikov
+home_description: "Kirill Golikov — Principal Software Engineer — C++ · Python · ML · AI. Unumdorlikni optimallashtirish, ML infratuzilmasi, tizimlar. Bilbao, Ispaniya."
+home_og_title: Kirill Golikov — Principal Software Engineer
+home_og_description: "Principal Software Engineer — C++ · Python · ML · AI. Bilbao, Ispaniya."
+
+# the title in two lines: role, then skills
+role_title: Principal Software Engineer
+role_skills: C++ · Python · ML · AI
+# hero: "Also:" + one of these, changing every few seconds
+also: "Shuningdek:"
+fun_roles:
+  - AI ishqibozi
+  - Flame graph folbini
+  - Har bir takt uchun kurashchi
+  - Head of Slop Review
+  - Cache-miss ovchisi
+  - Benchmarklarga ishonmaydigan bosh mutaxassis
+lang_soon: tez kunda
+theme_label: "Mavzu: avto, yorugʻ yoki qorongʻi"
+theme_auto: "Mavzu: avto (tizimga moslashadi)"
+theme_light: "Mavzu: yorugʻ"
+theme_dark: "Mavzu: qorongʻi"
+
+nav_home: Bosh sahifa
+nav_writing: Maqolalar
+nav_teaching: Oʻqituvchilik
+nav_about: Men haqimda / Rezyume
+nav_contact: Aloqa
+footer_contact: Aloqa
+# footer lines, HTML allowed; {mit} is replaced with the LICENSE URL
+footer_copy:
+  - '© 2026 Kirill Golikov'
+  - 'Saytni Claude yaratdi, inson esa bu orada ranglarni tanladi.'
+  - 'Barcha huquqlar himoyalangan va shu zahoti <a href="{mit}">MIT litsenziyasi</a> boʻyicha tekinga berib yuborilgan: olavering, hech kim qarshi emas.'
+  - 'Ish tajribasining oʻzini esa birovga oʻtkazib boʻlmaydi.'
+
+# {n} = number of items in the list (Uzbek nouns stay singular after numerals)
+all_writing: Barcha {n} ta maqola
+all_courses: Barcha {n} ta kurs
+# used instead when there are exactly two
+all_writing_two: Ikkala maqola
+all_courses_two: Ikkala kurs
+cv_title: Rezyume
+cv_description: "Kirill Golikov rezyumesi — Principal Software Engineer — C++ · Python · ML · AI. Bilbao, Ispaniya."
+comment_on_linkedin: LinkedIn sahifasida izoh qoldirish
+send_feedback: Fikr-mulohaza yuborish
+back_to_writing: Barcha maqolalar
+back_to_courses: Barcha kurslar
+
+writing_kicker: Maqolalar
+writing_title: Postlar va maqolalar
+writing_lead: C++, unumdorlik, ML va ularning ortidagi loyihalar haqida LinkedIn postlari va batafsil maqolalar.
+writing_description: Kirill Golikovning postlari va maqolalari.
+
+courses_kicker: Oʻqituvchilik
+courses_title: Kurslar
+courses_lead: Lomonosov nomidagi MDUda men yaratgan va oʻqigan maʼruza kurslari (rus tilida) — videolar va slaydlar bilan.
+courses_description: Kirill Golikovning maʼruza kurslari.
+
+source: Manba
+views: Koʻrishlar
+originally_on: "Dastlab eʼlon qilingan joy:"
+live_demo: Jonli demo →
+badge_demo: Jonli demo
+linkedin_post: LinkedIn posti
+# the one type tag of a Writing item, and the filters on /writing/
+type_post: Post
+type_article: Maqola
+type_paper: Ilmiy maqola
+filter_label: Tur boʻyicha filtrlash
+filter_all: Hammasi
+filter_posts: Postlar
+filter_articles: Maqolalar
+filter_papers: Ilmiy maqolalar
+
+covers_kicker: Covers
+covers_title: Cover options
+covers_lead: Generated SVG covers for content without its own preview image. Each option has a titled version for cards (left) and a text-free one shown above the title on the article page (right). Pick one per item by changing its cover field, then commit and push. Option 1 is the default.
+covers_set_in: Set in
+covers_current: current
+covers_option: Option
+covers_plain: Text-free variant for the article page
+covers_mask_title: Cover frost on hover
+covers_mask_hint: "At rest the cover is behind frosted glass with a clear corner; on hover the frost fades out and the picture zooms. Hover a card or press Play all. Corner, size and edge: --cover-peek-corner, --cover-peek-size, --cover-peek-soft in assets/site.css."
+covers_play_all: ▶ Play all
+covers_stop_all: ■ Stop
+
+# accessibility labels, paper issue and date formats
+aria_language: Til
+aria_sections: Boʻlimlar
+paper_issue: "{v}-jild, {i}-son"

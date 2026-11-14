@@ -1,0 +1,105 @@
+# UI strings for Spanish (Spain). Copy of i18n/en.yml with the same keys.
+# The default language (prefix "") is served at the site root.
+lang: es
+prefix: /es
+name: Español
+html_lang: es
+og_locale: es_ES
+author: Kirill Golikov
+months: [ene, feb, mar, abr, may, jun, jul, ago, sep, oct, nov, dic]
+
+home_title: Kirill Golikov
+home_description: "Kirill Golikov — Principal Software Engineer — C++ · Python · ML · AI. Optimización del rendimiento, infraestructura de ML, sistemas. Bilbao, España."
+home_og_title: Kirill Golikov — Principal Software Engineer
+home_og_description: "Principal Software Engineer — C++ · Python · ML · AI. Bilbao, España."
+
+# the title in two lines: role, then skills
+role_title: Principal Software Engineer
+role_skills: C++ · Python · ML · AI
+# hero: "Also:" + one of these, changing every few seconds
+also: "Y además:"
+fun_roles:
+  - Entusiasta de la IA
+  - Profiler con patas
+  - Optimizador compulsivo
+  - Head of Slop Review
+  - Cazador de cache misses
+  - Escéptico jefe de benchmarks
+lang_soon: próximamente
+theme_label: "Tema: automático, claro u oscuro"
+theme_auto: "Tema: automático (según el sistema)"
+theme_light: "Tema: claro"
+theme_dark: "Tema: oscuro"
+
+nav_home: Inicio
+nav_writing: Publicaciones
+nav_teaching: Docencia
+nav_about: Sobre mí / CV
+nav_contact: Contacto
+footer_contact: Contacto
+# footer lines, HTML allowed; {mit} is replaced with the LICENSE URL
+footer_copy:
+  - '© 2026 Kirill Golikov'
+  - 'Hecho por Claude mientras un humano elegía los colores.'
+  - 'Todos los derechos reservados y regalados al instante bajo la <a href="{mit}">licencia MIT</a>: llévatelo, nadie se va a quejar.'
+  - 'La experiencia laboral, eso sí, no es transferible.'
+
+# {n} = number of items in the list
+all_writing:
+  one: "Ver la publicación"
+  other: "Ver las {n} publicaciones"
+all_courses:
+  one: "Ver el curso"
+  other: "Ver los {n} cursos"
+# used instead when there are exactly two
+all_writing_two: Ver las dos publicaciones
+all_courses_two: Ver los dos cursos
+cv_title: CV
+cv_description: "CV de Kirill Golikov — Principal Software Engineer — C++ · Python · ML · AI. Bilbao, España."
+comment_on_linkedin: Deja un comentario en LinkedIn
+send_feedback: Enviar comentarios
+back_to_writing: Todas las publicaciones
+back_to_courses: Todos los cursos
+
+writing_kicker: Publicaciones
+writing_title: Posts y artículos
+writing_lead: Posts de LinkedIn y artículos más extensos sobre C++, rendimiento, ML y los proyectos que hay detrás.
+writing_description: Posts y artículos de Kirill Golikov.
+
+courses_kicker: Docencia
+courses_title: Cursos
+courses_lead: Cursos que creé e impartí en la Universidad Estatal de Moscú (MSU), en ruso, con vídeos y diapositivas.
+courses_description: Cursos de Kirill Golikov.
+
+source: Fuente
+views: Visualizaciones
+originally_on: Publicado originalmente en
+live_demo: Demo en vivo →
+badge_demo: Demo en vivo
+linkedin_post: Post de LinkedIn
+# the one type tag of a Writing item, and the filters on /writing/
+type_post: Post
+type_article: Artículo
+type_paper: Paper
+filter_label: Filtrar por tipo
+filter_all: Todo
+filter_posts: Posts
+filter_articles: Artículos
+filter_papers: Papers
+
+covers_kicker: Covers
+covers_title: Cover options
+covers_lead: Generated SVG covers for content without its own preview image. Each option has a titled version for cards (left) and a text-free one shown above the title on the article page (right). Pick one per item by changing its cover field, then commit and push. Option 1 is the default.
+covers_set_in: Set in
+covers_current: current
+covers_option: Option
+covers_plain: Text-free variant for the article page
+covers_mask_title: Cover frost on hover
+covers_mask_hint: "At rest the cover is behind frosted glass with a clear corner; on hover the frost fades out and the picture zooms. Hover a card or press Play all. Corner, size and edge: --cover-peek-corner, --cover-peek-size, --cover-peek-soft in assets/site.css."
+covers_play_all: ▶ Play all
+covers_stop_all: ■ Stop
+
+# accessibility labels, paper issue and date formats
+aria_language: Idioma
+aria_sections: Secciones
+paper_issue: "vol. {v}({i})"
