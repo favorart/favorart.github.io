@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffe6d3"/><stop offset=".55" stop-color="#f6dcef"/><stop offset="1" stop-color="#dfe7ff"/></linearGradient>
+  <radialGradient id="b1"><stop offset="0" stop-color="#ffd1df"/><stop offset="1" stop-color="#ffd1df" stop-opacity="0"/></radialGradient>
+  <radialGradient id="b2"><stop offset="0" stop-color="#e3dbff"/><stop offset="1" stop-color="#e3dbff" stop-opacity="0"/></radialGradient>
+  <radialGradient id="b3"><stop offset="0" stop-color="#cfe3ff"/><stop offset="1" stop-color="#cfe3ff" stop-opacity="0"/></radialGradient>
+  <radialGradient id="sun"><stop offset="0" stop-color="#ffc65c" stop-opacity="0.95"/><stop offset=".35" stop-color="#ffc65c" stop-opacity="0.52"/><stop offset="1" stop-color="#ffc65c" stop-opacity="0"/></radialGradient>
+  <filter id="frost" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="14"/></filter>
+  <clipPath id="card"><rect x="610" y="150" width="500" height="330" rx="28"/></clipPath>
+  <linearGradient id="peek" gradientUnits="userSpaceOnUse" x1="1110" y1="480" x2="960" y2="330">
+    <stop offset=".45" stop-color="#000"/><stop offset=".75" stop-color="#fff"/></linearGradient>
+  <mask id="frostmask"><rect x="0" y="0" width="1200" height="630" fill="url(#peek)"/></mask>
+</defs>
+<rect width="1200" height="630" fill="url(#bg)"/>
+<circle cx="180" cy="120" r="320" fill="url(#b1)"/><circle cx="1080" cy="80" r="300" fill="url(#b2)"/><circle cx="1000" cy="600" r="360" fill="url(#b3)"/>
+<circle cx="860" cy="315.0" r="300" fill="url(#sun)"/>
+<g clip-path="url(#card)">
+  <g>
+    <circle cx="860" cy="315.0" r="120" fill="#ffc65c" opacity="0.9"/>
+    <rect x="650" y="220" width="190" height="16" rx="8" fill="#352c4a" opacity=".55"/>
+    <rect x="650" y="250" width="140" height="12" rx="6" fill="#352c4a" opacity=".35"/>
+    <rect x="650" y="380" width="120" height="44" rx="22" fill="#f7a823"/>
+  </g>
+  <g mask="url(#frostmask)">
+    <rect x="610" y="150" width="500" height="330" fill="#fff" opacity="0.38" filter="url(#frost)"/>
+    <rect x="610" y="150" width="500" height="330" fill="#fff" opacity="0.30"/>
+  </g>
+</g>
+<rect x="610" y="150" width="500" height="330" rx="28" fill="none" stroke="#fff" stroke-opacity="0.7" stroke-width="2"/>
+<g transform="translate(632,172)"><circle r="6" fill="#ff8f8f"/><circle cx="20" r="6" fill="#ffd27a"/><circle cx="40" r="6" fill="#9fdcae"/></g>
+<path transform="translate(1040,410) scale(2)" d="M4 2l14 9-6 1.5L15 20l-3 1.5-3-7.5L4 18z" fill="#fff" stroke="#352c4a" stroke-width="1.3" stroke-linejoin="round"/>
+<text x="80" y="265" font-family="Plus Jakarta Sans, Segoe UI, sans-serif" font-weight="800" font-size="64" fill="#352c4a">Зачем тебе</text><text x="80" y="336" font-family="Plus Jakarta Sans, Segoe UI, sans-serif" font-weight="800" font-size="64" fill="#352c4a">сайт?</text><text x="82" y="426" font-family="Plus Jakarta Sans, Segoe UI, sans-serif" font-weight="500" font-size="26" fill="#6e6280">Как я делал сайт вместе с Claude</text>
+</svg>

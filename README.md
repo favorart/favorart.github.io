@@ -14,7 +14,7 @@ GitHub Actions (`.github/workflows/pages.yml`) on every push to `main`, daily, a
 | `i18n/en.yml` | UI strings; one file per language (`prefix: /ru` etc. for non-default ones) |
 | `templates/` | base layout and partials — the design lives here and in `assets/site.css` |
 | `assets/site.css` | the one stylesheet |
-| `posts/<yyyy-mm-slug>/index.md` | LinkedIn posts (+ their images in the same folder) |
+| `posts/<yyyy-mm-slug>/index.md` | LinkedIn posts and the site's own articles (+ their images in the same folder) |
 | `sources.yml` | external articles and courses, pulled from other repos at build time |
 | `covers/<slug>/` | cover options for external content; chooser page: `/writing/covers/` |
 | `tools/make_covers.py` | generates 3 SVG cover options |
@@ -52,6 +52,12 @@ python -m http.server -d _site 8000
 
    Note: a line starting with `#word` is a heading in Markdown — write `\#word` for a hashtag.
 3. Commit and push — the Action rebuilds the site.
+
+### The site's own article
+
+An article written for the site itself goes the same way into `posts/<yyyy-mm-slug>/index.md`, but without
+`source` and `original_url`: it is listed as an Article, has no "LinkedIn post" label or link to an original, and
+ends with the "Send feedback" button. Translate it like any post (see Translations).
 
 ### Rules for copying a post
 

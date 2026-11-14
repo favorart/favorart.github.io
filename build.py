@@ -6,7 +6,7 @@ Inputs
   i18n/<lang>.yml           UI strings per language (+ URL prefix: "" = root, "/ru", ...)
   templates/*.html          base layout and partials (string.Template, $placeholders)
   assets/site.css           the one stylesheet (Pygments code colours are appended)
-  posts/*/index.md          LinkedIn posts: YAML front matter + Markdown, images next to them
+  posts/*/index.md          LinkedIn posts and the site's own articles (no original_url): front matter + Markdown
   sources.yml               external articles/courses, fetched from other public repos
   covers/<slug>/            cover options for external content
   projects/<slug>/          projects: project.yml (links, date, cover) + <lang>.md (title/summary/kind + page text)
@@ -225,7 +225,8 @@ def render_markdown(text):
         },
         output_format="html5",
     )
-    return md.convert(gfm_fixups(text))
+    # pictures in a text load as the reader scrolls to them (a post may carry many heavy GIFs)
+    return re.sub(r"<img (?![^>]*\bloading=)", '<img loading="lazy" decoding="async" ', md.convert(gfm_fixups(text)))
 
 
 def fetch(url, tries=4):
@@ -323,9 +324,13 @@ def load_posts():
         where = "posts/%s/index.md" % name
         with open(md_path, encoding="utf-8") as f:
             meta, body = split_front_matter(f.read(), where)
-        for key in ("title", "date", "summary", "original_url"):
+        for key in ("title", "date", "summary"):
             if not meta.get(key):
                 fail("%s: front matter field '%s' is required" % (where, key))
+        # a copied LinkedIn post has source: linkedin + original_url; without them it is the site's own article
+        own = not meta.get("original_url")
+        if own and meta.get("source") == "linkedin":
+            fail("%s: source: linkedin needs original_url" % where)
         slug = str(meta.get("slug") or re.sub(r"^\d{4}-\d{2}(-\d{2})?-", "", name))
         cover = meta.get("cover")
         if cover and not os.path.isfile(os.path.join(folder, cover)):
@@ -338,11 +343,11 @@ def load_posts():
         if cover:  # the cover is shown above the title; drop the same picture repeated in the text
             body_html = re.sub(r'<p>\s*<img[^>]*\bsrc="%s"[^>]*>\s*</p>\s*' % re.escape(cover), "", body_html)
         items.append({
-            "type": "post", "wtype": "post", "section": "writing", "slug": slug,
+            "type": "post", "wtype": "article" if own else "post", "own": own, "section": "writing", "slug": slug,
             "title": str(meta["title"]), "date": as_date(meta["date"], where),
             "date_label": meta.get("date_label"), "lang": meta.get("lang", "ru"),
             "summary": str(meta["summary"]), "kind": meta.get("kind"),
-            "original_url": meta["original_url"], "tags": meta.get("tags") or [],
+            "original_url": meta.get("original_url"), "tags": meta.get("tags") or [],
             "cover_url": "/writing/%s/%s" % (slug, cover) if cover else None,
             "card_cover_url": "/writing/%s/%s" % (slug, card_cover) if card_cover else None,
             "folder": folder, "options_dir": folder,
@@ -679,11 +684,13 @@ def item_url(item, t=None):
 
 
 def kind_of(item, t):
-    """Label of the item; for a LinkedIn post it links to the original post."""
+    """Label of the item: kind, else 'LinkedIn post' for a copied post, 'Article' for the site's own one."""
     if item.get("paper"):
         label = "%s · %s · %d" % (S(t, "type_paper"), esc(str(loc(item["journal_short"], t))), item["year"])
     elif item.get("kind"):
         label = esc(str(loc(item["kind"], t)))
+    elif item.get("own"):
+        label = S(t, "type_article")
     else:
         label = S(t, "linkedin_post")
     return label  # plain text: a link with a language badge here read as "no translation"
@@ -775,7 +782,9 @@ def card(item, t):
 
 
 def article_page(item, t):
-    if item["type"] == "post":
+    if item.get("own"):  # the site's own article: no original elsewhere
+        source_top = ""
+    elif item["type"] == "post":
         source_top = '<a href="%s">LinkedIn</a>' % esc(item["original_url"])
     elif item["type"] == "paper":
         e = item["paper"]
@@ -796,7 +805,7 @@ def article_page(item, t):
         demo = ' · <a class="demo" href="%s">%s</a>' % (esc(item["demo_url"]), S(t, "live_demo"))
     subtitle = '<p class="subtitle">%s</p>' % esc(item["subtitle"]) if item.get("subtitle") else ""
     back = {"courses": "back_to_courses", "projects": "back_to_projects"}.get(item["section"], "back_to_writing")
-    if item["type"] == "post":
+    if item["type"] == "post" and not item.get("own"):
         cta = '<a class="btn sun big" href="%s">%s <span class="arr">→</span></a>' % (
             esc(item["original_url"]), S(t, "comment_on_linkedin"))
     else:
@@ -831,7 +840,7 @@ def article_page(item, t):
         content = tr_note(item, tr, t) + tr_body_html(item, dict(tr, body=body_md))
     body = tpl("article", hero=hero, kind=kind_of(item, t), date=date_text(item, t), views=views_tag(item, t), lang=esc(text_lang_),
                title=esc(title), title_lang=esc(title_lang),
-               subtitle=subtitle, author=S(t, "author"), source_top=source_top,
+               subtitle=subtitle, author=S(t, "author"), source_top=" · " + source_top if source_top else "",
                demo=demo, content=content, cta=cta, type_chip=type_chip(item, t),
                back_href="%s/%s/" % (t["prefix"], item["section"]), back_text=S(t, back))
     cover = item.get("cover_url") or ""
