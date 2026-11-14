@@ -7,6 +7,6 @@ source_lang: ru
 source_hash: caeeb68d
 translated: 2026-11-14
 translator: Claude
-reviewed:            # date of the independent review; the build ignores the file until it is set
+reviewed: 2026-11-14
 ---
 Diskret boshqaruvli tizimlarni pozitsiyalash masalasi uchun maʼlumotlar bazasida saqlanadigan sinov va xatolarni global interpolyatsiya hamda gradiyent tushish yordamida umumlashtirish usuliga asoslangan oʻqitish algoritmi ishlab chiqildi. Algoritm oʻqitish vaqtini (urinishlar sonini) qisqartirish mezoni boʻyicha optimallashtiriladi. Algoritm tekislikda harakatlanuvchi ikki xil turdagi tizim modellari uchun simulyatorda sinab koʻrildi: ikkita yetaklovchi gusenitsali mobil robot va aylanma hamda prizmatik boʻgʻinlarga ega ochiq kinematik zanjir uchun.

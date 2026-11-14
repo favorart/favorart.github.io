@@ -6,13 +6,13 @@ source_lang: en
 source_hash: 926233cf
 translated: 2026-11-14
 translator: Claude
-reviewed:            # date of the independent review; the build ignores the file until it is set
+reviewed: 2026-11-14
 ---
 # Pythonda GUI-ilova
 
 **English** · [Русский](article.ru.md)
 
-_Birinchi, desktop versiyasi (Python 2.7 + Tkinter) haqidagi 2018-yilgi maqola, rus tilidan tarjima. Asl nashr: https://vk.ru/@33453621-pi-gui-python. Toʻliq kod: [legacy/pi.py](legacy/pi.py); uni bugun ishga tushirish uchun [legacy/run.sh](legacy/run.sh) dan foydalaning._
+_Birinchi, desktop versiyasi (Python 2.7 + Tkinter) haqidagi 2018-yilgi maqola, rus tilidan tarjima. Asl nashr: https://vk.ru/@33453621-pi-gui-python. Toʻliq kod: [legacy/pi.py](legacy/pi.py); uni bugun ishga tushirish uchun [legacy/run.sh](legacy/run.sh)dan foydalaning._
 
 Vaqti-vaqti bilan menga kichik oynali ilova yozish kerak boʻlib qoladi. Odatda ilovalarni C++da yozaman. Bir paytlar Qt oʻrniga Windows APIni oʻrgangandim, chunki oynalarim doim Windows uchun boʻlardi, va men nativ interfeys har doim eng yaxshisi deb hisoblayman. Hammasi organik koʻrinishini xohlayman. WinAPI Windows qila oladigan hamma narsani qilishga imkon beradi, lekin koʻp narsani qoʻlda yozishga toʻgʻri keladi, qandaydir qoʻngʻiroqchalar va hushtakchalar esa doim kerak boʻladi.
 
@@ -92,7 +92,7 @@ Birinchi vidjetni yaratamiz — oynadagi foydalanuvchi oʻzgartira olmaydigan st
 tk.Label(root, text="This label")
 ```
 
-Lekin matnni koddan oʻzgartirish mumkin: `text` parametri oʻrniga satrli oʻzgaruvchi ulanadi — uning qiymatini oʻzgartirish `Label` dagi matnni darhol oʻzgartiradi:
+Lekin matnni koddan oʻzgartirish mumkin: `text` parametri oʻrniga satrli oʻzgaruvchi ulanadi — uning qiymatini oʻzgartirish `Label`dagi matnni darhol oʻzgartiradi:
 
 ```python
 lb_text = tk.StringVar()
@@ -259,7 +259,7 @@ fill_db(db, PI, 2000000000, 3000000000, count)
 print
 ```
 
-_Bu tayyorgarlik skriptlari `legacy/` da yoʻq; veb-versiyada ularning oʻrnini [tools/build_index.py](tools/build_index.py) egallaydi._
+_Bu tayyorgarlik skriptlari `legacy/`da yoʻq; veb-versiyada ularning oʻrnini [tools/build_index.py](tools/build_index.py) egallaydi._
 
 Tamom, tayyorgarlik bosqichi tugadi.
 
@@ -273,7 +273,7 @@ Interfeys rejasi:
 
 1.  Oynaning minimal oʻlchamini belgilash.
 2.  Notoʻgʻri sanani kiritib boʻlmasligi uchun tekshiriladigan sana kiritish.
-3.  `Label` da matnni belgilar boʻyicha keyingi qatorga oʻtadigan va ekranga qancha sigʻsa, aynan shuncha matn koʻrsatiladigan qilib joylashtirishni oʻrganish.
+3.  `Label`da matnni belgilar boʻyicha keyingi qatorga oʻtadigan va ekranga qancha sigʻsa, aynan shuncha matn koʻrsatiladigan qilib joylashtirishni oʻrganish.
 4.  π sonining kerakli qismini fayldan yoʻl-yoʻlakay yuklab, koʻrsatish.
 5.  Topilgan qism satrni barcha belgilar orasida ajratib koʻrsatish.
 6.  Joylashuv: choʻzilmaydigan uchta obyektdan iborat sarlavha va ularning ostida qolgan choʻziluvchi obyektlar.
@@ -342,7 +342,7 @@ class Example(tk.Frame):
 Example(root).pack(fill="both", expand=True)
 ```
 
-Bularning hammasidan menga faqat `'%P'` parametri — _butun yangi kiritma_ kerak edi. Agar navbatdagi belgi terilgandan keyin u bir butun sifatida sana (yoki sana boshi) boʻlmasa, shu belgigacha terilgan narsani qoldiramiz; aks holda belgi `Entry` ga qoʻshiladi.
+Bularning hammasidan menga faqat `'%P'` parametri — _butun yangi kiritma_ kerak edi. Agar navbatdagi belgi terilgandan keyin u bir butun sifatida sana (yoki sana boshi) boʻlmasa, shu belgigacha terilgan narsani qoldiramiz; aks holda belgi `Entry`ga qoʻshiladi.
 
 Toʻliq sana uchun oʻsha arrow kutubxonasidan foydalanamiz. Hosil boʻlgan `DateEntry` vidjeti: [legacy/pi.py, 34–89-qatorlar](legacy/pi.py#L34-L89).
 
@@ -362,7 +362,7 @@ class WrappingLabel(tk.Label):
 lbt = WrappingLabel(root, textvariable=lbt_text, font=dFont, anchor=tk.NW, justify=tk.LEFT)
 ```
 
-justify — koʻp qatorli matnni `Label` ning chap chetiga tekislash.
+justify — koʻp qatorli matnni `Label`ning chap chetiga tekislash.
 
 Keyin koʻrsatiladigan matnni ekranga sigʻadigan hajmgacha qisqartirish kerak edi.
 
@@ -475,7 +475,7 @@ if (actual_width  > max_width * max_height):
 
 Manba: [legacy/pi.py, 117–121-qatorlar](legacy/pi.py#L117-L121)
 
-`bisect` da solishtiriladigan qiymat uchun key parametri yoʻqligi sababli, oʻram yozishga toʻgʻri keldi:
+`bisect`da solishtiriladigan qiymat uchun key parametri yoʻqligi sababli, oʻram yozishga toʻgʻri keldi:
 
 ```python
 class KeyList(object):
@@ -528,13 +528,13 @@ lb3.config(state=tk.DISABLED)
 
 Manba: [legacy/pi.py, 255-qator](legacy/pi.py#L255)
 
-`Text` ajralib turmasligi uchun, xuddi `Label` dagidek, uning `background` i asosiy oyna rangiga oʻrnatiladi:
+`Text` ajralib turmasligi uchun, xuddi `Label`dagidek, uning `background`i asosiy oyna rangiga oʻrnatiladi:
 
 ```python
 bg=frame["bg"]
 ```
 
-Ishga tushishda `Text` ga boshlangʻich maʼlumot qoʻshamiz:
+Ishga tushishda `Text`ga boshlangʻich maʼlumot qoʻshamiz:
 
 ```python
 LONG_ARRAY = read_pi(1,2500)
@@ -552,7 +552,7 @@ self.insert(tk.END, text)  # then insert the new data at the end of the text
 
 Manba: [legacy/pi.py, 125–126-qatorlar](legacy/pi.py#L125-L126)
 
-Koʻrib turganingizdek, maʼlumot `Label` dagidan boshqacha qoʻshiladi: uni qatorma-qator, qaysi qatorga yozishni koʻrsatib qoʻshish mumkin. Men bu bilan ovora boʻlmadim va faqat bitta qator bilan ishlayman.
+Koʻrib turganingizdek, maʼlumot `Label`dagidan boshqacha qoʻshiladi: uni qatorma-qator, qaysi qatorga yozishni koʻrsatib qoʻshish mumkin. Men bu bilan ovora boʻlmadim va faqat bitta qator bilan ishlayman.
 
 Bir marta boʻlsa ham nimadir oʻrnatilgan vositalar bilan qilindi, bu allaqachon _katta gʻalaba_.
 
@@ -597,7 +597,7 @@ def bt_find_click(event=None):
 
 Manba: [legacy/pi.py, 136–162-qatorlar](legacy/pi.py#L136-L162)
 
-Koʻrib turganingizdek, endi `Text` ni hatto koddan oʻzgartirish uchun ham avval uni oddiy holatga qaytarish, tarkibni oʻzgartirish va keyin oʻzgartirishni yana taqiqlash kerak.
+Koʻrib turganingizdek, endi `Text`ni hatto koddan oʻzgartirish uchun ham avval uni oddiy holatga qaytarish, tarkibni oʻzgartirish va keyin oʻzgartirishni yana taqiqlash kerak.
 
 Tasodifiy siljish yangi sana uchun ajratib koʻrsatilgan moslik toʻgʻri ekanini va π sonining boshqa (ehtimol, uzoqdagi) fragmentida joylashganini yaqqol koʻrsatadi.
 
@@ -622,7 +622,7 @@ Manba: [legacy/pi.py, 164–173-qatorlar](legacy/pi.py#L164-L173)
 
 Avvaliga dasturni birinchi va eng oddiy joylashtiruvchi — `pack()` bilan qurishni oʻyladim. Rejaga koʻra, buning uchun asosiy `Text` oyna oʻlchamiga toʻgʻri choʻzilishi uchun obyektlarni guruhlash kerak edi.
 
-Birinchidan, uchta obyektdan iborat sarlavhani — taklif yozuvi, sana kiritish maydoni va tugmani — `Frame` guruhiga, `win_header` ga joyladim.
+Birinchidan, uchta obyektdan iborat sarlavhani — taklif yozuvi, sana kiritish maydoni va tugmani — `Frame` guruhiga, `win_header`ga joyladim.
 
 ```python
 # ...
@@ -803,7 +803,7 @@ WORKER = Worker() # an instance of the thread that reads the DB from the file
 
 Manba: [legacy/pi.py, 27–32-qatorlar](legacy/pi.py#L27-L32)
 
-GUI-dasturlashda ancha keng tarqalgan bu holat uchun — ogʻir hisoblashlar paytida formani javob beradigan holatda saqlash — Tkda maxsus funksiyalar bor. Bizga hodisalar siklining 10 millisekundidan keyin bizning funksiyamizni, bu yerda `listen_for_result()` ni, chaqiradigan `after()` kerak.
+GUI-dasturlashda ancha keng tarqalgan bu holat uchun — ogʻir hisoblashlar paytida formani javob beradigan holatda saqlash — Tkda maxsus funksiyalar bor. Bizga hodisalar siklining 10 millisekundidan keyin bizning funksiyamizni, bu yerda `listen_for_result()`ni, chaqiradigan `after()` kerak.
 
 ```python
 def listen_for_result():
@@ -841,7 +841,7 @@ Manba: [legacy/pi.py, 140–141-qatorlar](legacy/pi.py#L140-L141)
 
 ### Toʻliq dastlabki kod
 
-Toʻliq kod [legacy/pi.py](legacy/pi.py) da.
+Toʻliq kod [legacy/pi.py](legacy/pi.py)da.
 
 <img width="1080" height="557" alt="interfeys" src="https://github.com/user-attachments/assets/81283f68-b27a-4b1d-8242-a384d49153bd" />
 

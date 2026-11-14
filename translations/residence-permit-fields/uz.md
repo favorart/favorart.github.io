@@ -6,7 +6,7 @@ source_lang: ru
 source_hash: 608661f9
 translated: 2026-11-14
 translator: Claude
-reviewed:            # date of the independent review; the build ignores the file until it is set
+reviewed: 2026-11-14
 ---
 Nega hujjatlarga eng zarurlaridan tashqari ortiqcha maydonlar qoʻshiladi?
 
@@ -17,7 +17,7 @@ Serbiyada yashash uchun ruxsatnoma oldik. Kartochkalarda surat, F.I.Sh., tugʻil
 
 Bularning hammasi plastikda nima uchun kerak?
 
-Nega bu maʼlumotlarni serverda, maʼlumotlar bazasida, ularni oʻzgartirish mumkin boʻlgan joyda saqlab boʻlmaydi? Yozuvni esa karta raqami boʻyicha osongina olish mumkin. Raqam yagona, men — men ekanligimni tushunish va meni familiyadoshimdan va hokazolardan farqlash uchun uning oʻzi yetarli.
+Nega bu maʼlumotlarni serverda, maʼlumotlar bazasida, ularni oʻzgartirish mumkin boʻlgan joyda saqlab boʻlmaydi? Yozuvni esa karta raqami boʻyicha osongina olish mumkin. Raqam takrorlanmas, men — men ekanligimni tushunish va meni familiyadoshimdan va hokazolardan farqlash uchun uning oʻzi yetarli.
 
 Axir baribir maʼlumotlar bazasi boʻyicha tekshirasiz-ku. Internetsiz odam mening tugʻilgan joyim Oʻzbekiston deb koʻrsatilganiga qanday ishonch hosil qila oladi?
 
@@ -29,13 +29,13 @@ Davlat qayerda yashashimni bilmasligi kerak demoqchi emasman. Baribir roʻyxatda
 
 Bu orada inspektorlar bu «foydali» ishni bajarishga ulgurmaydi, topshirish uchun navbatlar, olish uchun navbatlar yigʻiladi...
 
-Yana hujjatlar «mamlakatda yashash uchun qonuniy asos yoʻqolguncha» emas, qatʼiy cheklangan muddatga beriladi, va yana oʻsha kirish hujjatlari bilan, oʻsha asoslar boʻyicha kartochkalarni qayta rasmiylashtirish uchun navbatlar yigʻiladi.
+Yana hujjatlar «mamlakatda yashash uchun qonuniy asos yoʻqolguncha» emas, qatʼiy cheklangan muddatga beriladi, va yana oʻsha boshlangʻich hujjatlar bilan, oʻsha asoslar boʻyicha kartochkalarni qayta rasmiylashtirish uchun navbatlar yigʻiladi.
 
 Serbiyada doimiy yashash uchun ruxsatnomaga topshirganimda (bu ham vaqtinchalik ruxsatnomaning oʻzi, faqat boshqacha ataladi va kartochkasi sariq emas, pushti) menga rad javobi berishdi, holbuki menda mamlakatda yashashim mumkin boʻlgan amaldagi ruxsatnoma bor edi. Lekin «asos»im vaqtincha oʻzgargan edi va bazadagi satrda asosni shunchaki oʻzgartirib, jarayonni davom ettirib boʻlmasdi. Ruxsatnoma kartochkamni olib qoʻyishlari kerak edi, lekin ololmadilar, chunki unda bosilgan...
 
 Uzun navbatlarda turishimga toʻgʻri keldi: rad javobi uchun, topshirish uchun, koʻrib chiqish uchun, barmoq izlari uchun va olish uchun. Navbatlar uzun, chunki inspektorlar ish hajmiga ulgurmaydi.
 
-Yana yaqinda Ispaniyada yashash uchun ruxsatnoma oldik, unda xotinimning roʻyxatdan oʻtish manzili notoʻgʻri koʻrsatilgan va bu manzil kartochkada bosilgan. Nima uchun? (Bundan tashqari, bungacha yashash joyi haqida alohida hujjatlar olgan edik.) Ishonmaysiz, lekin odamlar baʼzan koʻchib oʻtishadi! Ruxsatnoma amal qiladigan davrda mamlakatda oʻz koʻchmas mulki boʻlmagan odamlar katta ehtimol bilan yashash joyini oʻzgartiradi. Koʻchib oʻtgandan keyin nima qilish kerak boʻladi? Navbatga turishmi? Hozir hujjat topshirish uchun qaysi vaqtga boʻsh slotlar bor? Yarim yil oldingami?
+Yana yaqinda Ispaniyada yashash uchun ruxsatnoma oldik, unda xotinimning roʻyxatdan oʻtish manzili notoʻgʻri koʻrsatilgan va bu manzil kartochkada bosilgan. Nima uchun? (Bundan tashqari, bungacha yashash joyi haqida alohida hujjatlar olgan edik.) Ishonmaysiz, lekin odamlar baʼzan koʻchib oʻtishadi! Ruxsatnoma amal qiladigan davrda mamlakatda oʻz koʻchmas mulki boʻlmagan odamlar katta ehtimol bilan yashash joyini oʻzgartiradi. Koʻchib oʻtgandan keyin nima qilish kerak boʻladi? Navbatga turishmi? Hozir hujjat topshirish uchun qaysi vaqtga boʻsh slotlar bor? Yarim yil keyingami?
 
 Chunki hamma ish bilan band.
 
