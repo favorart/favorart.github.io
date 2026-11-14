@@ -3,7 +3,7 @@ title: "How I knew LLMs had come into my life"
 summary: "A first course on a business trip, then online classes and tests, and then the all-knowing agents arrived: I pretended to teach, the students pretended to learn."
 source: posts/2026-01-llm-teaching/index.md
 source_lang: ru
-source_hash: 587ef8d614b4
+source_hash: 587ef8d6
 translated: 2026-11-14
 translator: Claude
 reviewed: 2026-11-14

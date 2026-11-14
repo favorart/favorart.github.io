@@ -158,6 +158,7 @@ papers:
   - slug: learning-algorithm-discrete-control
     title: Алгоритм обучения систем с дискретным управлением
     title_en: Learning algorithm of systems with discrete control
+    summary_en: "A learning algorithm for positioning systems with discrete control: stored trials are generalized by global interpolation and gradient descent; tested on a differential-drive robot and a kinematic chain."
     authors: Голиков К.А.
     authors_en: Golikov K.A.
     journal: Интеллектуальные системы. Теория и приложения
@@ -186,6 +187,7 @@ papers:
   - slug: learning-systems-discrete-control
     title: Обучение систем с дискретным управлением
     title_en: Learning systems with discrete control
+    summary_en: "A learning algorithm for a discrete-control system: trial-and-error experience is stored in a database, and prediction with interpolation cuts the training time."
     authors: Голиков К.А.
     authors_en: Golikov K.A.
     journal: Интеллектуальные системы. Теория и приложения

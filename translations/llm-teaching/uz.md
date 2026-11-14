@@ -3,7 +3,7 @@ title: "LLM hayotimga kirib kelganini qanday his qildim"
 summary: "Avval xizmat safaridagi ilk kurs, keyin onlayn va testlar, hamma narsani biluvchi agentlar paydo boʻlgach esa: men dars bergandek boʻldim, talabalar oʻqigandek boʻlishdi."
 source: posts/2026-01-llm-teaching/index.md
 source_lang: ru
-source_hash: 587ef8d614b4
+source_hash: 587ef8d6
 translated: 2026-11-14
 translator: Claude
 reviewed: 2026-11-14

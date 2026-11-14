@@ -3,7 +3,7 @@ title: "Kako sam osetio da su LLM-ovi ušli u moj život"
 summary: "Prvi kurs na službenom putu, zatim onlajn i testovi, a kad su se pojavili sveznajući agenti: ja sam se pravio da predajem, studenti su se pravili da uče."
 source: posts/2026-01-llm-teaching/index.md
 source_lang: ru
-source_hash: 587ef8d614b4
+source_hash: 587ef8d6
 translated: 2026-11-14
 translator: Claude
 reviewed: 2026-11-14

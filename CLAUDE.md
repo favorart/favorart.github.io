@@ -12,18 +12,19 @@
 
 ## Every commit that adds or changes a post or an article
 
-Articles and posts (Writing) are translated into every site language other than their own; translations are a
-cache keyed by the version of the original (`translations/<section>/<slug>/<lang>.<hash>.md`, see README →
-Translations). Before committing such a change:
+Articles, posts and paper abstracts (Writing) are translated into every site language other than their own;
+one file per text and language, `translations/<slug>/<lang>.md`, updated in place — its `source_hash` says
+which version of the original it matches (see README → Translations). Never keep several versions of a file:
+history is git's job. Before committing such a change:
 
 1. Run `python tools/translations.py status`. It lists every post/article × language as `ok`, `missing`,
    `outdated` (the original changed since the translation) or `unreviewed`. Check **all** items, not only the
    one being added — an edit to an external repo can make an older translation outdated.
 2. For every `missing` / `outdated` / `unreviewed` cell:
    - `python tools/translations.py source <slug>` prints the original and its hash;
-   - `python tools/translations.py new <slug> <lang>` creates the file for the current version; fill in `title`,
-     `summary` and the translated Markdown body. For an outdated one, update the previous version's text
-     rather than translating from scratch (keep what is still right).
+   - `python tools/translations.py new <slug> <lang>` creates the file (fill in `title`, `summary` and the
+     translated Markdown body), or for an outdated one re-stamps it in place for the current original —
+     then edit its text to match the changes (keep what is still right, don't retranslate from scratch).
    - Translate per `docs/translation-glossary.md`, one agent per language, native-level, keeping Markdown,
      links, images and code untouched.
 3. Independent review: a separate agent that did not translate compares each new file with the original
@@ -31,8 +32,8 @@ Translations). Before committing such a change:
    sets `reviewed: <date>`. Unreviewed files are never published.
 4. `python build.py` (must print `0 outdated, 0 missing` unless the author agreed otherwise) and
    `python tools/check_links.py _site`.
-5. Commit the original change and its translations **in the same commit**. Old versions may be removed with
-   `python tools/translations.py prune` (git keeps them).
+5. Commit the original change and its translations **in the same commit**.
 
-Courses, papers (abstracts only) and the CV/home pages are not part of this cache: courses are not translated,
-papers carry their own RU/EN abstracts, CV/home are translated by hand in `content/`.
+Papers: the body of the file is the abstract, plus `keywords` in front matter; the English abstract comes from
+the journal (`abstract_en` in sources.yml) and is not translated. Courses are not translated (lectures are in
+Russian). CV/home are translated by hand in `content/`.

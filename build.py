@@ -412,60 +412,61 @@ def paper_item(e):
     lang, year = e.get("lang", "ru"), int(e["year"])
     ref = "%s %s // %s. — %d. — Т. %s, вып. %s. — С. %s." % (
         esc(e["authors"]), esc(e["title"]), esc(e["journal"]), year, e["volume"], e["issue"], esc(str(e["pages"])))
-    body = ['<p class="paper-ref">%s</p>' % ref,
-            '<p class="paper-pdf"><a class="btn sun big" href="%s">PDF <span class="arr">→</span></a></p>' % esc(e["pdf"]),
-            '<h2>%s</h2>' % PAPER_LABELS[lang][0], '<p>%s</p>' % esc(e["abstract"])]
+    body = ['<p class="paper-ref" lang="%s">%s</p>' % (esc(lang), ref),
+            '<p class="paper-pdf"><a class="btn sun big" href="%s">PDF <span class="arr">→</span></a></p>' % esc(e["pdf"])]
+    src = "# %s\n\n%s\n" % (e["title"], e["abstract"])
     if e.get("keywords"):
-        body.append('<p><strong>%s:</strong> %s</p>' % (PAPER_LABELS[lang][1], esc(e["keywords"])))
-    if e.get("abstract_en") and lang != "en":
-        body += ['<h2 lang="en">%s</h2>' % PAPER_LABELS["en"][0],
-                 '<p lang="en"><em>%s</em></p>' % esc(e.get("title_en", "")),
-                 '<p lang="en">%s</p>' % esc(e["abstract_en"])]
-        if e.get("keywords_en"):
-            body.append('<p lang="en"><strong>%s:</strong> %s</p>' % (PAPER_LABELS["en"][1], esc(e["keywords_en"])))
+        src += "\n%s: %s\n" % (PAPER_LABELS[lang][1], e["keywords"])
+    title = {lang: str(e["title"])}
+    summary = {lang: str(e["summary"])}
+    if e.get("title_en"):
+        title["en"] = str(e["title_en"])
+    if e.get("summary_en"):
+        summary["en"] = str(e["summary_en"])
     return {
-        "type": "paper", "wtype": "paper", "section": "writing", "slug": e["slug"], "title": str(e["title"]),
+        "source_md": src, "source_ref": "sources.yml papers/%s" % e["slug"],
+        "provided": ("en",) if e.get("abstract_en") else (),  # the journal's own English abstract
+        "type": "paper", "wtype": "paper", "section": "writing", "slug": e["slug"], "title": title,
         "date": as_date(e.get("date") or "%d-01-01" % year, where), "date_label": "vol. %s(%s)" % (e["volume"], e["issue"]),
         "lang": lang,
-        "summary": e["summary"], "kind": None, "journal_short": e.get("journal_short", "Intelligent Systems"), "year": year,
+        "summary": summary, "kind": None, "journal_short": e.get("journal_short", "Intelligent Systems"), "year": year,
         "original_url": e["pdf"], "tags": [], "demo_url": None, "list": e.get("list", True),
         "cover_url": "/" + cover if cover else None,
         "options_dir": os.path.join(ROOT, os.path.dirname(cover)) if cover else None,
-        "subtitle": e.get("title_en"), "body_html": "\n".join(body), "paper": e,
+        "subtitle": None, "paper_head": "\n".join(body), "body_html": "\n".join(body), "paper": e,
         "source_line": "%s, vol. %s, no. %s, %d, pp. %s" % (e["journal_en"], e["volume"], e["issue"], year, e["pages"]),
     }
 
 
 # ---------------------------------------------------------------- translations
-# Article translations are a cache keyed by the version of the original text:
-#   translations/<section>/<slug>/<lang>.<hash>.md   (hash = source_hash() of the original it was made from)
-# The build shows the version made from the current original; if there is none, the newest older one with a
-# note that the original has changed since. Only reviewed translations (front matter `reviewed: <date>`) are used.
-# tools/translations.py lists what is missing or stale and creates the files.
+# One file per text and language, updated in place (older versions live only in git history):
+#   translations/<slug>/<lang>.md   front matter `source_hash` = source_hash() of the original it was made from
+# If the hash matches the current original the translation is up to date; otherwise the page still shows it,
+# with a note that the original has changed since. Only reviewed translations (`reviewed: <date>`) are used.
+# tools/translations.py lists what is missing or outdated and creates / re-stamps the files.
 
-TRANSLATABLE_TYPES = ("post", "external")
+TRANSLATABLE_TYPES = ("post", "external", "paper")
 
 
 def source_hash(text):
-    """Version of an original text: sha256 of its normalized Markdown, first 12 hex digits."""
+    """Version of an original text: sha256 of its normalized Markdown, first 8 hex digits."""
     norm = "\n".join(line.rstrip() for line in text.replace("\r\n", "\n").strip().split("\n"))
-    return hashlib.sha256(norm.encode("utf-8")).hexdigest()[:12]
+    return hashlib.sha256(norm.encode("utf-8")).hexdigest()[:8]
 
 
 def translatable(item):
     return item["type"] in TRANSLATABLE_TYPES and item["section"] == "writing" and item["list"] and "source_md" in item
 
 
-def translation_files(item, lang):
-    d = os.path.join(ROOT, "translations", item["section"], item["slug"])
-    return sorted(glob.glob(os.path.join(d, "%s.*.md" % lang)))
+def translation_path(item, lang):
+    return os.path.join(ROOT, "translations", item["slug"], "%s.md" % lang)  # short: Windows paths max 260 chars
 
 
 def read_translation(path):
     with open(path, encoding="utf-8") as f:
         meta, body = split_front_matter(f.read(), os.path.relpath(path, ROOT))
     for key in ("title", "summary", "source_hash", "translated"):
-        if not meta.get(key):
+        if meta.get("reviewed") and not meta.get(key):
             fail("%s: front matter field '%s' is required" % (os.path.relpath(path, ROOT), key))
     return meta, body
 
@@ -479,25 +480,51 @@ def load_translations(items, langs):
         cur = source_hash(item["source_md"])
         item["source_version"] = cur
         for code in langs:
-            if code == item["lang"]:
+            if code == item["lang"] or code in item.get("provided", ()):
                 continue
-            best = None
-            for path in translation_files(item, code):
+            best, path = None, translation_path(item, code)
+            if os.path.isfile(path):
                 meta, body = read_translation(path)
-                if str(meta["source_hash"]) != os.path.basename(path).split(".")[-2]:
-                    fail("%s: file name and source_hash differ" % os.path.relpath(path, ROOT))
-                if not meta.get("reviewed"):
-                    continue  # not reviewed yet: never published
-                cand = {"meta": meta, "body": body, "fresh": str(meta["source_hash"]) == cur,
-                        "translated": str(meta["translated"])}
-                if best is None or (cand["fresh"], cand["translated"]) > (best["fresh"], best["translated"]):
-                    best = cand
+                if meta.get("reviewed"):  # not reviewed yet: never published
+                    best = {"meta": meta, "body": body, "fresh": str(meta["source_hash"]) == cur}
             if best:
                 TRANSLATIONS[(item["section"], item["slug"], code)] = best
                 report["fresh" if best["fresh"] else "stale"] += 1
             else:
                 report["missing"] += 1
     return report
+
+
+def paper_body(item, t, tr):
+    """Record + PDF, then the abstract in the page's language (a reviewed translation, or the journal's English
+    one), then the original abstract; on the original's own page also the English one."""
+    e, lang = item["paper"], item["lang"]
+    lab = lambda tt, k: esc(str(tt.get("paper_" + k) or PAPER_LABELS.get(tt["lang"], PAPER_LABELS["en"])[k == "keywords"]))
+    out = [item["paper_head"]]
+
+    def block(tt, hl, title, abstract, keywords):
+        a = ['<h2 lang="%s">%s</h2>' % (hl, lab(tt, "abstract"))]
+        if title:
+            a.append('<p lang="%s"><em>%s</em></p>' % (hl, esc(title)))
+        a.append('<p lang="%s">%s</p>' % (hl, esc(abstract)))
+        if keywords:
+            a.append('<p lang="%s"><strong>%s:</strong> %s</p>' % (hl, lab(tt, "keywords"), esc(keywords)))
+        return a
+
+    src_t = LANGS.get(lang, t)
+    if t["lang"] == lang:
+        out += block(t, src_t["html_lang"], None, e["abstract"], e.get("keywords"))
+        if e.get("abstract_en") and "en" in LANGS:
+            out += block(LANGS["en"], "en", e.get("title_en"), e["abstract_en"], e.get("keywords_en"))
+        return "\n".join(out)
+    if tr:
+        m = tr["meta"]
+        out.append(tr_note(item, tr, t))
+        out += block(t, t["html_lang"], None, tr["body"].strip(), m.get("keywords"))
+    elif t["lang"] == "en" and e.get("abstract_en"):
+        out += block(t, "en", None, e["abstract_en"], e.get("keywords_en"))
+    out += block(src_t, src_t["html_lang"], e["title"], e["abstract"], e.get("keywords"))
+    return "\n".join(out)
 
 
 def tr_of(item, t):
@@ -702,7 +729,14 @@ def article_page(item, t):
     tr = tr_of(item, t)
     title, title_lang = str(loc(item["title"], t)), text_lang(item, "title", t)
     summary, text_lang_, content, canonical = str(loc(item["summary"], t)), item["lang"], item["body_html"], item_url(item)
-    if tr:  # a reviewed translation of the text into this UI language
+    if item["type"] == "paper":
+        if tr:
+            title, title_lang, summary = str(tr["meta"]["title"]), t["html_lang"], str(tr["meta"]["summary"])
+        orig = item["paper"]["title"] if t["lang"] != item["lang"] else item["paper"].get("title_en")
+        orig_lang = item["lang"] if t["lang"] != item["lang"] else "en"
+        subtitle = '<p class="subtitle" lang="%s">%s</p>' % (esc(orig_lang), esc(orig)) if orig else ""
+        content, text_lang_, canonical = paper_body(item, t, tr), t["html_lang"], None
+    elif tr:  # a reviewed translation of the text into this UI language
         title, title_lang, summary = str(tr["meta"]["title"]), t["html_lang"], str(tr["meta"]["summary"])
         text_lang_, canonical = t["html_lang"], None
         content = tr_note(item, tr, t) + tr_body_html(item, tr)
