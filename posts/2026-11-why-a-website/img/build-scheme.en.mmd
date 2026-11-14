@@ -1,0 +1,16 @@
+```mermaid
+flowchart TB
+  subgraph repo["site repository"]
+    direction LR
+    P(LinkedIn posts,<br/>copies in Markdown) ~~~ S(list of external articles) ~~~ T(templates and styles)
+  end
+  subgraph ext["my repositories"]
+    direction LR
+    R1(robot-hand) ~~~ R2(IPL) ~~~ R3(pi-birthday) ~~~ R4(C++ and architecture<br/>courses)
+  end
+  repo -. list of articles .-> ext
+  repo --> B(site build)
+  ext -- texts at build time --> B
+  C(every commit<br/>and once a day) --> B
+  B --> G(GitHub Pages)
+```
