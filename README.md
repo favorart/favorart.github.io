@@ -68,6 +68,40 @@ python -m http.server -d _site 8000
   folder, the first one as `cover.jpg`.
 - `original_url` is the full `linkedin.com/posts/...` URL without tracking parameters (`?utm_…`, `rcm=`).
 
+## Translations
+
+The site is in en / es / ru / sr / uz. The page around every text is translated (`i18n/`, `content/`); posts
+and articles (Writing) are translated into the other languages through a **versioned cache**:
+
+```
+translations/<section>/<slug>/<lang>.<hash>.md
+```
+
+`<hash>` is the version of the original the translation was made from (`source_hash` in build.py: sha256 of the
+normalized Markdown, 12 hex digits). Front matter: `title`, `summary`, `source`, `source_lang`, `source_hash`,
+`translated`, `translator`, `reviewed` (date of the independent review — files without it are not published).
+
+On every build, for each text × language:
+
+| Cache has | Page shows |
+|---|---|
+| a reviewed translation of the current version | the translation, with "Translated … Original: <language>" |
+| only reviewed translations of older versions | the newest of them + "The original has been updated since this translation" |
+| nothing reviewed | the original text |
+
+The build prints `translations: N up to date, M outdated, K missing`. Tools:
+
+```sh
+python tools/translations.py status          # table: ok / missing / outdated / unreviewed
+python tools/translations.py source <slug>   # the original + its hash
+python tools/translations.py new <slug> <lang>   # creates the file for the current version
+python tools/translations.py prune           # removes versions superseded by a reviewed current one
+```
+
+When a post or article is added or changed, every missing/outdated translation is made and reviewed in the
+same commit — the procedure is in `CLAUDE.md`; agreed terms in `docs/translation-glossary.md`.
+Courses are not translated (their lectures are in Russian); papers have RU + EN abstracts.
+
 ## Add an external article or course
 
 Add an entry to `sources.yml` (`articles:` → `/writing/<slug>/`, `courses:` → `/courses/<slug>/`)

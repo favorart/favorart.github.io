@@ -95,3 +95,7 @@ covers_mask_title: Cover frost on hover
 covers_mask_hint: "At rest the cover is behind frosted glass with a clear corner; on hover the frost fades out and the picture zooms. Hover a card or press Play all. Corner, size and edge: --cover-peek-corner, --cover-peek-size, --cover-peek-soft in assets/site.css."
 covers_play_all: ▶ Play all
 covers_stop_all: ■ Stop
+
+# note above a translated article (followed by a link to the original) and the out-of-date warning
+translation_note: "Translated by Claude, independently reviewed. Original:"
+translation_stale: "The original has been updated since this translation."

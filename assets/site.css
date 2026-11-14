@@ -484,3 +484,8 @@ footer .copy { flex-basis: 100%; margin: 0; display: grid; gap: 2px; font-size: 
   .who b { font-size: 14px; }
   .avatar { width: 34px; height: 34px; }
 }
+
+/* note above a translated article: "Translation … Original: Русский", and the out-of-date warning */
+.prose .tr-note { text-align: left; font: 500 13px/1.5 Inter, sans-serif; color: var(--muted, inherit); margin: 0 0 .6em; }
+.prose .tr-note.stale { color: var(--text); padding: 8px 12px; border-radius: 12px; background: var(--glass-strong);
+  border: 1px solid var(--glass-line); }

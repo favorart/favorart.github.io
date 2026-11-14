@@ -107,3 +107,7 @@ covers_mask_hint: "At rest the cover is behind frosted glass with a clear corner
 covers_play_all: ▶ Play all
 covers_stop_all: ■ Stop
 paper_source: "{j}, т. {v}, вып. {i}, {y}, с. {p}"
+
+# note above a translated article (followed by a link to the original) and the out-of-date warning
+translation_note: "Перевод Claude, прошёл независимую проверку. Оригинал:"
+translation_stale: "Оригинал изменился после этого перевода."
