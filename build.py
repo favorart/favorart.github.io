@@ -739,8 +739,12 @@ def article_page(item, t):
     elif tr:  # a reviewed translation of the text into this UI language
         title, title_lang, summary = str(tr["meta"]["title"]), t["html_lang"], str(tr["meta"]["summary"])
         text_lang_, canonical = t["html_lang"], None
-        content = tr_note(item, tr, t) + tr_body_html(item, tr)
-        subtitle = ""
+        subtitle, body_md = "", tr["body"]
+        m = re.match(r"\A\s*#\s+(.+?)\s*#*\s*\n", body_md)
+        if m and item["type"] == "external":  # the text's own H1 is the subtitle, as on the original's page
+            subtitle = '<p class="subtitle">%s</p>' % esc(m.group(1).strip())
+            body_md = body_md[m.end():]
+        content = tr_note(item, tr, t) + tr_body_html(item, dict(tr, body=body_md))
     body = tpl("article", hero=hero, kind=kind_of(item, t), date=date_text(item, t), views=views_tag(item, t), lang=esc(text_lang_),
                title=esc(title), title_lang=esc(title_lang),
                subtitle=subtitle, author=S(t, "author"), source_top=source_top,
