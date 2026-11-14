@@ -62,6 +62,7 @@ def fail(msg):
 # Local CSS / favicon / cover URLs get ?v=<8 hex of sha256 of the file>, so browsers never pair new HTML
 # with a stale cached file. The stylesheet's version is set in main() from its generated text.
 ASSET_V = {}
+TRANSLATIONS = {}  # (section, slug, lang) -> translation, filled in main() by load_translations()
 
 
 def file_v(path):
@@ -329,6 +330,7 @@ def load_posts():
         card_cover = meta.get("card_cover")  # optional: a different picture for cards (e.g. a portrait photo)
         if card_cover and not os.path.isfile(os.path.join(folder, card_cover)):
             fail("%s: card_cover file '%s' not found next to index.md" % (where, card_cover))
+        source_md = body
         body_html = render_markdown(body)
         if cover:  # the cover is shown above the title; drop the same picture repeated in the text
             body_html = re.sub(r'<p>\s*<img[^>]*\bsrc="%s"[^>]*>\s*</p>\s*' % re.escape(cover), "", body_html)
@@ -343,6 +345,7 @@ def load_posts():
             "folder": folder, "options_dir": folder,
             "body_html": body_html, "subtitle": None, "demo_url": meta.get("demo_url"),
             "list": meta.get("list", True),
+            "source_md": source_md, "source_ref": where, "cover_file": cover,
         })
     return items
 
@@ -382,6 +385,8 @@ def load_external(offline):
             item["body_html"] = "<p><em>(offline build: content not fetched)</em></p>"
         else:
             raw = fetch("https://raw.githubusercontent.com/%s/%s/%s" % (e["repo"], e["branch"], e["path"]))
+            item["source_md"], item["source_ref"] = raw, "%s@%s:%s" % (e["repo"], e["branch"], e["path"])
+            item["page_of"] = page_of
             m = re.match(r"\A\s*#\s+(.+?)\s*#*\s*\n", raw)
             if m:  # the source's own H1 becomes the subtitle; the page H1 is the manifest title
                 item["subtitle"], raw = m.group(1).strip(), raw[m.end():]
@@ -429,6 +434,96 @@ def paper_item(e):
         "subtitle": e.get("title_en"), "body_html": "\n".join(body), "paper": e,
         "source_line": "%s, vol. %s, no. %s, %d, pp. %s" % (e["journal_en"], e["volume"], e["issue"], year, e["pages"]),
     }
+
+
+# ---------------------------------------------------------------- translations
+# Article translations are a cache keyed by the version of the original text:
+#   translations/<section>/<slug>/<lang>.<hash>.md   (hash = source_hash() of the original it was made from)
+# The build shows the version made from the current original; if there is none, the newest older one with a
+# note that the original has changed since. Only reviewed translations (front matter `reviewed: <date>`) are used.
+# tools/translations.py lists what is missing or stale and creates the files.
+
+TRANSLATABLE_TYPES = ("post", "external")
+
+
+def source_hash(text):
+    """Version of an original text: sha256 of its normalized Markdown, first 12 hex digits."""
+    norm = "\n".join(line.rstrip() for line in text.replace("\r\n", "\n").strip().split("\n"))
+    return hashlib.sha256(norm.encode("utf-8")).hexdigest()[:12]
+
+
+def translatable(item):
+    return item["type"] in TRANSLATABLE_TYPES and item["section"] == "writing" and item["list"] and "source_md" in item
+
+
+def translation_files(item, lang):
+    d = os.path.join(ROOT, "translations", item["section"], item["slug"])
+    return sorted(glob.glob(os.path.join(d, "%s.*.md" % lang)))
+
+
+def read_translation(path):
+    with open(path, encoding="utf-8") as f:
+        meta, body = split_front_matter(f.read(), os.path.relpath(path, ROOT))
+    for key in ("title", "summary", "source_hash", "translated"):
+        if not meta.get(key):
+            fail("%s: front matter field '%s' is required" % (os.path.relpath(path, ROOT), key))
+    return meta, body
+
+
+def load_translations(items, langs):
+    """Pick, for every translatable item and UI language, the translation to show."""
+    report = {"fresh": 0, "stale": 0, "missing": 0}
+    for item in items:
+        if not translatable(item):
+            continue
+        cur = source_hash(item["source_md"])
+        item["source_version"] = cur
+        for code in langs:
+            if code == item["lang"]:
+                continue
+            best = None
+            for path in translation_files(item, code):
+                meta, body = read_translation(path)
+                if str(meta["source_hash"]) != os.path.basename(path).split(".")[-2]:
+                    fail("%s: file name and source_hash differ" % os.path.relpath(path, ROOT))
+                if not meta.get("reviewed"):
+                    continue  # not reviewed yet: never published
+                cand = {"meta": meta, "body": body, "fresh": str(meta["source_hash"]) == cur,
+                        "translated": str(meta["translated"])}
+                if best is None or (cand["fresh"], cand["translated"]) > (best["fresh"], best["translated"]):
+                    best = cand
+            if best:
+                TRANSLATIONS[(item["section"], item["slug"], code)] = best
+                report["fresh" if best["fresh"] else "stale"] += 1
+            else:
+                report["missing"] += 1
+    return report
+
+
+def tr_of(item, t):
+    return TRANSLATIONS.get((item["section"], item["slug"], t["lang"]))
+
+
+def tr_body_html(item, tr):
+    body_html = render_markdown(tr["body"])
+    if item["type"] == "post" and item.get("cover_file"):
+        body_html = re.sub(r'<p>\s*<img[^>]*\bsrc="%s"[^>]*>\s*</p>\s*' % re.escape(item["cover_file"]), "", body_html)
+    if item["type"] == "external":
+        body_html = linkify_bare(rewrite_relative(body_html, item, item["page_of"]))
+    return body_html
+
+
+def tr_note(item, tr, t):
+    """'Translated … Original: <language>' above a translated text, plus a warning when it is out of date."""
+    src = LANGS.get(item["lang"])
+    link = ('<a href="%s%s" hreflang="%s" lang="%s">%s</a>' % (
+        src["prefix"], item_url(item), esc(src["html_lang"]), esc(src["html_lang"]), esc(str(src["name"])))
+        if src else "")
+    note = '<p class="tr-note">%s %s</p>' % (esc(str(t.get("translation_note", "Translation. Original:"))), link)
+    if not tr["fresh"]:
+        note += '<p class="tr-note stale">%s</p>' % esc(str(t.get(
+            "translation_stale", "The original has been updated since this translation.")))
+    return note
 
 
 # ---------------------------------------------------------------- pages
@@ -571,8 +666,10 @@ def card(item, t):
     return tpl("card", href=item_url(item, t), cover=cover, badge=badge, type_chip=type_chip(item, t),
                wtype=esc(item.get("wtype", "")) if item["section"] == "writing" else "", kind=kind_of(item, t), date=date_text(item, t),
                views=views_tag(item, t),
-               lang=esc(text_lang(item, "title", t)), title=esc(str(loc(item["title"], t))),
-               summary_lang=esc(text_lang(item, "summary", t)), summary=esc(str(loc(item["summary"], t))))
+               lang=esc(t["html_lang"] if tr_of(item, t) else text_lang(item, "title", t)),
+               title=esc(str(tr_of(item, t)["meta"]["title"] if tr_of(item, t) else loc(item["title"], t))),
+               summary_lang=esc(t["html_lang"] if tr_of(item, t) else text_lang(item, "summary", t)),
+               summary=esc(str(tr_of(item, t)["meta"]["summary"] if tr_of(item, t) else loc(item["summary"], t))))
 
 
 def article_page(item, t):
@@ -602,15 +699,23 @@ def article_page(item, t):
     hero = ""
     if page_cover(item):
         hero = cover_imgs(item, page_cover(item), "hero-cover", lazy=False)
-    body = tpl("article", hero=hero, kind=kind_of(item, t), date=date_text(item, t), views=views_tag(item, t), lang=esc(item["lang"]),
-               title=esc(str(loc(item["title"], t))), title_lang=esc(text_lang(item, "title", t)),
+    tr = tr_of(item, t)
+    title, title_lang = str(loc(item["title"], t)), text_lang(item, "title", t)
+    summary, text_lang_, content, canonical = str(loc(item["summary"], t)), item["lang"], item["body_html"], item_url(item)
+    if tr:  # a reviewed translation of the text into this UI language
+        title, title_lang, summary = str(tr["meta"]["title"]), t["html_lang"], str(tr["meta"]["summary"])
+        text_lang_, canonical = t["html_lang"], None
+        content = tr_note(item, tr, t) + tr_body_html(item, tr)
+        subtitle = ""
+    body = tpl("article", hero=hero, kind=kind_of(item, t), date=date_text(item, t), views=views_tag(item, t), lang=esc(text_lang_),
+               title=esc(title), title_lang=esc(title_lang),
                subtitle=subtitle, author=S(t, "author"), source_top=source_top,
-               demo=demo, content=item["body_html"], cta=cta, type_chip=type_chip(item, t),
+               demo=demo, content=content, cta=cta, type_chip=type_chip(item, t),
                back_href="%s/%s/" % (t["prefix"], item["section"]), back_text=S(t, back))
     cover = item.get("cover_url") or ""
-    return page(t, "%s — %s" % (loc(item["title"], t), t["author"]), body, item_url(item, t),
-                description=str(loc(item["summary"], t)),
-                canonical=item_url(item), og_image=cover if cover.lower().endswith(RASTER) else None, og_type="article",
+    return page(t, "%s — %s" % (title, t["author"]), body, item_url(item, t),
+                description=summary,
+                canonical=canonical, og_image=cover if cover.lower().endswith(RASTER) else None, og_type="article",
                 section="teaching" if item["section"] == "courses" else "writing")
 
 
@@ -779,6 +884,7 @@ def main():
     if dupes or ("writing", "covers") in keys:
         fail("duplicate or reserved slugs: %s" % sorted(dupes | ({("writing", "covers")} & set(keys))))
     items.sort(key=lambda i: (i["date"], str(loc(i["title"], t0))), reverse=True)
+    tr_report = load_translations(items, langs)
 
     if os.path.isdir(out):
         shutil.rmtree(out)
@@ -816,6 +922,8 @@ def main():
     for i in items:
         counts[i["section"]] = counts.get(i["section"], 0) + 1
     print("built: %s, languages: %s -> %s" % (counts, sorted(langs), out))
+    print("translations: %(fresh)d up to date, %(stale)d outdated, %(missing)d missing "
+          "(details: python tools/translations.py status)" % tr_report)
 
 
 if __name__ == "__main__":

@@ -99,3 +99,7 @@ aria_language: Til
 aria_sections: Boʻlimlar
 paper_issue: "{v}-jild, {i}-son"
 paper_source: "{j}, {v}-jild, {i}-son, {y}, {p}-betlar"
+
+# note above a translated article (followed by a link to the original) and the out-of-date warning
+translation_note: "Claude tarjimasi, mustaqil tekshirilgan. Asl matn:"
+translation_stale: "Ushbu tarjimadan keyin asl matn yangilangan."
