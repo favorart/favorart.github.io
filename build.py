@@ -41,6 +41,9 @@ SITE_URL = "https://favorart.github.io"
 LICENSE_URL = "https://github.com/favorart/favorart.github.io/blob/main/LICENSE"
 DEFAULT_LANG = "en"
 HOME_LATEST = 2  # cards per section on the home page
+# GoatCounter site code (https://<code>.goatcounter.com): cookie-free visit counter.
+# Empty string disables the counter. count.js itself ignores localhost and file:// views.
+GOATCOUNTER_CODE = os.environ.get("GOATCOUNTER_CODE", "favorart")
 RASTER = (".jpg", ".jpeg", ".png", ".gif", ".webp", ".avif")
 IMAGE_EXT = RASTER + (".svg",)
 # content sections: manifest key -> URL segment
@@ -414,6 +417,9 @@ def page(t, title, body, path, description="", lang=None, og_image=None, og_type
         extra.append('<meta property="og:image" content="%s">' % esc(SITE_URL + og_image))
     if noindex:
         extra.append('<meta name="robots" content="noindex">')
+    if GOATCOUNTER_CODE:
+        extra.append('<script data-goatcounter="https://%s.goatcounter.com/count" async '
+                     'src="https://gc.zgo.at/count.js"></script>' % esc(GOATCOUNTER_CODE))
     return tpl("base", lang=esc(lang or t["lang"]), title=esc(title), og_title=esc(og_title or title),
                description=esc(description), og_type=og_type, url=esc(SITE_URL + path),
                head_extra="\n".join(extra), body_class=body_class, prefix=t["prefix"],
