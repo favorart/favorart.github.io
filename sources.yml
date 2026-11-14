@@ -37,7 +37,7 @@ articles:
       uz: Tugʻilgan kuningiz π raqamlarida
     date: 2018-01-01
     date_label: 2018 → 2026
-    kind: {en: Article · EN / RU, es: Nota · EN / RU, ru: Заметка · EN / RU, sr: Zapis · EN / RU, uz: Qayd · EN / RU}
+    kind: {en: Article · Python, es: Nota · Python, ru: Заметка · Python, sr: Zapis · Python, uz: Qayd · Python}
     lang: en
     summary:
       en: A small GUI app in Python/Tkinter that finds your date of birth among 3 billion digits of π — later rebuilt for the web.
@@ -89,7 +89,7 @@ articles:
       uz: Sintaksisi sozlanadigan interpretator
     date: 2013-01-01
     date_label: "2013"
-    kind: {en: Article · RU, es: Nota · RU, ru: Заметка · RU, sr: Zapis · RU, uz: Qayd · RU}
+    kind: {en: Article, es: Nota, ru: Заметка, sr: Zapis, uz: Qayd}
     lang: ru
     summary:
       en: Bachelor's project — a cross-platform interpreter whose keywords and grammar are configurable.
