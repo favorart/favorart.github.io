@@ -3,7 +3,7 @@ title: "День рождения в цифрах числа π"
 summary: "Небольшое GUI-приложение на Python/Tkinter, которое ищет дату рождения среди 3 миллиардов знаков π, — позже переделанное для веба."
 source: favorart/pi-birthday@main:article.md
 source_lang: en
-source_hash: 926233cf
+source_hash: 7eab787c
 translated: 2026-11-14
 translator: Kirill Golikov (author), adapted by Claude
 reviewed: 2026-11-14

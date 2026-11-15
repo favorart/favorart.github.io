@@ -3,7 +3,7 @@ title: "Tu cumpleaños en las cifras de π"
 summary: "Una pequeña aplicación gráfica en Python/Tkinter que encuentra tu fecha de nacimiento entre 3000 millones de cifras de π, luego rehecha para la web."
 source: favorart/pi-birthday@main:article.md
 source_lang: en
-source_hash: 926233cf
+source_hash: 7eab787c
 translated: 2026-11-14
 translator: Claude
 reviewed: 2026-11-14
