@@ -28,41 +28,41 @@ Al principio Claude me propuso lo que propone siempre: un minimalismo estricto, 
 
 Después nos peleamos mucho tiempo con los efectos y los fondos. El sol o deslumbraba y aplastaba todo lo que tenía alrededor, o desaparecía del todo.
 
-![El sol: cuatro intentos](img/anim/10-sun.en.gif)
+![El sol: cuatro intentos](img/anim/10-sun.es.gif)
 
 La reacción al ratón tampoco salió a la primera. Yo quería justo ese zoom sobre la imagen de la tercera maqueta.
 
-![1. Rechazado: la tarjeta se eleva](img/anim/01-lift.en.gif)
+![1. Rechazado: la tarjeta se eleva](img/anim/01-lift.es.gif)
 
-![2. Aceptado: la imagen se amplía dentro de una tarjeta inmóvil](img/anim/02-zoom.en.gif)
+![2. Aceptado: la imagen se amplía dentro de una tarjeta inmóvil](img/anim/02-zoom.es.gif)
 
 Elegimos el zoom, pero yo no lo veía, y dos veces me quejé de que a mí simplemente no se ampliaba nada. Claude revisó los estilos dos veces, y todo estaba en su sitio. Resultó que en mi Windows los efectos de animación estaban desactivados. El navegador le transmitía fielmente a la web la petición de prescindir del movimiento, y la web fielmente no se movía. Mi propio Windows me prohibía ver lo que yo había encargado. Ahora, para los que son como yo, hay una versión discreta, en la que la imagen se amplía un poquito y rápido.
 
-![Versión discreta: un poquito y rápido](img/anim/02b-quiet.en.gif)
+![Versión discreta: un poquito y rápido](img/anim/02b-quiet.es.gif)
 
 Lo que más se resistió fue el propio cristal.
 
-![3. Rechazado: el cristal se desliza fuera](img/anim/03-slide.en.gif)
+![3. Rechazado: el cristal se desliza fuera](img/anim/03-slide.es.gif)
 
-![4. Paso: el cristal se desvanece entero](img/anim/04-fade.en.gif)
+![4. Paso: el cristal se desvanece entero](img/anim/04-fade.es.gif)
 
-![5. Rechazado: la diagonal avanza desplazándose](img/anim/05-sweep.en.gif)
+![5. Rechazado: la diagonal avanza desplazándose](img/anim/05-sweep.es.gif)
 
-![6. Paso: la diagonal se desvanece](img/anim/06-diagfade.en.gif)
+![6. Paso: la diagonal se desvanece](img/anim/06-diagfade.es.gif)
 
 Por dónde pasa la diagonal y cuánto se difumina no se puede explicar con palabras. Así que Claude hizo una página de pruebas aparte, donde nueve variantes se mueven a la vez. Cubren el 30, el 20 o el 10 por ciento de la imagen, y su borde es nítido, medio o ancho. Uno mira y señala con el dedo la que quiere.
 
 Elegí. Y luego me di cuenta de que todo ese tiempo había querido lo contrario.
 
-![7. Casi: una esquina transparente, pero no la buena](img/anim/07-peekTL.en.gif)
+![7. Casi: una esquina transparente, pero no la buena](img/anim/07-peekTL.es.gif)
 
-![8. Aceptado: la esquina de abajo a la derecha; al pasar el ratón, el cristal se desvanece entero](img/anim/08-peekBR.en.gif)
+![8. Aceptado: la esquina de abajo a la derecha; al pasar el ratón, el cristal se desvanece entero](img/anim/08-peekBR.es.gif)
 
 ## De los enlaces a los botones
 
 Cómo resaltar los enlaces también lo decidimos al tercer intento.
 
-![Enlaces: subrayado, rotulador, aparición](img/anim/09-links.en.gif)
+![Enlaces: subrayado, rotulador, aparición](img/anim/09-links.es.gif)
 
 El icono de la pestaña es toda la web en un cuadradito, con ese mismo sol. Ahora el sol nos recibe en el fondo, en la pestaña y en el logo de la página.
 
@@ -76,7 +76,7 @@ Debajo de cada nota hay dos botones iguales, pero solo «Enviar comentarios» es
 
 Las notas de mis repositorios no se copian a la web. Corrijo el README en el repositorio y se corrige la página. No hay una segunda versión, así que no hay nada que pueda desincronizarse.
 
-![Cómo se construye la web](img/build-scheme.en.png)
+![Cómo se construye la web](img/build-scheme.es.png)
 
 La web habla inglés, español, ruso, serbio y uzbeko. Quien haya leído mi currículum reconocerá en esta lista un mapa.
 
