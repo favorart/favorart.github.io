@@ -9,9 +9,9 @@ kind: Ochiq kodga hissa · C++
 ## Ishning asosiy yoʻnalishlari
 
 - **OpenMP oʻrniga — oʻz oqimlar puli.** CPU hisoblash dvigateli va klassik algoritmlarni (gradient boosting, SVM, k-means, optimizatorlar) OpenMPdan freymvorkning oʻz oqimlar puliga (thread pool) koʻchirdim: endi kutubxona oʻz oqimlarini oʻzi boshqaradi va barcha platformalarda bir xil ishlaydi.
-- **Xotira.** Xotira dvigateli va stek allokatorlarini refaktoring qildim, xotira limitlari, eng yuqori xotira sarfi statistikasi, har bir oqim uchun alohida bufer pullari va oqimlar oʻrtasida maʼlumot uzatishni qoʻshdim, qatlamlarning (jumladan, LoRA qatlamlarining) xotira sarfini kamaytirdim.
-- **Tezlik.** Konvolyutsiyaning tezroq teskari oʻtishi (backward pass), MKL JIT matritsa koʻpaytmasi, L1/L2 kesh oʻlchamlariga moslangan matritsa koʻpaytirgich, CUDA sinxronizatsiyalarini kamaytirish, pooling yadrolarida mikrooptimallashtirishlar.
-- **CUDA dvigateli.** Reduksiya yadrolari, umumiy buferni initsializatsiya qilish va standart qiymatlardagi xatolarni tuzatish.
+- **Xotira.** Xotira dvigateli va stek allokatorlarini refaktoring qildim, xotira limitlari, eng yuqori xotira sarfi statistikasi, har bir oqimning bufer pullari uchun baytlardagi chegara va oqimlar oʻrtasida maʼlumot uzatishni qoʻshdim, qatlamlarning (jumladan, LoRA qatlamlarining) xotira sarfini kamaytirdim.
+- **Tezlik.** Konvolyutsiyaning tezroq teskari oʻtishi (backward pass), baʼzi qatlamlarda MKL JIT matritsa koʻpaytmasi (keyinroq qisman bekor qilingan), CUDA sinxronizatsiyalarini kamaytirish, pooling yadrolarida mikrooptimallashtirishlar.
+- **CUDA dvigateli.** Reduksiya yadrolari va standart qiymatlardagi xatolarni tuzatish, GPUda LSTMni NaNdan himoyalash, ehtiyot uchun qoʻshimcha initsializatsiyalar.
 - **Modellar.** Pre-normalizatsiyali transformer enkoderi, gradientni kesish (gradient clipping), taqsimlangan inferens; NeoOnnxda — ikki yoʻnalishli LSTM, 1D transponirlangan konvolyutsiya, qatlam normalizatsiyasini qoʻshni amallar bilan birlashtirish (layer-normalization fusion) va graf optimizatori.
 - **Yigʻish va sifat.** Android va iOS uchun ixcham yigʻma, macOS uchun kross-kompilyatsiya, Visual Studio 2022ga oʻtish, CodeQL tekshiruvlari, yangi testlar va tozaroq ommaviy sarlavha fayllari.
 

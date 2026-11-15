@@ -18,9 +18,9 @@ Value Change Dump (VCD) — текстовый формат, в котором 
 
 ## Инженерная часть
 
-- CI на Linux, Windows и macOS с GoogleTest, AddressSanitizer и UndefinedBehaviorSanitizer.
+- CI на Linux, Windows и macOS: модульные тесты на GoogleTest и побайтовое сравнение с эталонным файлом; отдельная задача на Linux гоняет их под AddressSanitizer и UndefinedBehaviorSanitizer.
 - Каждый коммит, прошедший CI, получает тег семантической версии и GitHub Release с собранными библиотеками.
-- В CMake-проект библиотека подключается одним вызовом `CPMAddPackage`.
+- В CMake-проект библиотека подключается через `CPMAddPackage`; есть и сборка обычным Makefile.
 - В README — сравнение по возможностям с pyvcd и cpp-vcd-tracer.
 
 ## Почему это важно
