@@ -3,7 +3,7 @@ title: "How can a single float slow down GPU training?"
 summary: "A single scalar sent to the GPU with a synchronous cudaMemcpy stalls the whole training pipeline. Why that happens, and how NeoML avoids the stalls by passing the number by value."
 source: posts/2026-11-gpu-waits-for-a-float/index.md
 source_lang: ru
-source_hash: f24792e0
+source_hash: 104d94b0
 translated: 2026-11-15
 translator: Claude
 reviewed: 2026-11-15
@@ -38,9 +38,9 @@ Have you ever had to hunt down what your code was waiting for?
 
 Further reading:
 
-* NVIDIA, CUDA Runtime API: API synchronization behavior — which copies wait for the queue and which don't https://docs.nvidia.com/cuda/cuda-runtime-api/api-sync-behavior.html
-* NVIDIA, How to Optimize Data Transfers in CUDA C/C++ — pinned memory and the cost of small transfers https://developer.nvidia.com/blog/how-optimize-data-transfers-cuda-cc/
-* NVIDIA, Getting Started with CUDA Graphs — where the 2.9 / 3.8 / 9.6 µs figures come from https://developer.nvidia.com/blog/cuda-graphs/
-* PyTorch Performance Tuning Guide https://pytorch.org/tutorials/recipes/recipes/tuning_guide.html
+* [NVIDIA, CUDA Runtime API: API synchronization behavior](https://docs.nvidia.com/cuda/cuda-runtime-api/api-sync-behavior.html) — which copies wait for the queue and which don't
+* [NVIDIA, How to Optimize Data Transfers in CUDA C/C++](https://developer.nvidia.com/blog/how-optimize-data-transfers-cuda-cc/) — pinned memory and the cost of small transfers
+* [NVIDIA, Getting Started with CUDA Graphs](https://developer.nvidia.com/blog/cuda-graphs/) — where the 2.9 / 3.8 / 9.6 µs figures come from
+* [PyTorch Performance Tuning Guide](https://pytorch.org/tutorials/recipes/recipes/tuning_guide.html)
 
 ![Image from the post](cover.jpg)

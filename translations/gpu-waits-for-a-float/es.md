@@ -3,7 +3,7 @@ title: "¿Cómo puede un solo float frenar el entrenamiento en la GPU?"
 summary: "Un solo escalar enviado a la GPU con un cudaMemcpy síncrono detiene todo el pipeline de entrenamiento. Por qué pasa y cómo en NeoML se evitan las paradas pasando el número por valor."
 source: posts/2026-11-gpu-waits-for-a-float/index.md
 source_lang: ru
-source_hash: f24792e0
+source_hash: 104d94b0
 translated: 2026-11-15
 translator: Claude
 reviewed: 2026-11-15
@@ -38,9 +38,9 @@ El [PR](https://github.com/neoml-lib/neoml/pull/1070){: hreflang=en } que ayuda 
 
 Para leer:
 
-* NVIDIA, CUDA Runtime API: API synchronization behavior — qué copia espera a la cola y cuál no https://docs.nvidia.com/cuda/cuda-runtime-api/api-sync-behavior.html
-* NVIDIA, How to Optimize Data Transfers in CUDA C/C++ — la memoria fijada y el coste de las transferencias pequeñas https://developer.nvidia.com/blog/how-optimize-data-transfers-cuda-cc/
-* NVIDIA, Getting Started with CUDA Graphs — de dónde salen las cifras de 2,9 / 3,8 / 9,6 µs https://developer.nvidia.com/blog/cuda-graphs/
-* PyTorch Performance Tuning Guide https://pytorch.org/tutorials/recipes/recipes/tuning_guide.html
+* [NVIDIA, CUDA Runtime API: API synchronization behavior](https://docs.nvidia.com/cuda/cuda-runtime-api/api-sync-behavior.html) — qué copia espera a la cola y cuál no
+* [NVIDIA, How to Optimize Data Transfers in CUDA C/C++](https://developer.nvidia.com/blog/how-optimize-data-transfers-cuda-cc/) — la memoria fijada y el coste de las transferencias pequeñas
+* [NVIDIA, Getting Started with CUDA Graphs](https://developer.nvidia.com/blog/cuda-graphs/) — de dónde salen las cifras de 2,9 / 3,8 / 9,6 µs
+* [PyTorch Performance Tuning Guide](https://pytorch.org/tutorials/recipes/recipes/tuning_guide.html)
 
 ![Imagen del post](cover.jpg)
