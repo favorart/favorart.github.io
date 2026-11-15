@@ -29,41 +29,41 @@ Claude mi je prvo ponudio ono što obično nudi: strogi minimalizam, tamni inže
 
 Zatim smo se dugo mučili sa efektima i pozadinama. Sunce je čas zaslepljivalo i pritiskalo sve oko sebe, čas potpuno nestajalo.
 
-![Sunce: četiri pokušaja](img/anim/10-sun.en.gif)
+![Sunce: četiri pokušaja](img/anim/10-sun.sr.gif)
 
 Ni sa reakcijom na miša nije išlo odmah. Hteo sam baš ono zumiranje slike iz trećeg mokapa.
 
-![1. Odbijeno: kartica se podiže](img/anim/01-lift.en.gif)
+![1. Odbijeno: kartica se podiže](img/anim/01-lift.sr.gif)
 
-![2. Prihvaćeno: slika se uvećava unutar nepomične kartice](img/anim/02-zoom.en.gif)
+![2. Prihvaćeno: slika se uvećava unutar nepomične kartice](img/anim/02-zoom.sr.gif)
 
 Zumiranje smo izabrali, ali ja ga nisam video i dvaput sam se žalio da uvećanja kod mene jednostavno nema. Claude je dvaput proveravao stilove, i sve je bilo na mestu. Ispostavilo se da su mi u Windows-u isključeni efekti animacije. Pregledač je pošteno prenosio sajtu molbu da se ne pomera, i sajt se pošteno nije pomerao. Moj sopstveni Windows zabranjivao je da mi se prikaže ono što sam naručio. Sada za one poput mene postoji tiha verzija, gde se slika uvećava malčice i brzo.
 
-![Tiha verzija: malčice i brzo](img/anim/02b-quiet.en.gif)
+![Tiha verzija: malčice i brzo](img/anim/02b-quiet.sr.gif)
 
 Najviše muke bilo je sa samim staklom.
 
-![3. Odbijeno: staklo odlazi u stranu](img/anim/03-slide.en.gif)
+![3. Odbijeno: staklo odlazi u stranu](img/anim/03-slide.sr.gif)
 
-![4. Korak: staklo se topi celo](img/anim/04-fade.en.gif)
+![4. Korak: staklo se topi celo](img/anim/04-fade.sr.gif)
 
-![5. Odbijeno: dijagonala klizi preko slike](img/anim/05-sweep.en.gif)
+![5. Odbijeno: dijagonala klizi preko slike](img/anim/05-sweep.sr.gif)
 
-![6. Korak: dijagonala bledi](img/anim/06-diagfade.en.gif)
+![6. Korak: dijagonala bledi](img/anim/06-diagfade.sr.gif)
 
 Gde će proći dijagonala i koliko je zamućena, rečima se ne može objasniti. Zato je Claude napravio posebnu demo stranicu, gde se devet varijanti kreće istovremeno. Pokrivaju 30, 20 ili 10 procenata slike, a granica im je oštra, srednja ili široka. Gledaš i upreš prstom u onu pravu.
 
 Izabrao sam. A onda shvatio da sam sve vreme hteo obrnuto.
 
-![7. Skoro: providan ugao, ali ne taj](img/anim/07-peekTL.en.gif)
+![7. Skoro: providan ugao, ali ne taj](img/anim/07-peekTL.sr.gif)
 
-![8. Prihvaćeno: ugao dole desno, kad se pređe mišem staklo se topi celo](img/anim/08-peekBR.en.gif)
+![8. Prihvaćeno: ugao dole desno, kad se pređe mišem staklo se topi celo](img/anim/08-peekBR.sr.gif)
 
 ## Od linkova do dugmadi
 
 Kako ćemo isticati linkove, i to smo rešili tek iz trećeg pokušaja.
 
-![Linkovi: podvlačenje, marker, pojavljivanje](img/anim/09-links.en.gif)
+![Linkovi: podvlačenje, marker, pojavljivanje](img/anim/09-links.sr.gif)
 
 Ikonica na kartici pregledača – ceo sajt u malom kvadratiću, sa onim istim suncem. Sada nas sunce dočekuje i u pozadini, i na kartici, i u logotipu stranice.
 
@@ -77,7 +77,7 @@ Ispod svakog teksta su dva jednaka dugmeta, ali je upadljivo samo „Pošaljite 
 
 Tekstovi iz mojih repozitorijuma ne kopiraju se na sajt. Ispravio sam README u repozitorijumu, i ispravila se stranica. Druge verzije nema, pa nema ni šta da se razilazi.
 
-![Kako se sajt sklapa](img/build-scheme.en.png)
+![Kako se sajt sklapa](img/build-scheme.sr.png)
 
 Sajt govori engleski, španski, ruski, srpski i uzbečki. Ko je čitao moju biografiju, u ovom skupu prepoznaće mapu.
 

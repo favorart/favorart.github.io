@@ -29,41 +29,41 @@ Avvaliga Claude menga odatda taklif qiladigan narsalarni taklif qildi: qatʼiy m
 
 Keyin effektlar va fonlar bilan uzoq qiynaldik. Quyosh goh koʻzni qamashtirib, atrofdagi hamma narsani bosib ketardi, goh butunlay gʻoyib boʻlardi.
 
-![Quyosh: toʻrt urinish](img/anim/10-sun.en.gif)
+![Quyosh: toʻrt urinish](img/anim/10-sun.uz.gif)
 
 Sichqonchaga javob ham birdaniga shakllanmadi. Men uchinchi maketdagi oʻsha rasmni yaqinlashtirish effektini xohlardim.
 
-![1. Rad etildi: kartochka koʻtariladi](img/anim/01-lift.en.gif)
+![1. Rad etildi: kartochka koʻtariladi](img/anim/01-lift.uz.gif)
 
-![2. Qabul qilindi: rasm qimirlamaydigan kartochka ichida kattalashadi](img/anim/02-zoom.en.gif)
+![2. Qabul qilindi: rasm qimirlamaydigan kartochka ichida kattalashadi](img/anim/02-zoom.uz.gif)
 
 Yaqinlashtirishni tanladik, lekin men uni koʻrmadim va ikki marta menda kattalashish umuman yoʻq, deb shikoyat qildim. Claude ikki marta uslublarni tekshirdi, hammasi joyida edi. Maʼlum boʻlishicha, Windowsimda animatsiya effektlari oʻchirilgan ekan. Brauzer saytga harakatsiz ishlash iltimosini halol yetkazdi, sayt ham halol qimirlamadi. Oʻzimning Windowsim menga oʻzim buyurtma qilgan narsani koʻrsatishni taqiqlardi. Endi men kabilar uchun sokin versiya bor: unda rasm ozgina va tez kattalashadi.
 
-![Sokin versiya: ozgina va tez](img/anim/02b-quiet.en.gif)
+![Sokin versiya: ozgina va tez](img/anim/02b-quiet.uz.gif)
 
 Eng uzoq vaqt shishaning oʻzi boʻysunmadi.
 
-![3. Rad etildi: shisha surilib ketadi](img/anim/03-slide.en.gif)
+![3. Rad etildi: shisha surilib ketadi](img/anim/03-slide.uz.gif)
 
-![4. Qadam: shisha butunlay eriydi](img/anim/04-fade.en.gif)
+![4. Qadam: shisha butunlay eriydi](img/anim/04-fade.uz.gif)
 
-![5. Rad etildi: diagonal siljib yuguradi](img/anim/05-sweep.en.gif)
+![5. Rad etildi: diagonal siljib yuguradi](img/anim/05-sweep.uz.gif)
 
-![6. Qadam: diagonal soʻnib boradi](img/anim/06-diagfade.en.gif)
+![6. Qadam: diagonal soʻnib boradi](img/anim/06-diagfade.uz.gif)
 
 Diagonal qayerdan oʻtishini va qanchalik xira boʻlishini soʻz bilan tushuntirib boʻlmaydi. Shuning uchun Claude alohida stend-sahifa yasadi, unda toʻqqiz variant bir vaqtda harakatlanadi. Ular rasmning 30, 20 yoki 10 foizini yopadi, chegarasi esa keskin, oʻrtacha yoki keng. Qaraysan-u, keraklisini barmogʻing bilan nuqiysan.
 
 Tanladim. Keyin esa shuncha vaqt teskarisini xohlaganimni tushundim.
 
-![7. Deyarli: shaffof burchak, lekin oʻsha emas](img/anim/07-peekTL.en.gif)
+![7. Deyarli: shaffof burchak, lekin oʻsha emas](img/anim/07-peekTL.uz.gif)
 
-![8. Qabul qilindi: oʻng pastki burchak, ustiga olib borilganda shisha butunlay eriydi](img/anim/08-peekBR.en.gif)
+![8. Qabul qilindi: oʻng pastki burchak, ustiga olib borilganda shisha butunlay eriydi](img/anim/08-peekBR.uz.gif)
 
 ## Havolalardan tugmalargacha
 
 Havolalarni qanday ajratib koʻrsatishni ham faqat uchinchi urinishda hal qildik.
 
-![Havolalar: tagiga chizish, marker, paydo boʻlish](img/anim/09-links.en.gif)
+![Havolalar: tagiga chizish, marker, paydo boʻlish](img/anim/09-links.uz.gif)
 
 Tabdagi ikonka — butun sayt kichkina kvadratchada, oʻsha quyosh bilan. Endi quyosh bizni fonda ham, tabda ham, sahifa logotipida ham kutib oladi.
 
@@ -77,7 +77,7 @@ Har bir nashr ostida ikkita bir xil tugma bor, lekin faqat «Fikr-mulohaza yubor
 
 Repozitoriylarimdagi qaydlar saytga koʻchirilmaydi. Repozitoriydagi READMEni tuzatdim — sahifa ham tuzaldi. Ikkinchi versiya yoʻq, demak, bir-biridan farqlanib qoladigan narsa ham yoʻq.
 
-![Sayt qanday yigʻiladi](img/build-scheme.en.png)
+![Sayt qanday yigʻiladi](img/build-scheme.uz.png)
 
 Sayt ingliz, ispan, rus, serb va oʻzbek tillarida gapiradi. Rezyumemni oʻqiganlar bu toʻplamda xaritani taniydi.
 
