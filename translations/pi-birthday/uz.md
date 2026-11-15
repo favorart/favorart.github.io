@@ -3,7 +3,7 @@ title: "Tugʻilgan kuningiz π raqamlari ichida"
 summary: "Tugʻilgan sanangizni π sonining 3 milliard raqami orasidan topadigan Python/Tkinterdagi kichik GUI-ilova — keyinchalik veb uchun qayta yaratilgan."
 source: favorart/pi-birthday@main:article.md
 source_lang: en
-source_hash: 926233cf
+source_hash: 7eab787c
 translated: 2026-11-14
 translator: Claude
 reviewed: 2026-11-14
