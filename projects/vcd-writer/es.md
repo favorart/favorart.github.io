@@ -18,9 +18,9 @@ Empezó en 2017 como un port de la biblioteca de Python [pyvcd](https://github.c
 
 ## Ingeniería
 
-- CI en Linux, Windows y macOS con GoogleTest, AddressSanitizer y UndefinedBehaviorSanitizer.
+- CI en Linux, Windows y macOS: pruebas unitarias con GoogleTest y una comparación byte a byte con un archivo de referencia; un job aparte en Linux las ejecuta con AddressSanitizer y UndefinedBehaviorSanitizer.
 - Cada commit que pasa la CI recibe una etiqueta de versión semántica y una GitHub Release con bibliotecas precompiladas.
-- Se integra en un proyecto CMake con una sola llamada a `CPMAddPackage`.
+- Se integra en un proyecto CMake con `CPMAddPackage`; también se puede compilar con un Makefile simple.
 - El README la compara, funcionalidad por funcionalidad, con pyvcd y cpp-vcd-tracer.
 
 ## Por qué es importante

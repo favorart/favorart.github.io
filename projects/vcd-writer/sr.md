@@ -18,9 +18,9 @@ Nastala je 2017. kao port Python biblioteke [pyvcd](https://github.com/SanDisk-O
 
 ## Inženjerska strana
 
-- CI na Linux-u, Windows-u i macOS-u sa GoogleTest-om, AddressSanitizer-om i UndefinedBehaviorSanitizer-om.
+- CI na Linux-u, Windows-u i macOS-u: jedinični testovi na GoogleTest-u i poređenje bajt po bajt sa referentnim fajlom; zaseban CI zadatak na Linux-u ih pokreće pod AddressSanitizer-om i UndefinedBehaviorSanitizer-om.
 - Svaki komit koji prođe CI dobija oznaku semantičke verzije i GitHub Release sa unapred izgrađenim bibliotekama.
-- U CMake projekat se uključuje jednim pozivom `CPMAddPackage`.
+- U CMake projekat se uključuje preko `CPMAddPackage`; postoji i build običnim Makefile-om.
 - U README-u je poređenje sa pyvcd-om i cpp-vcd-tracer-om, funkciju po funkciju.
 
 ## Zašto je to važno

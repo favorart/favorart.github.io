@@ -9,9 +9,9 @@ kind: Open-source contributions · C++
 ## Main threads of the work
 
 - **OpenMP out, own thread pool in.** I moved the CPU math engine and the classic algorithms (gradient boosting, SVM, k-means, optimizers) from OpenMP to the framework's own thread pool, so the library controls its threads and runs the same on every platform.
-- **Memory.** I refactored the memory engine and the stack allocators, added memory limits, peak-memory statistics, buffer pools per thread and data transfer between threads, and made layers use less memory (including LoRA layers).
-- **Speed.** Faster convolution backward pass, MKL JIT matrix multiplication, a matrix multiplier tuned to L1/L2 cache sizes, fewer CUDA synchronizations, micro-optimizations in pooling kernels.
-- **CUDA engine.** Fixes in reduction kernels, shared buffer initialization and default values.
+- **Memory.** I refactored the memory engine and the stack allocators, added memory limits, peak-memory statistics, a byte threshold for per-thread buffer pools and data transfer between threads, and made layers use less memory (including LoRA layers).
+- **Speed.** Faster convolution backward pass, MKL JIT matrix multiplication in some layers (later partly rolled back), fewer CUDA synchronizations, micro-optimizations in pooling kernels.
+- **CUDA engine.** Fixes in reduction kernels and default values, NaN avoidance in LSTM on GPU, defensive initializations.
 - **Models.** A transformer encoder with pre-normalization, gradient clipping, distributed inference; in NeoOnnx — bidirectional LSTM, 1D transposed convolution, layer-normalization fusion and a graph optimizer.
 - **Builds and quality.** A compact build for Android and iOS, cross-compilation for macOS, the move to Visual Studio 2022, CodeQL checks, new tests and cleaner public headers.
 

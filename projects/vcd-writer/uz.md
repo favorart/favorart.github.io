@@ -14,13 +14,13 @@ Loyiha 2017-yilda Python kutubxonasi [pyvcd](https://github.com/SanDisk-Open-Sou
 - **Har bir oʻzgarishda xotira ajratilmaydi.** Qiymatlar 64 KiB hajmli chiqish buferiga yoziladi; benchmark repozitoriyning oʻzida.
 - **Yon taʼsirsiz validatsiya.** Nomlar, oʻlchamlar, qiymatlar va sana har qanday holat oʻzgarishidan oldin tekshiriladi, shuning uchun muvaffaqiyatsiz chaqiruv faylda iz qoldirmaydi; oʻtmishdagi vaqt belgisi istisno chiqaradi.
 - **Deterministik natija.** Fayl barcha platformalarda baytma-bayt bir xil chiqadi.
-- **Toza interfeys.** Writer obyektining holati pimpl ortiga yashirilgan; uchinchi tomon bogʻliqliklari yoʻq.
+- **Toza interfeys.** Ichki holat pimpl ortiga yashirilgan; uchinchi tomon bogʻliqliklari yoʻq.
 
 ## Muhandislik
 
-- GoogleTest, AddressSanitizer va UndefinedBehaviorSanitizer bilan Linux, Windows va macOS uchun CI.
+- Linux, Windows va macOS uchun CI: GoogleTest birlik testlari va etalon fayl bilan baytma-bayt solishtirish; Linuxdagi alohida vazifa ularni AddressSanitizer va UndefinedBehaviorSanitizer ostida ishga tushiradi.
 - CIdan oʻtgan har bir kommit semantik versiya tegi va oldindan yigʻilgan kutubxonalar bilan GitHub Release oladi.
-- CMake loyihasiga bitta `CPMAddPackage` chaqiruvi bilan ulanadi.
+- CMake loyihasiga `CPMAddPackage` orqali ulanadi; oddiy Makefile bilan yigʻish ham bor.
 - README faylida u pyvcd va cpp-vcd-tracer bilan imkoniyatlar boʻyicha birma-bir solishtirilgan.
 
 ## Bu nima uchun muhim

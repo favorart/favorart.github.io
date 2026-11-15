@@ -9,9 +9,9 @@ kind: Doprinos otvorenom kodu · C++
 ## Glavni pravci rada
 
 - **OpenMP napolje, sopstveni thread pool unutra.** CPU matematičko jezgro i klasične algoritme (gradient boosting, SVM, k-means, optimizatore) prebacio sam sa OpenMP-a na sopstveni thread pool frejmvorka, tako da biblioteka sama upravlja svojim nitima i radi isto na svim platformama.
-- **Memorija.** Refaktorisao sam memorijsko jezgro i stek alokatore, dodao ograničenja memorije, statistiku vršne potrošnje memorije, pulove bafera po niti i prenos podataka između niti, i smanjio potrošnju memorije slojeva (uključujući LoRA slojeve).
-- **Brzina.** Brži unazadni prolaz konvolucije, množenje matrica preko MKL JIT-a, množač matrica podešen prema veličinama L1/L2 keša, manje CUDA sinhronizacija, mikrooptimizacije u kernelima pooling-a.
-- **CUDA jezgro.** Ispravke u kernelima redukcije, inicijalizaciji deljenih bafera i podrazumevanim vrednostima.
+- **Memorija.** Refaktorisao sam memorijsko jezgro i stek alokatore, dodao ograničenja memorije, statistiku vršne potrošnje memorije, prag u bajtovima za pulove bafera svake niti i prenos podataka između niti, i smanjio potrošnju memorije slojeva (uključujući LoRA slojeve).
+- **Brzina.** Brži unazadni prolaz konvolucije, množenje matrica preko MKL JIT-a u nekim slojevima (kasnije delimično povučeno), manje CUDA sinhronizacija, mikrooptimizacije u kernelima pooling-a.
+- **CUDA jezgro.** Ispravke u kernelima redukcije i podrazumevanim vrednostima, zaštita LSTM-a na GPU-u od NaN vrednosti i dodatne zaštitne inicijalizacije.
 - **Modeli.** Transformer enkoder sa prednormalizacijom, odsecanje gradijenta, distribuirani inferens; u NeoOnnx-u — dvosmerni LSTM, 1D transponovana konvolucija, fuzija layer normalization operacije i optimizator grafa.
 - **Build i kvalitet.** Kompaktan build za Android i iOS, kroskompajliranje za macOS, prelazak na Visual Studio 2022, CodeQL provere, novi testovi i čistiji javni hederi.
 

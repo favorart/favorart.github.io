@@ -9,9 +9,9 @@ kind: Contribuciones de código abierto · C++
 ## Líneas principales del trabajo
 
 - **Fuera OpenMP, dentro un thread pool propio.** Pasé el motor matemático de CPU y los algoritmos clásicos (gradient boosting, SVM, k-means, optimizadores) de OpenMP al thread pool propio del framework, de modo que la biblioteca controla sus hilos y se comporta igual en todas las plataformas.
-- **Memoria.** Refactoricé el motor de memoria y los asignadores de pila, añadí límites de memoria, estadísticas de pico de memoria, pools de búferes por hilo y transferencia de datos entre hilos, y reduje el consumo de memoria de las capas (incluidas las capas LoRA).
-- **Velocidad.** Un paso hacia atrás (backward) más rápido en la convolución, multiplicación de matrices con MKL JIT, un multiplicador de matrices ajustado al tamaño de las cachés L1/L2, menos sincronizaciones de CUDA y microoptimizaciones en los kernels de pooling.
-- **Motor CUDA.** Correcciones en los kernels de reducción, en la inicialización de búferes compartidos y en los valores por defecto.
+- **Memoria.** Refactoricé el motor de memoria y los asignadores de pila, añadí límites de memoria, estadísticas de pico de memoria, un umbral en bytes para los pools de búferes de cada hilo y transferencia de datos entre hilos, y reduje el consumo de memoria de las capas (incluidas las capas LoRA).
+- **Velocidad.** Un paso hacia atrás (backward) más rápido en la convolución, multiplicación de matrices con MKL JIT en algunas capas (revertida en parte más tarde), menos sincronizaciones de CUDA y microoptimizaciones en los kernels de pooling.
+- **Motor CUDA.** Correcciones en los kernels de reducción y en los valores por defecto, protección de LSTM en GPU contra NaN e inicializaciones defensivas.
 - **Modelos.** Un codificador transformer con prenormalización, recorte de gradientes, inferencia distribuida; en NeoOnnx: LSTM bidireccional, convolución transpuesta 1D, fusión de la normalización de capa y un optimizador de grafos.
 - **Compilación y calidad.** Una compilación compacta para Android e iOS, compilación cruzada para macOS, la migración a Visual Studio 2022, comprobaciones de CodeQL, nuevas pruebas y cabeceras públicas más limpias.
 

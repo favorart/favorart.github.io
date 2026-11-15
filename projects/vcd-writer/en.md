@@ -18,9 +18,9 @@ It started in 2017 as a port of the Python library [pyvcd](https://github.com/Sa
 
 ## Engineering
 
-- CI on Linux, Windows and macOS with GoogleTest, AddressSanitizer and UndefinedBehaviorSanitizer.
+- CI on Linux, Windows and macOS: GoogleTest unit tests and a byte-for-byte comparison with a reference file; a separate Linux job runs them under AddressSanitizer and UndefinedBehaviorSanitizer.
 - Every commit that passes CI gets a semantic version tag and a GitHub Release with prebuilt libraries.
-- It plugs into a CMake project with one `CPMAddPackage` call.
+- It plugs into a CMake project with `CPMAddPackage`; a plain Makefile build is there too.
 - The README compares it feature by feature with pyvcd and cpp-vcd-tracer.
 
 ## Why it matters
