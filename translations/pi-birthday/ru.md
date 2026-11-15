@@ -13,7 +13,7 @@ reviewed: 2026-11-14
 
 [English](article.md){: hreflang=en } · **Русский**
 
-_Статья 2018 года о первой, десктопной версии (Python 2.7 + Tkinter). Исходная публикация: https://vk.ru/@33453621-pi-gui-python. Полный код — [legacy/pi.py](legacy/pi.py), запустить его сегодня можно скриптом [legacy/run.sh](legacy/run.sh)._
+_Статья 2018 года о первой, десктопной версии (Python 2.7 + Tkinter). Исходная публикация: [ВКонтакте](https://vk.ru/@33453621-pi-gui-python). Полный код — [legacy/pi.py](legacy/pi.py), запустить его сегодня можно скриптом [legacy/run.sh](legacy/run.sh)._
 
 Время от времени встаёт передо мной вопрос о написании небольших оконных приложений. Обычно приложения пишу на C++. Но в своё время вместо Qt изучал WindowsAPI, т.к. окна всегда нужны были для Windows, считаю, что нативный интерфейс всегда лучший. Хочется, чтобы всё смотрелось органично. WinAPI позволяет сделать всё, что может Windows, но много чего приходится писать в коде самому, всегда нужны какие-то плюшки и свистульки.
 
@@ -141,7 +141,7 @@ root.bind('<Return>', bt_find_click)
 
 ### Упаковщики
 
-\[Источник: https://habr.com/post/133337/\]
+\[Источник: [Хабр](https://habr.com/post/133337/)\]
 
 **1 pack()** — это функция, так называемый упаковщик, или менеджер расположения. Он отвечает за то, как виджеты будут располагаться на главном окне. Для каждого виджета нужно вызвать метод упаковщика, иначе он не будет отображён. Всего упаковщиков три:
 
@@ -864,40 +864,40 @@ noconsole — Tk запускается из консоли, то перед з�
 
 ### Использованная литература:
 
--   [stackoverflow.com/questions/30257574/…](https://stackoverflow.com/questions/30257574/how-to-get-the-widgets-current-x-and-y-coordinates){: hreflang=en }
--   [docs.python.org/2.7/library/ttk.html](https://docs.python.org/2.7/library/ttk.html#label-options){: hreflang=en }
--   [tcl.tk/man/tcl/TkCmd/event.htm](https://www.tcl.tk/man/tcl/TkCmd/event.htm){: hreflang=en }
--   [stackoverflow.com/questions/3842155/…](https://stackoverflow.com/questions/3842155/is-there-a-way-to-make-the-tkinter-text-widget-read-only){: hreflang=en }
--   [effbot.org/tkinterbook/text.htm](http://effbot.org/tkinterbook/text.htm){: hreflang=en }
--   [tutorialspoint.com/python/tk_text.htm](https://www.tutorialspoint.com/python/tk_text.htm){: hreflang=en }
--   [tutorialspoint.com/python/tk_button.htm](https://www.tutorialspoint.com/python/tk_button.htm){: hreflang=en }
--   [tutorialspoint.com/python/tk_entry.htm](https://www.tutorialspoint.com/python/tk_entry.htm){: hreflang=en }
--   [tutorialspoint.com/python/tk_frame.htm](https://www.tutorialspoint.com/python/tk_frame.htm){: hreflang=en }
--   [tutorialspoint.com/python/tk_label.htm](https://www.tutorialspoint.com/python/tk_label.htm){: hreflang=en }
--   [tutorialspoint.com/python/tk_pack.htm](https://www.tutorialspoint.com/python/tk_pack.htm){: hreflang=en }
--   [tutorialspoint.com/python/tk_grid.htm](https://www.tutorialspoint.com/python/tk_grid.htm){: hreflang=en }
--   [stackoverflow.com/questions/52062162/…](https://stackoverflow.com/questions/52062162/python-tkinter-how-to-count-the-quantity-of-characters-can-be-shown-in-expandi/52066664#52066664){: hreflang=en }
--   [zetcode.com/gui/tkinter/layout](http://zetcode.com/gui/tkinter/layout/){: hreflang=en }
--   [stackoverflow.com/questions/3950687/…](https://stackoverflow.com/questions/3950687/how-to-find-out-the-current-widget-size-in-tkinter){: hreflang=en }
--   [stackoverflow.com/questions/4140437/…](https://stackoverflow.com/questions/4140437/interactively-validating-entry-widget-content-in-tkinter){: hreflang=en }
--   [effbot.org/tkinterbook/label.htm](http://effbot.org/tkinterbook/label.htm){: hreflang=en }
--   [reddit.com/r/learnpython/comments/6dndqz/…](https://www.reddit.com/r/learnpython/comments/6dndqz/how_would_you_make_text_that_automatically_wraps/){: hreflang=en }
--   [stackoverflow.com/questions/25936958/…](https://stackoverflow.com/questions/25936958/tkinter-entry-validation-not-working){: hreflang=en }
--   [effbot.org/tkinterbook/variable.htm](http://effbot.org/tkinterbook/variable.htm){: hreflang=en }
--   [infohost.nmt.edu/tcc/help/pubs/tkinter/…](http://infohost.nmt.edu/tcc/help/pubs/tkinter/web/entry-validation.html){: hreflang=en }
--   [stackoverflow.com/questions/13242970/…](https://stackoverflow.com/questions/13242970/tkinter-entry-box-formatted-for-date){: hreflang=en }
--   [stackoverflow.com/questions/51143777/…](https://stackoverflow.com/questions/51143777/display-three-dots-in-the-end-of-a-tkinter-label-text){: hreflang=en }
--   [stackoverflow.com/questions/42146482/…](https://stackoverflow.com/questions/42146482/using-bisect-on-list-of-tuples-but-compare-using-first-value-only){: hreflang=en }
--   [effbot.org/tkinterbook/…](http://effbot.org/tkinterbook/tkinter-events-and-bindings.htm){: hreflang=en }
--   [stackoverflow.com/questions/48726956/…](https://stackoverflow.com/questions/48726956/measure-the-height-of-a-string-in-tkinter-python){: hreflang=en }
--   [stackoverflow.com/questions/270648/…](https://stackoverflow.com/questions/270648/tkinter-invoke-event-in-main-loop){: hreflang=en }
--   [arrow.readthedocs.io/en/latest](https://arrow.readthedocs.io/en/latest/#arrow.arrow.Arrow){: hreflang=en }
--   [docs.python.org/2/library/bisect.html](https://docs.python.org/2/library/bisect.html){: hreflang=en }
--   [tutorialspoint.com/python/file_seek.htm](https://www.tutorialspoint.com/python/file_seek.htm){: hreflang=en }
--   [stackoverflow.com/questions/10624937/…](https://stackoverflow.com/questions/10624937/convert-datetime-object-to-a-string-of-date-only-in-python){: hreflang=en }
--   [stackoverflow.com/questions/14288498/…](https://stackoverflow.com/questions/14288498/creating-a-loop-for-two-dates/14288620){: hreflang=en }
--   [stackoverflow.com/questions/39470012/…](https://stackoverflow.com/questions/39470012/python-overflow-error-iter-index-too-large){: hreflang=en }
--   [scorython.wordpress.com/2016/06/27/…](https://scorython.wordpress.com/2016/06/27/multithreading-with-tkinter/){: hreflang=en }
--   [stackoverflow.com/questions/42589372/…](https://stackoverflow.com/questions/42589372/pythontkinter-how-to-run-in-background-independant-of-tk-frontend){: hreflang=en }
--   [docs.python.org/2/library/threading.html](https://docs.python.org/2/library/threading.html){: hreflang=en }
--   http://www.cyberforum.ru/qbasic/thread1923079.html#post10542354
+-   [Stack Overflow: How to get the widget's current x and y coordinates](https://stackoverflow.com/questions/30257574/how-to-get-the-widgets-current-x-and-y-coordinates){: hreflang=en }
+-   [Python docs: ttk — Tk themed widgets](https://docs.python.org/2.7/library/ttk.html#label-options){: hreflang=en }
+-   [Tcl/Tk manual: event](https://www.tcl.tk/man/tcl/TkCmd/event.htm){: hreflang=en }
+-   [Stack Overflow: Make the Tkinter Text widget read-only](https://stackoverflow.com/questions/3842155/is-there-a-way-to-make-the-tkinter-text-widget-read-only){: hreflang=en }
+-   [effbot: The Tkinter Text widget](http://effbot.org/tkinterbook/text.htm){: hreflang=en }
+-   [Tutorialspoint: Tkinter Text](https://www.tutorialspoint.com/python/tk_text.htm){: hreflang=en }
+-   [Tutorialspoint: Tkinter Button](https://www.tutorialspoint.com/python/tk_button.htm){: hreflang=en }
+-   [Tutorialspoint: Tkinter Entry](https://www.tutorialspoint.com/python/tk_entry.htm){: hreflang=en }
+-   [Tutorialspoint: Tkinter Frame](https://www.tutorialspoint.com/python/tk_frame.htm){: hreflang=en }
+-   [Tutorialspoint: Tkinter Label](https://www.tutorialspoint.com/python/tk_label.htm){: hreflang=en }
+-   [Tutorialspoint: Tkinter pack()](https://www.tutorialspoint.com/python/tk_pack.htm){: hreflang=en }
+-   [Tutorialspoint: Tkinter grid()](https://www.tutorialspoint.com/python/tk_grid.htm){: hreflang=en }
+-   [Stack Overflow: How many characters fit in an expanding Tkinter label](https://stackoverflow.com/questions/52062162/python-tkinter-how-to-count-the-quantity-of-characters-can-be-shown-in-expandi/52066664#52066664){: hreflang=en }
+-   [ZetCode: Tkinter layout management](http://zetcode.com/gui/tkinter/layout/){: hreflang=en }
+-   [Stack Overflow: Current widget size in Tkinter](https://stackoverflow.com/questions/3950687/how-to-find-out-the-current-widget-size-in-tkinter){: hreflang=en }
+-   [Stack Overflow: Interactively validating Entry content in Tkinter](https://stackoverflow.com/questions/4140437/interactively-validating-entry-widget-content-in-tkinter){: hreflang=en }
+-   [effbot: The Tkinter Label widget](http://effbot.org/tkinterbook/label.htm){: hreflang=en }
+-   [Reddit r/learnpython: Text that wraps automatically](https://www.reddit.com/r/learnpython/comments/6dndqz/how_would_you_make_text_that_automatically_wraps/){: hreflang=en }
+-   [Stack Overflow: Tkinter Entry validation not working](https://stackoverflow.com/questions/25936958/tkinter-entry-validation-not-working){: hreflang=en }
+-   [effbot: Tkinter variable classes](http://effbot.org/tkinterbook/variable.htm){: hreflang=en }
+-   [NMT Tkinter reference: Entry validation](http://infohost.nmt.edu/tcc/help/pubs/tkinter/web/entry-validation.html){: hreflang=en }
+-   [Stack Overflow: Tkinter Entry formatted for a date](https://stackoverflow.com/questions/13242970/tkinter-entry-box-formatted-for-date){: hreflang=en }
+-   [Stack Overflow: Three dots at the end of a Tkinter label](https://stackoverflow.com/questions/51143777/display-three-dots-in-the-end-of-a-tkinter-label-text){: hreflang=en }
+-   [Stack Overflow: bisect on a list of tuples by the first value](https://stackoverflow.com/questions/42146482/using-bisect-on-list-of-tuples-but-compare-using-first-value-only){: hreflang=en }
+-   [effbot: Tkinter events and bindings](http://effbot.org/tkinterbook/tkinter-events-and-bindings.htm){: hreflang=en }
+-   [Stack Overflow: Measure the height of a string in Tkinter](https://stackoverflow.com/questions/48726956/measure-the-height-of-a-string-in-tkinter-python){: hreflang=en }
+-   [Stack Overflow: Invoke an event in the Tkinter main loop](https://stackoverflow.com/questions/270648/tkinter-invoke-event-in-main-loop){: hreflang=en }
+-   [Arrow: better dates & times for Python](https://arrow.readthedocs.io/en/latest/#arrow.arrow.Arrow){: hreflang=en }
+-   [Python docs: bisect — array bisection algorithm](https://docs.python.org/2/library/bisect.html){: hreflang=en }
+-   [Tutorialspoint: Python file seek()](https://www.tutorialspoint.com/python/file_seek.htm){: hreflang=en }
+-   [Stack Overflow: datetime to a date-only string](https://stackoverflow.com/questions/10624937/convert-datetime-object-to-a-string-of-date-only-in-python){: hreflang=en }
+-   [Stack Overflow: Loop over a range of dates](https://stackoverflow.com/questions/14288498/creating-a-loop-for-two-dates/14288620){: hreflang=en }
+-   [Stack Overflow: OverflowError: iter index too large](https://stackoverflow.com/questions/39470012/python-overflow-error-iter-index-too-large){: hreflang=en }
+-   [Multithreading with Tkinter](https://scorython.wordpress.com/2016/06/27/multithreading-with-tkinter/){: hreflang=en }
+-   [Stack Overflow: Run in the background independently of the Tk front end](https://stackoverflow.com/questions/42589372/pythontkinter-how-to-run-in-background-independant-of-tk-frontend){: hreflang=en }
+-   [Python docs: threading — higher-level threading interface](https://docs.python.org/2/library/threading.html){: hreflang=en }
+-   [CyberForum: QBasic thread](http://www.cyberforum.ru/qbasic/thread1923079.html#post10542354)

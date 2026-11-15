@@ -12,7 +12,7 @@ reviewed: 2026-11-14
 
 **English** · [Русский](article.ru.md){: hreflang=ru }
 
-_Birinchi, desktop versiyasi (Python 2.7 + Tkinter) haqidagi 2018-yilgi maqola, rus tilidan tarjima. Asl nashr: [vk.ru/@33453621-pi-gui-python](https://vk.ru/@33453621-pi-gui-python){: hreflang=ru }. Toʻliq kod: [legacy/pi.py](legacy/pi.py); uni bugun ishga tushirish uchun [legacy/run.sh](legacy/run.sh)dan foydalaning._
+_Birinchi, desktop versiyasi (Python 2.7 + Tkinter) haqidagi 2018-yilgi maqola, rus tilidan tarjima. Asl nashr: [VK](https://vk.ru/@33453621-pi-gui-python){: hreflang=ru }. Toʻliq kod: [legacy/pi.py](legacy/pi.py); uni bugun ishga tushirish uchun [legacy/run.sh](legacy/run.sh)dan foydalaning._
 
 Vaqti-vaqti bilan menga kichik oynali ilova yozish kerak boʻlib qoladi. Odatda ilovalarni C++da yozaman. Bir paytlar Qt oʻrniga Windows APIni oʻrgangandim, chunki oynalarim doim Windows uchun boʻlardi, va men nativ interfeys har doim eng yaxshisi deb hisoblayman. Hammasi organik koʻrinishini xohlayman. WinAPI Windows qila oladigan hamma narsani qilishga imkon beradi, lekin koʻp narsani qoʻlda yozishga toʻgʻri keladi, qandaydir qoʻngʻiroqchalar va hushtakchalar esa doim kerak boʻladi.
 
@@ -140,7 +140,7 @@ Vizual interfeys dizaynerini izlab WinAPIdan jon holatda qochgan edim. Maʼlum b
 
 ### Geometriya menejerlari
 
-\[Manba: [habr.com/post/133337](https://habr.com/post/133337/){: hreflang=ru }\]
+\[Manba: [Habr](https://habr.com/post/133337/){: hreflang=ru }\]
 
 **1 pack()** — joylashtiruvchi (packer) yoki geometriya menejeri deb ataladigan funksiya. U vidjetlar asosiy oynada qanday joylashishini hal qiladi. Joylashtiruvchini har bir vidjet uchun chaqirish kerak, aks holda vidjet koʻrinmaydi. Jami uchta joylashtiruvchi bor:
 
@@ -863,40 +863,40 @@ noconsole — Tk konsoldan ishga tushiriladi, shuning uchun formadan oldin termi
 
 ### Havolalar
 
--   https://stackoverflow.com/questions/30257574/how-to-get-the-widgets-current-x-and-y-coordinates
--   https://docs.python.org/2.7/library/ttk.html#label-options
--   https://www.tcl.tk/man/tcl/TkCmd/event.htm
--   https://stackoverflow.com/questions/3842155/is-there-a-way-to-make-the-tkinter-text-widget-read-only
--   http://effbot.org/tkinterbook/text.htm
--   https://www.tutorialspoint.com/python/tk\_text.htm
--   https://www.tutorialspoint.com/python/tk\_button.htm
--   https://www.tutorialspoint.com/python/tk\_entry.htm
--   https://www.tutorialspoint.com/python/tk\_frame.htm
--   https://www.tutorialspoint.com/python/tk\_label.htm
--   https://www.tutorialspoint.com/python/tk\_pack.htm
--   https://www.tutorialspoint.com/python/tk\_grid.htm
--   https://stackoverflow.com/questions/52062162/python-tkinter-how-to-count-the-quantity-of-characters-can-be-shown-in-expandi/52066664#52066664
--   http://zetcode.com/gui/tkinter/layout/
--   https://stackoverflow.com/questions/3950687/how-to-find-out-the-current-widget-size-in-tkinter
--   https://stackoverflow.com/questions/4140437/interactively-validating-entry-widget-content-in-tkinter
--   http://effbot.org/tkinterbook/label.htm
--   https://www.reddit.com/r/learnpython/comments/6dndqz/how\_would\_you\_make\_text\_that\_automatically\_wraps/
--   https://stackoverflow.com/questions/25936958/tkinter-entry-validation-not-working
--   http://effbot.org/tkinterbook/variable.htm
--   http://infohost.nmt.edu/tcc/help/pubs/tkinter/web/entry-validation.html
--   https://stackoverflow.com/questions/13242970/tkinter-entry-box-formatted-for-date
--   https://stackoverflow.com/questions/51143777/display-three-dots-in-the-end-of-a-tkinter-label-text
--   https://stackoverflow.com/questions/42146482/using-bisect-on-list-of-tuples-but-compare-using-first-value-only
--   http://effbot.org/tkinterbook/tkinter-events-and-bindings.htm
--   https://stackoverflow.com/questions/48726956/measure-the-height-of-a-string-in-tkinter-python
--   https://stackoverflow.com/questions/270648/tkinter-invoke-event-in-main-loop
--   https://arrow.readthedocs.io/en/latest/#arrow.arrow.Arrow
--   https://docs.python.org/2/library/bisect.html
--   https://www.tutorialspoint.com/python/file\_seek.htm
--   https://stackoverflow.com/questions/10624937/convert-datetime-object-to-a-string-of-date-only-in-python
--   https://stackoverflow.com/questions/14288498/creating-a-loop-for-two-dates/14288620
--   https://stackoverflow.com/questions/39470012/python-overflow-error-iter-index-too-large
--   https://scorython.wordpress.com/2016/06/27/multithreading-with-tkinter/
--   https://stackoverflow.com/questions/42589372/pythontkinter-how-to-run-in-background-independant-of-tk-frontend
--   https://docs.python.org/2/library/threading.html
--   http://www.cyberforum.ru/qbasic/thread1923079.html#post10542354
+-   [Stack Overflow: How to get the widget's current x and y coordinates](https://stackoverflow.com/questions/30257574/how-to-get-the-widgets-current-x-and-y-coordinates)
+-   [Python docs: ttk — Tk themed widgets](https://docs.python.org/2.7/library/ttk.html#label-options)
+-   [Tcl/Tk manual: event](https://www.tcl.tk/man/tcl/TkCmd/event.htm)
+-   [Stack Overflow: Make the Tkinter Text widget read-only](https://stackoverflow.com/questions/3842155/is-there-a-way-to-make-the-tkinter-text-widget-read-only)
+-   [effbot: The Tkinter Text widget](http://effbot.org/tkinterbook/text.htm)
+-   [Tutorialspoint: Tkinter Text](https://www.tutorialspoint.com/python/tk\_text.htm)
+-   [Tutorialspoint: Tkinter Button](https://www.tutorialspoint.com/python/tk\_button.htm)
+-   [Tutorialspoint: Tkinter Entry](https://www.tutorialspoint.com/python/tk\_entry.htm)
+-   [Tutorialspoint: Tkinter Frame](https://www.tutorialspoint.com/python/tk\_frame.htm)
+-   [Tutorialspoint: Tkinter Label](https://www.tutorialspoint.com/python/tk\_label.htm)
+-   [Tutorialspoint: Tkinter pack()](https://www.tutorialspoint.com/python/tk\_pack.htm)
+-   [Tutorialspoint: Tkinter grid()](https://www.tutorialspoint.com/python/tk\_grid.htm)
+-   [Stack Overflow: How many characters fit in an expanding Tkinter label](https://stackoverflow.com/questions/52062162/python-tkinter-how-to-count-the-quantity-of-characters-can-be-shown-in-expandi/52066664#52066664)
+-   [ZetCode: Tkinter layout management](http://zetcode.com/gui/tkinter/layout/)
+-   [Stack Overflow: Current widget size in Tkinter](https://stackoverflow.com/questions/3950687/how-to-find-out-the-current-widget-size-in-tkinter)
+-   [Stack Overflow: Interactively validating Entry content in Tkinter](https://stackoverflow.com/questions/4140437/interactively-validating-entry-widget-content-in-tkinter)
+-   [effbot: The Tkinter Label widget](http://effbot.org/tkinterbook/label.htm)
+-   [Reddit r/learnpython: Text that wraps automatically](https://www.reddit.com/r/learnpython/comments/6dndqz/how\_would\_you\_make\_text\_that\_automatically\_wraps/)
+-   [Stack Overflow: Tkinter Entry validation not working](https://stackoverflow.com/questions/25936958/tkinter-entry-validation-not-working)
+-   [effbot: Tkinter variable classes](http://effbot.org/tkinterbook/variable.htm)
+-   [NMT Tkinter reference: Entry validation](http://infohost.nmt.edu/tcc/help/pubs/tkinter/web/entry-validation.html)
+-   [Stack Overflow: Tkinter Entry formatted for a date](https://stackoverflow.com/questions/13242970/tkinter-entry-box-formatted-for-date)
+-   [Stack Overflow: Three dots at the end of a Tkinter label](https://stackoverflow.com/questions/51143777/display-three-dots-in-the-end-of-a-tkinter-label-text)
+-   [Stack Overflow: bisect on a list of tuples by the first value](https://stackoverflow.com/questions/42146482/using-bisect-on-list-of-tuples-but-compare-using-first-value-only)
+-   [effbot: Tkinter events and bindings](http://effbot.org/tkinterbook/tkinter-events-and-bindings.htm)
+-   [Stack Overflow: Measure the height of a string in Tkinter](https://stackoverflow.com/questions/48726956/measure-the-height-of-a-string-in-tkinter-python)
+-   [Stack Overflow: Invoke an event in the Tkinter main loop](https://stackoverflow.com/questions/270648/tkinter-invoke-event-in-main-loop)
+-   [Arrow: better dates & times for Python](https://arrow.readthedocs.io/en/latest/#arrow.arrow.Arrow)
+-   [Python docs: bisect — array bisection algorithm](https://docs.python.org/2/library/bisect.html)
+-   [Tutorialspoint: Python file seek()](https://www.tutorialspoint.com/python/file\_seek.htm)
+-   [Stack Overflow: datetime to a date-only string](https://stackoverflow.com/questions/10624937/convert-datetime-object-to-a-string-of-date-only-in-python)
+-   [Stack Overflow: Loop over a range of dates](https://stackoverflow.com/questions/14288498/creating-a-loop-for-two-dates/14288620)
+-   [Stack Overflow: OverflowError: iter index too large](https://stackoverflow.com/questions/39470012/python-overflow-error-iter-index-too-large)
+-   [Multithreading with Tkinter](https://scorython.wordpress.com/2016/06/27/multithreading-with-tkinter/)
+-   [Stack Overflow: Run in the background independently of the Tk front end](https://stackoverflow.com/questions/42589372/pythontkinter-how-to-run-in-background-independant-of-tk-frontend)
+-   [Python docs: threading — higher-level threading interface](https://docs.python.org/2/library/threading.html)
+-   [CyberForum: QBasic thread](http://www.cyberforum.ru/qbasic/thread1923079.html#post10542354)
