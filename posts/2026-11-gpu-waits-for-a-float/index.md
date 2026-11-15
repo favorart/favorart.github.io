@@ -39,9 +39,9 @@ tags: [cuda, gpu, ml, performance]
 
 Почитать:
 
-* NVIDIA, CUDA Runtime API: API synchronization behavior -- какое копирование ждёт очередь, а какое нет https://docs.nvidia.com/cuda/cuda-runtime-api/api-sync-behavior.html
-* NVIDIA, How to Optimize Data Transfers in CUDA C/C++ -- закреплённая память и цена мелких пересылок https://developer.nvidia.com/blog/how-optimize-data-transfers-cuda-cc/
-* NVIDIA, Getting Started with CUDA Graphs -- откуда цифры 2,9 / 3,8 / 9,6 мкс https://developer.nvidia.com/blog/cuda-graphs/
-* PyTorch Performance Tuning Guide https://pytorch.org/tutorials/recipes/recipes/tuning_guide.html
+* [NVIDIA, CUDA Runtime API: API synchronization behavior](https://docs.nvidia.com/cuda/cuda-runtime-api/api-sync-behavior.html) -- какое копирование ждёт очередь, а какое нет
+* [NVIDIA, How to Optimize Data Transfers in CUDA C/C++](https://developer.nvidia.com/blog/how-optimize-data-transfers-cuda-cc/) -- закреплённая память и цена мелких пересылок
+* [NVIDIA, Getting Started with CUDA Graphs](https://developer.nvidia.com/blog/cuda-graphs/) -- откуда цифры 2,9 / 3,8 / 9,6 мкс
+* [PyTorch Performance Tuning Guide](https://pytorch.org/tutorials/recipes/recipes/tuning_guide.html)
 
 ![Изображение из поста](cover.jpg)

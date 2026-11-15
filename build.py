@@ -293,7 +293,7 @@ def short_url(url, limit=42):
 
 
 def linkify_bare(html_text):
-    """External content: turn bare URLs in text (not in links/code) into short links."""
+    """Turn bare URLs in text (not in links/code) into short links."""
     out, skip = [], 0
     for tok in TOKEN_RE.split(html_text):
         if tok.startswith("<"):
@@ -351,7 +351,7 @@ def load_posts():
             "cover_url": "/writing/%s/%s" % (slug, cover) if cover else None,
             "card_cover_url": "/writing/%s/%s" % (slug, card_cover) if card_cover else None,
             "folder": folder, "options_dir": folder,
-            "body_html": mark_link_langs(body_html), "subtitle": None, "demo_url": meta.get("demo_url"),
+            "body_html": mark_link_langs(linkify_bare(body_html)), "subtitle": None, "demo_url": meta.get("demo_url"),
             "list": meta.get("list", True),
             "source_md": source_md, "source_ref": where, "cover_file": cover,
         })
@@ -607,8 +607,8 @@ def tr_body_html(item, tr):
     if item["type"] == "post" and item.get("cover_file"):
         body_html = re.sub(r'<p>\s*<img[^>]*\bsrc="%s"[^>]*>\s*</p>\s*' % re.escape(item["cover_file"]), "", body_html)
     if item["type"] == "external":
-        body_html = linkify_bare(rewrite_relative(body_html, item, item["page_of"]))
-    return mark_link_langs(body_html)
+        body_html = rewrite_relative(body_html, item, item["page_of"])
+    return mark_link_langs(linkify_bare(body_html))  # bare URLs in any text become short clickable links
 
 
 def tr_note(item, tr, t):

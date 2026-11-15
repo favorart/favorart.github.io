@@ -73,6 +73,8 @@ ends with the "Send feedback" button. Translate it like any post (see Translatio
 - Keep the text verbatim (fix nothing but obvious Markdown breakage); images of the post go into the
   folder, the first one as `cover.jpg`.
 - `original_url` is the full `linkedin.com/posts/...` URL without tracking parameters (`?utm_…`, `rcm=`).
+- Links are hidden behind names: a reading list "Title -- note https://…" becomes `[Title](https://…) -- note`;
+  `lnkd.in` short links are replaced by their targets (a link to an earlier post that is on the site → its page).
 
 ## Translations
 

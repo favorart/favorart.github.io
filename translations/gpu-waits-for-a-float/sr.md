@@ -3,7 +3,7 @@ title: "Kako jedan float može da uspori obuku na grafičkoj kartici?"
 summary: "Jedan skalar, poslat na GPU sinhronim pozivom cudaMemcpy, zaustavlja ceo pajplajn obuke. Zašto se to dešava i kako u NeoML-u izbeći zastoje tako što se broj prosledi po vrednosti."
 source: posts/2026-11-gpu-waits-for-a-float/index.md
 source_lang: ru
-source_hash: f24792e0
+source_hash: 104d94b0
 translated: 2026-11-15
 translator: Claude
 reviewed: 2026-11-15
@@ -38,9 +38,9 @@ A da li ste vi ikad tražili šta to vaš kod čeka?
 
 Za dalje čitanje:
 
-* NVIDIA, CUDA Runtime API: API synchronization behavior — koje kopiranje čeka red, a koje ne https://docs.nvidia.com/cuda/cuda-runtime-api/api-sync-behavior.html
-* NVIDIA, How to Optimize Data Transfers in CUDA C/C++ — zaključana memorija i cena sitnih prenosa https://developer.nvidia.com/blog/how-optimize-data-transfers-cuda-cc/
-* NVIDIA, Getting Started with CUDA Graphs — odakle brojke 2,9 / 3,8 / 9,6 µs https://developer.nvidia.com/blog/cuda-graphs/
-* PyTorch Performance Tuning Guide https://pytorch.org/tutorials/recipes/recipes/tuning_guide.html
+* [NVIDIA, CUDA Runtime API: API synchronization behavior](https://docs.nvidia.com/cuda/cuda-runtime-api/api-sync-behavior.html) — koje kopiranje čeka red, a koje ne
+* [NVIDIA, How to Optimize Data Transfers in CUDA C/C++](https://developer.nvidia.com/blog/how-optimize-data-transfers-cuda-cc/) — zaključana memorija i cena sitnih prenosa
+* [NVIDIA, Getting Started with CUDA Graphs](https://developer.nvidia.com/blog/cuda-graphs/) — odakle brojke 2,9 / 3,8 / 9,6 µs
+* [PyTorch Performance Tuning Guide](https://pytorch.org/tutorials/recipes/recipes/tuning_guide.html)
 
 ![Slika iz posta](cover.jpg)
