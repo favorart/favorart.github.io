@@ -316,6 +316,16 @@ def linkify_bare(html_text):
 
 # ---------------------------------------------------------------- loading content
 
+def drop_title_line(md, title):
+    """A LinkedIn post usually starts with its headline; on the site the headline is the page title, so a first
+    paragraph that repeats the title (ignoring case, escapes and punctuation) is not shown twice."""
+    norm = lambda x: re.sub(r"[\W_]+", " ", x.replace("\\#", "#")).strip().lower()
+    head, sep, rest = md.lstrip("\n").partition("\n\n")
+    if norm(head) and norm(head) == norm(str(title)):
+        return rest
+    return md
+
+
 def load_posts():
     items = []
     for md_path in sorted(glob.glob(os.path.join(ROOT, "posts", "*", "index.md"))):
@@ -339,7 +349,7 @@ def load_posts():
         if card_cover and not os.path.isfile(os.path.join(folder, card_cover)):
             fail("%s: card_cover file '%s' not found next to index.md" % (where, card_cover))
         source_md = body
-        body_html = render_markdown(body)
+        body_html = render_markdown(drop_title_line(body, meta["title"]))
         if cover:  # the cover is shown above the title; drop the same picture repeated in the text
             body_html = re.sub(r'<p>\s*<img[^>]*\bsrc="%s"[^>]*>\s*</p>\s*' % re.escape(cover), "", body_html)
         items.append({
@@ -603,7 +613,8 @@ def tr_of(item, t):
 
 
 def tr_body_html(item, tr):
-    body_html = render_markdown(tr["body"])
+    body = drop_title_line(tr["body"], tr["meta"]["title"]) if item["type"] == "post" else tr["body"]
+    body_html = render_markdown(body)
     if item["type"] == "post" and item.get("cover_file"):
         body_html = re.sub(r'<p>\s*<img[^>]*\bsrc="%s"[^>]*>\s*</p>\s*' % re.escape(item["cover_file"]), "", body_html)
     if item["type"] == "external":
