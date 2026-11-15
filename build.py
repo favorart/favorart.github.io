@@ -578,7 +578,7 @@ def paper_body(item, t, tr):
 RU_HOSTS = ("habr.com", "vk.com", "vk.ru", "ru.wikipedia.org", "coderszone.info", "intsysjournal.ru")
 EN_HOSTS = ("en.wikipedia.org", "stackoverflow.com", "docs.python.org", "reddit.com", "blog.cloudflare.com",
             "travisdowns.github.io", "lemire.me", "tutorialspoint.com", "effbot.org", "tcl.tk", "zetcode.com",
-            "readthedocs.io", "nmt.edu", "cppreference.com", "isocpp.org", "medium.com")
+            "readthedocs.io", "nmt.edu", "cppreference.com", "isocpp.org", "medium.com", "nvidia.com", "pytorch.org")
 A_HREF_RE = re.compile(r'<a\b([^>]*?)\bhref="(https?://[^"]+)"([^>]*)>')
 
 
