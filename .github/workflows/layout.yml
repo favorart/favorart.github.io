@@ -1,0 +1,37 @@
+name: Layout check
+
+# Every commit: build the site and check its layout in a headless browser for all languages, phone/tablet/desktop
+# widths and both themes (tools/layout_check.py: sideways scroll, touch targets under 40 px, wrapped dates/menu/
+# buttons, short words hanging at line ends). It does not block the deploy in pages.yml; a red check means
+# "look before the next push".
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: layout-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  layout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt playwright
+      - run: python -m playwright install --with-deps chromium
+      - run: python build.py
+      - run: python tools/layout_check.py _site --json layout.json
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: layout-findings
+          path: layout.json

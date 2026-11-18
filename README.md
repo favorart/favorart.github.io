@@ -26,8 +26,14 @@ GitHub Actions (`.github/workflows/pages.yml`) on every push to `main`, daily, a
 pip install -r requirements.txt
 python build.py            # -> _site/  (add --offline to skip fetching external repos)
 python tools/check_links.py _site
+python tools/layout_check.py _site --chrome   # layout in a browser: 5 languages × 375/768/1280 × light/dark
 python -m http.server -d _site 8000
 ```
+
+`tools/layout_check.py` (needs `pip install playwright`; in CI it uses Playwright's Chromium, locally `--chrome`
+uses the installed Chrome) fails on sideways scroll, touch targets under 40 px on phones, wrapped dates, menu items
+and buttons, and short words left at a line end. `.github/workflows/layout.yml` runs it on every push and pull
+request; it does not block the deploy.
 
 ## Add a LinkedIn post
 

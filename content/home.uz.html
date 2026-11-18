@@ -1,25 +1,14 @@
 <!-- Home page content (Uzbek, Latin). Wrapped by templates/base.html.
      Placeholders: $$prefix (URL language prefix), $$writing_cards, $$all_writing,
-     $$course_cards, $$all_courses, $$project_cards, $$all_projects, $$role_title, $$role_skills, $$fun_roles. Sections with data-nav are tracked by the side navigation. -->
+     $$course_cards, $$all_courses, $$project_cards, $$all_projects, $$role_title, $$role_skills, $$fun_roles (in About). Sections with data-nav are tracked by the side navigation. -->
 <header class="hero glass" data-nav="home">
-  <div class="kicker title2"><span>$role_title</span><span class="sub">$role_skills</span></div>
+  <div class="kicker hero-role">$role_title · $role_skills</div>
   <h1>Kirill Golikov</h1>
-  $fun_roles
+  <p class="value">Men C++ tizimlarini tezlashtiraman — SSD mikrodasturlaridan tortib neyron tarmoqlar ijro muhitlarigacha.</p>
   <p class="place">$open_to</p>
-  <p class="lead">Men <strong>C++ tizimlarini tezlashtiraman</strong>: unumdorlikni optimallashtirish, profillash va tizim dizayni — SSD mikrodasturlari va maʼlumotlarni saqlash tizimlaridagi deduplikatsiyadan tortib neyron tarmoqlar ijro muhitlari va mobil oʻyinlargacha. Diskret matematika va matematik kibernetika boʻyicha aspiranturani tamomlaganman, M. V. Lomonosov nomidagi MDUda 7 yil maʼruza oʻqiganman.</p>
   <div class="links">
-    <a class="btn sun" href="#contact">
-      <svg viewBox="0 0 24 24"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm9 7.2L4 7.3V17h16V7.3l-8 4.9ZM5.2 7 12 11.1 18.8 7H5.2Z"/></svg>
-      Aloqa
-    </a>
-    <a class="btn" href="https://www.linkedin.com/in/golikovkirill/" rel="me">
-      <svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg>
-      LinkedIn
-    </a>
-    <a class="btn" href="https://github.com/favorart" rel="me">
-      <svg viewBox="0 0 24 24"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.2.8.8 1.3 1.9 1.3 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1.1.9 2.2v3.3c0 .3.1.7.8.6A12 12 0 0 0 12 .3"/></svg>
-      GitHub
-    </a>
+    <a class="btn sun big" href="#contact">Ish boʻyicha yozish <span class="arr">→</span></a>
+    <a class="btn big calm" href="$prefix/cv/">Rezyume (CV)</a>
   </div>
 </header>
 
@@ -52,17 +41,22 @@
 
 <section id="about" data-nav="about">
   <div class="shead"><h2><small>Men haqimda / Rezyume</small>Men kimman</h2></div>
-  <div class="panel glass cv-preview linked">
-    <div>
-      <p class="intro">Tizimlarni tezlashtiradigan bosh dasturiy taʼminot muhandisi: profillash, unumdorlikni optimallashtirish va tizim dizayni — SSD mikrodasturlari va maʼlumotlarni saqlash tizimlaridagi deduplikatsiyadan tortib neyron tarmoqlar ijro muhitlari va mobil oʻyinlargacha.</p>
-      <ul class="facts">
-        <li><span>Hozir</span><b>Artificial Seed kompaniyasida katta dasturiy taʼminot muhandisi</b></li>
-        <li><span>Tajriba</span><b>2013-yildan beri sohada</b></li>
-        <li><span>Ish formati</span><b>Asosan masofaviy</b></li>
-        <li><span>Oʻqituvchilik</span><b>M. V. Lomonosov nomidagi MDU, 2016 — 2023</b></li>
-      </ul>
+  <div class="panel glass about-card">
+    <div class="about-text">
+      $fun_roles
+      <p class="intro">Men <strong>C++ tizimlarini tezlashtiraman</strong>: unumdorlikni optimallashtirish, profillash va tizim dizayni — SSD mikrodasturlari va maʼlumotlarni saqlash tizimlaridagi deduplikatsiyadan tortib neyron tarmoqlar ijro muhitlari va mobil oʻyinlargacha. Diskret matematika va matematik kibernetika boʻyicha aspiranturani tamomlaganman, M. V. Lomonosov nomidagi MDUda 7 yil maʼruza oʻqiganman.</p>
     </div>
-    <a class="btn sun big stretch" href="$prefix/cv/">Toʻliq rezyumeni ochish <span class="arr">→</span></a>
+    <div class="about-actions">
+      <a class="btn sun big" href="$prefix/cv/">Toʻliq rezyumeni ochish <span class="arr">→</span></a>
+      <a class="btn" href="https://www.linkedin.com/in/golikovkirill/" rel="me">
+        <svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg>
+        LinkedIn
+      </a>
+      <a class="btn" href="https://github.com/favorart" rel="me">
+        <svg viewBox="0 0 24 24"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.2.8.8 1.3 1.9 1.3 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1.1.9 2.2v3.3c0 .3.1.7.8.6A12 12 0 0 0 12 .3"/></svg>
+        GitHub
+      </a>
+    </div>
   </div>
 </section>
 

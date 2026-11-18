@@ -308,8 +308,6 @@ img.cover-dark { filter: none !important; }
 }
 .post:hover .cover, .post:focus-within .cover, .post:hover .thumb::before, .fx-grid.on .post .cover { transform: scale(1.1); }
 .post:hover .frost, .post:focus-within .frost, .fx-grid.on .post .frost { opacity: 0; }
-/* the frost stays only in the effect demo on /writing/covers/; cards elsewhere show the picture as is */
-:not(.fx-tile) > .post .frost { display: none; }
 .post .cap { /* frosted caption over the image */
   position: absolute; z-index: 2; left: 10px; right: 10px; bottom: 10px; display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap;
   padding: 8px 12px; border-radius: 14px; font: 500 11px/1.35 "JetBrains Mono", monospace; color: var(--text);
@@ -462,7 +460,7 @@ section.cv { padding-top: 0; }
 .article-foot { max-width: none; margin-top: 36px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 15px; }
 .article-foot .origin { font-weight: 600; }
 .foot-actions { display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; }
-.foot-actions .btn { flex: 0 1 320px; justify-content: center; }
+.foot-actions .btn { flex: 1 1 auto; justify-content: center; text-align: center; }
 .btn.calm { background: var(--glass-strong); color: var(--text); box-shadow: var(--glass-hi); border: 1px solid var(--line); }
 .btn.calm:hover { background: var(--chip); color: var(--text); }
 .btn:hover .arr.back { transform: translateX(-5px); }
@@ -570,3 +568,34 @@ footer .copy { flex-basis: 100%; margin: 0; display: grid; gap: 2px; font-size: 
 }
 /* list pages: the cards follow their own heading, not a new section */
 .page-head + section { padding-top: 4px; }
+
+/* article kicker: "[Type] KIND · date · views"; the date part never splits, on phones it takes its own line */
+.kicker .k-date { white-space: nowrap; }
+@media (max-width: 640px) {
+  .article-head .kicker .k-date { display: block; margin-top: 8px; }
+  .article-head .kicker .k-date .sep { display: none; }
+}
+
+/* ---- home hero (variant A): role, name, one value line, availability, two buttons ---- */
+.hero .hero-role { color: var(--text); font-weight: 600; }
+.hero .value { font-size: clamp(22px, 2.7vw, 30px); line-height: 1.3; font-weight: 600; letter-spacing: -.015em;
+  margin: 0 0 20px; max-width: 30em; text-wrap: balance; }
+.hero .links { margin-top: 26px; }
+
+/* ---- home "About": the old hero text on the left, actions stacked on the right ---- */
+.about-card { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 28px 44px; align-items: center; padding: 32px 36px; }
+.about-card .intro { margin: 0; font-size: 18px; max-width: 70ch; color: var(--muted); }
+.about-card .intro strong { color: var(--text); }
+.about-card .also { margin: 0 0 12px; }
+.about-actions { display: grid; gap: 10px; min-width: 220px; }
+.about-actions .btn { justify-content: center; min-height: 48px; }
+@media (max-width: 760px) {
+  .about-card { grid-template-columns: minmax(0, 1fr); padding: 24px 20px; }
+  .about-actions { min-width: 0; }
+}
+
+/* long words in headings ("высокопроизводительных" at 32px is wider than a phone) hyphenate instead of overflowing */
+h1, h2, h3 { overflow-wrap: break-word; -webkit-hyphens: auto; hyphens: auto; hyphenate-limit-chars: 10 4 4; }
+@media (max-width: 640px) {
+  .btn.big { padding: 14px 16px; font-size: 15px; }
+}

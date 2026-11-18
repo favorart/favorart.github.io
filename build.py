@@ -923,7 +923,10 @@ def article_page(item, t):
             subtitle = '<p class="subtitle">%s</p>' % esc(m.group(1).strip())
             body_md = body_md[m.end():]
         content = tr_note(item, tr, t) + tr_body_html(item, dict(tr, body=body_md))
-    body = tpl("article", hero=hero, kind=kind_of(item, t), date=date_text(item, t), views=views_tag(item, t), lang=esc(text_lang_),
+    kind = kind_of(item, t)
+    if item["section"] == "writing" and kind == S(t, "type_" + item["wtype"]):
+        kind = ""  # the type chip already says it ("Note" chip + "NOTE" label read as a stutter)
+    body = tpl("article", hero=hero, kind=kind, date=date_text(item, t), views=views_tag(item, t), lang=esc(text_lang_),
                title=esc(title), title_lang=esc(title_lang),
                subtitle=subtitle, author=S(t, "author"), source_top=" · " + source_top if source_top else "",
                demo=demo, content=content, cta=cta, type_chip=type_chip(item, t),
