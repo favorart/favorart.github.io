@@ -135,3 +135,25 @@ build time and its relative links/images point back to the source repo. For a co
 cpu, code, wave, net, btree, heap), set `cover: covers/<slug>/cover-1.svg`, then pick the final option on `/writing/covers/`.
 The tool also writes text-free twins (`cover-N-plain.svg`); the article page shows the twin of the chosen cover
 above the title (`--plain-only` regenerates just the twins).
+
+## Analytics
+
+GoatCounter (`GOATCOUNTER_CODE` in `build.py`, dashboard https://favorart.goatcounter.com), no cookies and no
+personal data, so no consent banner. Page views of an item in any UI language count as one path. Besides page
+views, `templates/base.html` sends events (Dashboard → "Events"):
+
+| Event | When |
+|---|---|
+| `click/contact` | a link to `#contact` |
+| `form/contact-sent` | the contact form is submitted (after the browser's validation) |
+| `out/<host>/<path>` | an outgoing link (LinkedIn, GitHub, journals…) |
+| `download/<file>` | a link to a .pdf/.zip/.docx/.pptx |
+| `read-50/<page>`, `read-90/<page>` | scrolled to half / almost the end (pages longer than 1.5 screens) |
+| `time-1m/<page>`, `time-3m/<page>` | the tab was visible on the page for 1 / 3 minutes |
+
+Links to the site in posts carry `?ref=linkedin&utm_campaign=<post-slug>`: LinkedIn sends no referrer, and
+GoatCounter reads `ref` as the source and `utm_campaign` as the campaign.
+
+Weekly report: `.github/workflows/weekly-report.yml` runs `tools/weekly_report.py` every Monday and opens an
+issue labelled `analytics` (closing the previous one). It needs the repo secret `GOATCOUNTER_API_TOKEN`
+(GoatCounter → your name in the top menu → API → a key with read access to statistics).

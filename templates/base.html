@@ -102,6 +102,62 @@ $body
         }).catch(function () {});
     });
   })();
+  // engagement events for GoatCounter (cookie-free, nothing personal: only the event name and the page path).
+  // Event names: click/contact, out/<host>/<path>, download/<file>, form/contact-sent,
+  // read-50|read-90|time-1m|time-3m + <page path>. Shown under "Events" on the GoatCounter dashboard.
+  (function () {
+    if (!'$gc_counter') return;
+    var queue = [];
+    function send(name, title) {
+      var g = window.goatcounter;
+      if (g && g.count) {
+        // "read-50/" etc. get the page path exactly as count.js counted the page view (canonical + path callback)
+        var page = g.get_data ? g.get_data({}).p : location.pathname;
+        if (/\/$$/.test(name)) name += page.replace(/^\/+/, '');
+        g.count({ path: name, title: (title || name).replace('@page', page), event: true });
+        return;
+      }
+      // count.js loads async: keep the event until it is there
+      if (queue.push([name, title]) > 1) return;
+      var t = setInterval(function () {
+        if (!window.goatcounter || !window.goatcounter.count) return;
+        clearInterval(t); queue.splice(0).forEach(function (q) { send(q[0], q[1]); });
+      }, 500);
+    }
+    // clicks: contact, outgoing links, files
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href]');
+      if (!a) return;
+      var u; try { u = new URL(a.href, location.href); } catch (x) { return; }
+      var text = (a.textContent || '').trim().slice(0, 80);
+      if (u.protocol === 'mailto:') send('click/mailto', text);
+      else if (u.origin === location.origin && u.hash === '#contact') send('click/contact', text + ' @page');
+      else if (/\.(pdf|zip|docx?|pptx?)$$/i.test(u.pathname)) send('download/' + u.pathname.split('/').pop(), u.href);
+      else if (u.origin !== location.origin && /^https?:$$/.test(u.protocol))
+        send('out/' + u.hostname.replace(/^www\./, '') + u.pathname.split('/').slice(0, 3).join('/').replace(/\/+$$/, ''), text + ' @page');
+    }, true);
+    // contact form: the submit event fires only after the browser's validation passed
+    var form = document.getElementById('contact-form');
+    if (form) form.addEventListener('submit', function () { send('form/contact-sent', 'Contact form sent @page'); });
+    // reading depth and visible time, once per page view; skipped on pages that fit in about one screen
+    var marks = {};
+    function once(k, name) { if (!marks[k]) { marks[k] = 1; send(name + '/', name + ' @page'); } }
+    function depth() {
+      var h = document.documentElement.scrollHeight, v = window.innerHeight;
+      if (h < v * 1.5) return;
+      var d = (window.scrollY + v) / h;
+      if (d >= 0.5) once('50', 'read-50');
+      if (d >= 0.9) once('90', 'read-90');
+    }
+    window.addEventListener('scroll', depth, { passive: true });
+    var seen = 0;
+    setInterval(function () {
+      if (document.visibilityState !== 'visible') return;
+      seen += 5;
+      if (seen === 60) once('t1', 'time-1m');
+      if (seen === 180) once('t3', 'time-3m');
+    }, 5000);
+  })();
 </script>
 </body>
 </html>
