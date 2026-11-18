@@ -126,3 +126,7 @@ paper_keywords: Palabras clave
 
 # above a course page in another language than the course itself
 course_lang_note: "Este curso se impartió en ruso, por eso sus materiales están en ruso."
+
+# availability: under the name on the home page and the CV, and above the contact form
+open_to: "Abierto a puestos en remoto · dispuesto a reubicarme"
+open_also: "También me interesan proyectos paralelos, consultoría, docencia, charlas y viajes a conferencias — y todo lo que sea divertido."

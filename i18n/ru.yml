@@ -124,3 +124,7 @@ paper_source: "{j}, т. {v}, вып. {i}, {y}, с. {p}"
 # note above a translated article (followed by a link to the original) and the out-of-date warning
 translation_note: "Перевод Claude, прошёл независимую проверку. Оригинал:"
 translation_stale: "Оригинал изменился после этого перевода."
+
+# availability: under the name on the home page and the CV, and above the contact form
+open_to: "Открыт к удалённой работе и релокации"
+open_also: "А ещё открыт к сайд-проектам, консультациям, преподаванию, докладам и поездкам на конференции — и вообще ко всему интересному."

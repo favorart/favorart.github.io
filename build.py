@@ -973,7 +973,7 @@ def home_page(items, t):
         return '<div class="posts">\n%s\n  </div>' % "\n".join(card(i, t) for i in listed[sec][:HOME_LATEST])
 
     try:
-        body = content.substitute(prefix=t["prefix"], writing_cards=grid("writing"), course_cards=grid("courses"),
+        body = content.substitute(prefix=t["prefix"], open_to=S(t, "open_to"), open_also=S(t, "open_also"), writing_cards=grid("writing"), course_cards=grid("courses"),
                                   contact_key=esc(CONTACT_FORM_KEY), lang_code=t["lang"],
                                   project_cards=grid("projects"),
                                   all_projects=all_label(t, "all_projects", len(listed["projects"])),
@@ -991,7 +991,7 @@ def cv_page(t):
     with open(path, encoding="utf-8") as f:
         content = string.Template(f.read())
     try:
-        body = content.substitute(prefix=t["prefix"], role_title=S(t, "role_title"), role_skills=S(t, "role_skills"))
+        body = content.substitute(prefix=t["prefix"], open_to=S(t, "open_to"), open_also=S(t, "open_also"), role_title=S(t, "role_title"), role_skills=S(t, "role_skills"))
     except KeyError as e:
         fail("%s: unknown placeholder $%s" % (path, e.args[0]))
     return page(t, "%s — %s" % (t["cv_title"], t["author"]), body, t["prefix"] + "/cv/",

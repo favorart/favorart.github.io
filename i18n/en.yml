@@ -111,3 +111,7 @@ translation_stale: "The original has been updated since this translation."
 
 # above a course page in another language than the course itself
 course_lang_note: "This course was taught in Russian, so its materials below are in Russian."
+
+# availability: under the name on the home page and the CV, and above the contact form
+open_to: "Open to remote roles · open to relocation"
+open_also: "Also up for side projects, consulting, teaching, conference talks and trips — and anything fun."
