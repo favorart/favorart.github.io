@@ -89,25 +89,6 @@ $body
     }, { rootMargin: '-35% 0px -60% 0px' });
     document.querySelectorAll('[data-nav]').forEach(function (s) { io.observe(s); });
   })();
-  // cover glint: a light band sweeps over one frosted card at a time, in page order, among the cards on screen
-  (function () {
-    var cards = [].slice.call(document.querySelectorAll('.post'));
-    if (!cards.length || !('IntersectionObserver' in window)) return;
-    var seen = new Set(), i = 0;
-    var io = new IntersectionObserver(function (es) {
-      es.forEach(function (e) { if (e.isIntersecting) seen.add(e.target); else seen.delete(e.target); });
-    }, { threshold: .5 });
-    cards.forEach(function (c) {
-      io.observe(c);
-      c.addEventListener('animationend', function () { c.classList.remove('glint'); });
-    });
-    setInterval(function () {
-      if (document.hidden) return;
-      var vis = cards.filter(function (c) { return seen.has(c) && !c.matches(':hover'); });
-      if (!vis.length) return;
-      vis[i++ % vis.length].classList.add('glint');
-    }, 2600);
-  })();
   // view counts from GoatCounter's public counter API (hidden when unavailable)
   (function () {
     var base = '$gc_counter', els = document.querySelectorAll('[data-views]');
