@@ -14,6 +14,7 @@ GitHub Actions (`.github/workflows/pages.yml`) on every push to `main`, daily, a
 | `i18n/en.yml` | UI strings; one file per language (`prefix: /ru` etc. for non-default ones) |
 | `templates/` | base layout and partials — the design lives here and in `assets/site.css` |
 | `assets/site.css` | the one stylesheet |
+| `content/teasers.yml` | card teasers per item and language (≤140 chars, break off with "…"); shown instead of the summary |
 | `posts/<yyyy-mm-slug>/index.md` | LinkedIn posts and the site's own articles (+ their images in the same folder) |
 | `sources.yml` | external articles and courses, pulled from other repos at build time |
 | `covers/<slug>/` | cover options for external content; chooser page: `/writing/covers/` |
