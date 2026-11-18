@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
-"""Weekly analytics report from the GoatCounter API, as Markdown (in Russian, for the author).
+"""Weekly analytics report from the GoatCounter API, as plain text (in Russian, for the author).
 
-    GOATCOUNTER_API_TOKEN=... python tools/weekly_report.py [--site favorart] [--end 2026-11-16] > report.md
+    GOATCOUNTER_API_TOKEN=... python tools/weekly_report.py [--end 2026-11-16]           # print it
+    GOATCOUNTER_API_TOKEN=... CONTACT_FORM_KEY=... python tools/weekly_report.py --send  # e-mail it
+    CONTACT_FORM_KEY=... python tools/weekly_report.py --test-send                       # delivery check only
 
 The week is the last full Monday-Sunday (UTC) before --end (default: today), compared with the week before.
-The token is a GoatCounter API key with read access to statistics; keep it in the GitHub secret
-GOATCOUNTER_API_TOKEN, never in the repo. Used by .github/workflows/weekly-report.yml.
+The report is e-mailed through Web3Forms with the contact form's key (CONTACT_FORM_KEY), so it lands in the
+same inbox as messages from the site and nothing is published (the repo and its Actions logs are public, so the
+workflow does not print the report). GOATCOUNTER_API_TOKEN is a GoatCounter API key with only "Read statistics"
+for this site; both live in GitHub secrets, never in the repo. Used by .github/workflows/weekly-report.yml.
 """
 import argparse
 import datetime as dt
@@ -13,6 +17,7 @@ import json
 import os
 import sys
 import time
+import urllib.error
 import urllib.parse
 import urllib.request
 
@@ -73,29 +78,20 @@ def stats(api, page, r, limit=10):
 
 def delta(now, before):
     if not before:
-        return "новое" if now else ""
+        return "(новое)" if now else ""
     d = now - before
-    return "%+d" % d if d else "="
+    return "(%+d)" % d if d else "(=)"
 
 
-def table(head, rows):
+def lines(rows):
+    """Rows as "  <number>  <text>": the number first, so it reads in a proportional e-mail font too."""
     if not rows:
-        return "_нет данных_\n"
-    lines = ["| " + " | ".join(head) + " |", "|" + "---|" * len(head)]
-    lines += ["| " + " | ".join(str(c).replace("|", "\\|") for c in row) + " |" for row in rows]
-    return "\n".join(lines) + "\n"
+        return ["  нет данных"]
+    w = max(len(str(r[0])) for r in rows)
+    return ["  %s  %s" % (str(r[0]).rjust(w), "  ".join(str(c) for c in r[1:] if c != "")) for r in rows]
 
 
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--site", default=os.environ.get("GOATCOUNTER_CODE", "favorart"))
-    ap.add_argument("--end", help="YYYY-MM-DD, default today (UTC)")
-    a = ap.parse_args()
-    token = os.environ.get("GOATCOUNTER_API_TOKEN", "")
-    if not token:
-        fail("GOATCOUNTER_API_TOKEN is not set")
-    api = API(a.site, token)
-    today = dt.date.fromisoformat(a.end) if a.end else dt.datetime.now(dt.timezone.utc).date()
+def report(api, site, today):
     start, end = week(today)
     cur, prev = rng(start, end), rng(start - dt.timedelta(days=7), start)
 
@@ -105,65 +101,102 @@ def main():
     pages = [x for x in h if not x["event"]]
     events = [x for x in h if x["event"]]
 
-    def ev(prefix):
-        return [x for x in events if x["path"].startswith(prefix)]
+    def ev(prefix, before=False):
+        if before:
+            return sum(c for (p, e), c in prev_count.items() if e and p.startswith(prefix))
+        return sum(x["count"] for x in events if x["path"].startswith(prefix))
+
+    def was(now, before):
+        return "(было %d)" % before if before != now else "(=)"
 
     last_day = end - dt.timedelta(days=1)
-    md = ["Неделя **%s – %s** (UTC), сравнение с предыдущей. Дашборд: https://%s.goatcounter.com\n"
-          % (start.strftime("%d.%m"), last_day.strftime("%d.%m.%Y"), a.site)]
+    period = "%s – %s" % (start.strftime("%d.%m"), last_day.strftime("%d.%m.%Y"))
+    out = ["Статистика favorart.github.io за неделю %s (UTC); в скобках — изменение к прошлой неделе." % period,
+           "Дашборд: https://%s.goatcounter.com" % site, ""]
 
     visitors = tot.get("total", 0) - tot.get("total_events", 0)
     visitors_prev = tot_prev.get("total", 0) - tot_prev.get("total_events", 0)
-    contact = sum(x["count"] for x in ev("click/contact"))
-    sent = sum(x["count"] for x in ev("form/contact-sent"))
-    md.append("## Коротко\n")
-    md.append(table(["Что", "Неделя", "Было"], [
-        ["Посетители (визиты страниц)", visitors, visitors_prev],
-        ["Клики «Связаться»", contact, sum(c for (p, e), c in prev_count.items() if e and p.startswith("click/contact"))],
-        ["**Отправлено через форму**", sent, sum(c for (p, e), c in prev_count.items() if e and p.startswith("form/contact-sent"))],
-        ["Переходы наружу (LinkedIn, GitHub…)", sum(x["count"] for x in ev("out/")),
-         sum(c for (p, e), c in prev_count.items() if e and p.startswith("out/"))],
-    ]))
+    out.append("КОРОТКО")
+    out += lines([[visitors, "посетителей", was(visitors, visitors_prev)]] +
+                 [[ev(p), name, was(ev(p), ev(p, True))] for p, name in (
+                     ("form/contact-sent", "сообщений через форму"),
+                     ("click/contact", "кликов «Связаться»"),
+                     ("out/", "переходов наружу (LinkedIn, GitHub…)"),
+                     ("download/", "скачиваний"))])
 
-    md.append("\n## Страницы\n")
-    md.append(table(["Страница", "Визиты", "Δ"],
-                    [[x["path"], x["count"], delta(x["count"], prev_count.get((x["path"], False), 0))]
-                     for x in sorted(pages, key=lambda x: -x["count"])[:15]]))
+    out += ["", "СТРАНИЦЫ (визиты)"]
+    out += lines([[x["count"], x["path"], delta(x["count"], prev_count.get((x["path"], False), 0))]
+                  for x in sorted(pages, key=lambda x: -x["count"])[:15]])
 
-    # reading: one row per page, columns = read events
     reading = {}
     for x in events:
         for name in READ_EVENTS:
             if x["path"].startswith(name + "/"):
                 reading.setdefault("/" + x["path"][len(name) + 1:], {})[name] = x["count"]
     visits = {x["path"]: x["count"] for x in pages}
-    md.append("\n## Дочитывание\n")
-    md.append("Сколько визитов прокрутили страницу до половины / почти до конца и сколько пробыли на ней ≥ 1 и ≥ 3 минут "
-              "(вкладка видна). Страницы на один экран не учитываются.\n\n")
-    md.append(table(["Страница", "Визиты", "50%", "90%", "≥1 мин", "≥3 мин"],
-                    [[p, visits.get(p, ""), *[r.get(n, "") for n in READ_EVENTS]]
-                     for p, r in sorted(reading.items(), key=lambda kv: -sum(kv[1].values()))[:15]]))
+    out += ["", "ДОЧИТЫВАНИЕ (визиты / прокрутили до 50% / до 90% / вкладка открыта ≥1 мин / ≥3 мин)"]
+    out += lines([["%s / %s / %s / %s / %s" % (visits.get(p, "?"), *[r.get(n, 0) for n in READ_EVENTS]), p]
+                  for p, r in sorted(reading.items(), key=lambda kv: -visits.get(kv[0], 0))[:15]])
 
-    md.append("\n## Клики\n")
     clicks = [x for x in events if not any(x["path"].startswith(n + "/") for n in READ_EVENTS)]
-    md.append(table(["Событие", "Раз", "Δ", "Последний текст ссылки / страница"],
-                    [[x["path"], x["count"], delta(x["count"], prev_count.get((x["path"], True), 0)), x.get("title", "")]
-                     for x in sorted(clicks, key=lambda x: -x["count"])[:20]]))
+    out += ["", "КЛИКИ"]
+    out += lines([[x["count"], x["path"], delta(x["count"], prev_count.get((x["path"], True), 0)),
+                   "— " + x["title"] if x.get("title") and x["title"] != x["path"] else ""]
+                  for x in sorted(clicks, key=lambda x: -x["count"])[:20]])
 
-    for title, page, head in (("Страны и регионы", "locations", "Где"),
-                              ("Источники", "toprefs", "Откуда"),
-                              ("Кампании (utm_campaign)", "campaigns", "Кампания"),
-                              ("Языки браузера", "languages", "Язык"),
-                              ("Экраны", "sizes", "Размер")):
+    for title, page in (("СТРАНЫ И РЕГИОНЫ", "locations"), ("ИСТОЧНИКИ", "toprefs"),
+                        ("КАМПАНИИ (utm_campaign)", "campaigns"), ("ЯЗЫКИ БРАУЗЕРА", "languages"),
+                        ("ЭКРАНЫ", "sizes")):
         s, s_prev = stats(api, page, cur), stats(api, page, prev, limit=100)
         before = {x["name"]: x["count"] for x in s_prev}
-        md.append("\n## %s\n" % title)
-        md.append(table([head, "Визиты", "Δ"], [[x["name"] or "(нет данных)", x["count"],
-                                                  delta(x["count"], before.get(x["name"], 0))] for x in s]))
+        out += ["", title]
+        out += lines([[x["count"], x["name"] or "(нет данных)", delta(x["count"], before.get(x["name"], 0))]
+                      for x in s])
 
-    md.append("\n_Источник «(нет данных)» — переходы без реферера (приложение LinkedIn, lnkd.in). Ставь в постах "
-              "ссылки с `?ref=linkedin&utm_campaign=<пост>`._\n")
-    print("\n".join(md))
+    out += ["", "«(нет данных)» в источниках — переходы без реферера (приложение LinkedIn, lnkd.in).",
+            "Ссылки в постах ставь с ?ref=linkedin&utm_campaign=<пост>."]
+    return "статистика за неделю %s" % period, "\n".join(out)
+
+
+def send(subject, text):
+    """E-mail through Web3Forms with the contact form's key (the same inbox as the site's messages)."""
+    key = os.environ.get("CONTACT_FORM_KEY", "")
+    if not key:
+        fail("CONTACT_FORM_KEY is not set")
+    data = json.dumps({"access_key": key, "subject": "favorart.github.io: " + subject,
+                       "from_name": "favorart.github.io", "name": "Weekly report (GoatCounter)",
+                       "message": text}).encode()
+    req = urllib.request.Request("https://api.web3forms.com/submit", data=data, headers={
+        "Content-Type": "application/json", "Accept": "application/json", "User-Agent": "site-weekly-report"})
+    try:
+        with urllib.request.urlopen(req, timeout=30) as r:
+            res = json.load(r)
+    except urllib.error.HTTPError as e:
+        fail("Web3Forms -> HTTP %d: %s" % (e.code, e.read()[:300].decode("utf-8", "replace")))
+    if not res.get("success"):
+        fail("Web3Forms: %s" % res.get("message", res))
+    print("sent:", res.get("message", "ok"))
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--site", default=os.environ.get("GOATCOUNTER_CODE", "favorart"))
+    ap.add_argument("--end", help="YYYY-MM-DD, default today (UTC)")
+    ap.add_argument("--send", action="store_true", help="e-mail the report instead of printing it")
+    ap.add_argument("--test-send", action="store_true", help="only check that an e-mail gets through")
+    a = ap.parse_args()
+    if a.test_send:
+        send("weekly report (test)", "Проверка доставки еженедельного отчёта GoatCounter. Статистики здесь нет.")
+        return
+    token = os.environ.get("GOATCOUNTER_API_TOKEN", "")
+    if not token:
+        fail("GOATCOUNTER_API_TOKEN is not set")
+    today = dt.date.fromisoformat(a.end) if a.end else dt.datetime.now(dt.timezone.utc).date()
+    subject, text = report(API(a.site, token), a.site, today)
+    if a.send:
+        send(subject, text)  # not printed: Actions logs of a public repo are public
+    else:
+        print(subject + "\n\n" + text)
 
 
 if __name__ == "__main__":
