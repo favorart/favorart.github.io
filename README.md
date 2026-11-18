@@ -154,6 +154,7 @@ views, `templates/base.html` sends events (Dashboard → "Events"):
 Links to the site in posts carry `?ref=linkedin&utm_campaign=<post-slug>`: LinkedIn sends no referrer, and
 GoatCounter reads `ref` as the source and `utm_campaign` as the campaign.
 
-Weekly report: `.github/workflows/weekly-report.yml` runs `tools/weekly_report.py` every Monday and opens an
-issue labelled `analytics` (closing the previous one). It needs the repo secret `GOATCOUNTER_API_TOKEN`
-(GoatCounter → your name in the top menu → API → a key with read access to statistics).
+Weekly report: `.github/workflows/weekly-report.yml` runs `tools/weekly_report.py --send` every Monday and
+e-mails the past week's stats through Web3Forms to the contact form's inbox (not published anywhere: the repo
+and its Actions logs are public). Secrets: `GOATCOUNTER_API_TOKEN` (GoatCounter -> your name in the top menu ->
+API -> only "Read statistics", only this site) and `CONTACT_FORM_KEY`.

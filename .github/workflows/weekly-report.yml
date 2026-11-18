@@ -1,8 +1,9 @@
 name: Weekly analytics report
 
-# Every Monday: GoatCounter stats for the past week -> a new issue labelled "analytics" (GitHub e-mails it to
-# the repo owner); the previous report issue is closed. Needs the repo secret GOATCOUNTER_API_TOKEN
-# (GoatCounter -> your name in the top menu -> API -> a key that can read statistics).
+# Every Monday: GoatCounter stats for the past week, e-mailed through Web3Forms to the same inbox as the
+# contact form. The report is not printed or published: this repo and its Actions logs are public.
+# Secrets: GOATCOUNTER_API_TOKEN (GoatCounter -> your name -> API -> "Read statistics" for this site)
+# and CONTACT_FORM_KEY (the contact form's Web3Forms key, already used by pages.yml).
 
 on:
   schedule:
@@ -11,7 +12,6 @@ on:
 
 permissions:
   contents: read
-  issues: write
 
 jobs:
   report:
@@ -21,17 +21,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Build the report
+      - run: python tools/weekly_report.py --send
         env:
           GOATCOUNTER_API_TOKEN: ${{ secrets.GOATCOUNTER_API_TOKEN }}
-        run: python tools/weekly_report.py > report.md
-      - name: Publish as an issue
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          gh label create analytics --color 0E8A16 --description "Weekly GoatCounter report" --force
-          for n in $(gh issue list --label analytics --state open --json number --jq '.[].number'); do
-            gh issue close "$n" --reason completed
-          done
-          gh issue create --label analytics --body-file report.md \
-            --title "Аналитика сайта: неделя до $(date -u +%d.%m.%Y)"
+          CONTACT_FORM_KEY: ${{ secrets.CONTACT_FORM_KEY }}
