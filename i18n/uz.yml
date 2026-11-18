@@ -8,9 +8,9 @@ author: Kirill Golikov
 months: [Yan, Fev, Mar, Apr, May, Iyun, Iyul, Avg, Sen, Okt, Noy, Dek]
 
 home_title: Kirill Golikov
-home_description: "Kirill Golikov — bosh dasturiy taʼminot muhandisi — C++ · Python · ML · AI. Unumdorlikni optimallashtirish, ML infratuzilmasi, tizimlar. Bilbao, Ispaniya."
+home_description: "Kirill Golikov — bosh dasturiy taʼminot muhandisi — C++ · Python · ML · AI. Unumdorlikni optimallashtirish, ML infratuzilmasi, tizimlar. Asosan masofaviy ish."
 home_og_title: Kirill Golikov — bosh dasturiy taʼminot muhandisi
-home_og_description: "Bosh dasturiy taʼminot muhandisi — C++ · Python · ML · AI. Bilbao, Ispaniya."
+home_og_description: "Bosh dasturiy taʼminot muhandisi — C++ · Python · ML · AI. Asosan masofaviy ish."
 
 # the title in two lines: role, then skills
 role_title: Bosh dasturiy taʼminot muhandisi
@@ -53,7 +53,7 @@ all_writing_two: Ikkala nashr
 all_courses_two: Ikkala kurs
 all_projects_two: Ikkala loyiha
 cv_title: Rezyume
-cv_description: "Kirill Golikov rezyumesi — bosh dasturiy taʼminot muhandisi — C++ · Python · ML · AI. Bilbao, Ispaniya."
+cv_description: "Kirill Golikov rezyumesi — bosh dasturiy taʼminot muhandisi — C++ · Python · ML · AI. Asosan masofaviy ish."
 comment_on_linkedin: LinkedIn sahifasida izoh qoldirish
 send_feedback: Fikr-mulohaza yuborish
 back_to_writing: Barcha nashrlar

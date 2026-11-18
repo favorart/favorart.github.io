@@ -5,7 +5,6 @@
   <div class="kicker title2"><span>$role_title</span><span class="sub">$role_skills</span></div>
   <h1>Kirill Golikov</h1>
   $fun_roles
-  <p class="place">Bilbao, Ispaniya</p>
   <p class="lead">Men <strong>C++ tizimlarini tezlashtiraman</strong>: unumdorlikni optimallashtirish, profillash va tizim dizayni — SSD mikrodasturlari va maʼlumotlarni saqlash tizimlaridagi deduplikatsiyadan tortib neyron tarmoqlar ijro muhitlari va mobil oʻyinlargacha. Diskret matematika va matematik kibernetika boʻyicha aspiranturani tamomlaganman, M. V. Lomonosov nomidagi MDUda 7 yil maʼruza oʻqiganman.</p>
   <div class="links">
     <a class="btn sun" href="#contact">
@@ -58,7 +57,7 @@
       <ul class="facts">
         <li><span>Hozir</span><b>Artificial Seed kompaniyasida katta dasturiy taʼminot muhandisi</b></li>
         <li><span>Tajriba</span><b>2013-yildan beri sohada</b></li>
-        <li><span>Joylashuv</span><b>Bilbao, Ispaniya</b></li>
+        <li><span>Ish formati</span><b>Asosan masofaviy</b></li>
         <li><span>Oʻqituvchilik</span><b>M. V. Lomonosov nomidagi MDU, 2016 — 2023</b></li>
       </ul>
     </div>
@@ -68,14 +67,18 @@
 
 <section id="contact" data-nav="contact">
   <div class="shead"><h2><small>Aloqa</small>Bogʻlanish</h2></div>
-  <!-- Formspree: replace YOUR_FORM_ID with the id from formspree.io (e.g. xyzabcde) -->
-  <form id="contact-form" class="card glass contact" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+  <!-- Contact form: Web3Forms (no account; the access key only routes mail and does not reveal the address).
+       The key is CONTACT_FORM_KEY in build.py; while it is empty the LinkedIn fallback below is shown. -->
+  <form id="contact-form" class="card glass contact" action="https://api.web3forms.com/submit" method="POST">
     <div class="row">
       <label>Ismingiz<input name="name" autocomplete="name" required></label>
       <label>Email manzilingiz<input type="email" name="email" autocomplete="email" required></label>
     </div>
     <label>Xabar<textarea name="message" rows="5" required></textarea></label>
-    <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none">
+    <input type="hidden" name="access_key" value="$contact_key">
+    <input type="hidden" name="subject" value="favorart.github.io: message ($lang_code)">
+    <input type="hidden" name="from_name" value="favorart.github.io">
+    <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none">
     <div class="actions">
       <button class="btn sun" type="submit">Xabar yuborish</button>
       <span id="form-status" role="status"></span>
@@ -88,7 +91,7 @@
   (function () {
     var form = document.getElementById('contact-form');
     var status = document.getElementById('form-status');
-    if (form.action.indexOf('YOUR_FORM_ID') !== -1) {
+    if (!form.elements.access_key.value) {
       form.hidden = true;
       document.getElementById('contact-fallback').hidden = false;
       return;

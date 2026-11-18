@@ -9,9 +9,9 @@ author: Kirill Golikov
 months: [ene, feb, mar, abr, may, jun, jul, ago, sep, oct, nov, dic]
 
 home_title: Kirill Golikov
-home_description: "Kirill Golikov — ingeniero de software principal — C++ · Python · ML · AI. Optimización del rendimiento, infraestructura de ML, sistemas. Bilbao, España."
+home_description: "Kirill Golikov — ingeniero de software principal — C++ · Python · ML · AI. Optimización del rendimiento, infraestructura de ML, sistemas. Trabajo preferentemente remoto."
 home_og_title: Kirill Golikov — ingeniero de software principal
-home_og_description: "Ingeniero de software principal — C++ · Python · ML · AI. Bilbao, España."
+home_og_description: "Ingeniero de software principal — C++ · Python · ML · AI. Trabajo preferentemente remoto."
 
 # the title in two lines: role, then skills
 role_title: Ingeniero de software principal
@@ -60,7 +60,7 @@ all_writing_two: Ver las dos publicaciones
 all_courses_two: Ver los dos cursos
 all_projects_two: Ver los dos proyectos
 cv_title: CV
-cv_description: "CV de Kirill Golikov — ingeniero de software principal — C++ · Python · ML · AI. Bilbao, España."
+cv_description: "CV de Kirill Golikov — ingeniero de software principal — C++ · Python · ML · AI. Trabajo preferentemente remoto."
 comment_on_linkedin: Comentar en LinkedIn
 send_feedback: Enviar comentarios
 back_to_writing: Todas las publicaciones

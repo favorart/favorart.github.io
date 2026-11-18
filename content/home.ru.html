@@ -5,7 +5,6 @@
   <div class="kicker title2"><span>$role_title</span><span class="sub">$role_skills</span></div>
   <h1>Кирилл Голиков</h1>
   $fun_roles
-  <p class="place">Бильбао, Испания</p>
   <p class="lead">Делаю <strong>системы на C++ быстрыми</strong>: оптимизация производительности, профилирование и проектирование систем — от прошивок SSD и дедупликации в системах хранения до сред выполнения нейросетей и мобильных игр. Аспирантура по дискретной математике и математической кибернетике, 7 лет преподавания в МГУ имени М. В. Ломоносова.</p>
   <div class="links">
     <a class="btn sun" href="#contact">
@@ -58,7 +57,7 @@
       <ul class="facts">
         <li><span>Сейчас</span><b>Старший инженер-программист в Artificial Seed</b></li>
         <li><span>Опыт</span><b>В индустрии с 2013 года</b></li>
-        <li><span>Где</span><b>Бильбао, Испания</b></li>
+        <li><span>Формат работы</span><b>Предпочтительно удалённо</b></li>
         <li><span>Преподавание</span><b>МГУ, 2016–2023</b></li>
       </ul>
     </div>
@@ -68,14 +67,18 @@
 
 <section id="contact" data-nav="contact">
   <div class="shead"><h2><small>Контакты</small>Напишите мне</h2></div>
-  <!-- Formspree: replace YOUR_FORM_ID with the id from formspree.io (e.g. xyzabcde) -->
-  <form id="contact-form" class="card glass contact" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+  <!-- Contact form: Web3Forms (no account; the access key only routes mail and does not reveal the address).
+       The key is CONTACT_FORM_KEY in build.py; while it is empty the LinkedIn fallback below is shown. -->
+  <form id="contact-form" class="card glass contact" action="https://api.web3forms.com/submit" method="POST">
     <div class="row">
       <label>Имя<input name="name" autocomplete="name" required></label>
       <label>Ваш email<input type="email" name="email" autocomplete="email" required></label>
     </div>
     <label>Сообщение<textarea name="message" rows="5" required></textarea></label>
-    <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none">
+    <input type="hidden" name="access_key" value="$contact_key">
+    <input type="hidden" name="subject" value="favorart.github.io: message ($lang_code)">
+    <input type="hidden" name="from_name" value="favorart.github.io">
+    <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none">
     <div class="actions">
       <button class="btn sun" type="submit">Отправить</button>
       <span id="form-status" role="status"></span>
@@ -88,7 +91,7 @@
   (function () {
     var form = document.getElementById('contact-form');
     var status = document.getElementById('form-status');
-    if (form.action.indexOf('YOUR_FORM_ID') !== -1) {
+    if (!form.elements.access_key.value) {
       form.hidden = true;
       document.getElementById('contact-fallback').hidden = false;
       return;
