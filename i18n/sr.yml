@@ -10,9 +10,9 @@ author: Kiril Golikov
 months: [jan, feb, mar, apr, maj, jun, jul, avg, sep, okt, nov, dec]
 
 home_title: Kiril Golikov
-home_description: "Kiril Golikov — glavni softverski inženjer — C++ · Python · ML · AI. Optimizacija performansi, ML infrastruktura, sistemi. Bilbao, Španija."
+home_description: "Kiril Golikov — glavni softverski inženjer — C++ · Python · ML · AI. Optimizacija performansi, ML infrastruktura, sistemi. Prvenstveno na daljinu."
 home_og_title: Kiril Golikov — glavni softverski inženjer
-home_og_description: "Glavni softverski inženjer — C++ · Python · ML · AI. Bilbao, Španija."
+home_og_description: "Glavni softverski inženjer — C++ · Python · ML · AI. Prvenstveno na daljinu."
 
 # the title in two lines: role, then skills
 role_title: Glavni softverski inženjer
@@ -64,7 +64,7 @@ all_writing_two: Oba teksta
 all_courses_two: Oba kursa
 all_projects_two: Oba projekta
 cv_title: CV
-cv_description: "CV Kirila Golikova, glavnog softverskog inženjera — C++ · Python · ML · AI. Bilbao, Španija."
+cv_description: "CV Kirila Golikova, glavnog softverskog inženjera — C++ · Python · ML · AI. Prvenstveno na daljinu."
 comment_on_linkedin: Ostavite komentar na LinkedIn-u
 send_feedback: Pošaljite komentar
 back_to_writing: Svi tekstovi

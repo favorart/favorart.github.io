@@ -47,6 +47,10 @@ HOME_LATEST = 2  # cards per section on the home page
 # GoatCounter site code (https://<code>.goatcounter.com): cookie-free visit counter.
 # Empty string disables the counter. count.js itself ignores localhost and file:// views.
 GOATCOUNTER_CODE = os.environ.get("GOATCOUNTER_CODE", "favorart")
+# Web3Forms access key for the contact form (https://web3forms.com, created by e-mail, no account). It is public by
+# design: it only tells Web3Forms which inbox to deliver to and does not reveal the address. Empty = form hidden,
+# the LinkedIn fallback is shown instead.
+CONTACT_FORM_KEY = os.environ.get("CONTACT_FORM_KEY", "")
 RASTER = (".jpg", ".jpeg", ".png", ".gif", ".webp", ".avif")
 IMAGE_EXT = RASTER + (".svg",)
 # content sections: manifest key -> URL segment
@@ -970,6 +974,7 @@ def home_page(items, t):
 
     try:
         body = content.substitute(prefix=t["prefix"], writing_cards=grid("writing"), course_cards=grid("courses"),
+                                  contact_key=esc(CONTACT_FORM_KEY), lang_code=t["lang"],
                                   project_cards=grid("projects"),
                                   all_projects=all_label(t, "all_projects", len(listed["projects"])),
                                   role_title=S(t, "role_title"), role_skills=S(t, "role_skills"), fun_roles=fun_roles(t),
