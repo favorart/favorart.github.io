@@ -512,7 +512,7 @@ footer .copy { flex-basis: 100%; margin: 0; display: grid; gap: 2px; font-size: 
   .pubs .links a { display: inline-flex; align-items: center; min-height: 40px; padding: 0 6px; }
   footer > span a { display: inline-flex; align-items: center; min-height: 40px; padding: 0 4px; }
   .crumbs [aria-current] { max-width: 24ch; }
-  .crumbs a { display: inline-flex; align-items: center; min-height: 40px; }
+  .crumbs a { display: inline-flex; align-items: center; justify-content: center; min-height: 40px; min-width: 40px; }
   .filters a { min-height: 40px; display: inline-flex; align-items: center; }
   .bar { padding: 10px 16px; gap: 10px; }
   .mnav { padding: 0 16px 10px; }
