@@ -46,7 +46,7 @@ class API:
                 if e.code == 429 and attempt < 4:
                     time.sleep(2)
                     continue
-                fail("%s -> HTTP %d: %s" % (path, e.code, e.read()[:300].decode("utf-8", "replace")))
+                fail("%s -> HTTP %d: %s" % (url, e.code, e.read()[:300].decode("utf-8", "replace")))
 
 
 def week(end):
