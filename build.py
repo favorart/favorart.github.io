@@ -746,12 +746,20 @@ SECTION_PAGE = {"writing": ("/writing/", "nav_writing"), "projects": ("/projects
                 "courses": ("/courses/", "nav_teaching"), "cv": ("/cv/", "nav_about")}
 
 
+def card_title(item, t):
+    """Title of an item as its card shows it in t's language (a reviewed translation's title when there is one)."""
+    tr = tr_of(item, t)
+    return str(tr["meta"]["title"] if tr else loc(item["title"], t))
+
+
 def breadcrumbs(t, crumbs):
-    """'Home › Section › Page' above the title of every inner page. crumbs = (section, current title or None);
-    the last item is the current page and is not a link."""
+    """Section bar above the title of every inner page: 'Home › Section › Page' and, on an item page, ← → to the
+    neighbouring items of the section (list order). crumbs = (section, current title or None[, item]);
+    the last crumb is the current page and is not a link. The side navigation itself always leads to the home page."""
     if not crumbs:
         return ""
-    section, current = crumbs
+    section, current = crumbs[:2]
+    item = crumbs[2] if len(crumbs) > 2 else None
     href, key = SECTION_PAGE[section]
     parts = ['<a href="%s/">%s</a>' % (t["prefix"], S(t, "nav_home"))]
     if current:
@@ -759,8 +767,20 @@ def breadcrumbs(t, crumbs):
         parts.append('<span aria-current="page">%s</span>' % esc(current))
     else:
         parts.append('<span aria-current="page">%s</span>' % S(t, key))
-    return ('<nav class="crumbs" aria-label="%s"><ol>%s</ol></nav>'
-            % (S(t, "aria_breadcrumbs"), "".join("<li>%s</li>" % p for p in parts)))
+    trail = ('<nav class="crumbs" aria-label="%s"><ol>%s</ol></nav>'
+             % (S(t, "aria_breadcrumbs"), "".join("<li>%s</li>" % p for p in parts)))
+    steps = ""
+    if item is not None:
+        links = []
+        for rel, arrow in (("prev", "←"), ("next", "→")):
+            nb = item.get("nb_" + rel)
+            if nb:
+                name = esc(card_title(nb, t))
+                links.append('<a rel="%s" href="%s" title="%s" aria-label="%s">%s</a>' % (rel, item_url(nb, t), name, name, arrow))
+            else:
+                links.append('<span aria-hidden="true">%s</span>' % arrow)
+        steps = '<span class="steps">%s</span>' % "".join(links)
+    return '<div class="ctxbar">%s%s</div>' % (trail, steps)
 
 
 def item_url(item, t=None):
@@ -850,6 +870,23 @@ def views_tag(item, t):
             % (esc(item_url(item)), S(t, "views"), EYE_SVG))
 
 
+TEASERS = {}  # content/teasers.yml: slug -> {lang: teaser}, filled in main()
+
+
+def load_teasers():
+    path = os.path.join(ROOT, "content", "teasers.yml")
+    if not os.path.isfile(path):
+        return {}
+    with open(path, encoding="utf-8") as f:
+        data = yaml.safe_load(f) or {}
+    for slug, by_lang in data.items():
+        for lang, text in (by_lang or {}).items():
+            if len(str(text)) > 140:
+                fail("content/teasers.yml: %s/%s is %d characters, the limit is 140 (3 lines of a card)"
+                     % (slug, lang, len(str(text))))
+    return data
+
+
 def card(item, t):
     cover, src = "", item.get("card_cover_url") or item.get("cover_url")
     if src:
@@ -857,13 +894,15 @@ def card(item, t):
     badge = ""
     if item.get("demo_url"):
         badge = '<a class="badge" href="%s">%s</a>' % (esc(item["demo_url"]), S(t, "badge_demo"))
+    # a teaser in the page's language (short hook, breaks off with "…") replaces the summary on the card
+    teaser = str((TEASERS.get(item["slug"]) or {}).get(t["lang"]) or "")
     return tpl("card", href=item_url(item, t), cover=cover, badge=badge, type_chip=type_chip(item, t),
                wtype=esc(item.get("wtype", "")) if item["section"] == "writing" else "", kind=kind_of(item, t), date=date_text(item, t),
                views=views_tag(item, t),
                lang=esc(t["html_lang"] if tr_of(item, t) else text_lang(item, "title", t)),
                title=esc(str(tr_of(item, t)["meta"]["title"] if tr_of(item, t) else loc(item["title"], t))),
-               summary_lang=esc(t["html_lang"] if tr_of(item, t) else text_lang(item, "summary", t)),
-               summary=esc(str(tr_of(item, t)["meta"]["summary"] if tr_of(item, t) else loc(item["summary"], t))))
+               summary_lang=esc(t["html_lang"] if teaser or tr_of(item, t) else text_lang(item, "summary", t)),
+               summary=esc(teaser or str(tr_of(item, t)["meta"]["summary"] if tr_of(item, t) else loc(item["summary"], t))))
 
 
 def article_page(item, t):
@@ -926,7 +965,7 @@ def article_page(item, t):
     kind = kind_of(item, t)
     if item["section"] == "writing" and kind == S(t, "type_" + item["wtype"]):
         kind = ""  # the type chip already says it ("Note" chip + "NOTE" label read as a stutter)
-    body = tpl("article", hero=hero, kind=kind, date=date_text(item, t), views=views_tag(item, t), lang=esc(text_lang_),
+    body = tpl("article", hero=hero, kind=kind, sep='<span class="sep"> · </span>' if kind else "", date=date_text(item, t), views=views_tag(item, t), lang=esc(text_lang_),
                title=esc(title), title_lang=esc(title_lang),
                subtitle=subtitle, author=S(t, "author"), source_top=" · " + source_top if source_top else "",
                demo=demo, content=content, cta=cta, type_chip=type_chip(item, t),
@@ -935,7 +974,7 @@ def article_page(item, t):
     return page(t, "%s — %s" % (title, t["author"]), body, item_url(item, t),
                 description=summary,
                 canonical=canonical, og_image=cover if cover.lower().endswith(RASTER) else None, og_type="article",
-                section=NAV_OF[item["section"]], crumbs=(item["section"], title))
+                section=NAV_OF[item["section"]], crumbs=(item["section"], title, item))
 
 
 def list_page(items, section, t):
@@ -1109,6 +1148,7 @@ def main():
         fail("duplicate or reserved slugs: %s" % sorted(dupes | ({("writing", "covers")} & set(keys))))
     items.sort(key=lambda i: (i["date"], str(loc(i["title"], t0))), reverse=True)
     tr_report = load_translations(items, langs)
+    TEASERS.update(load_teasers())
 
     if os.path.isdir(out):
         shutil.rmtree(out)
@@ -1132,6 +1172,13 @@ def main():
         write(os.path.join(root, "cv", "index.html"), cv_page(t))
         for section in ALL_SECTIONS:
             write(os.path.join(root, section, "index.html"), list_page(items, section, t))
+
+    # neighbours in the section's list (newest first) for the ← → of the section bar
+    for sec in ALL_SECTIONS:
+        listed = [i for i in items if i["list"] and i["section"] == sec]
+        for k, i in enumerate(listed):
+            i["nb_prev"] = listed[k - 1] if k > 0 else None
+            i["nb_next"] = listed[k + 1] if k + 1 < len(listed) else None
 
     # item pages: the text stays in its own language, the page around it exists in every UI language
     for item in items:

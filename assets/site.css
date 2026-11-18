@@ -599,3 +599,36 @@ h1, h2, h3 { overflow-wrap: break-word; -webkit-hyphens: auto; hyphens: auto; hy
 @media (max-width: 640px) {
   .btn.big { padding: 14px 16px; font-size: 15px; }
 }
+
+/* ---- glint: a wide white diagonal band sweeps across the frosted cover, card after card (JS in base.html adds
+   .glint in turn), inviting a click. It also runs with "reduce motion" on: one slow band, no zoom or bounce. ---- */
+.post .frost::after { content: ""; position: absolute; inset: -10% 0; pointer-events: none;
+  background: linear-gradient(115deg, transparent 24%, rgba(255, 255, 255, .25) 34%, rgba(255, 255, 255, .85) 44%,
+    rgba(255, 255, 255, .95) 50%, rgba(255, 255, 255, .85) 56%, rgba(255, 255, 255, .25) 66%, transparent 76%);
+  transform: translateX(-130%); }
+:root[data-theme="dark"] .post .frost::after { opacity: .6; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .post .frost::after { opacity: .6; } }
+.post.glint .frost::after { animation: glint 1.8s cubic-bezier(.45, 0, .25, 1) both; }
+@keyframes glint { from { transform: translateX(-130%); } to { transform: translateX(130%); } }
+
+/* About: one main button, LinkedIn and GitHub as 48px icon tiles under it */
+.about-actions .icons { display: flex; gap: 10px; justify-content: center; }
+.about-actions .icons a { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 14px; color: var(--text);
+  background: var(--glass-strong); border: 1px solid var(--glass-line); box-shadow: var(--glass-hi); transition: background .2s, color .2s; }
+.about-actions .icons a:hover { background: var(--sun); color: var(--sun-ink); }
+.about-actions .icons a:focus-visible { outline: 2px solid var(--sun); outline-offset: 2px; }
+.about-actions .icons svg { width: 20px; height: 20px; fill: currentColor; }
+
+/* section bar on inner pages: breadcrumbs on the left, ← → to the neighbouring items on the right */
+.ctxbar { display: flex; align-items: center; justify-content: space-between; gap: 8px 14px; flex-wrap: wrap;
+  margin: 0 0 14px; padding: 4px 6px 4px 4px; }
+.ctxbar .crumbs ol { margin: 0; }
+.ctxbar .steps { display: flex; gap: 8px; margin-left: auto; }
+.ctxbar .steps > * { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 999px; font-weight: 700;
+  background: var(--chip); border: 1px solid var(--glass-line); color: var(--text); transition: background .2s, color .2s; }
+.ctxbar .steps a:hover { background: var(--sun); color: var(--sun-ink); }
+.ctxbar .steps span { opacity: .35; }
+.ctxbar + .reader, .ctxbar + .page-head { margin-top: 0; }
+.ctxbar:has(+ .reader) { max-width: 860px; }
+/* card text: at most three lines (teasers are written to fit; a long summary is cut the same way) */
+.post .body p { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
