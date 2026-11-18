@@ -123,3 +123,5 @@ course_lang_note: "Bu kurs rus tilida oʻqitilgan, shuning uchun quyidagi materi
 # availability: under the name on the home page and the CV, and above the contact form
 open_to: "Masofaviy ishga ochiqman · koʻchib oʻtishga tayyorman"
 open_also: "Shuningdek, qoʻshimcha loyihalar, konsalting, oʻqitish, konferensiyalarda maʼruzalar va safarlarga ham ochiqman — umuman, qiziqarli boʻlgan hamma narsaga."
+# aria-label of the breadcrumb trail (Home › Section › Page) on inner pages
+aria_breadcrumbs: Sahifa yoʻli
