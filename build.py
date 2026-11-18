@@ -171,7 +171,8 @@ def date_text(item, t):
     if item.get("date_label"):
         return esc(str(loc(item["date_label"], t)))
     d = item["date"]
-    return esc(str(t.get("date_format", "{d} {m} {y}")).format(d=d.day, m=t["months"][d.month - 1], y=d.year))
+    # one unbreakable unit: "14 Nov 2026" never splits across lines
+    return esc(str(t.get("date_format", "{d} {m} {y}")).format(d=d.day, m=t["months"][d.month - 1], y=d.year)).replace(" ", NBSP)
 
 
 def split_front_matter(text, where):
@@ -652,8 +653,55 @@ def lang_nav(t, rel, only_default=False):
     return "".join(links)
 
 
+def lang_menu(t, rel, only_default=False):
+    """Phones: the language switcher folded into one 40x40 button that opens a list of full language names."""
+    items = []
+    for code, u in LANGS.items():
+        target = rel if not only_default or code == DEFAULT_LANG else "/writing/"
+        cur = ' aria-current="true"' if code == t["lang"] else ""
+        items.append('<a href="%s%s" hreflang="%s" lang="%s"%s><b>%s</b> %s</a>' % (
+            u["prefix"], target, esc(u["html_lang"]), esc(u["html_lang"]), cur, code.upper(), esc(str(u["name"]))))
+    return ('<details class="langdd"><summary aria-label="%s">%s</summary><div class="glass">%s</div></details>'
+            % (esc(str(t.get("aria_language", "Language"))), t["lang"].upper(), "".join(items)))
+
+
+# ---- typography: no short word (preposition, conjunction, article) or number left hanging at a line end ----
+SHORT_WORDS = {
+    "ru": "в во на к ко с со у о об обо от до по за из изо и а но не ни для без при над под про как что или да же ли бы то это я мы ты он она их его её ещё уже".split(),
+    "en": "a an the of to in on at by for and or but is as if it I my we no nor via".split(),
+    "es": "a y e o u de el la los las lo un una del al en con por que se no su sus mi ni sin".split(),
+    "sr": "i u na sa s za od do po o a ali da ne ni iz k ka bez pri uz kao".split(),
+    "uz": "va bu u ham har bir yoki bilan".split(),
+}
+_SHORT_ALL = sorted({w for ws in SHORT_WORDS.values() for w in ws}, key=len, reverse=True)
+_SHORT_RE = re.compile(r"(?<![\w\-.\u02bb\u02bc'\u2019])(%s|\d{1,4}|\u2116|\u00a7)[ \t\n]+(?=[^\s<])"
+                       % "|".join(map(re.escape, _SHORT_ALL)), re.IGNORECASE)
+_DASH_RE = re.compile(r"(?<=\S)[ \t\n]+(?=\u2014)")  # "word —": the dash never starts a line
+_SKIP_RE = re.compile(r"<(pre|code|script|style|textarea|svg|kbd|samp|title)\b.*?</\1>|<[^>]*>", re.S | re.I)
+NBSP = "\u00a0"
+
+
+def typo_nbsp(page_html):
+    """Bind short words and numbers to the next word, and a dash to the previous one, with U+00A0 — in text only,
+    never inside tags, attributes, code, scripts or styles. Same rule in every language (lists merged): a
+    non-breaking space after a short word of another language costs nothing."""
+    out, pos = [], 0
+    for m in _SKIP_RE.finditer(page_html):
+        out.append(_fix_text(page_html[pos:m.start()]))
+        out.append(m.group(0))
+        pos = m.end()
+    out.append(_fix_text(page_html[pos:]))
+    return "".join(out)
+
+
+def _fix_text(text):
+    if not text.strip():
+        return text
+    return _DASH_RE.sub(NBSP, _SHORT_RE.sub(lambda m: m.group(1) + NBSP, text))
+
+
 def page(t, title, body, path, description="", lang=None, og_image=None, og_type="website",
-         noindex=False, body_class="", og_title=None, section="", canonical=None, only_default=False):
+         noindex=False, body_class="", og_title=None, section="", canonical=None, only_default=False, crumbs=None):
     rel = path[len(t["prefix"]):] if t["prefix"] and path.startswith(t["prefix"] + "/") else path
     extra = []
     if not noindex and not only_default and canonical is None:
@@ -673,7 +721,7 @@ def page(t, title, body, path, description="", lang=None, og_image=None, og_type
                          "/^\\/(?:%s)(\\/(?:writing|courses|projects)\\/[^\\/]+\\/)$/, '$1'); } };</script>" % prefixes)
         extra.append('<script data-goatcounter="https://%s.goatcounter.com/count" async '
                      'src="https://gc.zgo.at/count.js"></script>' % esc(GOATCOUNTER_CODE))
-    return tpl("base", lang=esc(lang or t["html_lang"]), title=esc(title), og_title=esc(og_title or title),
+    return typo_nbsp(tpl("base", lang=esc(lang or t["html_lang"]), title=esc(title), og_title=esc(og_title or title),
                description=esc(description), og_type=og_type, url=esc(SITE_URL + path),
                aria_language=esc(str(t.get("aria_language", "Language"))),
                aria_sections=esc(str(t.get("aria_sections", "Sections"))),
@@ -690,7 +738,29 @@ def page(t, title, body, path, description="", lang=None, og_image=None, og_type
                footer_copy="".join("<span>%s</span>" % str(line).replace("{mit}", esc(LICENSE_URL))
                                    for line in t["footer_copy"]),
                gc_counter=("https://%s.goatcounter.com/counter/" % GOATCOUNTER_CODE) if GOATCOUNTER_CODE else "",
-               year=dt.date.today().year, body=body)
+               lang_menu=lang_menu(t, rel, only_default), crumbs=breadcrumbs(t, crumbs),
+               year=dt.date.today().year, body=body))
+
+
+SECTION_PAGE = {"writing": ("/writing/", "nav_writing"), "projects": ("/projects/", "nav_projects"),
+                "courses": ("/courses/", "nav_teaching"), "cv": ("/cv/", "nav_about")}
+
+
+def breadcrumbs(t, crumbs):
+    """'Home › Section › Page' above the title of every inner page. crumbs = (section, current title or None);
+    the last item is the current page and is not a link."""
+    if not crumbs:
+        return ""
+    section, current = crumbs
+    href, key = SECTION_PAGE[section]
+    parts = ['<a href="%s/">%s</a>' % (t["prefix"], S(t, "nav_home"))]
+    if current:
+        parts.append('<a href="%s%s">%s</a>' % (t["prefix"], href, S(t, key)))
+        parts.append('<span aria-current="page">%s</span>' % esc(current))
+    else:
+        parts.append('<span aria-current="page">%s</span>' % S(t, key))
+    return ('<nav class="crumbs" aria-label="%s"><ol>%s</ol></nav>'
+            % (S(t, "aria_breadcrumbs"), "".join("<li>%s</li>" % p for p in parts)))
 
 
 def item_url(item, t=None):
@@ -862,7 +932,7 @@ def article_page(item, t):
     return page(t, "%s — %s" % (title, t["author"]), body, item_url(item, t),
                 description=summary,
                 canonical=canonical, og_image=cover if cover.lower().endswith(RASTER) else None, og_type="article",
-                section=NAV_OF[item["section"]])
+                section=NAV_OF[item["section"]], crumbs=(item["section"], title))
 
 
 def list_page(items, section, t):
@@ -879,7 +949,7 @@ def list_page(items, section, t):
     body = tpl("list", kicker=S(t, key + "_kicker"), title=S(t, key + "_title"), lead=S(t, key + "_lead"),
                cards=cards, filters=filters)
     return page(t, "%s — %s" % (t[key + "_title"], t["author"]), body, "%s/%s/" % (t["prefix"], section),
-                description=t[key + "_description"], section=NAV_OF[section])
+                description=t[key + "_description"], section=NAV_OF[section], crumbs=(section, None))
 
 
 def covers_page(items, t):
@@ -995,7 +1065,7 @@ def cv_page(t):
     except KeyError as e:
         fail("%s: unknown placeholder $%s" % (path, e.args[0]))
     return page(t, "%s — %s" % (t["cv_title"], t["author"]), body, t["prefix"] + "/cv/",
-                description=t["cv_description"], og_type="profile", section="about")
+                description=t["cv_description"], og_type="profile", section="about", crumbs=("cv", None))
 
 
 def stylesheet():

@@ -130,3 +130,5 @@ course_lang_note: "Este curso se impartió en ruso, por eso sus materiales está
 # availability: under the name on the home page and the CV, and above the contact form
 open_to: "Abierto a puestos en remoto · dispuesto a reubicarme"
 open_also: "También me interesan proyectos paralelos, consultoría, docencia, charlas y viajes a conferencias — y todo lo que sea divertido."
+# aria-label of the breadcrumb trail (Home › Section › Page) on inner pages
+aria_breadcrumbs: Ruta de navegación

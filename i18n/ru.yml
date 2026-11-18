@@ -128,3 +128,5 @@ translation_stale: "Оригинал изменился после этого п
 # availability: under the name on the home page and the CV, and above the contact form
 open_to: "Открыт к удалённой работе и релокации"
 open_also: "А ещё открыт к сайд-проектам, консультациям, преподаванию, докладам и поездкам на конференции — и вообще ко всему интересному."
+# aria-label of the breadcrumb trail (Home › Section › Page) on inner pages
+aria_breadcrumbs: Навигационная цепочка

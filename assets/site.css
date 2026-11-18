@@ -28,6 +28,10 @@
   --cover-filter: none;
   --frost: rgba(255, 255, 255, .14);
   --frost-edge: rgba(255, 255, 255, .9);
+  /* form fields: an opaque fill and a border with >= 3:1 contrast (WCAG 1.4.11), unlike the glass around them */
+  --field: #ffffff;
+  --field-line: #8f88a0;
+  --hover: color-mix(in srgb, var(--sun) 16%, var(--glass-strong));
   color-scheme: light;
 }
 /* dark theme: follows the OS unless the visitor picked a theme (data-theme on <html>, see templates/base.html) */
@@ -57,6 +61,9 @@
     --cover-filter: saturate(.85) brightness(.78);
     --frost: rgba(255, 255, 255, .06);
     --frost-edge: rgba(255, 255, 255, .38);
+    --field: #100e17;
+    --field-line: #7a7390;
+    --hover: color-mix(in srgb, var(--sun) 18%, transparent);
     color-scheme: dark;
   }
 }
@@ -85,6 +92,9 @@
   --cover-filter: saturate(.85) brightness(.78);
   --frost: rgba(255, 255, 255, .06);
   --frost-edge: rgba(255, 255, 255, .38);
+  --field: #100e17;
+  --field-line: #7a7390;
+  --hover: color-mix(in srgb, var(--sun) 18%, transparent);
   color-scheme: dark;
 }
 
@@ -168,12 +178,15 @@ header.top { position: fixed; top: 0; left: 0; right: 0; z-index: 30; border-wid
 .theme[data-mode="auto"] [data-i="auto"], .theme[data-mode="light"] [data-i="light"], .theme[data-mode="dark"] [data-i="dark"] { display: block; }
 
 /* ---- layout + side navigation ---- */
-.layout { max-width: 1240px; margin: 0 auto; padding: 0 24px; display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: 40px; }
+.layout { max-width: 1240px; margin: 0 auto; padding: 0 24px; display: grid; grid-template-columns: 232px minmax(0, 1fr); gap: 40px; }
 aside.side { position: sticky; top: 84px; align-self: start; padding: 28px 0; }
-.snav { display: grid; gap: 2px; padding: 8px; border-radius: 22px; }
+.snav { display: grid; gap: 4px; padding: 8px; border-radius: 22px; }
+.snav a { white-space: nowrap; }
 .snav a, .mnav a { display: flex; align-items: center; gap: 10px; color: var(--muted); font-weight: 600; font-size: 14.5px; border-radius: 14px; padding: 9px 12px; transition: background .2s, color .2s; }
 .snav a i, .mnav a i { width: 8px; height: 8px; border-radius: 50%; background: var(--line); flex: none; transition: background .2s, box-shadow .2s; }
-.snav a:hover, .mnav a:hover { color: var(--text); background: var(--chip); }
+.snav a:hover, .mnav a:hover { color: var(--text); background: var(--hover); }
+.snav a:hover i, .mnav a:hover i { background: color-mix(in srgb, var(--sun) 70%, transparent); }
+.snav a:focus-visible, .mnav a:focus-visible { outline: 2px solid var(--sun); outline-offset: 1px; }
 body[data-section="home"] a[data-s="home"], body[data-section="writing"] a[data-s="writing"], body[data-section="projects"] a[data-s="projects"],
 body[data-section="teaching"] a[data-s="teaching"], body[data-section="about"] a[data-s="about"],
 body[data-section="contact"] a[data-s="contact"] { color: var(--text); background: var(--glass-strong); box-shadow: var(--glass-hi); }
@@ -186,7 +199,7 @@ main { min-width: 0; padding: 28px 0 0; }
 /* ---- shared headings ---- */
 .kicker { font: 500 12px/1.4 "JetBrains Mono", monospace; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; }
 h1 { font-weight: 800; font-size: clamp(32px, 5.5vw, 50px); line-height: 1.08; margin: 14px 0 12px; letter-spacing: -.03em; }
-.lead { font-size: 18px; color: var(--muted); max-width: 640px; margin: 0; }
+.lead { font-size: 18px; color: var(--muted); max-width: 70ch; margin: 0; }
 .lead strong { color: var(--text); font-weight: 700; }
 /* the title in two lines: role, then skills (smaller, muted) */
 .title2 span { display: block; }
@@ -205,8 +218,8 @@ h1 { font-weight: 800; font-size: clamp(32px, 5.5vw, 50px); line-height: 1.08; m
 .subtitle { font-family: "Source Serif 4", Georgia, serif; font-style: italic; font-size: 20px; color: var(--muted); margin: 0 0 10px; }
 .byline { font-size: 14px; color: var(--muted); }
 
-section { padding: 56px 0 0; }
-.shead { display: flex; align-items: end; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin: 0 0 20px; padding: 0 4px; }
+section { padding: 96px 0 0; }
+.shead { display: flex; align-items: end; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin: 0 0 24px; padding: 0 4px; }
 .shead h2 { margin: 0; font-size: clamp(26px, 4vw, 34px); letter-spacing: -.03em; line-height: 1.1; font-weight: 800; }
 .shead h2 small { display: block; font: 500 12px/1 "JetBrains Mono", monospace; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 10px; }
 .more, .btn {
@@ -225,7 +238,30 @@ section { padding: 56px 0 0; }
 .btn.big:hover { box-shadow: 0 12px 34px -8px color-mix(in srgb, var(--sun) 95%, transparent), 0 0 0 6px color-mix(in srgb, var(--sun) 22%, transparent); }
 .btn .arr { display: inline-block; transition: transform .25s ease; }
 .btn:hover .arr, .btn:focus-visible .arr { transform: translateX(5px); }
-p.all { margin: 22px 0 0; }
+p.all { margin: 28px 0 0; }
+
+/* ---- breadcrumbs on inner pages: Home > Section > Page ---- */
+.crumbs ol { list-style: none; margin: 0 0 4px; padding: 0 6px; display: flex; flex-wrap: wrap; align-items: center; font-size: 14px; color: var(--muted); }
+.crumbs li { display: flex; align-items: center; min-width: 0; }
+.crumbs li + li::before { content: "\203A"; margin: 0 8px; opacity: .6; }
+.crumbs a { color: var(--muted); font-weight: 600; padding: 6px 2px; border-radius: 6px; transition: color .2s; }
+.crumbs a:hover { color: var(--text); }
+.crumbs [aria-current] { color: var(--text); font-weight: 600; max-width: 42ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.crumbs + .reader, .crumbs + .page-head { margin-top: 10px; }
+
+/* ---- phones: the language list behind one button ---- */
+.langdd { display: none; position: relative; margin-left: auto; flex: none; }
+.langdd summary { list-style: none; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 999px; cursor: pointer;
+  font: 600 13px/1 "JetBrains Mono", monospace; color: var(--sun-ink); background: var(--sun); }
+.langdd summary::-webkit-details-marker { display: none; }
+.langdd summary:focus-visible { outline: 2px solid var(--text); outline-offset: 2px; }
+.langdd > div { position: absolute; right: 0; top: calc(100% + 8px); z-index: 40; display: grid; min-width: 190px; padding: 6px; border-radius: 18px;
+  background: var(--reader); }
+.langdd a { display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0 14px; border-radius: 12px; color: var(--text); font-weight: 600; }
+.langdd a b { font: 600 12px/1 "JetBrains Mono", monospace; color: var(--muted); width: 22px; }
+.langdd a:hover { background: var(--hover); }
+.langdd a[aria-current] { background: var(--sun); color: var(--sun-ink); }
+.langdd a[aria-current] b { color: inherit; }
 
 /* ---- hero ---- */
 header.hero { border-radius: 30px; padding: 44px 40px; }
@@ -272,6 +308,8 @@ img.cover-dark { filter: none !important; }
 }
 .post:hover .cover, .post:focus-within .cover, .post:hover .thumb::before, .fx-grid.on .post .cover { transform: scale(1.1); }
 .post:hover .frost, .post:focus-within .frost, .fx-grid.on .post .frost { opacity: 0; }
+/* the frost stays only in the effect demo on /writing/covers/; cards elsewhere show the picture as is */
+:not(.fx-tile) > .post .frost { display: none; }
 .post .cap { /* frosted caption over the image */
   position: absolute; z-index: 2; left: 10px; right: 10px; bottom: 10px; display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap;
   padding: 8px 12px; border-radius: 14px; font: 500 11px/1.35 "JetBrains Mono", monospace; color: var(--text);
@@ -337,11 +375,13 @@ img.cover-dark { filter: none !important; }
 .note b { color: var(--text); }
 
 /* ---- about / CV ---- */
-.cv-preview { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px 40px; align-items: center; margin-top: 0; padding: 30px 32px; }
-.cv-preview .intro { margin: 0 0 20px; font-size: 17px; max-width: 720px; }
-.facts { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); gap: 14px 24px; }
-.facts span { display: block; font: 500 11px/1.4 "JetBrains Mono", monospace; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
-.facts b { font-size: 15px; font-weight: 700; }
+.cv-preview { display: grid; gap: 28px; margin-top: 0; padding: 32px 36px; }
+.cv-preview .intro { margin: 0 0 24px; font-size: 18px; max-width: 70ch; }
+.cv-preview > .btn { justify-self: start; }
+.facts { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr)); gap: 16px 28px; }
+.facts li { padding-top: 14px; border-top: 1px solid var(--line); }
+.facts span { display: block; margin-bottom: 6px; font: 500 11px/1.4 "JetBrains Mono", monospace; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+.facts b { display: block; font-size: 15.5px; font-weight: 700; line-height: 1.35; }
 section.cv { padding-top: 0; }
 .pubs { margin: 0; padding-left: 22px; display: grid; gap: 18px; }
 .pubs p { margin: 0; }
@@ -350,10 +390,11 @@ section.cv { padding-top: 0; }
 .focus { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 16px; }
 .panel { border-radius: 26px; padding: 26px 28px; margin-top: 16px; }
 .ptitle { margin: 0 0 18px; font: 500 12px/1 "JetBrains Mono", monospace; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; }
-.job { display: grid; grid-template-columns: 140px 1fr; gap: 6px 26px; padding: 20px 0; border-top: 1px solid var(--line); }
+.job { display: grid; grid-template-columns: 200px 1fr; gap: 6px 26px; padding: 20px 0; border-top: 1px solid var(--line); }
 .ptitle + .job { border-top: 0; padding-top: 0; }
 .when { font: 12.5px/1.5 "JetBrains Mono", monospace; color: var(--muted); padding-top: 3px; }
 .when span { display: block; }
+.when span:first-child { white-space: nowrap; color: var(--text); }
 .job h3 { margin: 0; font-size: 18px; font-weight: 700; }
 .job h3 a { color: var(--text); }
 .job .role { color: var(--muted); font-size: 15px; margin: 2px 0 10px; }
@@ -372,9 +413,11 @@ section.cv { padding-top: 0; }
 .contact label { display: grid; gap: 6px; font-size: 13px; font-weight: 600; color: var(--muted); }
 .contact input, .contact textarea {
   font: inherit; font-size: 15px; color: var(--text); width: 100%;
-  background: var(--glass-strong); border: 1px solid var(--glass-line); border-radius: 14px; padding: 11px 14px;
+  background: var(--field); border: 1px solid var(--field-line); border-radius: 14px; padding: 11px 14px; min-height: 44px;
+  transition: border-color .2s;
 }
-.contact input:focus, .contact textarea:focus { outline: 2px solid var(--sun); outline-offset: 1px; }
+.contact input:hover, .contact textarea:hover { border-color: var(--text); }
+.contact input:focus, .contact textarea:focus { outline: 2px solid var(--sun); outline-offset: 1px; border-color: var(--sun); }
 .contact .actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
 #form-status { font-size: 14px; color: var(--muted); }
 
@@ -450,28 +493,39 @@ footer .copy { flex-basis: 100%; margin: 0; display: grid; gap: 2px; font-size: 
 
 /* ---- tablet / mobile: side nav becomes pills under the header ---- */
 @media (max-width: 960px) {
-  :root { --hdr: 110px; }
-  html { scroll-padding-top: 124px; }
+  :root { --hdr: 116px; }
+  html { scroll-padding-top: 130px; }
   .layout { grid-template-columns: minmax(0, 1fr); gap: 0; }
   aside.side { display: none; }
-  .mnav { display: flex; gap: 6px; overflow-x: auto; max-width: 1240px; margin: 0 auto; padding: 0 24px 10px; scrollbar-width: none; }
+  .mnav { display: flex; gap: 8px; overflow-x: auto; max-width: 1240px; margin: 0 auto; padding: 0 24px 10px; scrollbar-width: none; }
   .mnav::-webkit-scrollbar { display: none; }
-  .mnav a { flex: none; font-size: 13px; padding: 6px 12px; border-radius: 999px; background: var(--chip); border: 1px solid var(--glass-line); }
+  .mnav a { flex: none; font-size: 14px; min-height: 40px; padding: 0 14px; border-radius: 999px; background: var(--chip); border: 1px solid var(--glass-line); }
 }
 @media (max-width: 640px) {
-  :root { --hdr: 100px; }
+  :root { --hdr: 118px; }
+  /* touch targets: >= 40x40 for every control outside running text; buttons span the full width */
+  .lang { display: none; }
+  .langdd { display: block; }
+  .who { min-height: 44px; }
+  .theme { width: 44px; height: 44px; }
+  .links .btn, p.all .btn, .contact .actions .btn, .cv-preview > .btn, .foot-actions .btn { width: 100%; justify-content: center; min-height: 48px; }
+  .links { flex-direction: column; }
+  .contact .actions { flex-direction: column; align-items: stretch; }
+  .pubs .links a { display: inline-flex; align-items: center; min-height: 40px; padding: 0 6px; }
+  footer > span a { display: inline-flex; align-items: center; min-height: 40px; padding: 0 4px; }
+  .crumbs [aria-current] { max-width: 24ch; }
+  .crumbs a { display: inline-flex; align-items: center; min-height: 40px; }
+  .filters a { min-height: 40px; display: inline-flex; align-items: center; }
   .bar { padding: 10px 16px; gap: 10px; }
   .mnav { padding: 0 16px 10px; }
   .layout { padding: 0 16px; }
   .who small { display: none; }
   .logo { width: 32px; height: 32px; border-radius: 8px; }
   .bar { gap: 8px; }
-  .theme { width: 30px; height: 30px; }
-  .lang a, .lang span { padding: 7px 6px; }
   header.hero { padding: 28px 22px; border-radius: 24px; }
-  section { padding-top: 44px; }
+  section { padding-top: 72px; }
   .panel, .contact { padding: 20px; }
-  .cv-preview { grid-template-columns: 1fr; padding: 22px 20px; }
+  .cv-preview { padding: 24px 20px; }
   .foot-actions { flex-direction: column; }
   .foot-actions .btn { flex: none; width: 100%; }
   .job { grid-template-columns: 1fr; }
@@ -506,3 +560,13 @@ footer .copy { flex-basis: 100%; margin: 0; display: grid; gap: 2px; font-size: 
 /* "Also up for side projects, consulting…" under the availability line and above the contact form */
 .open-also { color: var(--muted); margin: 0 0 14px; max-width: 62ch; }
 .page-head .place + .place { margin-top: 4px; }
+
+/* phones: each part of the job dates line stays whole; small controls on cards and lists get 40px targets */
+@media (max-width: 640px) {
+  .when { display: flex; flex-wrap: wrap; }
+  .when span { white-space: pre; }
+  .post .badge { display: inline-flex; align-items: center; min-height: 40px; padding: 0 14px; }
+  .lecturer li a { display: inline-flex; align-items: center; min-height: 40px; }
+}
+/* list pages: the cards follow their own heading, not a new section */
+.page-head + section { padding-top: 4px; }
