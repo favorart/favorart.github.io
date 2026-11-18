@@ -131,3 +131,7 @@ paper_keywords: Ključne reči
 
 # above a course page in another language than the course itself
 course_lang_note: "Ovaj kurs je predavan na ruskom, pa su materijali u nastavku na ruskom."
+
+# availability: under the name on the home page and the CV, and above the contact form
+open_to: "Otvoren za rad na daljinu · spreman za preseljenje"
+open_also: "Zanimaju me i sporedni projekti, konsalting, podučavanje, predavanja i putovanja na konferencije — i sve što je zabavno."
