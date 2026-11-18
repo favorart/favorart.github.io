@@ -27,6 +27,10 @@ jobs:
           cache: pip
       - run: pip install -r requirements.txt
       - run: python build.py
+        env:
+          # Web3Forms access key for the contact form: a repo secret, so it is not in the repo
+          # (it is public in the built page by design: it only routes mail, the address stays hidden)
+          CONTACT_FORM_KEY: ${{ secrets.CONTACT_FORM_KEY }}
       - run: python tools/check_links.py _site
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
