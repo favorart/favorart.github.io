@@ -634,3 +634,7 @@ h1, h2, h3 { overflow-wrap: break-word; -webkit-hyphens: auto; hyphens: auto; hy
 .about-card .stats b { display: block; font-size: clamp(24px, 2.6vw, 30px); font-weight: 800; letter-spacing: -.02em; line-height: 1.15; white-space: nowrap; }
 .about-card .stats span { display: block; margin-top: 4px; font-size: 13px; line-height: 1.35; color: var(--muted); }
 @media (max-width: 480px) { .about-card .stats { grid-template-columns: 1fr; } .about-card .stats li { display: flex; align-items: baseline; gap: 12px; } .about-card .stats b { min-width: 4.3em; } .about-card .stats span { margin: 0; } }
+
+/* mermaid diagrams (drawn by mermaid.js): no code-block look, scroll if wider than the column */
+.prose pre.mermaid { background: none; border: 0; padding: 0; margin: 1.2em 0; text-align: center; overflow-x: auto; white-space: pre; }
+.prose pre.mermaid svg { max-width: 100%; height: auto; }

@@ -221,6 +221,14 @@ def gfm_fixups(md_text):
     return "\n".join(out)
 
 
+MERMAID_RE = re.compile(r"^```mermaid[ \t]*\n(.*?)\n```[ \t]*$", re.M | re.S)
+
+
+def mermaid_blocks(text):
+    """```mermaid fences become <pre class="mermaid"> (drawn in the browser by mermaid.js, see templates/base.html)."""
+    return MERMAID_RE.sub(lambda m: '\n<pre class="mermaid">%s</pre>\n' % html.escape(m.group(1), quote=False), text)
+
+
 def render_markdown(text):
     md = markdown.Markdown(
         extensions=["extra", "sane_lists", "codehilite", "toc"],
@@ -231,7 +239,7 @@ def render_markdown(text):
         output_format="html5",
     )
     # pictures in a text load as the reader scrolls to them (a post may carry many heavy GIFs)
-    return re.sub(r"<img (?![^>]*\bloading=)", '<img loading="lazy" decoding="async" ', md.convert(gfm_fixups(text)))
+    return re.sub(r"<img (?![^>]*\bloading=)", '<img loading="lazy" decoding="async" ', md.convert(mermaid_blocks(gfm_fixups(text))))
 
 
 def fetch(url, tries=4):
@@ -367,7 +375,7 @@ def load_posts():
             "card_cover_url": "/writing/%s/%s" % (slug, card_cover) if card_cover else None,
             "folder": folder, "options_dir": folder,
             "body_html": mark_link_langs(linkify_bare(body_html)), "subtitle": None, "demo_url": meta.get("demo_url"),
-            "list": meta.get("list", True),
+            "list": meta.get("list", True), "home": meta.get("home", True),
             "source_md": source_md, "source_ref": where, "cover_file": cover,
         })
     return items
@@ -383,7 +391,9 @@ def load_external(offline):
     if unknown:
         fail("sources.yml: unknown sections %s (known: %s)" % (sorted(unknown), sorted(SECTIONS)))
     entries = [(SECTIONS[key], e) for key in SECTIONS for e in (manifest.get(key) or [])]
-    page_of = {(e["repo"], e["path"]): "/%s/%s/" % (sec, e["slug"]) for sec, e in entries}
+    pre_of = lambda code: LANGS[code]["prefix"] if code in LANGS else ""
+    # a link to a text that is on this site goes to its page in the text's own language
+    page_of = {(e["repo"], e["path"]): "%s/%s/%s/" % (pre_of(e.get("lang", "en")), sec, e["slug"]) for sec, e in entries}
     for sec, e in entries:  # the same text in another language, kept in the repo next to the original
         for code, path in (e.get("translation_files") or {}).items():
             pre = LANGS[code]["prefix"] if code in LANGS else ""
@@ -406,7 +416,8 @@ def load_external(offline):
             "tags": e.get("tags") or [], "demo_url": e.get("demo_url"),
             "cover_url": "/" + cover if cover else None,
             "options_dir": os.path.join(ROOT, os.path.dirname(cover)) if cover else None,
-            "list": e.get("list", True), "subtitle": None,
+            "list": e.get("list", True), "home": e.get("home", True), "subtitle": None,
+            "provided": tuple(e.get("translation_files") or ()),  # the author's own versions in the repo
         }
         if offline:
             item["body_html"] = "<p><em>(offline build: content not fetched)</em></p>"
@@ -418,6 +429,9 @@ def load_external(offline):
             if m:  # the source's own H1 becomes the subtitle; the page H1 is the manifest title
                 item["subtitle"], raw = m.group(1).strip(), raw[m.end():]
             item["body_html"] = mark_link_langs(linkify_bare(rewrite_relative(render_markdown(raw), item, page_of)))
+            item["author_versions"] = {
+                code: fetch("https://raw.githubusercontent.com/%s/%s/%s" % (e["repo"], e["branch"], path))
+                for code, path in (e.get("translation_files") or {}).items()}
         items.append(item)
     items += [paper_item(e) for e in manifest.get("papers") or []]
     return items
@@ -544,6 +558,11 @@ def load_translations(items, langs):
             continue
         cur = source_hash(item["source_md"])
         item["source_version"] = cur
+        for code, md in (item.get("author_versions") or {}).items():  # the author's own version: always current
+            if code in langs:
+                TRANSLATIONS[(item["section"], item["slug"], code)] = {
+                    "meta": {"title": loc(item["title"], langs[code]), "summary": loc(item["summary"], langs[code])},
+                    "body": md, "fresh": True, "by_author": True}
         for code in langs:
             if code == item["lang"] or code in item.get("provided", ()):
                 continue
@@ -628,6 +647,12 @@ def tr_body_html(item, tr):
 
 
 def tr_note(item, tr, t):
+    if tr.get("by_author"):
+        return ""
+    return _tr_note(item, tr, t)
+
+
+def _tr_note(item, tr, t):
     """'Translated … Original: <language>' above a translated text, plus a warning when it is out of date."""
     src = LANGS.get(item["lang"])
     link = ('<a href="%s%s" hreflang="%s" lang="%s">%s</a>' % (
@@ -1082,7 +1107,8 @@ def home_page(items, t):
     listed = {sec: [i for i in items if i["list"] and i["section"] == sec] for sec in ALL_SECTIONS}
 
     def grid(sec):
-        return '<div class="posts">\n%s\n  </div>' % "\n".join(card(i, t) for i in listed[sec][:HOME_LATEST])
+        on_home = [i for i in listed[sec] if i.get("home", True)]
+        return '<div class="posts">\n%s\n  </div>' % "\n".join(card(i, t) for i in on_home[:HOME_LATEST])
 
     try:
         body = content.substitute(prefix=t["prefix"], open_to=S(t, "open_to"), open_also=S(t, "open_also"), writing_cards=grid("writing"), course_cards=grid("courses"),
