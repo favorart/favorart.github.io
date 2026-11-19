@@ -297,12 +297,15 @@ img.cover-dark { filter: none !important; }
    --cover-peek-soft    width of the diagonal edge (10% = medium)
    Edge position for a 1200x630 cover: 0.672 * sqrt(size) along the gradient line. */
 :root { --cover-peek-corner: 315deg; --cover-peek-size: .1; --cover-peek-soft: 10%; }
+/* the frost's shape (clear corner), shared by the frost and the glint over it */
+.post .thumb {
+  --fx-edge: calc(.672 * sqrt(var(--cover-peek-size)) * 100%);
+  --fx-mask: linear-gradient(var(--cover-peek-corner), transparent calc(var(--fx-edge) - var(--cover-peek-soft) / 2), #000 calc(var(--fx-edge) + var(--cover-peek-soft) / 2));
+}
 .post .frost {
   position: absolute; inset: 0; pointer-events: none;
-  --fx-edge: calc(.672 * sqrt(var(--cover-peek-size)) * 100%);
   background: linear-gradient(160deg, color-mix(in srgb, var(--m2) 30%, transparent), color-mix(in srgb, var(--m1) 26%, transparent) 55%, color-mix(in srgb, var(--m4) 30%, transparent)), var(--frost);
   -webkit-backdrop-filter: blur(4px) saturate(125%); backdrop-filter: blur(4px) saturate(125%);
-  --fx-mask: linear-gradient(var(--cover-peek-corner), transparent calc(var(--fx-edge) - var(--cover-peek-soft) / 2), #000 calc(var(--fx-edge) + var(--cover-peek-soft) / 2));
   -webkit-mask-image: var(--fx-mask); mask-image: var(--fx-mask);
   transition: opacity .6s ease;
 }
@@ -638,3 +641,14 @@ h1, h2, h3 { overflow-wrap: break-word; -webkit-hyphens: auto; hyphens: auto; hy
 /* mermaid diagrams (drawn by mermaid.js): no code-block look, scroll if wider than the column */
 .prose pre.mermaid { background: none; border: 0; padding: 0; margin: 1.2em 0; text-align: center; overflow-x: auto; white-space: pre; }
 .prose pre.mermaid svg { max-width: 100%; height: auto; }
+
+/* ---- glint: a thin bright diagonal line crosses the frost of a few cards on screen in turn (base.html adds .gl and
+   animates its ::before). Masked like the frost, so it never runs over the clear corner; gone wherever the frost
+   is gone (hover, focus, a card thawed on a phone). It runs with "reduce motion" too: a single slow line. ---- */
+.post .gl { position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden;
+  -webkit-mask-image: var(--fx-mask); mask-image: var(--fx-mask); transition: opacity .3s; }
+.post .gl::before { content: ""; position: absolute; inset: -20% -60%; transform: translateX(-100%);
+  background: linear-gradient(110deg, transparent 42%, rgba(255, 255, 255, .9) 49%, #fff 50%, rgba(255, 255, 255, .9) 51%, transparent 58%) 50% 0 / 50% 100% no-repeat; }
+:root[data-theme="dark"] .post .gl { opacity: .75; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .post .gl { opacity: .75; } }
+.post:hover .gl, .post:focus-within .gl, .post.thaw .gl, .fx-grid.on .post .gl { opacity: 0; }
