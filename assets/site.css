@@ -361,11 +361,6 @@ img.cover-dark { filter: none !important; }
 .linked a:not(.stretch) { position: relative; z-index: 2; }
 .linked:hover, .post:hover, .post:focus-within { box-shadow: var(--shadow), var(--glass-hi), 0 0 0 2px color-mix(in srgb, var(--sun) 45%, transparent); }
 .linked:has(.stretch:focus-visible) { outline: 3px solid var(--sun); outline-offset: 2px; }
-.lecturer .stretch { color: var(--text); font-size: 16px; }
-.lecturer .stretch b { font-weight: 700; }
-.lecturer ul { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 6px; }
-.lecturer li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 16px; font-size: 15px; }
-.lecturer li span { font: 12.5px/1.6 "JetBrains Mono", monospace; color: var(--muted); }
 .place { display: flex; align-items: center; gap: 10px; margin: 0 0 14px; font-weight: 600; }
 .place::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--sun); box-shadow: 0 0 0 5px color-mix(in srgb, var(--sun) 25%, transparent); }
 .page-head .place { margin-top: 14px; }
@@ -564,7 +559,6 @@ footer .copy { flex-basis: 100%; margin: 0; display: grid; gap: 2px; font-size: 
   .when { display: flex; flex-wrap: wrap; }
   .when span { white-space: pre; }
   .post .badge { display: inline-flex; align-items: center; min-height: 40px; padding: 0 14px; }
-  .lecturer li a { display: inline-flex; align-items: center; min-height: 40px; }
 }
 /* list pages: the cards follow their own heading, not a new section */
 .page-head + section { padding-top: 4px; }
