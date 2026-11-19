@@ -97,6 +97,33 @@ $body
     }, { rootMargin: '-47% 0px -47% 0px' });
     document.querySelectorAll('.post').forEach(function (c) { io.observe(c); });
   })();
+  // glint: a thin light line crosses the frost of one card on screen, or of several random ones when more than
+  // four are visible (one per four), every 2.5 s; cards just glinted wait for the next round
+  (function () {
+    var cards = [].slice.call(document.querySelectorAll('.post .frost')).map(function (f) {
+      var g = document.createElement('div'); g.className = 'gl'; g.setAttribute('aria-hidden', 'true');
+      f.parentNode.insertBefore(g, f.nextSibling);
+      return f.closest('.post');
+    });
+    if (!cards.length || !Element.prototype.animate) return;
+    var last = [];
+    setInterval(function () {
+      if (document.hidden) return;
+      var vis = cards.filter(function (c) {
+        var r = c.getBoundingClientRect();
+        return r.bottom > 0 && r.top < innerHeight && !c.matches(':hover, :focus-within, .thaw');
+      });
+      var pool = vis.filter(function (c) { return last.indexOf(c) < 0; });
+      if (!pool.length) pool = vis;
+      var n = Math.max(1, Math.floor(vis.length / 4)), pick = [];
+      while (pick.length < n && pool.length) pick.push(pool.splice(Math.floor(Math.random() * pool.length), 1)[0]);
+      pick.forEach(function (c, k) {
+        c.querySelector('.gl').animate([{ transform: 'translateX(-70%)' }, { transform: 'translateX(70%)' }],
+          { duration: 1400, delay: k * 220, easing: 'cubic-bezier(.45, 0, .25, 1)', pseudoElement: '::before' });
+      });
+      last = pick;
+    }, 2500);
+  })();
   // view counts from GoatCounter's public counter API (hidden when unavailable)
   (function () {
     var base = '$gc_counter', els = document.querySelectorAll('[data-views]');
