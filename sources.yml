@@ -18,8 +18,9 @@
 #   cover       repo-relative path to the preview image (options: see /writing/covers/)
 #   demo_url    optional "Live demo" link on the page
 #   list        false = page is built but has no card of its own
-#   translation_files  {lang: path} other-language versions of the text in the same repo; links to them
-#               lead to this page in that language (the text itself comes from translations/)
+#   translation_files  {lang: path} the author's own versions of the text in other languages, in the same repo:
+#               shown as that language's text (fetched at build time, no copies) and links to them lead there
+#   home        false = not on the home page (still in its section)
 #
 # `papers`: journal publications -> /writing/<slug>/ (type Paper). Nothing is fetched: the page shows the
 # bibliographic record, the abstracts (copied from the paper itself) and a link to the journal's PDF.
@@ -49,6 +50,24 @@ articles:
     demo_url: https://favorart.github.io/pi-birthday/
     translation_files: {ru: article.ru.md}   # links to these files go to the page in that language
 
+
+  - slug: pi-stores-everything
+    repo: favorart/pi-birthday
+    branch: main
+    path: article-2026.ru.md
+    title:
+      ru: π хранит всё, так что хранить π мне не пришлось
+      en: π stores everything, so I didn't have to store π
+    date: 2026-11-19
+    kind: {en: Article · Python, es: Nota · Python, ru: Заметка · Python, sr: Zapis · Python, uz: Qayd · Python}
+    lang: ru
+    summary:
+      ru: "Детективная история сайта, который находит любую дату в трёх миллиардах знаков π: сколько знаков нужно, чтобы нашлись все даты, почему перевод большого числа в строку в CPython признали уязвимостью и как numpy прошёл 1,7 млрд цифр за полторы минуты."
+      en: "The detective story behind a site that finds any date in three billion digits of π: how many digits it takes for every date to show up, why converting a big integer to a string in CPython became a vulnerability, and how numpy went through 1.7 billion digits in a minute and a half."
+    cover: covers/pi-birthday/cover-4.svg
+    demo_url: https://favorart.github.io/pi-birthday/
+    translation_files: {en: article-2026.md}
+    home: false
 
   - slug: robot-hand
     repo: favorart/robot-hand
