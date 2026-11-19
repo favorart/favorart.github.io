@@ -89,6 +89,14 @@ $body
     }, { rootMargin: '-35% 0px -60% 0px' });
     document.querySelectorAll('[data-nav]').forEach(function (s) { io.observe(s); });
   })();
+  // touch screens have no hover: the card crossing the middle of the screen thaws instead (frost off, small zoom)
+  (function () {
+    if (!window.matchMedia || !matchMedia('(hover: none), (pointer: coarse)').matches || !('IntersectionObserver' in window)) return;
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { e.target.classList.toggle('thaw', e.isIntersecting); });
+    }, { rootMargin: '-47% 0px -47% 0px' });
+    document.querySelectorAll('.post').forEach(function (c) { io.observe(c); });
+  })();
   // view counts from GoatCounter's public counter API (hidden when unavailable)
   (function () {
     var base = '$gc_counter', els = document.querySelectorAll('[data-views]');

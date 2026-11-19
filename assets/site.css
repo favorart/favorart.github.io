@@ -583,9 +583,16 @@ footer .copy { flex-basis: 100%; margin: 0; display: grid; gap: 2px; font-size: 
 .about-card .also { margin: 0 0 12px; }
 .about-actions { display: grid; gap: 10px; min-width: 220px; }
 .about-actions .btn { justify-content: center; min-height: 48px; }
+@media (max-width: 1100px) {
+  /* not enough room for text, tiles and a side column: actions go under the tiles, in one row */
+  .about-card { grid-template-columns: minmax(0, 1fr); }
+  .about-actions { min-width: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+  .about-actions .btn { flex: 0 1 280px; }
+}
 @media (max-width: 760px) {
-  .about-card { grid-template-columns: minmax(0, 1fr); padding: 24px 20px; }
-  .about-actions { min-width: 0; }
+  .about-card { padding: 24px 20px; }
+  .about-actions .btn { flex: 1 1 100%; }
+  .about-actions .icons { flex: 1 1 100%; }
 }
 
 /* long words in headings ("высокопроизводительных" at 32px is wider than a phone) hyphenate instead of overflowing */
@@ -596,11 +603,11 @@ h1, h2, h3 { overflow-wrap: break-word; -webkit-hyphens: auto; hyphens: auto; hy
 
 /* About: one main button, LinkedIn and GitHub as 48px icon tiles under it */
 .about-actions .icons { display: flex; gap: 10px; justify-content: center; }
-.about-actions .icons a { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 14px; color: var(--text);
+.about-actions .icons a { display: grid; place-items: center; width: 56px; height: 56px; border-radius: 16px; color: var(--text);
   background: var(--glass-strong); border: 1px solid var(--glass-line); box-shadow: var(--glass-hi); transition: background .2s, color .2s; }
 .about-actions .icons a:hover { background: var(--sun); color: var(--sun-ink); }
 .about-actions .icons a:focus-visible { outline: 2px solid var(--sun); outline-offset: 2px; }
-.about-actions .icons svg { width: 20px; height: 20px; fill: currentColor; }
+.about-actions .icons svg { width: 24px; height: 24px; fill: currentColor; }
 
 /* section bar on inner pages: breadcrumbs on the left, ← → to the neighbouring items on the right */
 .ctxbar { display: flex; align-items: center; justify-content: space-between; gap: 8px 14px; flex-wrap: wrap;
@@ -615,3 +622,15 @@ h1, h2, h3 { overflow-wrap: break-word; -webkit-hyphens: auto; hyphens: auto; hy
 .ctxbar:has(+ .reader) { max-width: 860px; }
 /* card text: at most three lines (teasers are written to fit; a long summary is cut the same way) */
 .post .body p { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+
+/* touch screens: the card in the middle of the screen thaws (base.html adds .thaw only there), the rest stay frosted */
+.post.thaw .frost { opacity: 0; }
+.post.thaw .cover, .post.thaw .thumb::before { transform: scale(1.06); }
+
+/* About: three stat tiles under the intro */
+.about-card .intro { margin-bottom: 18px; }
+.about-card .stats { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(9.5em, 1fr)); gap: 10px; }
+.about-card .stats li { padding: 12px 14px; border-radius: 16px; background: var(--glass-strong); border: 1px solid var(--glass-line); box-shadow: var(--glass-hi); }
+.about-card .stats b { display: block; font-size: clamp(24px, 2.6vw, 30px); font-weight: 800; letter-spacing: -.02em; line-height: 1.15; white-space: nowrap; }
+.about-card .stats span { display: block; margin-top: 4px; font-size: 13px; line-height: 1.35; color: var(--muted); }
+@media (max-width: 480px) { .about-card .stats { grid-template-columns: 1fr; } .about-card .stats li { display: flex; align-items: baseline; gap: 12px; } .about-card .stats b { min-width: 4.3em; } .about-card .stats span { margin: 0; } }
