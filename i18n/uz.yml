@@ -85,6 +85,9 @@ linkedin_post: LinkedIn posti
 type_post: Post
 type_article: Qayd
 type_paper: Maqola
+type_thesis: Tezis
+# conference abstract on its page: conference, section, year
+thesis_source: "{c}, «{s}» seksiyasi, {y}"
 filter_label: Tur boʻyicha filtrlash
 filter_all: Hammasi
 filter_posts: Postlar

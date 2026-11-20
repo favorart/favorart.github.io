@@ -14,6 +14,9 @@ here first. Languages: en (source of the UI), es (neutral, for readers on every 
 | sr | Post | Zapis | Rad | Postovi, zapisi i radovi |
 | uz | Post | Qayd | Maqola | Postlar, qaydlar va maqolalar (menu: Nashrlar) |
 
+Conference abstracts (тезисы доклада) are listed with papers under the same filter; their tag is
+en Talk abstract, es Ponencia, ru Тезисы, sr Saopštenje, uz Tezis.
+
 Filters are the plurals: es Posts/Notas/Artículos, ru Посты/Заметки/Статьи, sr Postovi/Zapisi/Radovi,
 uz Postlar/Qaydlar/Maqolalar.
 
