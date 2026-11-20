@@ -87,6 +87,9 @@ linkedin_post: LinkedIn post
 type_post: Post
 type_article: Article
 type_paper: Paper
+type_thesis: Talk abstract
+# conference abstract on its page: conference, section, year
+thesis_source: "{c}, section “{s}”, {y}"
 filter_label: Filter by type
 filter_all: All
 filter_posts: Posts

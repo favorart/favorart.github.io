@@ -143,6 +143,18 @@ cpu, code, wave, net, btree, heap), set `cover: covers/<slug>/cover-1.svg`, then
 The tool also writes text-free twins (`cover-N-plain.svg`); the article page shows the twin of the chosen cover
 above the title (`--plain-only` regenerates just the twins).
 
+## Add a paper or a conference abstract
+
+`sources.yml` → `papers:` (page `/writing/<slug>/`, the PDF stays on the publisher's site). Common fields:
+`slug`, `title`, `authors`, `year`, `pdf`, `lang`, `summary`, `abstract` (the page body), optional `keywords`,
+`title_en`/`summary_en`/`abstract_en`/`keywords_en` when the publisher gives an English version, `cover`.
+- Journal paper: `journal`, `journal_en`, `journal_short`, `volume`, `issue`, `pages`.
+- Conference abstract (тезисы доклада): `conference`, `conference_en`, `conference_short` (per language, without the
+  year: "Ломоносов"), `section`, `section_en`, `collection` (the collection's record after "//", as the
+  publisher gives it), `date` (the conference). Tagged "Тезисы / Talk abstract" and filtered with the papers.
+
+Add it to `content/cv.<lang>.html` → Publications in every language, then translate the abstract like a post.
+
 ## Analytics
 
 GoatCounter (`GOATCOUNTER_CODE` in `build.py`, dashboard https://favorart.goatcounter.com), no cookies and no

@@ -102,6 +102,9 @@ linkedin_post: Пост в LinkedIn
 type_post: Пост
 type_article: Заметка
 type_paper: Статья
+type_thesis: Тезисы
+# conference abstract on its page: conference, section, year
+thesis_source: "{c}, секция «{s}», {y}"
 filter_label: Фильтр по типу
 filter_all: Все
 filter_posts: Посты
