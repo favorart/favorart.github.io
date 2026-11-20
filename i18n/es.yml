@@ -92,6 +92,9 @@ linkedin_post: Post de LinkedIn
 type_post: Post
 type_article: Nota
 type_paper: Artículo
+type_thesis: Ponencia
+# conference abstract on its page: conference, section, year
+thesis_source: "{c}, sección «{s}», {y}"
 filter_label: Filtrar por tipo
 filter_all: Todo
 filter_posts: Posts

@@ -96,6 +96,9 @@ linkedin_post: Post na LinkedIn-u
 type_post: Post
 type_article: Zapis
 type_paper: Rad
+type_thesis: Saopštenje
+# conference abstract on its page: conference, section, year
+thesis_source: "{c}, sekcija „{s}“, {y}"
 filter_label: Filtriraj po tipu
 filter_all: Sve
 filter_posts: Postovi

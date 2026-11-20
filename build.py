@@ -165,6 +165,8 @@ def text_lang(item, field, t):
 
 
 def date_text(item, t):
+    if item.get("paper") and item["paper"].get("conference"):  # conference abstracts: just the year
+        return str(item["year"])
     if item.get("paper"):  # journal issue instead of a date: "vol. 23(1)"
         e = item["paper"]
         return esc(str(t.get("paper_issue", "vol. {v}({i})")).replace("{v}", str(e["volume"])).replace("{i}", str(e["issue"])))
@@ -478,18 +480,24 @@ PAPER_LABELS = {"ru": ("Аннотация", "Ключевые слова"), "en
 
 
 def paper_item(e):
-    """A journal publication: bibliographic record + abstracts, the PDF stays on the journal's site."""
+    """A publication: bibliographic record + abstracts, the PDF stays on the publisher's site. Either a journal
+    paper (journal, volume, issue, pages) or a conference abstract (conference, section, collection)."""
     where = "sources.yml[papers/%s]" % e.get("slug")
-    for key in ("slug", "title", "authors", "journal", "journal_en", "volume", "issue", "year", "pages", "pdf",
-                "summary", "abstract"):
+    thesis = bool(e.get("conference"))
+    venue = (("conference", "conference_en", "conference_short", "section", "section_en", "collection") if thesis
+             else ("journal", "journal_en", "volume", "issue", "pages"))
+    for key in ("slug", "title", "authors", "year", "pdf", "summary", "abstract") + venue:
         if not e.get(key):
             fail("%s: field '%s' is required" % (where, key))
     cover = e.get("cover")
     if cover and not os.path.isfile(os.path.join(ROOT, cover)):
         fail("%s: cover '%s' not found" % (where, cover))
     lang, year = e.get("lang", "ru"), int(e["year"])
-    ref = "%s %s // %s. — %d. — Т. %s, вып. %s. — С. %s." % (
-        esc(e["authors"]), esc(e["title"]), esc(e["journal"]), year, e["volume"], e["issue"], esc(str(e["pages"])))
+    if thesis:  # the collection's own record, as the publisher gives it
+        ref = "%s %s // %s." % (esc(e["authors"]), esc(e["title"]), esc(str(e["collection"]).rstrip(".")))
+    else:
+        ref = "%s %s // %s. — %d. — Т. %s, вып. %s. — С. %s." % (
+            esc(e["authors"]), esc(e["title"]), esc(e["journal"]), year, e["volume"], e["issue"], esc(str(e["pages"])))
     body = ['<p class="paper-ref" lang="%s">%s</p>' % (esc(lang), ref),
             '<p class="paper-pdf"><a class="btn sun big" href="%s" hreflang="%s">PDF <span class="arr">→</span></a></p>'
             % (esc(e["pdf"]), esc(lang))]
@@ -506,14 +514,15 @@ def paper_item(e):
         "source_md": src, "source_ref": "sources.yml papers/%s" % e["slug"],
         "provided": ("en",) if e.get("abstract_en") else (),  # the journal's own English abstract
         "type": "paper", "wtype": "paper", "section": "writing", "slug": e["slug"], "title": title,
-        "date": as_date(e.get("date") or "%d-01-01" % year, where), "date_label": "vol. %s(%s)" % (e["volume"], e["issue"]),
+        "date": as_date(e.get("date") or "%d-01-01" % year, where), "date_label": str(year) if thesis else "vol. %s(%s)" % (e["volume"], e["issue"]),
         "lang": lang,
-        "summary": summary, "kind": None, "journal_short": e.get("journal_short", "Intelligent Systems"), "year": year,
+        "summary": summary, "kind": None, "journal_short": e.get("conference_short" if thesis else "journal_short", "Intelligent Systems"), "year": year,
         "original_url": e["pdf"], "tags": [], "demo_url": None, "list": e.get("list", True),
         "cover_url": "/" + cover if cover else None,
         "options_dir": os.path.join(ROOT, os.path.dirname(cover)) if cover else None,
         "subtitle": None, "paper_head": "\n".join(body), "body_html": "\n".join(body), "paper": e,
-        "source_line": "%s, vol. %s, no. %s, %d, pp. %s" % (e["journal_en"], e["volume"], e["issue"], year, e["pages"]),
+        "source_line": ("%s, section “%s”, %d" % (e["conference_en"], e["section_en"], year)) if thesis
+        else "%s, vol. %s, no. %s, %d, pp. %s" % (e["journal_en"], e["volume"], e["issue"], year, e["pages"]),
     }
 
 
@@ -609,7 +618,7 @@ def paper_body(item, t, tr):
     return "\n".join(out)
 
 
-RU_HOSTS = ("habr.com", "vk.com", "vk.ru", "ru.wikipedia.org", "coderszone.info", "intsysjournal.ru")
+RU_HOSTS = ("habr.com", "vk.com", "vk.ru", "ru.wikipedia.org", "coderszone.info", "intsysjournal.ru", "confhub.ru")
 EN_HOSTS = ("en.wikipedia.org", "stackoverflow.com", "docs.python.org", "reddit.com", "blog.cloudflare.com",
             "travisdowns.github.io", "lemire.me", "tutorialspoint.com", "effbot.org", "tcl.tk", "zetcode.com",
             "readthedocs.io", "nmt.edu", "cppreference.com", "isocpp.org", "medium.com", "nvidia.com", "pytorch.org")
@@ -815,7 +824,9 @@ def item_url(item, t=None):
 
 def kind_of(item, t):
     """Label of the item: kind, else 'LinkedIn post' for a copied post, 'Article' for the site's own one."""
-    if item.get("paper"):
+    if item.get("paper") and item["paper"].get("conference"):  # "Talk abstract · Lomonosov", the year follows
+        label = "%s · %s" % (S(t, "type_thesis"), esc(str(loc(item["journal_short"], t))))
+    elif item.get("paper"):
         label = "%s · %s · %d" % (S(t, "type_paper"), esc(str(loc(item["journal_short"], t))), item["year"])
     elif item.get("kind"):
         label = esc(str(loc(item["kind"], t)))
@@ -879,7 +890,8 @@ def type_chip(item, t):
     """The one type tag of a Writing item: Post / Article / Paper (courses have none)."""
     if item["section"] != "writing":
         return ""
-    return '<span class="chip type">%s</span>' % S(t, "type_" + item["wtype"])
+    thesis = item.get("paper") and item["paper"].get("conference")
+    return '<span class="chip type">%s</span>' % S(t, "type_thesis" if thesis else "type_" + item["wtype"])
 
 
 EYE_SVG = ('<svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path fill="none" stroke="currentColor" '
@@ -936,9 +948,14 @@ def article_page(item, t):
     elif item["type"] == "post":
         source_top = '<a href="%s">LinkedIn</a>' % esc(item["original_url"])
     elif item["type"] == "paper":
-        e = item["paper"]
-        line = str(t.get("paper_source", "{j}, vol. {v}, no. {i}, {y}, pp. {p}")).format(
-            j=e["journal"] if t["lang"] == item["lang"] and e.get("journal") else e["journal_en"], v=e["volume"], i=e["issue"], y=item["year"], p=e["pages"])
+        e, own = item["paper"], t["lang"] == item["lang"]
+        if e.get("conference"):
+            line = str(t["thesis_source"]).format(c=e["conference"] if own else e["conference_en"],
+                                                  s=e["section"] if own else e["section_en"], y=item["year"])
+        else:
+            line = str(t.get("paper_source", "{j}, vol. {v}, no. {i}, {y}, pp. {p}")).format(
+                j=e["journal"] if own and e.get("journal") else e["journal_en"],
+                v=e["volume"], i=e["issue"], y=item["year"], p=e["pages"])
         source_top = '<a href="%s">%s</a>' % (esc(item["original_url"]), esc(line))
     elif item["type"] == "project":
         source_top = '%s: %s' % (S(t, "source"), " · ".join('<a href="%s">%s</a>' % (
