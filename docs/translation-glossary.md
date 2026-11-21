@@ -66,7 +66,7 @@ uz Postlar/Qaydlar/Maqolalar.
 
 | en | es | ru | sr | uz |
 |---|---|---|---|---|
-| Projects (menu, section) | Proyectos | Проекты | Projekti | Loyihalar |
+| Projects (menu, section; a project's title is its repo name, untranslated) | Proyectos | Проекты | Projekti | Loyihalar |
 | Open-source code (home section) | Código abierto | Открытый код | Otvoreni kod | Ochiq kod |
 | Library | Biblioteca | Библиотека | Biblioteka | Kutubxona |
 | Open-source contributions | Contribuciones de código abierto | Вклад в открытый код | Doprinos otvorenom kodu | Ochiq kodga hissa |
@@ -76,6 +76,10 @@ uz Postlar/Qaydlar/Maqolalar.
 | How it works | Cómo funciona | Как это устроено | Kako radi | Qanday ishlaydi |
 | Engineering | Ingeniería | Инженерная часть | Inženjerska strana | Muhandislik |
 | Why it matters | Por qué es importante | Почему это важно | Zašto je to važno | Bu nima uchun muhim |
+| Limitations | Limitaciones | Ограничения | Ograničenja | Cheklovlar |
+| The price, measured | El precio, medido | Цена в цифрах | Izmerena cena | Oʻlchangan narx |
+| Self-checks | Autocomprobaciones | Самопроверки | Samoprovere | Oʻz-oʻzini tekshirish |
+| Diagnostics | Diagnóstico | Диагностика | Dijagnostika | Diagnostika |
 | Technosphere (Mail.Ru Group + MSU) | Technosphere | Техносфера | Tehnosfera | Texnosfera |
 
 Technical terms: pull request stays (ru «пул-реквест», sr «pull request-ovi»); framework — es framework, ru

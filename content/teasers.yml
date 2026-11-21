@@ -102,11 +102,11 @@ ipl:
 
 # ---------------------------------------------------------------- projects
 vcd-writer:
-  ru: "В 2017-м это был порт pyvcd на C++. В 2026-м я сверил его с IEEE 1364-2005 пункт за пунктом и добился, чтобы на каждое изменение…"
-  en: "In 2017 it was a C++ port of pyvcd. In 2026 I checked it against IEEE 1364-2005 clause by clause and made sure each value change…"
-  es: "En 2017 fue un port de pyvcd a C++. En 2026 lo verifiqué contra IEEE 1364-2005 punto por punto y logré que cada cambio de valor…"
-  sr: "Godine 2017. to je bio port pyvcd-a na C++, a 2026. sam ga uskladio sa IEEE 1364-2005 tačku po tačku i postigao da na svaku promenu…"
-  uz: "2017-yilda bu pyvcdning C++dagi porti edi. 2026-yilda uni IEEE 1364-2005 bilan bandma-band solishtirdim va har bir qiymat oʻzgarishi…"
+  ru: "18 зелёных тестов прятали переполнение буфера в куче и неверный VCD. Санитайзеры это нашли; теперь тестов 39, а горячий путь быстрее…"
+  en: "18 green tests hid a heap buffer overflow and invalid VCD output. Sanitizers found them; now there are 39 tests and a hot path 2–5× faster…"
+  es: "18 pruebas en verde ocultaban un desbordamiento de búfer en el heap y un VCD inválido. Los sanitizers los encontraron; ahora hay 39…"
+  sr: "18 zelenih testova krilo je prekoračenje bafera na hipu i neispravan VCD. Sanitizeri su to našli; sada ima 39 testova, a…"
+  uz: "18 ta muvaffaqiyatli test dinamik xotirada bufer toʻlib ketishi va notoʻgʻri VCDni yashirgan. Sanitayzerlar ularni topdi; endi…"
 
 neoml:
   ru: "С 2022 по 2024 год в NeoML приняли больше сотни моих пул-реквестов. Среди них — перевод математического движка с OpenMP на…"
@@ -123,11 +123,11 @@ b-tree:
   uz: "2015-yilda C tilida B-daraxtli kalit-qiymat omborini yozdim, lekin oʻchirish va jurnaldan tiklashni tugatmadim. 2026-yilda…"
 
 allocator:
-  ru: "Мой аллокатор умеет сам себя дефрагментировать, сдвигая блоки. На ревью 2026 года санитайзеры нашли в нём десять ошибок — от…"
-  en: "My allocator defragments itself by moving blocks around. In a 2026 review, sanitizers found ten bugs in it, from…"
-  es: "Mi asignador de memoria se desfragmenta solo, moviendo bloques. En la revisión de 2026, los sanitizers le hallaron diez errores, desde…"
-  sr: "Moj alokator sam sebe defragmentira pomerajući blokove. Na reviziji 2026. sanitajzeri su u njemu našli deset grešaka — od…"
-  uz: "Allokatorim bloklarni siljitib, oʻzini oʻzi defragmentatsiya qiladi. 2026-yilgi koʻrikda sanitayzerlar unda oʻnta xato topdi, ularning…"
+  ru: "Мой аллокатор сам себя дефрагментирует, сдвигая блоки. Санитайзеры и ревью 2026 года нашли в нём 13 ошибок — от записи за конец…"
+  en: "My allocator defragments itself by moving blocks around. Sanitizers and a 2026 review found 13 bugs in it, from writes past the buffer…"
+  es: "Mi asignador se desfragmenta solo, moviendo bloques. Los sanitizers y la revisión de 2026 le hallaron 13 errores, desde escrituras…"
+  sr: "Moj alokator se sam defragmentuje pomerajući blokove. Sanitizeri i pregled koda iz 2026. našli su u njemu 13 grešaka — od upisa van…"
+  uz: "Allokatorim bloklarni siljitib, oʻzini oʻzi defragmentatsiya qiladi. Sanitayzerlar va 2026-yilgi kod koʻrigi unda 13 ta xato topdi…"
 
 # ---------------------------------------------------------------- courses
 cpp-course:

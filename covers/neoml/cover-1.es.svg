@@ -58,10 +58,6 @@
 <circle cx="1076.2" cy="217.5" r="24" fill="#004f90" stroke="#004f90" stroke-width="4"/>
 <circle cx="1076.2" cy="412.5" r="24" fill="none" stroke="#5d6470" stroke-width="4"/>
 <text x="72" y="120" font-family="'JetBrains Mono', Consolas, monospace" font-size="22" letter-spacing="2" fill="#004f90">CONTRIBUCIONES DE CÓDIGO ABIERTO · C++</text>
-<text x="72" y="210" font-family="'Source Serif 4', Georgia, serif" font-weight="600" font-size="56" fill="#1c1f24">NeoML:</text>
-<text x="72" y="272" font-family="'Source Serif 4', Georgia, serif" font-weight="600" font-size="56" fill="#1c1f24">contribuciones al</text>
-<text x="72" y="335" font-family="'Source Serif 4', Georgia, serif" font-weight="600" font-size="56" fill="#1c1f24">framework de</text>
-<text x="72" y="398" font-family="'Source Serif 4', Georgia, serif" font-weight="600" font-size="56" fill="#1c1f24">aprendizaje</text>
-<text x="72" y="460" font-family="'Source Serif 4', Georgia, serif" font-weight="600" font-size="56" fill="#1c1f24">automático de ABBYY</text>
+<text x="72" y="210" font-family="'Source Serif 4', Georgia, serif" font-weight="600" font-size="60" fill="#1c1f24">neoml</text>
 <text x="72" y="560" font-family="Inter, Arial, sans-serif" font-size="24" fill="#5d6470">Kirill Golikov · favorart.github.io</text>
 </svg>

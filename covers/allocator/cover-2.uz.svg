@@ -17,6 +17,5 @@
 <polygon points="846.0,328.4 874.0,328.4 860.0,346.4" fill="#9aa3ae"/></g>
 <rect x="0" y="0" width="1200" height="630" fill="url(#fade)"/>
 <text x="72" y="360" font-family="'JetBrains Mono', Consolas, monospace" font-size="22" letter-spacing="2" fill="#6aaef0">XOTIRA ALLOKATORI · C++</text>
-<text x="72" y="440" font-family="'Source Serif 4', Georgia, serif" font-weight="600" font-size="48" fill="#e7e9ec">allocator: defragmentatsiya qila</text>
-<text x="72" y="493" font-family="'Source Serif 4', Georgia, serif" font-weight="600" font-size="48" fill="#e7e9ec">oladigan xotira allokatori</text>
+<text x="72" y="440" font-family="'Source Serif 4', Georgia, serif" font-weight="600" font-size="52" fill="#e7e9ec">allocator</text>
 </svg>

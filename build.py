@@ -9,7 +9,7 @@ Inputs
   posts/*/index.md          LinkedIn posts and the site's own articles (no original_url): front matter + Markdown
   sources.yml               external articles/courses, fetched from other public repos
   covers/<slug>/            cover options for external content
-  projects/<slug>/          projects: project.yml (links, date, cover) + <lang>.md (title/summary/kind + page text)
+  projects/<slug>/          projects: project.yml (name, links, date, cover) + <lang>.md (tagline/summary/kind + page text)
 
 Output: _site/  (deployed by .github/workflows/pages.yml)
 
@@ -440,8 +440,9 @@ def load_external(offline):
 
 
 def load_projects():
-    """Projects: projects/<slug>/project.yml (links, date, cover, demo) and one <lang>.md per UI language
-    (front matter title / summary / kind, body = the page text). The text is written per language, so every
+    """Projects: projects/<slug>/project.yml (name, links, date, cover, demo) and one <lang>.md per UI language
+    (front matter tagline / summary / kind, body = the page text). The title everywhere is `name`, the repo name;
+    the tagline is the subtitle on the project page. The text is written per language, so every
     language must have its file."""
     items = []
     for d in sorted(glob.glob(os.path.join(ROOT, "projects", "*", "project.yml"))):
@@ -449,7 +450,7 @@ def load_projects():
         where = os.path.relpath(d, ROOT)
         with open(d, encoding="utf-8") as f:
             e = yaml.safe_load(f) or {}
-        for key in ("date", "links"):
+        for key in ("name", "date", "links"):
             if not e.get(key):
                 fail("%s: field '%s' is required" % (where, key))
         cover = e.get("cover")
@@ -460,14 +461,14 @@ def load_projects():
                 "demo_url": e.get("demo_url"), "tags": [], "list": e.get("list", True), "subtitle": None,
                 "cover_url": "/" + cover if cover else None,
                 "options_dir": os.path.join(ROOT, os.path.dirname(cover)) if cover else None,
-                "title": {}, "summary": {}, "kind": {}, "body_md": {}, "body_html": ""}
+                "title": str(e["name"]), "tagline": {}, "summary": {}, "kind": {}, "body_md": {}, "body_html": ""}
         for code in LANGS:
             path = os.path.join(folder, "%s.md" % code)
             if not os.path.isfile(path):
                 fail("%s is missing (a project page is needed in every language)" % os.path.relpath(path, ROOT))
             with open(path, encoding="utf-8") as f:
                 meta, body = split_front_matter(f.read(), os.path.relpath(path, ROOT))
-            for key in ("title", "summary", "kind"):
+            for key in ("tagline", "summary", "kind"):
                 if not meta.get(key):
                     fail("%s: front matter field '%s' is required" % (os.path.relpath(path, ROOT), key))
                 item[key][code] = meta[key]
@@ -992,6 +993,7 @@ def article_page(item, t):
         content, text_lang_, canonical = paper_body(item, t, tr), t["html_lang"], None
     elif item["type"] == "project":  # written in every language: the page is in t's language
         text_lang_, canonical = t["html_lang"], None
+        subtitle = '<p class="subtitle" lang="%s">%s</p>' % (esc(t["html_lang"]), esc(str(item["tagline"][t["lang"]])))
         content = mark_link_langs(linkify_bare(render_markdown(item["body_md"][t["lang"]])))
     elif item["section"] == "courses" and t["lang"] != item["lang"] and t.get("course_lang_note"):
         content = '<p class="tr-note">%s</p>' % S(t, "course_lang_note") + content  # courses are not translated

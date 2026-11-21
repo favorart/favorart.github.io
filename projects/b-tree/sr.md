@@ -1,27 +1,26 @@
 ---
-title: "b-tree: key-value skladište na B-stablu u C-u"
-summary: "Key-value skladište na disku, napisano od nule u C-u: B-stablo nad stranicama fiksne veličine, ključevi i vrednosti promenljive dužine, LRU keš stranica i žurnal sa unapred upisanim izmenama (write-ahead) za oporavak posle pada."
-kind: Mehanizam za skladištenje · C
+tagline: "Key-value skladište u C-u: B-stablo na disku i žurnal"
+summary: "Key-value skladište u jednom fajlu, u čistom C-u: stranice B-stabla, LRU keš i žurnal sa kontrolnim sumama. Oporavak posle pada testira se ubijanjem procesa-deteta; najgori scenariji su izmereni."
+kind: "Mehanizam za skladištenje · C"
 ---
 
-Mala ugrađena baza podataka, napisana 2015. kao kursni projekat u Tehnosferi (Mail.Ru Group i MGU „M. V. Lomonosov“). Zadatak je bio da se od nule napravi sloj za skladištenje kakav prave baze podataka imaju ispod haube: key-value skladište iza zadatog C API-ja (`dbcreate`, `dbopen`, umetanje, pretraga, brisanje, upis na disk, zatvaranje), koje svoje podatke drži u jednom fajlu. Godine 2026. projekat je vraćen u život: nedovršeni brisanje i oporavak iz žurnala su završeni, a sve je pokriveno testovima.
+Ugrađeno key-value skladište koje sam napisao 2015. u Tehnosferi (Mail.Ru Group i MGU „M. V. Lomonosov“) iza zadatog C API-ja, a završio 2026. Svaka stranica fajla je čvor B-stabla. Keš zapisuje sve izmenjene („prljave“) stranice odjednom, pa fajl uvek sadrži konzistentno stablo, a ponovna primena žurnala posle pada procesa vraća svaku potvrđenu izmenu. Zato što se puna stranica deli u tački umetanja, stranice su pri sekvencijalnom umetanju popunjene 68%.
 
 ## Kako radi
 
-- **B-stablo nad stranicama.** Fajl je podeljen na stranice fiksne veličine (podrazumevano 4 KB); svaki čvor stabla je jedna stranica. Ključevi i vrednosti promenljive dužine čuvaju se direktno u čvorovima, do 1/8 stranice po zapisu.
-- **Deljenje i balansiranje.** Pune stranice se dele unapred, pri silasku, u jednom prolazu; pri sekvencijalnom umetanju stranica se deli u tački umetanja, pa stranice ostaju dobro popunjene. Pri brisanju se nedovoljno popunjena stranica spaja sa susednom ili od nje pozajmljuje zapise.
+- **B-stablo nad stranicama.** Stranice fiksne veličine (podrazumevano 4 KB); ključevi i vrednosti promenljive dužine čuvaju se direktno u čvorovima, do 1/8 stranice po zapisu. Pune stranice se dele unapred, pri silasku, u jednom prolazu; pri brisanju se nedovoljno popunjene stranice spajaju sa susednom ili od nje pozajmljuju zapise.
 - **Mapa slobodnog prostora.** Servisne stranice čuvaju bitmapu slobodnih stranica, pa se obrisane stranice ponovo koriste.
-- **LRU keš.** Nedavno korišćene stranice ostaju u memoriji (podrazumevano 16 MB); izmenjene („prljave“) stranice se zapisuju nazad pri izbacivanju iz keša — sve odjednom, pa fajl uvek sadrži konzistentno stablo.
-- **Žurnal.** Svaka izmena se prvo upisuje u žurnal unapred (write-ahead), a svaki zapis ima kontrolnu sumu; pri otvaranju se ponovo primenjuju zapisi posle poslednje kontrolne tačke, a zapis prekinut padom se odbacuje.
-- **Konfiguracija.** Veličina fajla, veličina stranice i veličina keša zadaju se pri kreiranju baze.
+- **LRU keš.** Nedavno korišćene stranice ostaju u memoriji (podrazumevano 16 MB); izbacivanje prljave stranice zapisuje sve prljave stranice i poziva `fsync`.
+- **Žurnal.** Svaka izmena se prvo upisuje u žurnal čiji zapisi imaju kontrolne sume; pri otvaranju se ponovo primenjuju zapisi posle poslednje kontrolne tačke, a zapis prekinut padom se zanemaruje.
+- **Dijagnostika.** `db_check` proverava stablo, `db_stats` prikazuje njegov oblik i popunjenost, `db_trace` beleži operacije na četiri nivoa.
 
 ## Inženjerska strana
 
-- Čist C99 i POSIX, bez zavisnosti, gradi se Make-om; Windows nije podržan.
-- Testovi na cmocka-i: jedinični testovi modula, nasumične operacije proverene prema referentnom modelu, oporavak posle pada u procesu-detetu i najgori scenariji opterećenja; pokreću se i pod AddressSanitizer-om i UndefinedBehaviorSanitizer-om.
-- CI na Linux-u (gcc i clang, običan build i sa sanitizerima) i macOS-u; benčmark se pokreće na svaki push na `master`.
-- Svaki push na `master` koji prođe CI dobija oznaku verzije i GitHub Release sa bibliotekom za Linux i macOS.
+- Čist C99 i POSIX, bez zavisnosti, gradi se Make-om.
+- Testovi na cmocka-i: jedinični testovi modula, nasumične operacije proverene prema referentnom modelu, oporavak posle pada u procesu-detetu i najgori scenariji opterećenja; svi se pokreću i pod AddressSanitizer-om i UndefinedBehaviorSanitizer-om.
+- Benčmark u README-u: kada stablo stane u keš, oko 186 hiljada nasumičnih umetanja i 594 hiljade pretraga u sekundi.
+- CI na Linux-u (gcc i clang, običan build i sa sanitizerima) i macOS-u; svaki push na `master` koji prođe CI dobija oznaku verzije i GitHub Release.
 
-## Zašto je to važno
+## Ograničenja
 
-Projekat dotiče ključna pitanja svakog mehanizma za skladištenje: raspored podataka na stranicama, deljenje i spajanje čvorova, keširanje i trajnost. To je direktan put od udžbeničkog B-stabla do toga kako su napravljeni SQLite ili InnoDB.
+Žurnal štiti od pada procesa, ali ne i od nestanka struje; bazu u jednom trenutku koristi samo jedan proces; ovo je B-stablo, a ne B+-stablo.
