@@ -3,7 +3,7 @@ title: "Tugʻilgan kuningiz π raqamlari ichida"
 summary: "Tugʻilgan sanangizni π sonining 3 milliard raqami orasidan topadigan Python/Tkinterdagi kichik GUI-ilova — keyinchalik veb uchun qayta yaratilgan."
 source: favorart/pi-birthday@main:article.md
 source_lang: en
-source_hash: 219b2f17
+source_hash: b30d8afa
 translated: 2026-11-21
 translator: Claude
 reviewed: 2026-11-21
@@ -271,7 +271,7 @@ Bir arzimas narsa qoldi xolos — grafik interfeys.
 
 Interfeys rejasi:
 
-<img width="807" height="579" alt="reja" src="https://github.com/user-attachments/assets/a718d644-af95-4aa8-8da3-48d56f8265bd" />
+<img width="807" height="579" alt="reja" src="img/plan-en.png" />
 
 1.  Oynaning minimal oʻlchamini belgilash.
 2.  Notoʻgʻri sanani kiritib boʻlmasligi uchun tekshiriladigan sana kiritish.
@@ -845,7 +845,7 @@ Manba: [legacy/pi.py, 140–141-qatorlar](legacy/pi.py#L140-L141)
 
 Toʻliq kod [legacy/pi.py](legacy/pi.py)da.
 
-<img width="1080" height="557" alt="interfeys" src="https://github.com/user-attachments/assets/81283f68-b27a-4b1d-8242-a384d49153bd" />
+<img width="1080" height="557" alt="interfeys" src="img/interface-en.jpg" />
 
 ### Lokalizatsiya
 

@@ -23,6 +23,7 @@ import datetime as dt
 import glob
 import hashlib
 import html
+from html.parser import HTMLParser
 import os
 import posixpath
 import re
@@ -329,7 +330,7 @@ def linkify_bare(html_text):
     out, skip = [], 0
     for tok in TOKEN_RE.split(html_text):
         if tok.startswith("<"):
-            m = re.match(r"<(/?)(a|pre|code)", tok, re.I)
+            m = re.match(r"<(/?)(a|pre|code)\b", tok, re.I)
             if m:
                 skip += -1 if m.group(1) else 1
             out.append(tok)
@@ -688,6 +689,79 @@ EN_HOSTS = ("en.wikipedia.org", "stackoverflow.com", "docs.python.org", "reddit.
             "travisdowns.github.io", "lemire.me", "tutorialspoint.com", "effbot.org", "tcl.tk", "zetcode.com",
             "readthedocs.io", "nmt.edu", "cppreference.com", "isocpp.org", "medium.com", "nvidia.com", "pytorch.org")
 A_HREF_RE = re.compile(r'<a\b([^>]*?)\bhref="(https?://[^"]+)"([^>]*)>')
+
+
+class _LinkPlaces(HTMLParser):
+    """For every <a hreflang> start tag: its offset, whether it sits in a list item, its paragraph, its text;
+    for every paragraph: the text outside links."""
+
+    def __init__(self, text):
+        super().__init__(convert_charrefs=True)
+        self.lines = [0]
+        for line in text.splitlines(True):
+            self.lines.append(self.lines[-1] + len(line))
+        self.stack, self.links, self.p_text, self.cur_p, self.cur_a = [], [], {}, None, None
+
+    def handle_starttag(self, tag, attrs):
+        if tag == "p":
+            self.cur_p = len(self.p_text)
+            self.p_text[self.cur_p] = ""
+        if tag == "a":
+            line, col = self.getpos()
+            a = dict(attrs)
+            self.cur_a = {"pos": self.lines[line - 1] + col, "raw": self.get_starttag_text(), "text": "",
+                          "li": "li" in self.stack or "td" in self.stack or "th" in self.stack,
+                          "p": self.cur_p, "hreflang": a.get("hreflang")}
+            self.links.append(self.cur_a)
+        if tag not in VOID_TAGS:
+            self.stack.append(tag)
+
+    def handle_endtag(self, tag):
+        if tag in self.stack:
+            while self.stack and self.stack.pop() != tag:
+                pass
+        if tag == "p":
+            self.cur_p = None
+        if tag == "a":
+            self.cur_a = None
+
+    def handle_data(self, data):
+        if self.cur_a is not None:
+            self.cur_a["text"] += data
+        elif self.cur_p is not None:
+            self.p_text[self.cur_p] += data
+
+
+VOID_TAGS = {"br", "img", "hr", "input", "meta", "link", "wbr", "source", "col", "area", "base", "embed", "track"}
+
+
+def mark_inline_links(html_text):
+    """A language badge (a[hreflang]) is shown on links that stand alone: in a list or a table, alone in their
+    paragraph (or with only other links and separators around, as in a line of links), and never on a link whose
+    text names its language ("English", "Русский": the name says it). A link inside running text gets class
+    "inl" and no badge (site.css): the badge breaks the line, and justified text shows the gap."""
+    names = {str(u.get("name", "")).strip().lower() for u in LANGS.values()} | {"english", "русский"}
+    p = _LinkPlaces(html_text)
+    p.feed(html_text)
+    out, last = [], 0
+    for a in p.links:
+        if not a["hreflang"]:
+            continue
+        text = " ".join(a["text"].split()).lower()
+        named = text in names or text.split(" ")[0] in names
+        alone = a["li"] or (a["p"] is not None and not re.sub(r"[\s·|•,;:()\[\]{}0-9.*—–-]+", "", p.p_text[a["p"]]))
+        if alone and not named:
+            continue
+        raw = a["raw"]
+        if 'class="' in raw:
+            new = raw.replace('class="', 'class="inl ', 1)
+        else:
+            new = raw[:-1].rstrip("/") + ' class="inl">'
+        out.append(html_text[last:a["pos"]])
+        out.append(new)
+        last = a["pos"] + len(raw)
+    out.append(html_text[last:])
+    return "".join(out)
 
 
 def mark_link_langs(html_text):
@@ -1085,7 +1159,7 @@ def article_page(item, t):
             subtitle = '<p class="subtitle">%s</p>' % esc(m.group(1).strip())
             body_md = body_md[m.end():]
         content = tr_note(item, tr, t) + tr_body_html(item, dict(tr, body=body_md))
-    content = localize_site_links(content, item, t)
+    content = mark_inline_links(localize_site_links(content, item, t))
     kind = kind_of(item, t)
     if item["section"] == "writing":  # the type chip already says it ("Note" chip + "NOTE" label read as a stutter)
         chip = S(t, "type_" + item["wtype"])

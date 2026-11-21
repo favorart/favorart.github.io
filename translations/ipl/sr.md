@@ -3,10 +3,10 @@ title: "Interpreter sa podesivom sintaksom"
 summary: "Diplomski projekat sa osnovnih studija – višeplatformski interpreter čije se ključne reči i gramatika mogu podešavati."
 source: favorart/IPL@master:docs/ru/README.md
 source_lang: ru
-source_hash: b2ca507e
-translated: 2026-11-14
+source_hash: 5b3a6762
+translated: 2026-11-21
 translator: Claude
-reviewed: 2026-11-14
+reviewed: 2026-11-21
 ---
 # Interpreter za interpretirani programski jezik sa podesivom sintaksom
 
