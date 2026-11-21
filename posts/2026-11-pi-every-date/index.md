@@ -8,6 +8,7 @@ original_url: https://www.linkedin.com/posts/golikovkirill_python-math-algorithm
 cover: cover.jpg
 tags: [python, math, algorithms, numpy, pi]
 home: false
+demo_url: https://favorart.github.io/pi-birthday/
 ---
 
 Я посчитал три миллиарда знаков π: все до одной даты календаря прячутся внутри.
