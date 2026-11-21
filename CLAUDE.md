@@ -12,6 +12,18 @@
 - Projects (`projects/<slug>/<lang>.md`) are written per language, not translated at build time: a change to
   `en.md` is made in every language file in the same commit, with an independent review (README → Add a project).
 
+## Links and images (details: README → Links)
+
+- A link leads to the reader's language if that page exists, then to this site, then to English; in translations
+  link `/<lang>/writing/<slug>/` for pages of this site. Language badges only on standalone links (lists, tables,
+  own line), never inside running text or on links named after their language.
+- Images in translations come from the English version; text on an image in another language → make an English
+  copy in the source repo.
+- Before a release of link-heavy changes run `python tools/check_link_langs.py _site --wiki` and
+  `python tools/check_web_links.py _site`; a dead link → new address or Wayback copy, in the original and in
+  every translation.
+- Pushing to an external source repo (pi-birthday, IPL, robot-hand…) only after showing the author the edits.
+
 ## Every commit that adds or changes a post or an article
 
 Articles, posts and paper abstracts (Writing) are translated into every site language other than their own;
