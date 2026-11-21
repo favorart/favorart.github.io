@@ -3,7 +3,7 @@ title: "Vaš rođendan u ciframa broja π"
 summary: "Mala GUI aplikacija u Python-u/Tkinter-u koja pronalazi vaš datum rođenja među 3 milijarde cifara broja π – kasnije prepravljena za veb."
 source: favorart/pi-birthday@main:article.md
 source_lang: en
-source_hash: 219b2f17
+source_hash: b30d8afa
 translated: 2026-11-21
 translator: Claude
 reviewed: 2026-11-21
@@ -271,7 +271,7 @@ Ostala je sitnica – grafički interfejs.
 
 Plan interfejsa:
 
-<img width="807" height="579" alt="plan" src="https://github.com/user-attachments/assets/a718d644-af95-4aa8-8da3-48d56f8265bd" />
+<img width="807" height="579" alt="plan" src="img/plan-en.png" />
 
 1.  Fiksirati minimalnu veličinu prozora.
 2.  Unos datuma sa validacijom, da se ne bi mogao uneti nevažeći datum.
@@ -845,7 +845,7 @@ Izvor: [legacy/pi.py, redovi 140–141](legacy/pi.py#L140-L141)
 
 Ceo kod je u [legacy/pi.py](legacy/pi.py).
 
-<img width="1080" height="557" alt="interface" src="https://github.com/user-attachments/assets/81283f68-b27a-4b1d-8242-a384d49153bd" />
+<img width="1080" height="557" alt="interface" src="img/interface-en.jpg" />
 
 ### Lokalizacija
 
