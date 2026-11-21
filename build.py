@@ -1007,6 +1007,21 @@ def card(item, t):
                summary=esc(teaser or str(tr_of(item, t)["meta"]["summary"] if tr_of(item, t) else loc(item["summary"], t))))
 
 
+SITE_LINK_RE = re.compile(r'<a(\s[^>]*?\s|\s)href="(?:%s)?(?:/(?:es|ru|sr|uz))?/((?:writing|courses|projects)/([^/"#?]+)/)([#?][^"]*)?"([^>]*)>'
+                          % re.escape(SITE_URL))
+
+
+def localize_site_links(html_text, item, t):
+    """A link in the text to another page of this site goes to that page in the reader's UI language (every
+    item page exists in every language). Links to other versions of the same text and links with an explicit
+    hreflang (the author chose the language) stay as they are."""
+    def sub(m):
+        if m.group(3) == item["slug"] or "hreflang=" in m.group(1) + m.group(5):
+            return m.group(0)
+        return '<a%shref="%s/%s%s"%s>' % (m.group(1), t["prefix"], m.group(2), m.group(4) or "", m.group(5))
+    return SITE_LINK_RE.sub(sub, html_text)
+
+
 def article_page(item, t):
     if item.get("own"):  # the site's own article: no original elsewhere
         source_top = ""
@@ -1070,6 +1085,7 @@ def article_page(item, t):
             subtitle = '<p class="subtitle">%s</p>' % esc(m.group(1).strip())
             body_md = body_md[m.end():]
         content = tr_note(item, tr, t) + tr_body_html(item, dict(tr, body=body_md))
+    content = localize_site_links(content, item, t)
     kind = kind_of(item, t)
     if item["section"] == "writing":  # the type chip already says it ("Note" chip + "NOTE" label read as a stutter)
         chip = S(t, "type_" + item["wtype"])

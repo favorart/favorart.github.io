@@ -362,7 +362,7 @@ _____________________
 ### Korišćeni algoritmi
 
 *	{1}	[Metod izračunavanja SHA256 heš-sume datoteke (Ch. Devine, 2003)](http://patux.net/crypto_programs/hash/sha-2/sha256.c.html){: hreflang=en }
-*	{2}	[Metod rekurzivnog spusta](http://en.wikipedia.org/wiki/Recursive_descent_parser){: hreflang=en }
+*	{2}	[Metod rekurzivnog spusta](https://sr.wikipedia.org/sr-el/Analizator_rekurzivnim_spustom)
 *	{3}	[Konstruisanje prefiksne poljske notacije metodom programskog steka](http://algolist.manual.ru/maths/misc/revpn.php){: hreflang=ru }
 *	{4}	Konstruisanje heš-tabela
 *	Heš-adresa jednaka ostatku pri deljenju prostim brojem (A. Dumey, 1956)
