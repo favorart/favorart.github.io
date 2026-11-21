@@ -356,7 +356,7 @@ _____________________
 * [2]	Керниган Б., Ритчи Д. Язык программирования С. / The C Programming Language. – Prentice Hall, 1988
 * [3]	[Ejemplo de cómo escribir un intérprete sencillo](http://rsdn.ru/forum/alg/5018812.all){: hreflang=ru }
 * [4]	[Tu propio intérprete](http://coderszone.info/339-sam-sebe-interpretator.html){: hreflang=ru }
-* [5]	[Tipado dinámico (Wikipedia)](http://ru.wikipedia.org/wiki/Динамическая_типизация){: hreflang=ru }
+* [5]	[Tipado dinámico (Wikipedia)](https://es.wikipedia.org/wiki/Tipado_dinámico)
 
 
 ### Algoritmos utilizados
