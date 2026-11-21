@@ -18,8 +18,10 @@ GitHub Actions (`.github/workflows/pages.yml`) on every push to `main`, daily, a
 | `posts/<yyyy-mm-slug>/index.md` | LinkedIn posts and the site's own articles (+ their images in the same folder) |
 | `sources.yml` | external articles and courses, pulled from other repos at build time |
 | `covers/<slug>/` | cover options for external content; chooser page: `/writing/covers/` |
-| `tools/make_covers.py` | generates 3 SVG cover options |
+| `tools/make_covers.py` | generates SVG cover options (motif pi: also 4 "pastel" and 5 "browser") |
 | `tools/check_links.py` | checks the built site for broken links/images |
+| `tools/check_link_langs.py` | links in texts that lead to another language while the reader's exists (see Links) |
+| `tools/check_web_links.py` | requests every external link of the built site: 4xx/5xx, dead hosts, moved away |
 | `tools/check_text.py` | checks the text of the built pages: formulas left as TeX, citations [N] that are not links, unconverted Markdown |
 
 ## Build locally
@@ -28,6 +30,8 @@ GitHub Actions (`.github/workflows/pages.yml`) on every push to `main`, daily, a
 pip install -r requirements.txt
 python build.py            # -> _site/  (add --offline to skip fetching external repos)
 python tools/check_links.py _site
+python tools/check_link_langs.py _site --wiki   # links lead to the reader's language
+python tools/check_web_links.py _site          # external links alive (slow, ~1 min)
 python tools/check_text.py _site
 python tools/layout_check.py _site --chrome   # layout in a browser: 5 languages × 375/768/1280 × light/dark
 python -m http.server -d _site 8000
@@ -119,6 +123,24 @@ python tools/translations.py new <slug> <lang>   # creates the file, or re-stamp
 When a post or article is added or changed, every missing/outdated translation is made and reviewed in the
 same commit — the procedure is in `CLAUDE.md`; agreed terms in `docs/translation-glossary.md`.
 Courses are not translated (their lectures are in Russian); papers have RU + EN abstracts.
+
+## Links
+
+- **Language of the target.** A link leads to the page in the reader's language if it exists, then to this
+  site's own page, then to English. Links in a text to another page of this site go to that page in the page's
+  language automatically (build.py `localize_site_links`; links with an explicit `hreflang` and to other versions
+  of the same text are kept); in translations write `/<lang>/writing/<slug>/`, not the original's `.md`.
+  Wikipedia: the article in the reader's language, else English (a one-line stub does not count).
+  Deliberate exceptions go into `EXCEPTIONS` in `tools/check_link_langs.py` with the reason.
+- **Language badge** (`{: hreflang=xx }`, auto for known RU/EN hosts): shown only on links that stand alone
+  (lists, tables, a line of their own). Links inside running text and links whose text names the language
+  ("English · Русский", "Original: English") get class `inl` from build.py and no badge (`site.css`).
+- **Dead links**: a page that moved → its new address; a page that is gone → its Wayback Machine copy
+  (`https://web.archive.org/web/<timestamp>/<url>`). Fix it in the original repo and in every translation in the
+  same way. Sites behind a login are not checked; bot walls verified in a browser are in `BOT_WALL` in
+  `tools/check_web_links.py`.
+- **Images in translations** come from the English version; an image with text in another language
+  (a Russian screenshot or diagram in an English text) gets an English copy in the source repo first.
 
 ## Add a project
 
