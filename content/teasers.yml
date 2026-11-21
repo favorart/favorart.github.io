@@ -123,11 +123,11 @@ ipl:
 
 # ---------------------------------------------------------------- projects
 vcd-writer:
-  ru: "В 2017-м это был порт pyvcd. В 2026-м я сверил его со стандартом IEEE пункт за пунктом и добился, чтобы на каждое изменение…"
-  en: "In 2017 it was a port of pyvcd. In 2026 I checked it against the IEEE spec clause by clause and ensured each value change…"
-  es: "En 2017 era el port de un módulo de Python. En 2026 lo contrasté con el estándar IEEE cláusula a cláusula y logré que cada cambio…"
-  sr: "2017. to je bio port pyvcd-a. 2026. sam ga tačku po tačku uporedio sa IEEE standardom i postigao da na svaku promenu…"
-  uz: "2017-yilda bu pyvcd porti edi. 2026-yilda uni IEEE standarti bilan bandma-band solishtirdim va har bir qiymat oʻzgarishiga…"
+  ru: "18 зелёных тестов прятали переполнение буфера в куче и неверный VCD. Санитайзеры это нашли; теперь тестов 39, а горячий путь быстрее…"
+  en: "18 green tests hid a heap buffer overflow and invalid VCD output. Sanitizers found them; now there are 39 tests and a hot path 2–5× faster…"
+  es: "18 pruebas en verde ocultaban un desbordamiento de búfer en el heap y un VCD inválido. Los sanitizers los encontraron; ahora hay 39…"
+  sr: "18 zelenih testova krilo je prekoračenje bafera na hipu i neispravan VCD. Sanitizeri su to našli; sada ima 39 testova, a…"
+  uz: "18 ta muvaffaqiyatli test dinamik xotirada bufer toʻlib ketishi va notoʻgʻri VCDni yashirgan. Sanitayzerlar ularni topdi; endi…"
 
 neoml:
   ru: "С 2022 по 2024 год приняли больше сотни моих пул-реквестов. Один снял математический движок с OpenMP и пересадил на…"

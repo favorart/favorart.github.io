@@ -129,9 +129,10 @@ projects/<slug>/<lang>.md     # front matter tagline (subtitle), summary, kind (
 ```
 
 The build fails if a language file is missing. Write `en.md` first, then the other languages with an
-independent review (as for translations, see `CLAUDE.md`). Covers: `python tools/make_covers.py covers/<slug>
-<motif> "<title>" "<kicker>"` plus `--lang xx --author "Name"` per language (motifs for projects: wave, net,
-btree, heap, cpu, code).
+independent review (as for translations, see `CLAUDE.md`). Cover: one for all languages, as the
+title is the repo name: `python tools/make_covers.py covers/<slug> <motif> "<name>" "<kind in English>"` (motifs
+for projects: wave, net, btree, heap, cpu, code). Keep only `cover-1` (light) and `cover-2` (its dark-theme twin)
+with their `-plain` variants; no `--lang` versions.
 
 ## Add an external article or course
 

@@ -1,25 +1,23 @@
 ---
-title: "allocator: alokator memorije sa defragmentacijom"
-summary: "Alokator memorije u C++17 nad fiksnom arenom koji ume sam sebe da defragmentuje, uparen sa pametnim pokazivačem koji ostaje ispravan kada se blokovi pomeraju."
-kind: Alokator memorije · C++
+tagline: "Alokator koji se sam defragmentuje i prati premeštene blokove"
+summary: "Alokator u C++17 bez dodatne memorije: defrag() sabija podatke brzinom od 6,4 GB/s, a Pointer prati premeštene blokove. Izmerena cena: alloc() je oko 140 puta sporiji od malloc-a."
+kind: "Alokator memorije · C++"
 ---
 
-Kursni projekat iz 2015. (Tehnosfera, Mail.Ru Group i MGU „M. V. Lomonosov“): alokator memorije koji sam upravlja jednom fiksnom arenom umesto da poziva sistemski `malloc`. Godine 2026. kod je prošao reviziju: greške su ispravljene, a projekat je dobio prave testove, CI i izdanja.
+Kursni projekat iz 2015. (Tehnosfera, Mail.Ru Group i MGU „M. V. Lomonosov“): alokator nad jednim fiksnim baferom koji sopstvenu evidenciju drži u tom istom baferu — podaci rastu od početka, deskriptori blokova od kraja. Pošto `defrag()` pomera blokove, korisnik drži `Pointer` koji svoj blok ponovo pronalazi po jedinstvenom indeksu. Godine 2026. sanitizeri i pregled koda pronašli su u njemu 13 grešaka, od upisa van bafera do pokazivača koji je pronalazio tuđi blok; svaka ispravka ima regresioni test.
 
 ## Kako radi
 
-- **Bez dodatne memorije.** Alokator izdaje blokove iz unapred alociranog bafera, a njegova sopstvena evidencija — dvostruko povezana lista deskriptora blokova, sortirana po adresama — živi u istom baferu, zbijena od njegovog kraja bez praznina. Alokacija prolazi kroz listu do prvog odgovarajućeg prostora, O(broj blokova); oslobađanje ima složenost O(1).
-- **Defragmentacija.** Posle mnogo alokacija i oslobađanja slobodan prostor se raspadne na sitne komade. `defrag()` u jednom prolazu primiče žive blokove jedan uz drugi, tako da slobodan prostor ponovo postane jedna neprekidna oblast; `realloc()` povećava ili smanjuje blok na mestu kad ima prostora.
-- **Pametni pokazivač.** Pomeranje blokova bi pokvarilo obične pokazivače, pa korisnik radi preko klase `Pointer`. Ona pamti mesto deskriptora i jedinstveni indeks bloka i ponovo pronalazi blok kada se pomeri; pokazivač na oslobođeni blok vraća `nullptr`.
+- **Bez dodatne memorije.** Deskriptori čine dvostruko povezanu listu sortiranu po adresama, zbijenu na kraju bafera bez praznina. Alokacija traži prvi odgovarajući prostor (first fit) i prolazi kroz listu, O(broj blokova); oslobađanje ima složenost O(1).
+- **Defragmentacija.** `defrag()` u jednom prolazu primiče žive blokove jedan uz drugi, tako da slobodan prostor ponovo postane jedna oblast; `realloc()` povećava ili smanjuje blok na mestu kad ima prostora.
+- **Pametni pokazivač.** `Pointer` pamti mesto deskriptora i indeks bloka i ponovo pronalazi blok kada se pomeri; pokazivač na oslobođeni blok vraća `nullptr`.
+- **Samoprovere.** `check()` proverava svaku invarijantu arene, `dump()` ispisuje njenu mapu.
+
+## Izmerena cena
+
+Benčmark u README-u to pošteno pokazuje: alokacija traje 4,6 µs naspram 33 ns za `malloc`, jer prolazi kroz listu; sabijanje radi brzinom od 6,4 GB/s živih podataka, a dereferenciranje `Pointer`-a sa keširanim mestom deskriptora košta 2,3 ns.
 
 ## Inženjerska strana
 
-- Revizija iz 2026. pokrenula je stare testove pod AddressSanitizer-om i UndefinedBehaviorSanitizer-om i pronašla deset grešaka — od upisa van bafera do pokazivača koji je pronalazio tuđi blok; svaka ispravka ima regresioni test.
-- GoogleTest testovi pokrivaju ceo javni API, a nasumični stres-test poredi svaki živi blok sa modelom bajt po bajt.
-- CI gradi projekat GCC-om i Clang-om na Linux-u (i pod sanitizerima), MSVC-om na Windows-u i Apple Clang-om na macOS-u; upozorenja se tretiraju kao greške.
-- README sadrži benčmark u poređenju sa `malloc`/`free` koji pošteno pokazuje cenu: alokacija prolazi kroz listu i mnogo je sporija od `malloc`-a, dok je sabijanje jedan prolaz `memmove`-a.
-- Svaki push na `master` koji prođe CI dobija oznaku verzije i GitHub Release sa fajlom zaglavlja i statičkom bibliotekom za Linux, Windows i macOS.
-
-## Zašto je to važno
-
-Sopstveni alokatori su jedan od glavnih alata za rad na performansama u C++-u: manje sistemskih poziva, bolja lokalnost podataka i predvidljiva potrošnja memorije. Ovaj projekat pokazuje mehaniku koja stoji iza toga — i cenu pomeranja objekata u memoriji.
+- GoogleTest testovi nad celim javnim API-jem, nasumični stres-test koji svaki živi blok poredi sa modelom bajt po bajt i cilj za libFuzzer; stres-testovi i fuzzer pozivaju `check()` posle svake operacije.
+- CI gradi projekat GCC-om i Clang-om na Linux-u (i pod AddressSanitizer-om i UndefinedBehaviorSanitizer-om), MSVC-om na Windows-u i Apple Clang-om na macOS-u, upozorenja se tretiraju kao greške; svaki zeleni push na `master` dobija oznaku verzije i GitHub Release.
