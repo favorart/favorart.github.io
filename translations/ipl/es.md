@@ -3,7 +3,7 @@ title: "Un intérprete con sintaxis configurable"
 summary: "Proyecto de fin de grado: un intérprete multiplataforma cuyas palabras clave y gramática se pueden configurar."
 source: favorart/IPL@master:docs/ru/README.md
 source_lang: ru
-source_hash: 5b3a6762
+source_hash: 22e15939
 translated: 2026-11-21
 translator: Claude
 reviewed: 2026-11-21
@@ -354,16 +354,16 @@ _____________________
 
 * [1]	Шилдт Г. Язык С для профессиональных программистов. / Born to Code in C. – Osborne, 1989
 * [2]	Керниган Б., Ритчи Д. Язык программирования С. / The C Programming Language. – Prentice Hall, 1988
-* [3]	[Ejemplo de cómo escribir un intérprete sencillo](http://rsdn.ru/forum/alg/5018812.all){: hreflang=ru }
-* [4]	[Tu propio intérprete](http://coderszone.info/339-sam-sebe-interpretator.html){: hreflang=ru }
+* [3]	[Ejemplo de cómo escribir un intérprete sencillo](https://rsdn.org/forum/alg/5018812){: hreflang=ru }
+* [4]	[Tu propio intérprete](https://web.archive.org/web/20090820050231/http://coderszone.info/339-sam-sebe-interpretator.html){: hreflang=ru }
 * [5]	[Tipado dinámico (Wikipedia)](https://es.wikipedia.org/wiki/Tipado_dinámico)
 
 
 ### Algoritmos utilizados
 
-*	{1}	[Cálculo de la suma hash SHA256 de un archivo (Ch. Devine, 2003)](http://patux.net/crypto_programs/hash/sha-2/sha256.c.html){: hreflang=en }
+*	{1}	[Cálculo de la suma hash SHA256 de un archivo (Ch. Devine, 2003)](https://web.archive.org/web/20120615070343/http://patux.net/crypto_programs/hash/sha-2/sha256.c.html){: hreflang=en }
 *	{2}	[Descenso recursivo](http://en.wikipedia.org/wiki/Recursive_descent_parser){: hreflang=en }
-*	{3}	[Construcción de la notación polaca directa mediante una pila](http://algolist.manual.ru/maths/misc/revpn.php){: hreflang=ru }
+*	{3}	[Construcción de la notación polaca directa mediante una pila](https://web.archive.org/web/20240705142522/https://algolist.manual.ru/maths/misc/revpn.php){: hreflang=ru }
 *	{4}	Construcción de tablas hash
 *	Dirección hash igual al resto de la división por un número primo (A. Dumey, 1956)
 *	Encadenamiento (H. P. Luhn, 1953)

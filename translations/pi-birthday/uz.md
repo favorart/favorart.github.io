@@ -3,7 +3,7 @@ title: "Tugʻilgan kuningiz π raqamlari ichida"
 summary: "Tugʻilgan sanangizni π sonining 3 milliard raqami orasidan topadigan Python/Tkinterdagi kichik GUI-ilova — keyinchalik veb uchun qayta yaratilgan."
 source: favorart/pi-birthday@main:article.md
 source_lang: en
-source_hash: b30d8afa
+source_hash: 7cb4d0b6
 translated: 2026-11-21
 translator: Claude
 reviewed: 2026-11-21
@@ -871,9 +871,9 @@ noconsole — Tk konsoldan ishga tushiriladi, shuning uchun formadan oldin termi
 
 -   [Stack Overflow: How to get the widget's current x and y coordinates](https://stackoverflow.com/questions/30257574/how-to-get-the-widgets-current-x-and-y-coordinates)
 -   [Python docs: ttk — Tk themed widgets](https://docs.python.org/2.7/library/ttk.html#label-options)
--   [Tcl/Tk manual: event](https://www.tcl.tk/man/tcl/TkCmd/event.htm)
+-   [Tcl/Tk manual: event](https://www.tcl-lang.org/man/tcl8.6/TkCmd/event.htm)
 -   [Stack Overflow: Make the Tkinter Text widget read-only](https://stackoverflow.com/questions/3842155/is-there-a-way-to-make-the-tkinter-text-widget-read-only)
--   [effbot: The Tkinter Text widget](http://effbot.org/tkinterbook/text.htm)
+-   [effbot: The Tkinter Text widget](https://web.archive.org/web/20201112033110/http://effbot.org/tkinterbook/text.htm)
 -   [Tutorialspoint: Tkinter Text](https://www.tutorialspoint.com/python/tk\_text.htm)
 -   [Tutorialspoint: Tkinter Button](https://www.tutorialspoint.com/python/tk\_button.htm)
 -   [Tutorialspoint: Tkinter Entry](https://www.tutorialspoint.com/python/tk\_entry.htm)
@@ -882,18 +882,18 @@ noconsole — Tk konsoldan ishga tushiriladi, shuning uchun formadan oldin termi
 -   [Tutorialspoint: Tkinter pack()](https://www.tutorialspoint.com/python/tk\_pack.htm)
 -   [Tutorialspoint: Tkinter grid()](https://www.tutorialspoint.com/python/tk\_grid.htm)
 -   [Stack Overflow: How many characters fit in an expanding Tkinter label](https://stackoverflow.com/questions/52062162/python-tkinter-how-to-count-the-quantity-of-characters-can-be-shown-in-expandi/52066664#52066664)
--   [ZetCode: Tkinter layout management](http://zetcode.com/gui/tkinter/layout/)
+-   [ZetCode: Tkinter layout management](https://web.archive.org/web/20190415112347/http://zetcode.com/gui/tkinter/layout/)
 -   [Stack Overflow: Current widget size in Tkinter](https://stackoverflow.com/questions/3950687/how-to-find-out-the-current-widget-size-in-tkinter)
 -   [Stack Overflow: Interactively validating Entry content in Tkinter](https://stackoverflow.com/questions/4140437/interactively-validating-entry-widget-content-in-tkinter)
--   [effbot: The Tkinter Label widget](http://effbot.org/tkinterbook/label.htm)
+-   [effbot: The Tkinter Label widget](https://web.archive.org/web/20201112020335/http://effbot.org/tkinterbook/label.htm)
 -   [Reddit r/learnpython: Text that wraps automatically](https://www.reddit.com/r/learnpython/comments/6dndqz/how\_would\_you\_make\_text\_that\_automatically\_wraps/)
 -   [Stack Overflow: Tkinter Entry validation not working](https://stackoverflow.com/questions/25936958/tkinter-entry-validation-not-working)
--   [effbot: Tkinter variable classes](http://effbot.org/tkinterbook/variable.htm)
--   [NMT Tkinter reference: Entry validation](http://infohost.nmt.edu/tcc/help/pubs/tkinter/web/entry-validation.html)
+-   [effbot: Tkinter variable classes](https://web.archive.org/web/20230716211314/https://effbot.org/tkinterbook/variable.htm)
+-   [NMT Tkinter reference: Entry validation](https://tkdocs.com/shipman/entry-validation.html)
 -   [Stack Overflow: Tkinter Entry formatted for a date](https://stackoverflow.com/questions/13242970/tkinter-entry-box-formatted-for-date)
 -   [Stack Overflow: Three dots at the end of a Tkinter label](https://stackoverflow.com/questions/51143777/display-three-dots-in-the-end-of-a-tkinter-label-text)
 -   [Stack Overflow: bisect on a list of tuples by the first value](https://stackoverflow.com/questions/42146482/using-bisect-on-list-of-tuples-but-compare-using-first-value-only)
--   [effbot: Tkinter events and bindings](http://effbot.org/tkinterbook/tkinter-events-and-bindings.htm)
+-   [effbot: Tkinter events and bindings](https://web.archive.org/web/20230528034914/https://effbot.org/tkinterbook/tkinter-events-and-bindings.htm)
 -   [Stack Overflow: Measure the height of a string in Tkinter](https://stackoverflow.com/questions/48726956/measure-the-height-of-a-string-in-tkinter-python)
 -   [Stack Overflow: Invoke an event in the Tkinter main loop](https://stackoverflow.com/questions/270648/tkinter-invoke-event-in-main-loop)
 -   [Arrow: better dates & times for Python](https://arrow.readthedocs.io/en/latest/#arrow.arrow.Arrow)

@@ -3,10 +3,10 @@ title: "Movimiento punto a punto de un brazo robótico con control discreto"
 summary: "Algoritmos de aprendizaje para posicionar un brazo robótico con control discreto: ensayo y error en lugar de un modelo conocido."
 source: favorart/robot-hand@master:README.md
 source_lang: en
-source_hash: ad3388a2
-translated: 2026-11-14
+source_hash: 294e8654
+translated: 2026-11-21
 translator: Claude
-reviewed: 2026-11-14
+reviewed: 2026-11-21
 ---
 # Sistema de movimiento punto a punto para un robot con control discreto
 
@@ -297,8 +297,8 @@ Se quiere que la base de datos de un robot incluya la experiencia acumulada por 
 8. Никифоров С.О., Мархадаев Б.Е., Сумкин А.Г. - Экстремальные свойства стационарных движений двухшарнирного манипулятора // Изд. СО АН СССР, 1985. - №6. – Вып. .3. Сер. техн. наук,- 99 с.
 9. Физиология человека: Учебник / Под ред. Покровского В.М., Коротько Г.Ф. - 2-е изд., перераб. и доп. - М.:Медицина, 2003. – 656 с.. ил. – (Учеб.лит. Для студ. мед. вузов). — ISBN 5-225-04729-7.
 10. [Aproximación lineal - Wikipedia](https://es.wikipedia.org/wiki/Aproximación_lineal)
-11. [Ильва Эллнеби. Моторные движения](http://www.childneurologyinfo.com/sensory-text-breaking3.php){: hreflang=ru }
-12. [Тарабарин В.Б. Конспект лекций по курсу ТММ](http://www.tmm-umk.bmstu.ru/lectures){: hreflang=ru }
+11. [Ильва Эллнеби. Моторные движения](https://web.archive.org/web/20220924062125/http://www.childneurologyinfo.com/sensory-text-breaking3.php){: hreflang=ru }
+12. [Тарабарин В.Б. Конспект лекций по курсу ТММ](https://web.archive.org/web/20200225212503/http://tmm-umk.bmstu.ru/lectures/){: hreflang=ru }
 13. [Golikov K.A. - Learning algorithm of systems with discrete control](http://intsysjournal.ru/pdfs/23-1/Golikov.pdf){: hreflang=ru }
 14. [Golikov K.A. - Learning systems with descrete control](http://intsysjournal.ru/pdfs/22-4/Golikov.pdf){: hreflang=ru }
 
