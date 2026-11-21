@@ -60,6 +60,5 @@
 <circle cx="1085.0" cy="430.0" r="24" fill="none" stroke="#9aa3ae" stroke-width="4"/></g>
 <rect x="0" y="0" width="1200" height="630" fill="url(#fade)"/>
 <text x="72" y="360" font-family="'JetBrains Mono', Consolas, monospace" font-size="22" letter-spacing="2" fill="#6aaef0">OCHIQ KODGA HISSA · C++</text>
-<text x="72" y="440" font-family="'Source Serif 4', Georgia, serif" font-weight="600" font-size="44" fill="#e7e9ec">NeoML: ABBYYning mashinali oʻqitish</text>
-<text x="72" y="489" font-family="'Source Serif 4', Georgia, serif" font-weight="600" font-size="44" fill="#e7e9ec">freymvorkiga qoʻshgan hissam</text>
+<text x="72" y="440" font-family="'Source Serif 4', Georgia, serif" font-weight="600" font-size="52" fill="#e7e9ec">neoml</text>
 </svg>

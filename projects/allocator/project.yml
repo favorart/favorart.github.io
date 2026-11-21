@@ -1,4 +1,5 @@
 # Project page: shared data. The text is in <lang>.md next to this file, one per site language.
+name: allocator
 date: 2015-04-10
 date_label: "2015"
 cover: covers/allocator/cover-1.svg

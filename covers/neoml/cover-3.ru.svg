@@ -106,7 +106,5 @@
 <circle cx="1060.0" cy="470.0" r="24" fill="none" stroke="#ffffff" stroke-width="4"/>
 <rect x="60" y="60" width="1080" height="510" fill="none" stroke="#ffffff" stroke-opacity=".5" stroke-width="2"/>
 <text x="100" y="130" font-family="'JetBrains Mono', Consolas, monospace" font-size="22" letter-spacing="2" fill="#9fd0ff">ВКЛАД В ОТКРЫТЫЙ КОД · C++</text>
-<text x="100" y="205" font-family="'Source Serif 4', Georgia, serif" font-weight="600" font-size="46" fill="#ffffff">NeoML: мой вклад во</text>
-<text x="100" y="256" font-family="'Source Serif 4', Georgia, serif" font-weight="600" font-size="46" fill="#ffffff">фреймворк машинного</text>
-<text x="100" y="308" font-family="'Source Serif 4', Georgia, serif" font-weight="600" font-size="46" fill="#ffffff">обучения от ABBYY</text>
+<text x="100" y="205" font-family="'Source Serif 4', Georgia, serif" font-weight="600" font-size="46" fill="#ffffff">neoml</text>
 </svg>
