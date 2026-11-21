@@ -22,6 +22,7 @@ GitHub Actions (`.github/workflows/pages.yml`) on every push to `main`, daily, a
 | `tools/check_links.py` | checks the built site for broken links/images |
 | `tools/check_link_langs.py` | links in texts that lead to another language while the reader's exists (see Links) |
 | `tools/check_web_links.py` | requests every external link of the built site: 4xx/5xx, dead hosts, moved away |
+| `tools/check_text.py` | checks the text of the built pages: formulas left as TeX, citations [N] that are not links, unconverted Markdown |
 
 ## Build locally
 
@@ -31,6 +32,7 @@ python build.py            # -> _site/  (add --offline to skip fetching external
 python tools/check_links.py _site
 python tools/check_link_langs.py _site --wiki   # links lead to the reader's language
 python tools/check_web_links.py _site          # external links alive (slow, ~1 min)
+python tools/check_text.py _site
 python tools/layout_check.py _site --chrome   # layout in a browser: 5 languages × 375/768/1280 × light/dark
 python -m http.server -d _site 8000
 ```
