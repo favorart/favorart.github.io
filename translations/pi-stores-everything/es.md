@@ -3,10 +3,10 @@ title: "π lo guarda todo, así que no tuve que guardar π"
 summary: "La historia detectivesca de un sitio que encuentra cualquier fecha entre tres mil millones de cifras de π: cuántas cifras hacen falta para que aparezcan todas las fechas, por qué convertir un número grande en cadena en CPython se declaró una vulnerabilidad y cómo numpy recorrió 1700 millones de cifras en un minuto y medio."
 source: favorart/pi-birthday@main:article-2026.ru.md
 source_lang: ru
-source_hash: 38da8e4e
-translated: 2026-11-19
+source_hash: bfcf9dd2
+translated: 2026-11-21
 translator: Claude
-reviewed: 2026-11-19
+reviewed: 2026-11-21
 ---
 # π lo guarda todo, así que no tuve que guardar π
 
@@ -77,7 +77,7 @@ En la primera barra está más de la mitad de todas las fechas, 2,3 millones de 
 
 ## ¿Y cómo funciona esto?
 
-En 2018 mi programa (sin internet) necesitaba un archivo de texto de 3 GB: tres mil millones de cifras de π, un byte por cifra, calculadas «por si acaso», casi el doble de las necesarias. Y además una tabla «fecha → posición» de 3,65 millones de filas que Python tardaba ¡4 segundos en leer!
+En 2018 [mi programa](/es/writing/pi-birthday/) (sin internet) necesitaba un archivo de texto de 3 GB: tres mil millones de cifras de π, un byte por cifra, calculadas «por si acaso», casi el doble de las necesarias. Y además una tabla «fecha → posición» de 3,65 millones de filas que Python tardaba ¡4 segundos en leer!
 
 Ahora quise que los lectores de la nota pudieran hacer el mismo experimento por su cuenta y me propuse convertir aquel viejo programita en una página web en GitHub Pages. Solo que GitHub [no acepta archivos de más de 100 MB](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github){: hreflang=en }, y mi archivo era treinta veces más grande. Buscar una salida me entusiasmó tanto que de ahí salió una nota nueva. ¡Porque al final el sitio no necesitaba el archivo de cifras para nada! ¿Cómo pasó eso?
 
@@ -197,7 +197,7 @@ Por eso recurrí a [y-cruncher](http://www.numberworld.org/y-cruncher/){: hrefla
 
 ## 5. ¿Cómo encontrar 3,65 millones de fechas en 3000 millones de cifras?
 
-El programa de 2018 recorría π con una ventana de 8 cifras: en cada paso las juntaba en una cadena «DD.MM.AAAA» y la buscaba en un diccionario. Medí ese enfoque con 2 millones de cifras (ya en Python 3): 0,53 millones de cifras por segundo, unos 54 minutos para la pasada completa.
+[El programa de 2018](/es/writing/pi-birthday/) recorría π con una ventana de 8 cifras: en cada paso las juntaba en una cadena «DD.MM.AAAA» y la buscaba en un diccionario. Medí ese enfoque con 2 millones de cifras (ya en Python 3): 0,53 millones de cifras por segundo, unos 54 minutos para la pasada completa.
 
 Y Python 2.7 ponía lo suyo. El contador de posición al recorrer una cadena se guardaba ahí en un número de 32 bits —en Windows, incluso en la compilación de 64 bits—, y al llegar a los 2100 millones el programa se caía con el error «iter index too large». El archivo de cifras había que cortarlo en trozos de mil millones.
 

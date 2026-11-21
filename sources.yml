@@ -64,7 +64,7 @@ articles:
     summary:
       ru: "Детективная история сайта, который находит любую дату в трёх миллиардах знаков π: сколько знаков нужно, чтобы нашлись все даты, почему перевод большого числа в строку в CPython признали уязвимостью и как numpy прошёл 1,7 млрд цифр за полторы минуты."
       en: "The detective story behind a site that finds any date in three billion digits of π: how many digits it takes for every date to show up, why converting a big integer to a string in CPython became a vulnerability, and how numpy went through 1.7 billion digits in a minute and a half."
-    cover: covers/pi-birthday/cover-4.svg
+    cover: covers/pi-stores-everything/cover-5.svg
     demo_url: https://favorart.github.io/pi-birthday/
     translation_files: {en: article-2026.md}
     home: false

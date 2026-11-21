@@ -3,16 +3,18 @@ title: "Vaš rođendan u ciframa broja π"
 summary: "Mala GUI aplikacija u Python-u/Tkinter-u koja pronalazi vaš datum rođenja među 3 milijarde cifara broja π – kasnije prepravljena za veb."
 source: favorart/pi-birthday@main:article.md
 source_lang: en
-source_hash: 7eab787c
-translated: 2026-11-14
+source_hash: 219b2f17
+translated: 2026-11-21
 translator: Claude
-reviewed: 2026-11-14
+reviewed: 2026-11-21
 ---
 # Grafička aplikacija u Python-u
 
 **Srpski** · [English](article.md){: hreflang=en } · [Русский](article.ru.md){: hreflang=ru }
 
 _Članak iz 2018. o prvoj, desktop verziji (Python 2.7 + Tkinter), prvobitno napisan na ruskom. Originalna objava: [VK](https://vk.ru/@33453621-pi-gui-python){: hreflang=ru }. Ceo kod: [legacy/pi.py](legacy/pi.py); da biste ga danas pokrenuli, koristite [legacy/run.sh](legacy/run.sh)._
+
+_Nastavak iz 2026. – veb verzija koja ne čuva nijednu cifru broja π: [π čuva sve, pa ja nisam morao da čuvam π](/sr/writing/pi-stores-everything/)._
 
 S vremena na vreme treba da napišem neku malu aplikaciju sa prozorima. Aplikacije obično pišem u C++-u. Nekada sam umesto Qt-a naučio Windows API, jer su moji prozori uvek bili za Windows, a smatram da je nativni interfejs uvek najbolji. Želim da sve izgleda prirodno. WinAPI omogućava da uradiš sve što Windows može, ali mnogo toga mora da se piše ručno, a uvek treba nekih ukrasa i dodataka.
 
@@ -860,6 +862,10 @@ pyinstaller --onefile pi.py --noconsole
 ```
 
 noconsole – Tk se pokreće iz konzole, pa se pre forme pojavljuje terminal; ne treba nam, a ova opcija ga uklanja.
+
+### Osam godina kasnije
+
+Godine 2026. program se preselio u pregledač, a ispostavilo se da sajtu fajl od 3 GB sa ciframa broja π uopšte nije potreban. Kako je do toga došlo, pišem u novom zapisu: [π čuva sve, pa ja nisam morao da čuvam π](/sr/writing/pi-stores-everything/).
 
 ### Reference
 

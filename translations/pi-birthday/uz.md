@@ -3,16 +3,18 @@ title: "Tugʻilgan kuningiz π raqamlari ichida"
 summary: "Tugʻilgan sanangizni π sonining 3 milliard raqami orasidan topadigan Python/Tkinterdagi kichik GUI-ilova — keyinchalik veb uchun qayta yaratilgan."
 source: favorart/pi-birthday@main:article.md
 source_lang: en
-source_hash: 7eab787c
-translated: 2026-11-14
+source_hash: 219b2f17
+translated: 2026-11-21
 translator: Claude
-reviewed: 2026-11-14
+reviewed: 2026-11-21
 ---
 # Pythonda GUI-ilova
 
-**English** · [Русский](article.ru.md){: hreflang=ru }
+**Oʻzbekcha** · [English](article.md){: hreflang=en } · [Русский](article.ru.md){: hreflang=ru }
 
-_Birinchi, desktop versiyasi (Python 2.7 + Tkinter) haqidagi 2018-yilgi maqola, rus tilidan tarjima. Asl nashr: [VK](https://vk.ru/@33453621-pi-gui-python){: hreflang=ru }. Toʻliq kod: [legacy/pi.py](legacy/pi.py); uni bugun ishga tushirish uchun [legacy/run.sh](legacy/run.sh)dan foydalaning._
+_Birinchi, desktop versiyasi (Python 2.7 + Tkinter) haqidagi 2018-yilgi qayd, rus tilidan tarjima. Asl nashr: [VK](https://vk.ru/@33453621-pi-gui-python){: hreflang=ru }. Toʻliq kod: [legacy/pi.py](legacy/pi.py); uni bugun ishga tushirish uchun [legacy/run.sh](legacy/run.sh)dan foydalaning._
+
+_2026-yilgi davomi — π sonining birorta ham raqamini saqlamaydigan veb-versiya: [π hamma narsani saqlaydi, shuning uchun men π sonini saqlamasam ham boʻldi](/uz/writing/pi-stores-everything/)._
 
 Vaqti-vaqti bilan menga kichik oynali ilova yozish kerak boʻlib qoladi. Odatda ilovalarni C++da yozaman. Bir paytlar Qt oʻrniga Windows APIni oʻrgangandim, chunki oynalarim doim Windows uchun boʻlardi, va men nativ interfeys har doim eng yaxshisi deb hisoblayman. Hammasi organik koʻrinishini xohlayman. WinAPI Windows qila oladigan hamma narsani qilishga imkon beradi, lekin koʻp narsani qoʻlda yozishga toʻgʻri keladi, qandaydir qoʻngʻiroqchalar va hushtakchalar esa doim kerak boʻladi.
 
@@ -860,6 +862,10 @@ pyinstaller --onefile pi.py --noconsole
 ```
 
 noconsole — Tk konsoldan ishga tushiriladi, shuning uchun formadan oldin terminal paydo boʻladi; u bizga kerak emas va bu bayroq uni olib tashlaydi.
+
+### Sakkiz yildan keyin
+
+2026-yilda dastur brauzerga koʻchdi va sayt uchun π raqamlari yozilgan 3 GBlik fayl umuman kerak emasligi maʼlum boʻldi. Bu qanday sodir boʻlgani — yangi qaydda: [π hamma narsani saqlaydi, shuning uchun men π sonini saqlamasam ham boʻldi](/uz/writing/pi-stores-everything/).
 
 ### Havolalar
 
