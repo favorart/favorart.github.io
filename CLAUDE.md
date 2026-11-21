@@ -24,6 +24,31 @@
   every translation.
 - Pushing to an external source repo (pi-birthday, IPL, robot-hand…) only after showing the author the edits.
 
+## Layout and design decisions
+
+The author chose these; keep them unless asked. General layout rules are in the `web-layout-review` skill.
+
+- After any layout change run `tools/layout_check.py` and `tools/check_text.py` over all pages and languages.
+  Touch targets get `min-width`/`min-height` with a margin: CI fonts on Linux differ (a crumb came out 39 px).
+- On phones buttons are full width and the same everywhere; mobile overrides are scoped by their container
+  (`.hero .links`, not `.links`, which also breaks the CV publication links).
+- Navigation: on the home page the menu scrolls to its sections (including "About") and highlights the current
+  one; inner pages have a section bar with breadcrumbs and ← → to the neighbouring items.
+- Covers: frost over the whole cover except a clear corner (`--cover-peek-*`, `--fx-mask` in `site.css`); it
+  thaws on hover, and on touch screens the card in the middle of the screen thaws. The glint (`.gl`, same mask)
+  runs only over the frost, by WAAPI every 2.5 s on `max(1, floor(visible / 4))` cards, and ignores reduced
+  motion on purpose.
+- "About" stats: a big number and one short caption, no second line; buttons go under the stats below 1100 px;
+  profile icons are 56 px tiles.
+- Teasers (`content/teasers.yml`): ≤ 140 characters (the build fails), no word stem shared with the title or the
+  text on the cover, no announcing and no answer; cards clamp them to 3 lines.
+- Article page: a subtitle equal to the title is not shown; the type chip is not repeated in "type · tag".
+- Formulas: KaTeX, loaded only on pages that have them; its `\tag` labels must not get the `.tag` chip style.
+- Diagrams are ```mermaid blocks, drawn by the site in the theme's colours; a PNG only for LinkedIn.
+- Articles contain no code listings or commands: the mechanism in words, the code in its repo.
+- Papers: «PDF →» (publisher) and «Копия PDF» buttons, both kept for good (no CI switching between them), an
+  ISTINA record link for every paper, no text transcriptions; the CV lists journal papers only.
+
 ## Every commit that adds or changes a post or an article
 
 Articles, posts and paper abstracts (Writing) are translated into every site language other than their own;
