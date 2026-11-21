@@ -382,7 +382,7 @@ section.cv { padding-top: 0; }
 .pubs { margin: 0; padding-left: 22px; display: grid; gap: 18px; }
 .pubs p { margin: 0; }
 .pubs .en { color: var(--muted); font-size: 14.5px; margin-top: 4px; }
-.pubs .links { margin-top: 6px; font-size: 14px; }
+.pubs .links { margin-top: 6px; font-size: 14px; align-items: center; gap: 2px 6px; }
 .focus { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 16px; }
 .panel { border-radius: 26px; padding: 26px 28px; margin-top: 16px; }
 .ptitle { margin: 0 0 18px; font: 500 12px/1 "JetBrains Mono", monospace; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; }
@@ -504,8 +504,8 @@ footer .copy { flex-basis: 100%; margin: 0; display: grid; gap: 2px; font-size: 
   .langdd { display: block; }
   .who { min-height: 44px; }
   .theme { width: 44px; height: 44px; }
-  .links .btn, p.all .btn, .contact .actions .btn, .cv-preview > .btn, .foot-actions .btn { width: 100%; justify-content: center; min-height: 48px; }
-  .links { flex-direction: column; }
+  .hero .links .btn, p.all .btn, .contact .actions .btn, .cv-preview > .btn, .foot-actions .btn { width: 100%; justify-content: center; min-height: 48px; }
+  .hero .links { flex-direction: column; }
   .contact .actions { flex-direction: column; align-items: stretch; }
   .pubs .links a { display: inline-flex; align-items: center; min-height: 40px; padding: 0 6px; }
   footer > span a { display: inline-flex; align-items: center; min-height: 40px; padding: 0 4px; }

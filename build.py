@@ -199,6 +199,9 @@ LIST_RE = re.compile(r"^(\s*)([-*+]|\d+[.)])\s+\S")
 FENCE_RE = re.compile(r"^\s*(```|~~~)")
 
 
+STRIKE_RE = re.compile(r"(?<!~)~~(?=\S)(.+?)(?<=\S)~~(?!~)")
+
+
 def gfm_fixups(md_text):
     """Bridge GitHub-flavoured Markdown habits that Python-Markdown does not accept:
     lists/tables/fences right after a paragraph (no blank line), 2-space nested lists."""
@@ -218,6 +221,12 @@ def gfm_fixups(md_text):
                     out.append("")
             elif line.startswith("|") and prev.strip() and not prev.startswith("|"):
                 out.append("")
+            # a hard line break written as a trailing backslash (Pandoc/CommonMark) -> two trailing spaces
+            if line.endswith("\\") and not line.endswith("\\\\"):
+                line = line[:-1].rstrip() + "  "
+            # ~~strikethrough~~ (GFM), outside inline code
+            if "~~" in line and "`" not in line:
+                line = STRIKE_RE.sub(lambda m: "<del>%s</del>" % m.group(1), line)
         out.append(line)
         prev = line
     return "\n".join(out)
@@ -1012,8 +1021,14 @@ def article_page(item, t):
             body_md = body_md[m.end():]
         content = tr_note(item, tr, t) + tr_body_html(item, dict(tr, body=body_md))
     kind = kind_of(item, t)
-    if item["section"] == "writing" and kind == S(t, "type_" + item["wtype"]):
-        kind = ""  # the type chip already says it ("Note" chip + "NOTE" label read as a stutter)
+    if item["section"] == "writing":  # the type chip already says it ("Note" chip + "NOTE" label read as a stutter)
+        chip = S(t, "type_" + item["wtype"])
+        if kind == chip:
+            kind = ""
+        elif kind.startswith(chip + " · "):
+            kind = kind[len(chip) + 3:]
+    if subtitle and re.sub(r"<[^>]+>|\W", "", html.unescape(subtitle)).lower() == re.sub(r"\W", "", title).lower():
+        subtitle = ""  # the text's own H1 equal to the title would print the same line twice
     body = tpl("article", hero=hero, kind=kind, sep='<span class="sep"> · </span>' if kind else "", date=date_text(item, t), views=views_tag(item, t), lang=esc(text_lang_),
                title=esc(title), title_lang=esc(title_lang),
                subtitle=subtitle, author=S(t, "author"), source_top=" · " + source_top if source_top else "",
