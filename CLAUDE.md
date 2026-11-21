@@ -33,7 +33,7 @@ history is git's job. Before committing such a change:
    (accuracy, omissions, grammar, glossary terms, typography, Markdown intact), fixes clear errors and only then
    sets `reviewed: <date>`. Unreviewed files are never published.
 4. `python build.py` (must print `0 outdated, 0 missing` unless the author agreed otherwise) and
-   `python tools/check_links.py _site`.
+   `python tools/check_links.py _site` and `python tools/check_text.py _site`.
 5. Commit the original change and its translations **in the same commit**.
 
 Papers: one abstract per page, in the page's language. The file body is the abstract, plus `keywords` in front

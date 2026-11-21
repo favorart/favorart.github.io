@@ -658,3 +658,16 @@ h1, h2, h3 { overflow-wrap: break-word; -webkit-hyphens: auto; hyphens: auto; hy
 :root[data-theme="dark"] .post .gl { opacity: .75; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .post .gl { opacity: .75; } }
 .post:hover .gl, .post:focus-within .gl, .post.thaw .gl, .fx-grid.on .post .gl { opacity: 0; }
+
+/* TeX formulas: KaTeX draws them (templates/base.html); before that, the source shows as code */
+.prose .math-block { text-align: center; overflow-x: auto; }
+.prose .math-rendered.math-display { display: block; overflow-x: auto; overflow-y: hidden; }
+.prose .katex { font-size: 1.08em; }
+
+/* citations [N] / {N} lead to their item in the reference list, which stays clear of the sticky header */
+.prose a.cite { text-decoration: none; white-space: nowrap; }
+.prose a.cite:hover { text-decoration: underline; }
+.prose [id^="ref-"], .prose [id^="src-"] { scroll-margin-top: 5rem; }
+.prose [id^="ref-"]:target, .prose [id^="src-"]:target { background: var(--th); border-radius: 6px; }
+/* KaTeX numbers equations with .tag: not the site's tag chip */
+.prose .katex .tag { vertical-align: baseline; font: inherit; color: inherit; background: none; border-radius: 0; padding: 0; margin: 0; }
