@@ -3,10 +3,10 @@ title: "π hamma narsani saqlaydi, shuning uchun men π sonini saqlamasam ham bo
 summary: "π sonining uch milliard raqami ichidan istalgan sanani topadigan sayt ortidagi detektiv hikoya: har bir sana chiqishi uchun nechta raqam kerak, nega CPythonda katta butun sonni satrga aylantirish zaiflikka aylandi va numpy 1,7 milliard raqamni bir yarim daqiqada qanday bosib oʻtdi."
 source: favorart/pi-birthday@main:article-2026.ru.md
 source_lang: ru
-source_hash: 38da8e4e
-translated: 2026-11-19
+source_hash: bfcf9dd2
+translated: 2026-11-21
 translator: Claude
-reviewed: 2026-11-19
+reviewed: 2026-11-21
 ---
 # π hamma narsani saqlaydi, shuning uchun men π sonini saqlamasam ham boʻldi
 
@@ -27,7 +27,7 @@ _Va π sonining birorta ham raqamini saqlamay turib, tugʻilgan kuningizni qanda
 
 Matematiklar π [normal son](https://en.wikipedia.org/wiki/Normal_number){: hreflang=en } ekaniga ishonishadi. Bu shuni anglatadiki, uning yozuvida har bir raqam oʻn holatdan birida, har bir raqamlar juftligi yuztadan birida, har bir sakkiz raqamli ketma-ketlik yuz milliontadan birida uchraydi. Goʻyo π sonining raqamlarini kimdir halol oʻn qirrali zarni tashlab chiqargandek!
 
-Agar shunday boʻlsa, π sonida istalgan chekli raqamlar ketma-ketligi yozilgan. Telefon raqamingiz. Kredit kartangiz raqami. Shu maqolaning matni istalgan kodlashda. Borxesning haqiqiy [Bobil kutubxonasi](https://en.wikipedia.org/wiki/The_Library_of_Babel){: hreflang=en }, faqat u cheksiz.
+Agar shunday boʻlsa, π sonida istalgan chekli raqamlar ketma-ketligi yozilgan. Telefon raqamingiz. Kredit kartangiz raqami. Shu qaydning matni istalgan kodlashda. Borxesning haqiqiy [Bobil kutubxonasi](https://en.wikipedia.org/wiki/The_Library_of_Babel){: hreflang=en }, faqat u cheksiz.
 
 Lekin π sonining normalligi hozircha faqat gipoteza. Trillionlab raqamlar ustidagi tekshiruvlar unga mos keladi, ammo isbot yoʻq. Hatto 7 raqami π sonida cheksiz koʻp marta uchrashi ham isbotlanmagan!
 
@@ -77,9 +77,9 @@ Birinchi ustunda barcha sanalarning yarmidan koʻpi bor — 3,65 mln dan 2,3 mln
 
 ## Bu qanday ishlaydi?
 
-2018-yilda mening dasturimga (internetsiz) 3 GB lik matn fayli kerak edi: π sonining uch milliard belgisi, har bir raqamga bir bayt, «ehtiyot shart» hisoblangan — keragidan deyarli ikki baravar koʻp. Yana 3,65 mln qatorli «sana → oʻrin» jadvali ham bor edi, uni Python 4 soniyada oʻqib chiqardi!
+2018-yilda [mening dasturimga](/uz/writing/pi-birthday/) (internetsiz) 3 GB lik matn fayli kerak edi: π sonining uch milliard belgisi, har bir raqamga bir bayt, «ehtiyot shart» hisoblangan — keragidan deyarli ikki baravar koʻp. Yana 3,65 mln qatorli «sana → oʻrin» jadvali ham bor edi, uni Python 4 soniyada oʻqib chiqardi!
 
-Bugun maqola oʻquvchilari xuddi shu tajribani oʻzlari oʻtkaza olishini xohladim va eski dasturchani GitHub Pagesdagi veb-shaklga oʻtkazishga kirishdim. Biroq GitHub [100 MB dan katta fayllarni qabul qilmaydi](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github){: hreflang=en }, mening faylim esa oʻttiz baravar katta. Chiqish yoʻlini izlash meni shunchalik qiziqtirib qoʻydiki, undan yangi maqola oʻsib chiqdi. Axir saytga raqamlar fayli umuman kerak emas ekan! Bu qanday boʻldi?
+Bugun qayd oʻquvchilari xuddi shu tajribani oʻzlari oʻtkaza olishini xohladim va eski dasturchani GitHub Pagesdagi veb-shaklga oʻtkazishga kirishdim. Biroq GitHub [100 MB dan katta fayllarni qabul qilmaydi](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github){: hreflang=en }, mening faylim esa oʻttiz baravar katta. Chiqish yoʻlini izlash meni shunchalik qiziqtirib qoʻydiki, undan yangi qayd oʻsib chiqdi. Axir saytga raqamlar fayli umuman kerak emas ekan! Bu qanday boʻldi?
 
 ## 1. Balki π sonini siqish mumkindir?
 
@@ -197,7 +197,7 @@ Shuning uchun π boʻyicha jahon rekordlari oʻrnatiladigan dastur — [y-crunch
 
 ## 5. 3 mlrd raqam ichidan 3,65 mln sanani qanday topish mumkin?
 
-2018-yilgi dastur π boʻylab 8 raqamli oyna bilan yurardi: har qadamda ulardan «KK.OO.YYYY» satrini yopishtirib, uni lugʻatdan qidirardi. Bu yondashuvni 2 mln raqamda oʻlchab koʻrdim (endi Python 3da): soniyasiga 0,53 mln raqam, butun oʻtish uchun — taxminan 54 daqiqa.
+[2018-yilgi dastur](/uz/writing/pi-birthday/) π boʻylab 8 raqamli oyna bilan yurardi: har qadamda ulardan «KK.OO.YYYY» satrini yopishtirib, uni lugʻatdan qidirardi. Bu yondashuvni 2 mln raqamda oʻlchab koʻrdim (endi Python 3da): soniyasiga 0,53 mln raqam, butun oʻtish uchun — taxminan 54 daqiqa.
 
 Python 2.7 esa oʻzinikini qoʻshardi. U yerda satr boʻylab yurishdagi oʻrin hisoblagichi 32 bitli sonda saqlanardi — Windowsda hatto 64 bitli yigʻmada ham, — va 2,1 mlrd belgiga yetganda dastur «iter index too large» xatosi bilan qulab tushardi. Raqamlar faylini milliardtalik boʻlaklarga kesishga toʻgʻri kelardi.
 
@@ -224,7 +224,7 @@ Barcha 3 652 059 ta sana topildi. Va π oʻzini tasodifiy raqamlar nazariyasi ba
 | Eng kech sana | ~1 568 800 000 | 1 669 501 859 |
 | Eng erta sana | ~27 | 63 |
 
-Maqola boshidagi bashorat eng kech sana boʻyicha 6 % ga adashdi, lekin bunday rekordning tarqoqligi taxminan 130 mln belgi (π/√6 · 10⁸: π bu yerga ham suqilib kirib olgan), shuning uchun 100 mln ga adashish — meʼyor doirasida. Asrlar boʻyicha oʻrtacha oʻrinlar 98,0–101,6 mln yoʻlagida yotadi: π hech bir davrni na yaxshi koʻradi, na xafa qiladi.
+Qayd boshidagi bashorat eng kech sana boʻyicha 6 % ga adashdi, lekin bunday rekordning tarqoqligi taxminan 130 mln belgi (π/√6 · 10⁸: π bu yerga ham suqilib kirib olgan), shuning uchun 100 mln ga adashish — meʼyor doirasida. Asrlar boʻyicha oʻrtacha oʻrinlar 98,0–101,6 mln yoʻlagida yotadi: π hech bir davrni na yaxshi koʻradi, na xafa qiladi.
 
 Bir oz rekordlar va qiziq holatlar:
 

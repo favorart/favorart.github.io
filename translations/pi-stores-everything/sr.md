@@ -3,10 +3,10 @@ title: "π čuva sve, pa ja nisam morao da čuvam π"
 summary: "Detektivska priča o sajtu koji nalazi bilo koji datum u tri milijarde cifara broja π: koliko cifara treba da bi se pojavio svaki datum, zašto je pretvaranje velikog broja u string u CPython-u postalo ranjivost i kako je numpy prešao 1,7 milijardi cifara za minut i po."
 source: favorart/pi-birthday@main:article-2026.ru.md
 source_lang: ru
-source_hash: 38da8e4e
-translated: 2026-11-19
+source_hash: bfcf9dd2
+translated: 2026-11-21
 translator: Claude
-reviewed: 2026-11-19
+reviewed: 2026-11-21
 ---
 # π čuva sve, pa ja nisam morao da čuvam π
 
@@ -77,7 +77,7 @@ U prvom stupcu je više od polovine svih datuma, 2,3 miliona od 3,65, a svaki sl
 
 ## A kako to radi?
 
-Godine 2018. mom programu (bez interneta) bio je potreban tekstualni fajl od 3 GB: tri milijarde cifara broja π, po bajt za cifru, izračunatih „za svaki slučaj“, skoro duplo više nego što treba. I još tabela „datum → pozicija“ sa 3,65 miliona redova, koju je Python parsirao 4 sekunde!
+Godine 2018. [mom programu](/sr/writing/pi-birthday/) (bez interneta) bio je potreban tekstualni fajl od 3 GB: tri milijarde cifara broja π, po bajt za cifru, izračunatih „za svaki slučaj“, skoro duplo više nego što treba. I još tabela „datum → pozicija“ sa 3,65 miliona redova, koju je Python parsirao 4 sekunde!
 
 Danas sam poželeo da čitaoci ovog zapisa mogu sami da izvedu isti eksperiment, pa sam se prihvatio da stari programčić pretvorim u veb-formu na GitHub Pages. Samo što GitHub [ne prima fajlove veće od 100 MB](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github){: hreflang=en }, a moj fajl je trideset puta veći. Traženje izlaza me je toliko zaokupilo da je iz njega izrastao novi zapis. Jer sajtu fajl s ciframa uopšte nije bio potreban! Kako je to ispalo?
 
@@ -197,7 +197,7 @@ Zato sam uzeo [y-cruncher](http://www.numberworld.org/y-cruncher/){: hreflang=en
 
 ## 5. Kako naći 3,65 miliona datuma u 3 milijarde cifara?
 
-Program iz 2018. išao je kroz π prozorom od 8 cifara: na svakom koraku lepio je od njih string „DD.MM.GGGG“ i tražio ga u rečniku. Izmerio sam taj pristup na 2 miliona cifara (već na Python-u 3): 0,53 miliona cifara u sekundi, za ceo prolaz oko 54 minuta.
+[Program iz 2018.](/sr/writing/pi-birthday/) išao je kroz π prozorom od 8 cifara: na svakom koraku lepio je od njih string „DD.MM.GGGG“ i tražio ga u rečniku. Izmerio sam taj pristup na 2 miliona cifara (već na Python-u 3): 0,53 miliona cifara u sekundi, za ceo prolaz oko 54 minuta.
 
 A Python 2.7 je dodavao svoje. Brojač pozicije pri prolasku kroz string čuvao se tamo u 32-bitnom broju (na Windows-u čak i u 64-bitnoj verziji), i na oznaci od 2,1 milijarde program je padao sa greškom „iter index too large“. Fajl s ciframa morao je da se seče na komade od po milijardu.
 
