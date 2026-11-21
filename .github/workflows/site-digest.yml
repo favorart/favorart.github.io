@@ -1,0 +1,81 @@
+name: Weekly "what's new" digest
+
+# Every Sunday: what changed on the site's Russian pages over the week (new pages, edited paragraphs
+# "было -> стало", removed ones), e-mailed through Web3Forms to the contact form's inbox, ready to forward.
+# Last week's text is the snapshot artifact of the previous scheduled run; without one (first run, or a manual
+# run) the site is built from the commit N days ago. Note: a build of an old commit reads the external
+# article repos as they are now, so their changes show only when last week's snapshot exists.
+# Secret: CONTACT_FORM_KEY (the contact form's Web3Forms key, already used by pages.yml).
+
+on:
+  schedule:
+    - cron: "0 11 * * 0"   # Sunday 11:00 UTC (12:00 in Spain in winter, 13:00 in summer)
+  workflow_dispatch:
+    inputs:
+      days:
+        description: "Compare with the site N days ago"
+        default: "7"
+      send:
+        description: "E-mail it (otherwise only print it in the log)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  actions: read   # to download the previous run's snapshot
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      DAYS: ${{ inputs.days || '7' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+
+      - name: This week's site
+        run: |
+          python build.py --out "$RUNNER_TEMP/new_site"
+          python tools/site_digest.py snapshot "$RUNNER_TEMP/new_site" "$RUNNER_TEMP/new.json"
+
+      - name: Last week's site
+        run: |
+          mkdir -p "$RUNNER_TEMP/prev"
+          if [ "${{ github.event_name }}" = schedule ]; then
+            id=$(gh run list --workflow site-digest.yml --event schedule --status success -L 1 \
+                   --json databaseId -q '.[0].databaseId')
+            if [ -n "$id" ] && gh run download "$id" -n site-digest-snapshot -D "$RUNNER_TEMP/prev"; then
+              cp "$RUNNER_TEMP/prev/new.json" "$RUNNER_TEMP/old.json"
+              echo "previous snapshot: run $id"
+              exit 0
+            fi
+          fi
+          base=$(git rev-list -1 --first-parent --before="$DAYS days ago" HEAD)
+          if [ -z "$base" ]; then echo '{}' > "$RUNNER_TEMP/old.json"; exit 0; fi
+          echo "building the site at $base ($DAYS days ago)"
+          git worktree add -q "$RUNNER_TEMP/old" "$base"
+          (cd "$RUNNER_TEMP/old" && python build.py --out "$RUNNER_TEMP/old_site")
+          python tools/site_digest.py snapshot "$RUNNER_TEMP/old_site" "$RUNNER_TEMP/old.json"
+
+      - name: Digest
+        env:
+          CONTACT_FORM_KEY: ${{ secrets.CONTACT_FORM_KEY }}
+        run: |
+          send=""
+          if [ "${{ github.event_name }}" = schedule ] || [ "${{ inputs.send }}" = true ]; then send=--send; fi
+          python tools/site_digest.py diff "$RUNNER_TEMP/old.json" "$RUNNER_TEMP/new.json" $send
+
+      - name: Keep this week's text for next Sunday
+        if: github.event_name == 'schedule'
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-digest-snapshot
+          path: ${{ runner.temp }}/new.json
+          retention-days: 30

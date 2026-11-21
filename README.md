@@ -177,3 +177,10 @@ Weekly report: `.github/workflows/weekly-report.yml` runs `tools/weekly_report.p
 e-mails the past week's stats through Web3Forms to the contact form's inbox (not published anywhere: the repo
 and its Actions logs are public). Secrets: `GOATCOUNTER_API_TOKEN` (GoatCounter -> your name in the top menu ->
 API -> only "Read statistics", only this site) and `CONTACT_FORM_KEY`.
+
+"What's new" digest: `.github/workflows/site-digest.yml` runs every Sunday and e-mails (same Web3Forms channel)
+what changed on the Russian pages over the week, in plain words for readers: new pages with their summary and
+link, edited paragraphs as "Было / Стало", removed ones (`tools/site_digest.py`; no commits, no code, page
+chrome skipped). Last week's text is the previous scheduled run's artifact. Try it by hand: Actions -> the
+workflow -> Run workflow (`days`, `send` off prints the digest in the log instead of e-mailing it), or locally
+`python tools/site_digest.py snapshot <site> old.json` for two builds, then `diff old.json new.json`.
