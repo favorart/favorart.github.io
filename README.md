@@ -20,6 +20,7 @@ GitHub Actions (`.github/workflows/pages.yml`) on every push to `main`, daily, a
 | `covers/<slug>/` | cover options for external content; chooser page: `/writing/covers/` |
 | `tools/make_covers.py` | generates 3 SVG cover options |
 | `tools/check_links.py` | checks the built site for broken links/images |
+| `tools/check_text.py` | checks the text of the built pages: formulas left as TeX, citations [N] that are not links, unconverted Markdown |
 
 ## Build locally
 
@@ -27,6 +28,7 @@ GitHub Actions (`.github/workflows/pages.yml`) on every push to `main`, daily, a
 pip install -r requirements.txt
 python build.py            # -> _site/  (add --offline to skip fetching external repos)
 python tools/check_links.py _site
+python tools/check_text.py _site
 python tools/layout_check.py _site --chrome   # layout in a browser: 5 languages × 375/768/1280 × light/dark
 python -m http.server -d _site 8000
 ```

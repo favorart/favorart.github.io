@@ -197,6 +197,23 @@ $body
   })();
 </script>
 <script type="module">
+  // TeX formulas (dollar-delimited in the source, <code class="math"> in the page): KaTeX only where there are any
+  const formulas = document.querySelectorAll('code.math');
+  if (formulas.length) {
+    const css = document.createElement('link');
+    css.rel = 'stylesheet';
+    css.href = 'https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css';
+    document.head.appendChild(css);
+    const { default: katex } = await import('https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.mjs');
+    formulas.forEach(el => {
+      const span = document.createElement('span');
+      span.className = 'math-rendered' + (el.classList.contains('math-display') ? ' math-display' : '');
+      katex.render(el.textContent, span, { displayMode: el.classList.contains('math-display'), throwOnError: false });
+      el.replaceWith(span);
+    });
+  }
+</script>
+<script type="module">
   // diagrams from ```mermaid blocks: load mermaid.js only on pages that have them; colours follow the site theme
   const blocks = document.querySelectorAll('pre.mermaid');
   if (blocks.length) {

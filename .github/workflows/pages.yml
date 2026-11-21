@@ -32,6 +32,7 @@ jobs:
           # (it is public in the built page by design: it only routes mail, the address stays hidden)
           CONTACT_FORM_KEY: ${{ secrets.CONTACT_FORM_KEY }}
       - run: python tools/check_links.py _site
+      - run: python tools/check_text.py _site  # formulas, citations, unconverted Markdown
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
