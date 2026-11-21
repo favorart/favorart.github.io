@@ -3,16 +3,18 @@ title: "Tu cumpleaños en las cifras de π"
 summary: "Una pequeña aplicación gráfica en Python/Tkinter que encuentra tu fecha de nacimiento entre 3000 millones de cifras de π, luego rehecha para la web."
 source: favorart/pi-birthday@main:article.md
 source_lang: en
-source_hash: 7eab787c
-translated: 2026-11-14
+source_hash: 219b2f17
+translated: 2026-11-21
 translator: Claude
-reviewed: 2026-11-14
+reviewed: 2026-11-21
 ---
 # Una aplicación gráfica en Python
 
-**Español** · [Русский](article.ru.md){: hreflang=ru }
+**Español** · [English](article.md){: hreflang=en } · [Русский](article.ru.md){: hreflang=ru }
 
 _Artículo de 2018 sobre la primera versión, de escritorio (Python 2.7 + Tkinter), traducido del ruso. Publicación original: [VK](https://vk.ru/@33453621-pi-gui-python){: hreflang=ru }. Código completo: [legacy/pi.py](legacy/pi.py); para ejecutarlo hoy, usen [legacy/run.sh](legacy/run.sh)._
+
+_La continuación de 2026, una versión web que no guarda ni una cifra de π: [π lo guarda todo, así que no tuve que guardar π](/es/writing/pi-stores-everything/)._
 
 De vez en cuando me toca escribir una pequeña aplicación con ventanas. Normalmente escribo aplicaciones en C++. En su día, en lugar de Qt aprendí la API de Windows, porque mis ventanas siempre eran para Windows, y creo que la interfaz nativa siempre es la mejor. Quiero que todo se vea orgánico. WinAPI permite hacer todo lo que puede hacer Windows, pero hay mucho que escribir a mano, y siempre hacen falta algunos adornos.
 
@@ -860,6 +862,10 @@ pyinstaller --onefile pi.py --noconsole
 ```
 
 noconsole: Tk se lanza desde una consola, así que antes del formulario aparece una terminal; no la necesitamos, y esta opción la quita.
+
+### Ocho años después
+
+En 2026 el programa se mudó al navegador, y resultó que el sitio no necesitaba para nada el archivo de 3 GB con las cifras de π. Cómo pasó, lo cuento en la nueva nota: [π lo guarda todo, así que no tuve que guardar π](/es/writing/pi-stores-everything/).
 
 ### Referencias
 
