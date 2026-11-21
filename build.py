@@ -242,6 +242,131 @@ def mermaid_blocks(text):
     return MERMAID_RE.sub(lambda m: '\n<pre class="mermaid">%s</pre>\n' % html.escape(m.group(1), quote=False), text)
 
 
+# TeX formulas: $$...$$ (display) and $...$ (inline), outside code. The source $ must hug the formula
+# ($x$, not "$5 and $10"), so prices stay text. They become <code class="math">, which the Markdown
+# converter, the typography pass and the link passes leave alone; KaTeX draws them in the browser
+# (templates/base.html), and without JS the reader still sees the TeX source.
+MATH_DISPLAY_RE = re.compile(r"\$\$(.+?)\$\$", re.S)
+MATH_INLINE_RE = re.compile(r"(?<![\\$\w])\$(?=[^\s$])([^$\n]*?[^\s$\\])\$(?![\w$])")
+CODE_SPAN_RE = re.compile(r"(`+).+?\1", re.S)
+
+
+def math_spans(text):
+    """Swap formulas for placeholders before Markdown (so _, *, ^ and backslashes inside stay as written)."""
+    found = []
+
+    def formulas(part):  # \$ is a literal dollar sign
+        return MATH_INLINE_RE.sub(keep(False), MATH_DISPLAY_RE.sub(keep(True), part)).replace("\\$", "$")
+
+    def keep(display):
+        def sub(m):
+            found.append((display, m.group(1).strip()))
+            return "MATHPH%dX" % (len(found) - 1)
+        return sub
+
+    out, in_fence = [], False
+    for chunk in re.split(r"(^[ \t]*(?:```|~~~).*$)", text, flags=re.M):
+        if FENCE_RE.match(chunk) and "\n" not in chunk:
+            in_fence = not in_fence
+        elif not in_fence:
+            pieces, pos = [], 0
+            for m in CODE_SPAN_RE.finditer(chunk):  # inline code keeps its $
+                part = chunk[pos:m.start()]
+                pieces += [formulas(part), m.group(0)]
+                pos = m.end()
+            pieces.append(formulas(chunk[pos:]))
+            chunk = "".join(pieces)
+        out.append(chunk)
+    return "".join(out), found
+
+
+def math_restore(html_text, found):
+    def tag(i):
+        display, tex = found[i]
+        return '<code class="math%s">%s</code>' % (" math-display" if display else "", html.escape(tex, quote=False))
+    # a display formula alone in a paragraph is a block of its own
+    html_text = re.sub(r"<p>\s*MATHPH(\d+)X\s*</p>",
+                       lambda m: '<p class="math-block">%s</p>' % tag(int(m.group(1))), html_text)
+    return re.sub(r"MATHPH(\d+)X", lambda m: tag(int(m.group(1))), html_text)
+
+
+# Citations: a reference list whose items start with [N] (literature) or {N} (sources) gets anchors, and every
+# [N] / {N} in the text of the same page (or `{N}` as code) becomes a link to its item.
+REF_ITEM_RE = re.compile(r"<(li|p)>(\s*(?:<p>)?\s*)([\[{])(\d+)([\]}])")  # a list item or a footnote paragraph
+CITE_RE = re.compile(r"\[(\d+(?:\s*,\s*\d+)*)\]|\{(\d+)\}")
+
+
+def numbered_refs(html_text, ids):
+    """A reference list written as a plain numbered list (1. 2. …): when the text cites [N], the last <ol> of
+    the page that has at least as many items as the largest N is the list, and its items become ref-1, ref-2, …"""
+    cited = [int(n) for m in CITE_RE.finditer(re.sub(r"<(pre|code)\b.*?</\1>", "", html_text, flags=re.S))
+             if m.group(1) for n in re.findall(r"\d+", m.group(1))]
+    opens = list(re.finditer(r"<ol(?:\s[^>]*)?>", html_text))
+    if not cited or not opens:
+        return html_text
+    m = opens[-1]
+    start = int((re.search(r'\bstart="(\d+)"', m.group(0)) or [0, 1])[1])
+    out, depth, n, pos = [], 0, start, m.end()
+    for tag in re.finditer(r"<(/?)(ol|ul|li)\b[^>]*>", html_text[m.end():]):
+        t = tag.group(0)
+        if tag.group(2) in ("ol", "ul"):
+            if tag.group(1) and depth == 0:
+                break
+            depth += -1 if tag.group(1) else 1
+        elif t == "<li>" and depth == 0:
+            out.append((m.end() + tag.start(), m.end() + tag.end(), n))
+            n += 1
+    if n - start < max(cited):
+        return html_text
+    for a, b, k in reversed(out):
+        html_text = html_text[:a] + '<li id="ref-%d">' % k + html_text[b:]
+        ids.add(("ref", str(k)))
+    return html_text
+
+
+def cite_links(html_text):
+    ids = set()
+
+    def anchor(m):  # the item's own label is hidden from the citation pass as REFLBL…
+        kind = "ref" if m.group(3) == "[" else "src"
+        if (kind, m.group(4)) in ids:  # the same number twice: only the first gets the anchor
+            return m.group(0).replace(m.group(3) + m.group(4), "REFLBL%s%sR" % ("1" if kind == "ref" else "2", m.group(4)), 1)
+        ids.add((kind, m.group(4)))
+        return '<%s id="%s-%s">%sREFLBL%s%sR' % (m.group(1), kind, m.group(4), m.group(2), "1" if kind == "ref" else "2",
+                                                 m.group(4))
+    html_text = REF_ITEM_RE.sub(anchor, html_text)
+    if not ids:
+        html_text = numbered_refs(html_text, ids)
+    if not ids:
+        return html_text
+
+    def link(kind, n, label):
+        return '<a class="cite" href="#%s-%s">%s</a>' % (kind, n, label)
+
+    def cite(m):
+        if m.group(2):
+            return link("src", m.group(2), m.group(0)) if ("src", m.group(2)) in ids else m.group(0)
+        nums = re.findall(r"\d+", m.group(1))
+        if not all(("ref", n) in ids for n in nums):
+            return m.group(0)
+        if len(nums) == 1:
+            return link("ref", nums[0], m.group(0))
+        return "[%s]" % re.sub(r"\d+", lambda d: link("ref", d.group(0), d.group(0)), m.group(1))
+
+    html_text = re.sub(r"<code>\{(\d+)\}</code>", lambda m: link("src", m.group(1), m.group(0))
+                       if ("src", m.group(1)) in ids else m.group(0), html_text)
+    out, skip = [], 0
+    for tok in TOKEN_RE.split(html_text):
+        if tok.startswith("<"):
+            m = re.match(r"<(/?)(a|pre|code|h[1-6])\b", tok, re.I)
+            if m:
+                skip += -1 if m.group(1) else 1
+            out.append(tok)
+        else:
+            out.append(tok if skip else CITE_RE.sub(cite, tok))
+    return re.sub(r"REFLBL([12])(\d+)R", lambda m: ("[%s]" if m.group(1) == "1" else "{%s}") % m.group(2), "".join(out))
+
+
 def render_markdown(text):
     md = markdown.Markdown(
         extensions=["extra", "sane_lists", "codehilite", "toc"],
@@ -252,7 +377,9 @@ def render_markdown(text):
         output_format="html5",
     )
     # pictures in a text load as the reader scrolls to them (a post may carry many heavy GIFs)
-    return re.sub(r"<img (?![^>]*\bloading=)", '<img loading="lazy" decoding="async" ', md.convert(mermaid_blocks(gfm_fixups(text))))
+    text, formulas = math_spans(mermaid_blocks(gfm_fixups(text)))
+    body = cite_links(math_restore(md.convert(text), formulas))
+    return re.sub(r"<img (?![^>]*\bloading=)", '<img loading="lazy" decoding="async" ', body)
 
 
 def fetch(url, tries=4):
