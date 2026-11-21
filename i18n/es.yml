@@ -95,6 +95,15 @@ type_paper: Artículo
 type_thesis: Ponencia
 # conference abstract on its page: conference, section, year
 thesis_source: "{c}, sección «{s}», {y}"
+# publication pages: the PDF copy kept in papers/ and the links when the original is gone
+paper_page: "Página"
+paper_copy: "Copia en PDF"
+paper_gone: "El PDF ya no está disponible en el sitio del editor, por eso el enlace lleva a la copia guardada aquí."
+paper_archive: "Copia en Web Archive"
+paper_offline: "El volumen no está publicado en línea; aquí se guarda una copia en PDF."
+paper_record: "Registro bibliográfico"
+paper_no_text: "Ni el autor ni la web conservan el texto de esta ponencia; la copia en PDF es la página del programa del congreso donde figura."
+paper_back: "Volver a la publicación"
 filter_label: Filtrar por tipo
 filter_all: Todo
 filter_posts: Posts

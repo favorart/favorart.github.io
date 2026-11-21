@@ -154,7 +154,19 @@ above the title (`--plain-only` regenerates just the twins).
   year: "Ломоносов"), `section`, `section_en`, `collection` (the collection's record after "//", as the
   publisher gives it), `date` (the conference). Tagged "Тезисы / Talk abstract" and filtered with the papers.
 
-Add it to `content/cv.<lang>.html` → Publications in every language, then translate the abstract like a post.
+Saved copies (in case the publisher's site loses the paper):
+- `pdf_copy: papers/<slug>.pdf` — the PDF kept in the repo (personal e-mail addresses blanked out), served at
+  `/papers/<slug>.pdf`;
+- `record_url` — a bibliographic record (ISTINA) for a paper that was never online; `abstract` may be left out
+  when the text is lost (the page then says so).
+
+While the publisher's PDF is alive the page shows it plus its copy; when it is gone the PDF links (page and CV)
+switch to the copy. `pdf_gone: true` switches at once; otherwise `tools/check_sources.py` (weekly,
+`.github/workflows/source-check.yml`) counts failed checks in `papers/source-status.yml`; the switch happens after
+3 in a row, and back when the PDF answers again.
+
+Add it to `content/cv.<lang>.html` → Publications in every language (links line:
+`<p class="links">$plinks_<slug, - as _></p>`), then translate the abstract like a post.
 
 ## Analytics
 

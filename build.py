@@ -43,6 +43,8 @@ LICENSE_URL = "https://github.com/favorart/favorart.github.io/blob/main/LICENSE"
 DEFAULT_LANG = "en"
 LANG_ORDER = ["en", "es", "ru", "sr", "uz"]  # order in the language switcher
 LANGS = {}  # filled in main(): code -> i18n dict
+SOURCE_STATUS = {}  # papers/source-status.yml: results of tools/check_sources.py
+PAPERS = []  # paper items, for the publication links in the CV
 HOME_LATEST = 2  # cards per section on the home page
 # GoatCounter site code (https://<code>.goatcounter.com): cookie-free visit counter.
 # Empty string disables the counter. count.js itself ignores localhost and file:// views.
@@ -503,9 +505,14 @@ def paper_item(e):
     thesis = bool(e.get("conference"))
     venue = (("conference", "conference_en", "conference_short", "section", "section_en", "collection") if thesis
              else ("journal", "journal_en", "volume", "issue", "pages"))
-    for key in ("slug", "title", "authors", "year", "pdf", "summary", "abstract") + venue:
+    for key in ("slug", "title", "authors", "year", "summary") + venue:
         if not e.get(key):
             fail("%s: field '%s' is required" % (where, key))
+    if not (e.get("pdf") or e.get("pdf_copy")):
+        fail("%s: give 'pdf' (the original online) or 'pdf_copy' (the copy in papers/), or both" % where)
+    if e.get("pdf_copy") and not (e["pdf_copy"].startswith("papers/") and os.path.isfile(os.path.join(ROOT, e["pdf_copy"]))):
+        fail("%s: pdf_copy '%s' must be a file in papers/" % (where, e["pdf_copy"]))
+    alive = original_alive(e)
     cover = e.get("cover")
     if cover and not os.path.isfile(os.path.join(ROOT, cover)):
         fail("%s: cover '%s' not found" % (where, cover))
@@ -515,10 +522,9 @@ def paper_item(e):
     else:
         ref = "%s %s // %s. — %d. — Т. %s, вып. %s. — С. %s." % (
             esc(e["authors"]), esc(e["title"]), esc(e["journal"]), year, e["volume"], e["issue"], esc(str(e["pages"])))
-    body = ['<p class="paper-ref" lang="%s">%s</p>' % (esc(lang), ref),
-            '<p class="paper-pdf"><a class="btn sun big" href="%s" hreflang="%s">PDF <span class="arr">→</span></a></p>'
-            % (esc(e["pdf"]), esc(lang))]
-    src = "# %s\n\n%s\n" % (e["title"], e["abstract"])
+    body = ['<p class="paper-ref" lang="%s">%s</p>' % (esc(lang), ref)]  # buttons: paper_buttons(), per UI language
+    # translated: title, summary and the abstract; a talk whose text is lost has only the summary as body
+    src = "# %s\n\n%s\n" % (e["title"], e.get("abstract") or e["summary"])
     if e.get("keywords"):
         src += "\n%s: %s\n" % (PAPER_LABELS[lang][1], e["keywords"])
     title = {lang: str(e["title"])}
@@ -534,7 +540,8 @@ def paper_item(e):
         "date": as_date(e.get("date") or "%d-01-01" % year, where), "date_label": str(year) if thesis else "vol. %s(%s)" % (e["volume"], e["issue"]),
         "lang": lang,
         "summary": summary, "kind": None, "journal_short": e.get("conference_short" if thesis else "journal_short", "Intelligent Systems"), "year": year,
-        "original_url": e["pdf"], "tags": [], "demo_url": None, "list": e.get("list", True),
+        "original_url": e["pdf"] if alive else ("/" + e["pdf_copy"] if e.get("pdf_copy") else e.get("record_url")),
+        "original_alive": alive, "tags": [], "demo_url": None, "list": e.get("list", True),
         "cover_url": "/" + cover if cover else None,
         "options_dir": os.path.join(ROOT, os.path.dirname(cover)) if cover else None,
         "subtitle": None, "paper_head": "\n".join(body), "body_html": "\n".join(body), "paper": e,
@@ -605,12 +612,71 @@ def load_translations(items, langs):
     return report
 
 
+SOURCE_STATUS_FILE = os.path.join(ROOT, "papers", "source-status.yml")
+SOURCE_GONE_AFTER = 3  # failed weekly checks in a row (tools/check_sources.py) before the saved copy takes over
+
+
+def source_status():
+    if not os.path.isfile(SOURCE_STATUS_FILE):
+        return {}
+    with open(SOURCE_STATUS_FILE, encoding="utf-8") as f:
+        return yaml.safe_load(f) or {}
+
+
+def original_alive(e):
+    """Is the publisher's PDF still there? 'pdf_gone: true' in sources.yml switches at once; otherwise the
+    weekly check decides (several failures in a row, so a site that is down for a day does not flip the links)."""
+    if not e.get("pdf") or e.get("pdf_gone"):
+        return False
+    st = SOURCE_STATUS.get(e["slug"]) or {}
+    return not (st.get("url") == e["pdf"] and int(st.get("fails", 0)) >= SOURCE_GONE_AFTER)
+
+
+def pdf_link(item):
+    """The PDF to open: the publisher's while it is alive, else the copy kept in papers/ (None if neither)."""
+    e = item["paper"]
+    if item["original_alive"]:
+        return e["pdf"]
+    return "/" + e["pdf_copy"] if e.get("pdf_copy") else None
+
+
+def paper_buttons(item, t):
+    """PDF: the publisher's while it is alive (plus the copy kept here), else the copy on this site."""
+    e, lang = item["paper"], item["lang"]
+    out = []
+    pdf = pdf_link(item)
+    if pdf:
+        out.append('<a class="btn sun big" href="%s" hreflang="%s">PDF <span class="arr">→</span></a>' % (
+            esc(pdf), esc(lang)))
+    if item["original_alive"] and e.get("pdf_copy"):
+        out.append('<a class="btn big calm" href="/%s" hreflang="%s">%s</a>' % (esc(e["pdf_copy"]), esc(lang), S(t, "paper_copy")))
+    note = ""
+    if e.get("pdf") and not item["original_alive"]:
+        note = '<p class="tr-note">%s <a href="https://web.archive.org/web/2024/%s">%s</a></p>' % (
+            S(t, "paper_gone"), esc(e["pdf"]), S(t, "paper_archive"))
+    elif not e.get("pdf") and e.get("record_url"):  # never online: the copy is the PDF, plus the record
+        note = '<p class="tr-note">%s <a href="%s">%s</a></p>' % (
+            S(t, "paper_offline"), esc(e["record_url"]), S(t, "paper_record"))
+    return note + ('<p class="paper-pdf">%s</p>' % " ".join(out) if out else "")
+
+
+def cv_paper_links(t):
+    """$plinks_<slug> in the CV: the page and the PDF (the publisher's while it is alive, else the copy)."""
+    out = {}
+    for item in PAPERS:
+        links = ['<a href="%s">%s →</a>' % (item_url(item, t), S(t, "paper_page"))]
+        if pdf_link(item):
+            links.append('<a href="%s" hreflang="%s">PDF →</a>' % (esc(pdf_link(item)), esc(item["lang"])))
+        out["plinks_" + item["slug"].replace("-", "_")] = " · ".join(links)
+    return out
+
+
 def paper_body(item, t, tr):
     """Record + PDF, then the abstract in the page's language only (the original, a reviewed translation, or the
     journal's English abstract); the original title stays as the subtitle on other-language pages."""
     e, lang = item["paper"], item["lang"]
     lab = lambda tt, k: esc(str(tt.get("paper_" + k) or PAPER_LABELS.get(tt["lang"], PAPER_LABELS["en"])[k == "keywords"]))
-    out = [item["paper_head"]]
+    out = [item["paper_head"], paper_buttons(item, t)]
 
     def block(tt, hl, title, abstract, keywords):
         a = ['<h2 lang="%s">%s</h2>' % (hl, lab(tt, "abstract"))]
@@ -621,6 +687,8 @@ def paper_body(item, t, tr):
             a.append('<p lang="%s"><strong>%s:</strong> %s</p>' % (hl, lab(tt, "keywords"), esc(keywords)))
         return a
 
+    if not e.get("abstract"):  # the text is lost: the record and what is left (the programme page)
+        return "\n".join(out + ['<p class="tr-note">%s</p>' % S(t, "paper_no_text")])
     # one abstract per page, in the page's language; the original only when there is no translation
     src_t = LANGS.get(lang, t)
     if t["lang"] == lang:
@@ -973,7 +1041,7 @@ def article_page(item, t):
             line = str(t.get("paper_source", "{j}, vol. {v}, no. {i}, {y}, pp. {p}")).format(
                 j=e["journal"] if own and e.get("journal") else e["journal_en"],
                 v=e["volume"], i=e["issue"], y=item["year"], p=e["pages"])
-        source_top = '<a href="%s">%s</a>' % (esc(item["original_url"]), esc(line))
+        source_top = ('<a href="%s">%s</a>' % (esc(e["pdf"]), esc(line))) if item["original_alive"] else esc(line)
     elif item["type"] == "project":
         source_top = '%s: %s' % (S(t, "source"), " · ".join('<a href="%s">%s</a>' % (
             esc(link["url"]), esc(str(loc(link["label"], t)))) for link in item["links"]))
@@ -1152,7 +1220,7 @@ def home_page(items, t):
         return '<div class="posts">\n%s\n  </div>' % "\n".join(card(i, t) for i in on_home[:HOME_LATEST])
 
     try:
-        body = content.substitute(prefix=t["prefix"], open_to=S(t, "open_to"), open_also=S(t, "open_also"), writing_cards=grid("writing"), course_cards=grid("courses"),
+        body = content.substitute(cv_paper_links(t), prefix=t["prefix"], open_to=S(t, "open_to"), open_also=S(t, "open_also"), writing_cards=grid("writing"), course_cards=grid("courses"),
                                   contact_key=esc(CONTACT_FORM_KEY), lang_code=t["lang"],
                                   project_cards=grid("projects"),
                                   all_projects=all_label(t, "all_projects", len(listed["projects"])),
@@ -1170,7 +1238,7 @@ def cv_page(t):
     with open(path, encoding="utf-8") as f:
         content = string.Template(f.read())
     try:
-        body = content.substitute(prefix=t["prefix"], open_to=S(t, "open_to"), open_also=S(t, "open_also"), role_title=S(t, "role_title"), role_skills=S(t, "role_skills"))
+        body = content.substitute(cv_paper_links(t), prefix=t["prefix"], open_to=S(t, "open_to"), open_also=S(t, "open_also"), role_title=S(t, "role_title"), role_skills=S(t, "role_skills"))
     except KeyError as e:
         fail("%s: unknown placeholder $%s" % (path, e.args[0]))
     return page(t, "%s — %s" % (t["cv_title"], t["author"]), body, t["prefix"] + "/cv/",
@@ -1208,7 +1276,9 @@ def main():
     langs = load_languages()
     LANGS.update(langs)
     t0 = langs[DEFAULT_LANG]
+    SOURCE_STATUS.update(source_status())
     items = load_posts() + load_external(args.offline) + load_projects()
+    PAPERS.extend(i for i in items if i["type"] == "paper")
     keys = [(i["section"], i["slug"]) for i in items]
     dupes = {k for k in keys if keys.count(k) > 1}
     if dupes or ("writing", "covers") in keys:
@@ -1227,6 +1297,10 @@ def main():
     write(os.path.join(out, "assets", "site.css"), css)
     if os.path.isdir(os.path.join(ROOT, "covers")):
         shutil.copytree(os.path.join(ROOT, "covers"), os.path.join(out, "covers"))
+    for item in PAPERS:  # PDF copies of the publications: /papers/<slug>.pdf
+        if item["paper"].get("pdf_copy"):
+            os.makedirs(os.path.join(out, "papers"), exist_ok=True)
+            shutil.copy2(os.path.join(ROOT, item["paper"]["pdf_copy"]), os.path.join(out, item["paper"]["pdf_copy"]))
 
     # language-dependent pages: home and indexes (content pages exist once, in their own language)
     for t in langs.values():

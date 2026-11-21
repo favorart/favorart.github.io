@@ -88,6 +88,15 @@ type_paper: Maqola
 type_thesis: Tezis
 # conference abstract on its page: conference, section, year
 thesis_source: "{c}, «{s}» seksiyasi, {y}"
+# publication pages: the PDF copy kept in papers/ and the links when the original is gone
+paper_page: "Sahifa"
+paper_copy: "PDF nusxasi"
+paper_gone: "PDF nashriyot saytida endi mavjud emas, shuning uchun havola shu yerda saqlangan nusxaga olib boradi."
+paper_archive: "Web Archivedagi nusxa"
+paper_offline: "Toʻplam internetda eʼlon qilinmagan; PDF nusxasi shu yerda saqlanadi."
+paper_record: "Bibliografik yozuv"
+paper_no_text: "Ushbu tezis matni na muallifda, na internetda saqlanib qolgan; PDF nusxasi — maʼruza koʻrsatilgan konferensiya dasturi sahifasi."
+paper_back: "Nashrga qaytish"
 filter_label: Tur boʻyicha filtrlash
 filter_all: Hammasi
 filter_posts: Postlar
