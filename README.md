@@ -123,9 +123,9 @@ Courses are not translated (their lectures are in Russian); papers have RU + EN 
 Projects (`/projects/<slug>/`) are written for the site itself, in every language:
 
 ```
-projects/<slug>/project.yml   # date, date_label, cover, demo_url (optional),
+projects/<slug>/project.yml   # name (= the repo name, the title everywhere), date, date_label, cover, demo_url,
                               # links: [{url, label}] — label may be {en: …, ru: …}
-projects/<slug>/<lang>.md     # front matter title, summary, kind (card label); body = page text
+projects/<slug>/<lang>.md     # front matter tagline (subtitle), summary, kind (card label); body = page text
 ```
 
 The build fails if a language file is missing. Write `en.md` first, then the other languages with an
@@ -182,5 +182,5 @@ API -> only "Read statistics", only this site) and `CONTACT_FORM_KEY`.
 what changed on the Russian pages over the week, in plain words for readers: new pages with their summary and
 link, edited paragraphs as "Было / Стало", removed ones (`tools/site_digest.py`; no commits, no code, page
 chrome skipped). Last week's text is the previous scheduled run's artifact. Try it by hand: Actions -> the
-workflow -> Run workflow (`days`, `send` off prints the digest in the log instead of e-mailing it), or locally
+workflow -> Run workflow (`end` = last day of a past week, `days`, `send` off prints the digest in the log instead of e-mailing it), or locally
 `python tools/site_digest.py snapshot <site> old.json` for two builds, then `diff old.json new.json`.

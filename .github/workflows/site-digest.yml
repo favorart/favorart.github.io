@@ -12,8 +12,11 @@ on:
     - cron: "0 11 * * 0"   # Sunday 11:00 UTC (12:00 in Spain in winter, 13:00 in summer)
   workflow_dispatch:
     inputs:
+      end:
+        description: "Last day of the period, YYYY-MM-DD (empty: today)"
+        default: ""
       days:
-        description: "Compare with the site N days ago"
+        description: "Length of the period in days"
         default: "7"
       send:
         description: "E-mail it (otherwise only print it in the log)"
@@ -30,6 +33,7 @@ jobs:
     env:
       GH_TOKEN: ${{ github.token }}
       DAYS: ${{ inputs.days || '7' }}
+      END: ${{ inputs.end }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -42,7 +46,14 @@ jobs:
 
       - name: This week's site
         run: |
-          python build.py --out "$RUNNER_TEMP/new_site"
+          if [ -z "$END" ]; then
+            python build.py --out "$RUNNER_TEMP/new_site"
+          else   # a past week: the site as it was at the end of that day (Spain)
+            head=$(git rev-list -1 --first-parent --before="$END 23:59:59 +0100" HEAD)
+            echo "building the site at $head (end of $END)"
+            git worktree add -q "$RUNNER_TEMP/head" "$head"
+            (cd "$RUNNER_TEMP/head" && python build.py --out "$RUNNER_TEMP/new_site")
+          fi
           python tools/site_digest.py snapshot "$RUNNER_TEMP/new_site" "$RUNNER_TEMP/new.json"
 
       - name: Last week's site
@@ -57,9 +68,11 @@ jobs:
               exit 0
             fi
           fi
-          base=$(git rev-list -1 --first-parent --before="$DAYS days ago" HEAD)
-          if [ -z "$base" ]; then echo '{}' > "$RUNNER_TEMP/old.json"; exit 0; fi
-          echo "building the site at $base ($DAYS days ago)"
+          end=${END:-$(date -u +%F)}
+          start=$(date -u -d "$end - $DAYS days" +%F)
+          base=$(git rev-list -1 --first-parent --before="$start 23:59:59 +0100" HEAD)
+          if [ -z "$base" ]; then echo "no site before $start"; echo '{}' > "$RUNNER_TEMP/old.json"; exit 0; fi
+          echo "building the site at $base (end of $start)"
           git worktree add -q "$RUNNER_TEMP/old" "$base"
           (cd "$RUNNER_TEMP/old" && python build.py --out "$RUNNER_TEMP/old_site")
           python tools/site_digest.py snapshot "$RUNNER_TEMP/old_site" "$RUNNER_TEMP/old.json"
@@ -70,7 +83,7 @@ jobs:
         run: |
           send=""
           if [ "${{ github.event_name }}" = schedule ] || [ "${{ inputs.send }}" = true ]; then send=--send; fi
-          python tools/site_digest.py diff "$RUNNER_TEMP/old.json" "$RUNNER_TEMP/new.json" $send
+          python tools/site_digest.py diff "$RUNNER_TEMP/old.json" "$RUNNER_TEMP/new.json" --days "$DAYS"             ${END:+--end "$END"} $send
 
       - name: Keep this week's text for next Sunday
         if: github.event_name == 'schedule'
