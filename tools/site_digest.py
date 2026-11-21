@@ -33,7 +33,7 @@ SKIP_CLASSES = {"views", "kicker", "ctxbar", "steps", "btn", "tr-note"}  # page 
 INLINE = {"span", "a", "time", "b", "strong", "em", "i"}
 NAMES = {"": "Главная", "cv": "Резюме (CV)"}
 MONTHS = "января февраля марта апреля мая июня июля августа сентября октября ноября декабря".split()
-MAX_PER_PAGE = 12
+MAX_PER_PAGE = 10
 MAX_CHARS = 40000
 
 
@@ -154,7 +154,8 @@ def word_changes(a, b):
 
 
 def page_changes(old, new):
-    lines = []
+    """Changes of one page, each a list of lines (shown with a blank line between them)."""
+    items = []
     ob, nb = old["blocks"], new["blocks"]
     for op, i1, i2, j1, j2 in difflib.SequenceMatcher(None, ob, nb, autojunk=False).get_opcodes():
         if op == "equal":
@@ -166,15 +167,15 @@ def page_changes(old, new):
                 break
             olds.pop(0), news.pop(0)
             if len(a) <= 220 and len(b) <= 220:
-                lines.append("  Было:  «%s»\n  Стало: «%s»" % (a, b))
+                items.append(["     ❌ было:   " + a, "     ✅ стало:  " + b])
             else:
-                lines += ["  Исправлено: " + w for w in word_changes(a, b)[:4]]
-        lines += ["  Убрано: «%s»" % short(a, 200) for a in olds]
-        lines += ["  Добавлено: «%s»" % short(b) for b in news]
+                items += [["     ✏️ поправлено:  " + w] for w in word_changes(a, b)[:4]]
+        items += [["     ➖ убрано:  «%s»" % short(a, 200)] for a in olds]
+        items += [["     ➕ добавлено:  «%s»" % short(b)] for b in news]
     d = new["imgs"] - old["imgs"]
     if d:
-        lines.append("  %s картинок: %d" % ("Новых" if d > 0 else "Убрано", abs(d)))
-    return lines
+        items.append(["     🖼 %s картинок: %d" % ("новых" if d > 0 else "убрано", abs(d))])
+    return items
 
 
 def date_ru(d):
@@ -187,34 +188,74 @@ def period(start, end):
     return "%s – %s" % (date_ru(start), date_ru(end))
 
 
-def digest(old, new, end):
-    start = end - dt.timedelta(days=7)
+def plural(n, one, few, many):
+    if n % 10 == 1 and n % 100 != 11:
+        return "%d %s" % (n, one)
+    return "%d %s" % (n, few if 2 <= n % 10 <= 4 and not 12 <= n % 100 <= 14 else many)
+
+
+RULE = "━" * 28
+SECTIONS = [("writing", "📝 Публикации"), ("projects", "🛠 Проекты"), ("courses", "🎓 Курсы"), ("", "📄 Страницы")]
+
+
+def section(rel):
+    head = rel.split("/")[0]
+    return head if head in ("writing", "projects", "courses") else ""
+
+
+def heading(title):
+    return [RULE, title, RULE, ""]
+
+
+def digest(old, new, end, days=7):
+    start = end - dt.timedelta(days=days - 1)
     added = [r for r in new if r not in old]
     removed = [r for r in old if r not in new]
     changed = [(r, page_changes(old[r], new[r])) for r in new if r in old]
     changed = [(r, c) for r, c in changed if c]
     if not (added or removed or changed):
         return None, None
-    out = ["Что нового на сайте favorart.github.io за неделю: %s %d года." % (period(start, end), end.year),
-           "Ссылки ведут на русские версии страниц.", ""]
+    when = "%s %d" % (period(start, end), end.year)
+    out = ["📰  Что нового на сайте favorart.github.io", "      %s" % when, ""]
+    if not old:
+        out += ["На этой неделе сайт появился! Ниже всё, что на нём есть.", ""]
+    if old:
+        counts = [plural(len(added), "новая страница", "новые страницы", "новых страниц"),
+                  plural(len(changed), "страница с правками", "страницы с правками", "страниц с правками"),
+                  plural(len(removed), "страница убрана", "страницы убраны", "страниц убрано")]
+        out += ["Коротко: " + ", ".join(c for c in counts if not c.startswith("0 ")) + ".", ""]
     if added:
-        out += ["НОВОЕ", ""]
-        for r in added:
-            out += ["• " + new[r]["title"]] + (["  " + new[r]["summary"]] if new[r]["summary"] else []) + ["  " + url(r), ""]
+        out += heading("✨  НОВОЕ")
+        for key, name in SECTIONS:
+            group = [r for r in added if section(r) == key]
+            if not group:
+                continue
+            out += [name, ""]
+            for i, r in enumerate(group, 1):
+                out.append("  %d. %s" % (i, new[r]["title"]))
+                if new[r]["summary"] and r:
+                    out.append("     " + new[r]["summary"])
+                out += ["     👉 " + url(r), ""]
     if changed:
-        out += ["ИЗМЕНЕНИЯ НА СТРАНИЦАХ", ""]
-        for r, c in changed:
-            out += ["• %s — %s" % (new[r]["title"], url(r))]
-            out += c[:MAX_PER_PAGE]
-            if len(c) > MAX_PER_PAGE:
-                out.append("  …и ещё %d правок, страницу стоит перечитать целиком." % (len(c) - MAX_PER_PAGE))
-            out.append("")
+        out += heading("✏️  ПРАВКИ НА СТРАНИЦАХ")
+        for r, items in changed:
+            out += ["📄 " + new[r]["title"], "     👉 " + url(r), ""]
+            if len(items) > 3 * MAX_PER_PAGE:  # rewritten as a whole: a list of fragments would not help
+                out += ["     🔄 Текст страницы заметно переработан (%s) — её стоит перечитать целиком."
+                        % plural(len(items), "правка", "правки", "правок"), ""]
+                continue
+            for it in items[:MAX_PER_PAGE]:
+                out += it + [""]
+            if len(items) > MAX_PER_PAGE:
+                rest = len(items) - MAX_PER_PAGE
+                out += ["     …и ещё %s — страницу стоит перечитать целиком." % plural(rest, "правка", "правки", "правок"), ""]
     if removed:
-        out += ["УБРАНО С САЙТА", ""] + ["• " + old[r]["title"] for r in removed] + [""]
+        out += heading("🗑  УБРАНО С САЙТА") + ["  • " + old[r]["title"] for r in removed] + [""]
+    out += [RULE, "Письмо собрано автоматически по русской версии сайта.", "Приятного чтения! 🙂"]
     text = "\n".join(out)
     if len(text) > MAX_CHARS:
         text = text[:MAX_CHARS].rsplit("\n", 1)[0] + "\n\n…письмо обрезано: правок за неделю очень много."
-    subject = "что нового на сайте за неделю (%s)" % period(start, end)
+    subject = "что нового на сайте, %s" % when
     return subject, text
 
 
@@ -227,26 +268,24 @@ def main():
     d = sub.add_parser("diff")
     d.add_argument("old")
     d.add_argument("new")
-    d.add_argument("--end", help="YYYY-MM-DD, default today (UTC)")
+    d.add_argument("--end", help="last day of the period, YYYY-MM-DD, default today (UTC)")
+    d.add_argument("--days", type=int, default=7, help="length of the period in days")
     d.add_argument("--send", action="store_true", help="e-mail the digest instead of printing it")
     a = ap.parse_args()
     if a.cmd == "snapshot":
-        pages = snapshot(a.site)
+        pages = snapshot(a.site) if os.path.isdir(a.site) else {}
         if not pages:
             print("site_digest: warning: no %s pages in %s" % (LANG, a.site))
         json.dump(pages, open(a.out, "w", encoding="utf-8"), ensure_ascii=False, indent=0)
         print("snapshot: %d pages" % len(pages))
         return
     old, new = (json.load(open(f, encoding="utf-8")) for f in (a.old, a.new))
-    if not old:
-        print("no previous snapshot with %s pages: nothing to compare, nothing sent" % LANG)
-        return
     end = dt.date.fromisoformat(a.end) if a.end else dt.datetime.now(dt.timezone.utc).date()
-    subject, text = digest(old, new, end)
+    subject, text = digest(old, new, end, a.days)
     if not subject:
         print("no changes this week: nothing sent")
     elif a.send:
-        send(subject, text)
+        send(subject, text, name="Что нового на сайте")
     else:
         print(subject + "\n\n" + text)
 
