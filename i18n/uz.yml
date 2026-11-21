@@ -88,6 +88,14 @@ type_paper: Maqola
 type_thesis: Tezis
 # conference abstract on its page: conference, section, year
 thesis_source: "{c}, «{s}» seksiyasi, {y}"
+# publication pages: the PDF copy kept in papers/, the ISTINA record
+paper_page: "Sahifa"
+paper_copy: "PDF nusxasi"
+paper_offline: "Toʻplam internetda eʼlon qilinmagan; PDF nusxasi shu yerda saqlanadi."
+paper_record: "ISTINA (MDU) tizimidagi bibliografik yozuv"
+paper_istina: "ISTINA"
+paper_no_text: "Ushbu tezis matni na muallifda, na internetda saqlanib qolgan; PDF nusxasi — maʼruza koʻrsatilgan konferensiya dasturi sahifasi."
+paper_back: "Nashrga qaytish"
 filter_label: Tur boʻyicha filtrlash
 filter_all: Hammasi
 filter_posts: Postlar
