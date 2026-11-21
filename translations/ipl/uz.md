@@ -3,7 +3,7 @@ title: "Sozlanadigan sintaksisli interpretator"
 summary: "Bakalavrlik loyihasi — kalit soʻzlari va grammatikasini sozlash mumkin boʻlgan kross-platformali interpretator."
 source: favorart/IPL@master:docs/ru/README.md
 source_lang: ru
-source_hash: 5b3a6762
+source_hash: 22e15939
 translated: 2026-11-21
 translator: Claude
 reviewed: 2026-11-21
@@ -353,16 +353,16 @@ _____________________
 
 * [1]	Шилдт Г. Язык С для профессиональных программистов. / Born to Code in C. – Osborne, 1989
 * [2]	Керниган Б., Ритчи Д. Язык программирования С. / The C Programming Language. – Prentice Hall, 1988
-* [3]	[Пример написания простого интерпретатора](http://rsdn.ru/forum/alg/5018812.all){: hreflang=ru }
-* [4]	[Сам себе интерпретатор](http://coderszone.info/339-sam-sebe-interpretator.html){: hreflang=ru }
+* [3]	[Пример написания простого интерпретатора](https://rsdn.org/forum/alg/5018812){: hreflang=ru }
+* [4]	[Сам себе интерпретатор](https://web.archive.org/web/20090820050231/http://coderszone.info/339-sam-sebe-interpretator.html){: hreflang=ru }
 * [5]	[Динамическая типизация данных](http://ru.wikipedia.org/wiki/Динамическая_типизация){: hreflang=ru }
 
 
 ### Foydalanilgan algoritmlar
 
-*	{1}	[Fayl xesh-summasini SHA256 bilan hisoblash usuli (Ch. Devine, 2003)](http://patux.net/crypto_programs/hash/sha-2/sha256.c.html){: hreflang=en }
+*	{1}	[Fayl xesh-summasini SHA256 bilan hisoblash usuli (Ch. Devine, 2003)](https://web.archive.org/web/20120615070343/http://patux.net/crypto_programs/hash/sha-2/sha256.c.html){: hreflang=en }
 *	{2}	[Rekursiv tushish usuli](http://en.wikipedia.org/wiki/Recursive_descent_parser){: hreflang=en }
-*	{3}	[Dasturiy stek usuli bilan toʻgʻri polyak notatsiyasini qurish](http://algolist.manual.ru/maths/misc/revpn.php){: hreflang=ru }
+*	{3}	[Dasturiy stek usuli bilan toʻgʻri polyak notatsiyasini qurish](https://web.archive.org/web/20240705142522/https://algolist.manual.ru/maths/misc/revpn.php){: hreflang=ru }
 *	{4}	Xesh-jadvallarni qurish
 *	Xesh-manzil tub songa boʻlishdagi qoldiqqa teng (A. Dumey, 1956)
 *	Zanjirlar usuli (H. P. Luhn, 1953)

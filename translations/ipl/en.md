@@ -3,7 +3,7 @@ title: "An interpreter with customizable syntax"
 summary: "Bachelor's project — a cross-platform interpreter whose keywords and grammar are configurable."
 source: favorart/IPL@master:docs/ru/README.md
 source_lang: ru
-source_hash: 5b3a6762
+source_hash: 22e15939
 translated: 2026-11-21
 translator: Claude
 reviewed: 2026-11-21
@@ -354,16 +354,16 @@ _____________________
 
 * [1]	Schildt H. Born to Code in C. – Osborne, 1989
 * [2]	Kernighan B., Ritchie D. The C Programming Language. – Prentice Hall, 1988
-* [3]	[An example of writing a simple interpreter](http://rsdn.ru/forum/alg/5018812.all){: hreflang=ru }
-* [4]	[Your own interpreter](http://coderszone.info/339-sam-sebe-interpretator.html){: hreflang=ru }
+* [3]	[An example of writing a simple interpreter](https://rsdn.org/forum/alg/5018812){: hreflang=ru }
+* [4]	[Your own interpreter](https://web.archive.org/web/20090820050231/http://coderszone.info/339-sam-sebe-interpretator.html){: hreflang=ru }
 * [5]	[Dynamic typing](http://ru.wikipedia.org/wiki/Динамическая_типизация){: hreflang=ru }
 
 
 ### Algorithms used
 
-*	{1}	[SHA256 file hash computation (Ch. Devine, 2003)](http://patux.net/crypto_programs/hash/sha-2/sha256.c.html)
+*	{1}	[SHA256 file hash computation (Ch. Devine, 2003)](https://web.archive.org/web/20120615070343/http://patux.net/crypto_programs/hash/sha-2/sha256.c.html)
 *	{2}	[Recursive descent](http://en.wikipedia.org/wiki/Recursive_descent_parser)
-*	{3}	[Building Polish (prefix) notation with a stack](http://algolist.manual.ru/maths/misc/revpn.php){: hreflang=ru }
+*	{3}	[Building Polish (prefix) notation with a stack](https://web.archive.org/web/20240705142522/https://algolist.manual.ru/maths/misc/revpn.php){: hreflang=ru }
 *	{4}	Building hash tables
 *	Hash address equal to the remainder of division by a prime (A. Dumey, 1956)
 *	Separate chaining (H. P. Luhn, 1953)
