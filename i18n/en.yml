@@ -90,6 +90,14 @@ type_paper: Paper
 type_thesis: Talk abstract
 # conference abstract on its page: conference, section, year
 thesis_source: "{c}, section “{s}”, {y}"
+# publication pages: the PDF copy kept in papers/, the ISTINA record
+paper_page: "Page"
+paper_copy: "PDF copy"
+paper_offline: "The collection is not online; a PDF copy is kept here."
+paper_record: "Bibliographic record in ISTINA (Lomonosov MSU)"
+paper_istina: "ISTINA"
+paper_no_text: "Neither the author nor the web has kept the text of this abstract; the PDF copy is the conference programme page that lists the talk."
+paper_back: "Back to the publication"
 filter_label: Filter by type
 filter_all: All
 filter_posts: Posts

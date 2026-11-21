@@ -154,7 +154,18 @@ above the title (`--plain-only` regenerates just the twins).
   year: "Ломоносов"), `section`, `section_en`, `collection` (the collection's record after "//", as the
   publisher gives it), `date` (the conference). Tagged "Тезисы / Talk abstract" and filtered with the papers.
 
-Add it to `content/cv.<lang>.html` → Publications in every language, then translate the abstract like a post.
+Saved copies (in case the publisher's site loses the paper):
+- `pdf_copy: papers/<slug>.pdf` — the PDF kept in the repo (personal e-mail addresses blanked out), served at
+  `/papers/<slug>.pdf`. Re-save it losslessly before adding (PDF streams are already compressed, this only drops
+  garbage, ~5%): `python -c "import fitz,sys; d=fitz.open(sys.argv[1]); d.save(sys.argv[2], garbage=4, deflate=True, clean=True)" in.pdf out.pdf`;
+- `record_url` — the paper's record in ISTINA (MSU); `abstract` may be left out
+  when the text is lost (the page then says so).
+
+The page shows two buttons: the publisher's PDF and the copy (just the copy if it was never online), and
+the ISTINA record (`record_url`, give it for every paper); the CV links the same.
+
+Add it to `content/cv.<lang>.html` → Publications in every language (links line:
+`<p class="links">$plinks_<slug, - as _></p>`), then translate the abstract like a post.
 
 ## Analytics
 
