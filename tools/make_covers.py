@@ -13,6 +13,9 @@ the site picks the -plain twin of the chosen cover automatically). --plain-only 
   3 "blueprint" accent background with a grid, white line-art
   4 "pastel"    (motif pi only) peach-lavender gradient, fading rows of digits, a big π in a glass circle;
                 it has no title, so cover-4-plain.svg is the same picture
+  5 "browser"   (motif pi only) mint-periwinkle gradient, a browser window with a wall of π digits and one
+                date in red, fed by a 10x10 grid of index files (the 2026 web version); no title either
+Motif pi also writes cover-4-dark.svg and cover-5-dark.svg, the dark-theme twins.
 """
 import math
 import os
@@ -165,6 +168,63 @@ def cover_pastel_pi(motif, title, kicker, plain=False, dark=False):
         body.append('<text x="-14" y="%d" font-family="%s" font-size="75" fill="%s" opacity="%s">%s</text>'
                     % (154 + i * 103, mono, ink, op, row))
     body.append('<text x="806" y="257" font-family="Georgia, \'Times New Roman\', serif" font-size="206" fill="#ffffff" opacity=".9">π</text>')
+    return ('<svg xmlns="http://www.w3.org/2000/svg" width="%d" height="%d" viewBox="0 0 %d %d">\n%s\n</svg>\n'
+            % (W, H, W, H, "\n".join(body)))
+
+
+def cover_browser_pi(motif, title, kicker, plain=False, dark=False):
+    """A browser window with a wall of π digits and one date found in red, fed by a 10x10 grid of index
+    files (the 2026 web version of pi-birthday). No title, so cover-5-plain.svg is the same picture.
+    dark=True: the dark-theme twin (cover-5-dark.svg)."""
+    mono = "'JetBrains Mono', Consolas, 'Courier New', monospace"
+    if dark:
+        g1, g2, ink, win, edge, cell, red = "#1d3330", "#1f2742", "#b6c8f5", ".07", ".25", ".12", "#ff6b6b"
+    else:
+        g1, g2, ink, win, edge, cell, red = "#c9efe3", "#d6dcff", "#4f5f9e", ".55", ".9", ".55", "#e0454b"
+    body = ['<defs><linearGradient id="bg5" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="%s"/>'
+            '<stop offset="1" stop-color="%s"/></linearGradient></defs>' % (g1, g2),
+            '<rect width="1200" height="630" fill="url(#bg5)"/>']
+    # the index: 100 files, one of them holds the date
+    hit = (3, 6)
+    for r in range(10):
+        for c in range(10):
+            on = (r, c) == hit
+            body.append('<rect x="%d" y="%d" width="22" height="22" rx="5" fill="%s" opacity="%s"/>'
+                        % (70 + c * 30, 170 + r * 30, red if on else "#ffffff", "1" if on else cell))
+    hx, hy = 70 + hit[1] * 30 + 22, 170 + hit[0] * 30 + 11
+    # the window
+    body += ['<rect x="430" y="80" width="700" height="470" rx="18" fill="#ffffff" opacity="%s"/>' % win,
+             '<rect x="430" y="80" width="700" height="470" rx="18" fill="none" stroke="#ffffff" stroke-width="3" opacity="%s"/>' % edge,
+             '<line x1="430" y1="132" x2="1130" y2="132" stroke="#ffffff" stroke-width="2" opacity="%s"/>' % edge]
+    for i, col in enumerate(("#ff8a80", "#ffd166", "#8fd19e")):
+        body.append('<circle cx="%d" cy="106" r="8" fill="%s"/>' % (462 + i * 28, col))
+    body += ['<rect x="550" y="92" width="540" height="28" rx="14" fill="#ffffff" opacity="%s"/>' % ("0.1" if dark else "0.7"),
+             '<text x="570" y="112" font-family="%s" font-size="17" fill="%s" opacity=".8">favorart.github.io/pi-birthday</text>'
+             % (mono, ink)]
+    # the wall of digits; 14031992 found at 40 535 034 (row 3, column 8)
+    per, rows, row_hit, col_hit, pos = 22, 7, 3, 8, 40535034
+    digits = PI[40:40 + per * rows]
+    k = row_hit * per + col_hit
+    digits = digits[:k] + "14031992" + digits[k + 8:]
+    cw = 34 * 0.6
+    for r in range(rows):
+        y = 190 + r * 52
+        body.append('<text x="455" y="%d" font-family="%s" font-size="16" fill="%s" opacity=".55">%d</text>'
+                    % (y - 2, mono, ink, pos - col_hit + (r - row_hit) * per))
+        if r == row_hit:
+            body.append('<rect x="%.1f" y="%d" width="%.1f" height="44" rx="8" fill="%s" opacity=".16"/>'
+                        % (560 + col_hit * cw - 6, y - 34, 8 * cw + 12, red))
+        line = digits[r * per:(r + 1) * per]
+        if r == row_hit:
+            a, b, c = line[:col_hit], line[col_hit:col_hit + 8], line[col_hit + 8:]
+            body.append('<text x="560" y="%d" font-family="%s" font-size="34" fill="%s" opacity=".75">%s'
+                        '<tspan fill="%s" font-weight="700">%s</tspan>%s</text>' % (y, mono, ink, a, red, b, c))
+        else:
+            body.append('<text x="560" y="%d" font-family="%s" font-size="34" fill="%s" opacity="%s">%s</text>'
+                        % (y, mono, ink, ".45" if abs(r - row_hit) == 1 else ".28", line))
+    tx, ty = 560 + col_hit * cw - 6, 190 + row_hit * 52 - 12
+    body.append('<path d="M%d %d C %d %d, %d %d, %.1f %d" fill="none" stroke="%s" stroke-width="3" '
+                'stroke-dasharray="8 7" opacity=".8"/>' % (hx + 6, hy, hx + 90, hy, tx - 120, ty, tx - 4, ty, red))
     return ('<svg xmlns="http://www.w3.org/2000/svg" width="%d" height="%d" viewBox="0 0 %d %d">\n%s\n</svg>\n'
             % (W, H, W, H, "\n".join(body)))
 
@@ -342,7 +402,7 @@ def main():
     kicker = args[3] if len(args) > 3 else "Kirill Golikov"
     motif = MOTIFS[motif_name]
     os.makedirs(out_dir, exist_ok=True)
-    styles = [cover_paper, cover_night, cover_blueprint] + ([cover_pastel_pi] if motif_name == "pi" else [])
+    styles = [cover_paper, cover_night, cover_blueprint] + ([cover_pastel_pi, cover_browser_pi] if motif_name == "pi" else [])
     for n, fn in enumerate(styles, 1):
         variants = [("-plain", True)] if plain_only else [("", False), ("-plain", True)]
         if lang:
@@ -351,10 +411,11 @@ def main():
             with open(os.path.join(out_dir, "cover-%d%s.svg" % (n, suffix)), "w", encoding="utf-8", newline="\n") as f:
                 f.write(fn(motif, title, kicker, plain))
     k = len(styles)
-    if motif_name == "pi":  # dark-theme twin of the pastel style
-        for suffix, plain in variants:
-            with open(os.path.join(out_dir, "cover-4-dark%s.svg" % suffix), "w", encoding="utf-8", newline="\n") as f:
-                f.write(cover_pastel_pi(motif, title, kicker, plain, dark=True))
+    if motif_name == "pi":  # dark-theme twins of the pastel and browser styles
+        for n, fn in ((4, cover_pastel_pi), (5, cover_browser_pi)):
+            for suffix, plain in variants:
+                with open(os.path.join(out_dir, "cover-%d-dark%s.svg" % (n, suffix)), "w", encoding="utf-8", newline="\n") as f:
+                    f.write(fn(motif, title, kicker, plain, dark=True))
     print("wrote %s covers to %s" % ("%d text-free" % k if plain_only else "%d + %d text-free" % (k, k), out_dir))
 
 

@@ -265,9 +265,14 @@ ATTR_RE = re.compile(r'(\b(?:href|src)\s*=\s*)(["\'])(.*?)\2', re.S)
 
 def rewrite_relative(html_text, entry, page_of):
     """Make relative links/images of external content absolute (pointing at its repo).
-    Links to another file that is itself on this site go to that page instead."""
+    Links to another file that is itself on this site go to that page instead; root-relative links to a page
+    of this site (a translation linking to /es/writing/<slug>/) are kept."""
     repo, branch, path = entry["repo"], entry["branch"], entry["path"]
     base_dir = posixpath.dirname(path)
+    prefixes = sorted({u["prefix"] for u in LANGS.values() if u["prefix"]}, key=len, reverse=True)
+    unprefix = lambda p: next((p[len(x):] for x in prefixes if p.startswith(x + "/")), p)
+    pages = {unprefix(p) for p in page_of.values()}
+    site_page = lambda p: p.startswith("/") and not p.startswith("//") and unprefix(p) in pages
 
     def fix(m):
         prefix, quote, url = m.group(1), m.group(2), html.unescape(m.group(3)).strip()
@@ -275,6 +280,8 @@ def rewrite_relative(html_text, entry, page_of):
         if not url or url.startswith(("#", "//")) or SCHEME_RE.match(url):
             return m.group(0)
         parts = urllib.parse.urlsplit(url)
+        if site_page(parts.path):  # a page of this site in some language, e.g. /es/writing/<slug>/
+            return m.group(0)
         if parts.path.startswith("/"):
             target = parts.path.lstrip("/")
         elif parts.path:
