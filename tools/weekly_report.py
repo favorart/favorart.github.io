@@ -158,13 +158,13 @@ def report(api, site, today):
     return "статистика за неделю %s" % period, "\n".join(out)
 
 
-def send(subject, text):
+def send(subject, text, name="Weekly report (GoatCounter)"):
     """E-mail through Web3Forms with the contact form's key (the same inbox as the site's messages)."""
     key = os.environ.get("CONTACT_FORM_KEY", "")
     if not key:
         fail("CONTACT_FORM_KEY is not set")
     data = json.dumps({"access_key": key, "subject": "favorart.github.io: " + subject,
-                       "from_name": "favorart.github.io", "name": "Weekly report (GoatCounter)",
+                       "from_name": "favorart.github.io", "name": name,
                        "message": text}).encode()
     req = urllib.request.Request("https://api.web3forms.com/submit", data=data, headers={
         "Content-Type": "application/json", "Accept": "application/json", "User-Agent": "site-weekly-report"})
