@@ -2,103 +2,124 @@
 # One entry per item slug; languages en, es, ru, sr, uz (a missing language falls back to the summary).
 
 # ---------------------------------------------------------------- writing
+pi-every-date:
+  ru: "Восемь цифр ДДММГГГГ попадаются в среднем раз на 10⁸ позиций. Я хотел пощупать гипотезу руками и упёрся в CPython, который…"
+  en: "A DDMMYYYY string turns up about once per hundred million places. I wanted to test the idea myself and hit CPython, which…"
+  es: "Ocho dígitos DDMMAAAA salen, de media, una vez cada 10⁸ posiciones. Quise probarlo a mano y choqué con CPython, que…"
+  sr: "Osam znakova DDMMGGGG javlja se u proseku jednom na 10⁸ pozicija. Hteo sam da proverim hipotezu na delu i zapeo o CPython, koji…"
+  uz: "KKOOYYYY — sakkiz belgi — oʻrtacha har 10⁸ oʻrinda bir uchraydi. Gipotezani qoʻlda sinadim, lekin CPythonga taqaldim, u…"
+
+pi-stores-everything:
+  ru: "В 2018-м моей программе нужен был текстовый файл на 3 ГБ, а GitHub Pages пускает лишь 1 ГБ. Я сжал цифры zlib, bzip2, xz и…"
+  en: "In 2018 my program needed a 3 GB text file; GitHub Pages allows 1 GB. I squeezed the digits with zlib, bzip2, xz and…"
+  es: "En 2018 mi programa necesitaba un texto de 3 GB y GitHub Pages admite solo 1 GB. Comprimí los dígitos con zlib, bzip2, xz y…"
+  sr: "Programu mi je 2018. trebao tekst od 3 GB, a GitHub Pages dopušta 1 GB. Cifre sam sažimao zlib-om, bzip2-om, xz-om i…"
+  uz: "2018-yilda dasturimga 3 GB matn fayl kerak edi, GitHub Pages esa 1 GB beradi. Raqamlarni zlib, bzip2, xz bilan siqdim va…"
+
 gpu-waits-for-a-float:
-  ru: "В NeoML один скаляр на каждом шаге останавливал обучение на видеокарте. Шина ни при чём: 4 байта летят мгновенно, а дорог…"
-  en: "In NeoML a single scalar stalled GPU training on every step. The bus isn't to blame: 4 bytes cross it instantly. The expensive part is…"
-  es: "En NeoML un solo escalar frenaba el entrenamiento en GPU en cada paso. No es culpa del bus: 4 bytes cruzan al instante. Lo caro es…"
-  sr: "U NeoML-u jedan skalar je na svakom koraku zaustavljao obuku na GPU-u. Magistrala nije kriva: 4 bajta prolaze odmah, a skupo je…"
-  uz: "NeoMLda bitta skalyar har qadamda videokartadagi oʻqitishni toʻxtatib qoʻyardi. Shina ayb emas: 4 bayt bir lahzada oʻtadi. Qimmati esa…"
+  ru: "Машинное эпсилон в функции потерь, порог ReLU, границы градиента — каждое такое число в NeoML ехало по шине так, что…"
+  en: "Machine epsilon in the loss, the ReLU threshold, gradient bounds: in NeoML each such scalar crossed the bus in a way that…"
+  es: "El épsilon de máquina en la pérdida, el umbral de ReLU, los límites del gradiente: en NeoML cada número cruzaba el bus tal que…"
+  sr: "Mašinski epsilon u funkciji gubitka, prag ReLU-a, granice gradijenta: svaki takav broj je u NeoML-u putovao magistralom tako da…"
+  uz: "Yoʻqotishdagi mashina epsiloni, ReLU chegarasi, gradient chegaralari — NeoMLda har bir bunday son shinadan shunday oʻtardiki…"
 
 why-a-website:
-  ru: "«Зачем тебе сайт?» — насмешливо спросила жена. Ответа не было. Через два вечера с Claude сайт был готов, а ответ оказался…"
-  en: "“Why do you need a website?” my wife teased. I had no answer. Two evenings with Claude later, the site was done, and the answer…"
-  es: "«¿Para qué quieres un sitio?», se burló mi esposa. No supe responder. Tras dos noches con Claude el sitio estaba listo y la respuesta…"
-  sr: "„Čemu ti sajt?“ — podrugljivo je pitala žena. Odgovora nije bilo. Posle dve večeri s Claude-om sajt je bio gotov, a odgovor se pokazao…"
-  uz: "“Senga sayt nega kerak?” — deb kuldi xotinim. Javobim yoʻq edi. Claude bilan ikki kechadan soʻng sayt tayyor boʻldi, javob esa…"
+  ru: "Я дважды жаловался, что картинка при наведении не увеличивается. Стили были на месте, а виноват оказался…"
+  en: "Twice I complained that the picture didn't zoom on hover. The styles were all in place, and the culprit turned out to be…"
+  es: "Me quejé dos veces de que la imagen no se agrandaba al pasar el cursor. Los estilos estaban en su sitio y el culpable resultó ser…"
+  sr: "Dvaput sam se žalio da se slika ne uvećava kad pređem mišem preko nje. Stilovi su bili na mestu, a ispostavilo se da je krivac…"
+  uz: "Ikki marta shikoyat qilgandim: sichqoncha olib kelinganda rasm kattalashmaydi. Uslublar joyida edi, aybdor esa…"
 
 avx512-frequency:
-  ru: "AVX2 ускорил NeoML, и мне поручили переписать горячие циклы на AVX-512: вектор вдвое шире. Я переписал, померил и…"
-  en: "AVX2 had sped up NeoML, so my task was to rewrite the hot loops in AVX-512: vectors twice as wide. I rewrote them, measured and…"
-  es: "AVX2 aceleró NeoML y me encargaron reescribir los bucles críticos en AVX-512: vectores el doble de anchos. Los reescribí, medí y…"
-  sr: "AVX2 je ubrzao NeoML, pa sam dobio zadatak da vruće petlje prepišem na AVX-512: vektor je dvaput širi. Prepisao sam, izmerio i…"
-  uz: "AVX2 NeoMLni tezlashtirdi, menga asosiy sikllarni AVX-512ga qayta yozish topshirildi: vektor ikki karra kengroq. Yozdim, oʻlchadim va…"
+  ru: "Компилятору разрешали не выше SSE2, поэтому свёртки мы переписали вручную. Прирост был явный, и мне поручили пойти дальше…"
+  en: "The compiler was allowed nothing above SSE2, so we hand-wrote the convolutions. It paid off, and I was asked to go further…"
+  es: "El compilador no podía ir más allá de SSE2, así que reescribimos las convoluciones a mano. Se notó y me encargaron ir más lejos…"
+  sr: "Kompajleru je bio dozvoljen najviše SSE2, pa smo konvolucije pisali ručno. Dobitak je bio jasan i naložili su mi da idem dalje…"
+  uz: "Kompilyatorga SSE2dan yuqorisi mumkin emas edi, konvolyutsiyalarni qoʻlda yozdik. Foyda yaqqol edi, menga esa yana…"
 
 console-trend:
-  ru: "Microsoft положила в Windows «Косынку», чтобы приучить нас к мыши. А теперь с ИИ-агентами вернулась консоль, и я снова…"
-  en: "Microsoft shipped Solitaire with Windows to get us used to the mouse. Now AI agents have brought the console back, and I'm…"
-  es: "Microsoft puso el Solitario en Windows para enseñarnos a usar el ratón. Ahora los agentes de IA devolvieron la consola y yo otra vez…"
-  sr: "Microsoft je u Windows stavio „Pasijans“ da nas navikne na miša. A sada se sa AI agentima vratila konzola, i ja opet…"
-  uz: "Microsoft bizni sichqonchaga oʻrgatish uchun Windowsga Solitaire qoʻygan edi. Endi AI-agentlar bilan konsol qaytdi, men esa yana…"
+  ru: "«Косынку» положили в Windows, чтобы приучить нас к мыши, а «Сапёра» — к правой кнопке. Я печатаю десятью пальцами, но…"
+  en: "Solitaire shipped with Windows to teach us the mouse, Minesweeper the right button. I touch-type, and yet…"
+  es: "El Solitario vino con Windows para enseñarnos el ratón, y el Buscaminas, el botón derecho. Yo escribo con diez dedos, pero…"
+  sr: "Pasijans je stigao uz Windows da nas navikne na miša, a Minolovac na desni taster. Ja kucam sa svih deset prstiju, ali…"
+  uz: "Solitaire sichqonchaga, Minesweeper oʻng tugmaga oʻrgatish uchun Windowsga qoʻshilgan. Oʻn barmoq bilan yozaman, lekin…"
 
 diploma-topic:
-  ru: "В бакалаврском дипломе я хотел приблизить программирование к естественному языку. Жаль, я не знал, что это уже обещали в…"
-  en: "My bachelor's thesis tried to bring programming closer to natural language. Too bad I didn't know that had been promised in…"
-  es: "En mi tesis de licenciatura quise acercar la programación al lenguaje natural. Lástima que no sabía que eso ya se prometió en…"
-  sr: "U završnom radu osnovnih studija hteo sam da približim programiranje prirodnom jeziku. Šteta što nisam znao da je to već obećano u…"
-  uz: "Bakalavr diplomimda dasturlashni tabiiy tilga yaqinlashtirmoqchi boʻldim. Afsus, bu allaqachon vaʼda qilinganini bilmasdim: bu vaʼda…"
+  ru: "Студентом я мечтал о самомодифицирующемся коде, а написал язык, похожий на формализованный текст. И не знал, что в 1959-м…"
+  en: "As a student I dreamed of self-modifying code but wrote a language that reads like formal prose. I had no idea that in 1959…"
+  es: "De estudiante soñaba con código automodificable, pero escribí un lenguaje parecido a un texto formal. Y no sabía que en 1959…"
+  sr: "Kao student sanjao sam o samomodifikujućem kodu, a napisao jezik nalik formalizovanom tekstu. Nisam znao da je 1959. godine…"
+  uz: "Talabaligimda oʻz-oʻzini oʻzgartiruvchi kod orzu qilardim, lekin rasmiy matnga oʻxshash til yozdim. Bilmasdimki, 1959-yilda…"
 
 residence-permit-fields:
-  ru: "Жене в чип ВНЖ Сербии записали неверный адрес, мне на карте — неверное место рождения. Ей перекодировали на месте, а мне…"
-  en: "Serbia put the wrong address on my wife's residence permit chip and the wrong birthplace on my card. Hers was fixed on the spot, mine…"
-  es: "Serbia grabó mal la dirección en el chip del permiso de mi esposa y mi lugar de nacimiento en el mío. Lo suyo se arregló allí; lo mío…"
-  sr: "Ženi su u čip srpske boravišne dozvole upisali pogrešnu adresu, a meni pogrešno mesto rođenja. Njoj su ispravili odmah, a meni…"
-  uz: "Rafiqamning Serbiya ruxsatnomasi chipiga notoʻgʻri manzil, kartamga xato tugʻilgan joy yozildi. Uniki joyida tuzatildi, meniki esa…"
+  ru: "В Сербии жене записали в чип неверный адрес, мне на карточке — неверное место рождения. Ей перекодировали на месте, а мне…"
+  en: "In Serbia my wife's chip got the wrong address and my card the wrong birthplace. Hers was recoded on the spot, while mine…"
+  es: "En Serbia el chip de mi mujer llevaba mal la dirección y mi tarjeta, el lugar de nacimiento. A ella se lo arreglaron allí; a mí…"
+  sr: "U Srbiji su ženi u čip upisali pogrešnu adresu, a meni na kartici pogrešno rodno mesto. Njoj su ga odmah ispravili, a meni…"
+  uz: "Serbiyada xotinimning chipiga xato manzil yozishdi, mening kartamda esa tugʻilgan joy xato. Uniki joyida tuzatildi, meniki esa…"
 
 internet-geoblocking:
-  ru: "Захотел проверить свою кредитную историю в Узбекистане. В личный кабинет не попал, на госуслугах ничего не смог, а приложение…"
-  en: "I wanted to check my credit history in Uzbekistan. The account page wouldn't let me in, the e-gov portal did nothing, and the app…"
-  es: "Quise revisar mi historial crediticio en Uzbekistán. No entré a mi cuenta, en los servicios públicos en línea no logré nada y la app…"
-  sr: "Hteo sam da proverim kreditnu istoriju u Uzbekistanu. U lični kabinet nisam ušao, na e-upravi nisam mogao ništa, a aplikacija…"
-  uz: "Oʻzbekistondagi kredit tariximni tekshirmoqchi boʻldim. Kabinetga kira olmadim, davlat xizmatlarida hech narsa qila olmadim, ilova esa…"
+  ru: "Решил проверить свою кредитную историю в Узбекистане. В личный кабинет не попал, на госуслугах ничего не смог, а приложение…"
+  en: "I wanted to check my credit history in Uzbekistan. The account page shut me out, I got nowhere on the e-gov portal, and the app…"
+  es: "Quise ver mi historial crediticio en Uzbekistán. No entré en mi cuenta, en el portal estatal no logré nada y la aplicación…"
+  sr: "Hteo sam da proverim kreditnu istoriju u Uzbekistanu. U nalog nisam mogao da uđem, na e-upravi nisam uspeo ništa, a aplikacija…"
+  uz: "Oʻzbekistondagi kredit tariximni tekshirmoqchi edim. Kabinetga kira olmadim, davlat xizmatlarida hech narsa chiqmadi, ilova esa…"
 
 tax-reform-uzbekistan:
-  ru: "При оплате по QR в Узбекистане 1% налога сразу уходит в бюджет. Я думал, систему взяли у Китая готовой, но оказалось…"
-  en: "Pay by QR in Uzbekistan and 1% tax goes to the budget at once. I assumed the system came ready-made from China, but it turned out…"
-  es: "Al pagar con QR en Uzbekistán, el 1 % de impuesto va directo al presupuesto. Creí que el sistema venía hecho de China, pero resultó…"
-  sr: "Pri QR plaćanju u Uzbekistanu 1% poreza odmah ide u budžet. Mislio sam da je sistem preuzet gotov iz Kine, ali se ispostavilo…"
-  uz: "Oʻzbekistonda QR orqali toʻlaganda 1% soliq darhol byudjetga ketadi. Tizim Xitoydan tayyor holda olingan deb oʻylagandim, aslida esa…"
+  ru: "При покупке по QR-коду в Узбекистане 1% сразу уходит в бюджет. Я был уверен, что схему взяли у Китая готовой, но…"
+  en: "Pay by QR code in Uzbekistan and 1% goes straight to the budget. I was sure the scheme came ready-made from China, but…"
+  es: "Al pagar con QR en Uzbekistán, el 1 % va directo al presupuesto. Yo creía que el esquema llegó de China ya hecho, pero…"
+  sr: "Kad se plaća QR kodom u Uzbekistanu, 1% odmah odlazi u budžet. Bio sam siguran da su šemu preuzeli gotovu iz Kine, ali…"
+  uz: "Oʻzbekistonda QR-kod orqali toʻlovda 1% darhol byudjetga ketadi. Sxemani Xitoydan tayyor holda olishgan deb ishonardim, lekin…"
 
 llm-teaching:
-  ru: "Первый курс я читал студентам вживую и вернулся заряженным. Потом были онлайн и тесты, а в год всезнающих агентов…"
-  en: "My first course was in person, and I came home recharged. Then came online classes and tests, and once all-knowing agents arrived…"
-  es: "Mi primer curso fue presencial y volví lleno de energía. Luego, clases en línea y exámenes; y en el año de los agentes omniscientes…"
-  sr: "Prvi kurs sam držao uživo i vratio se napunjen. Posle su došli onlajn nastava i testovi, a u godini sveznajućih agenata…"
-  uz: "Birinchi kursni jonli oʻqidim va ruhlanib qaytdim. Keyin onlayn va testlar boshlandi, hamma narsani biladigan agentlar yilida esa…"
+  ru: "Первый курс я читал вживую, дописывая темы по вечерам, и вернулся заряженным. Потом денег на командировки не стало, и…"
+  en: "I taught my first course in person, writing topics in the evenings, and returned recharged. Then travel money ran out, and…"
+  es: "El primer curso lo di en persona, escribiendo temas por las tardes, y volví con energía. Luego no hubo dinero para viajes y…"
+  sr: "Prvi kurs sam držao uživo, dopisujući teme uveče, i vratio sam se napunjen. Zatim je nestalo para za putovanja i…"
+  uz: "Birinchi kursni jonli oʻqidim, mavzularni kechqurunlari yozib bordim va ruhlanib qaytdim. Keyin safarlar uchun pul qolmadi va…"
+
+lomonosov-2019-learning-systems:
+  ru: "Манипулятор и гусеничный робот копят опыт проб и ошибок в базе. Я раздавал им случайные команды, но за разумное время…"
+  en: "I fed my manipulator and tracked robot random commands and stored every try in a database, but in reasonable time…"
+  es: "Un manipulador y un robot oruga guardan en una base su ensayo y error. Les di órdenes al azar, pero en un tiempo razonable…"
+  sr: "Manipulator i gusenični robot gomilaju iskustvo pokušaja i promašaja u bazi. Delio sam im nasumične komande, ali za razumno vreme…"
+  uz: "Manipulyator va gusenitsali robot sinov va xato tajribasini bazada toʻplaydi. Tasodifiy buyruqlar berdim, ammo oqilona vaqtda…"
 
 learning-algorithm-discrete-control:
-  ru: "Как научить систему с дискретным управлением попадать в цель, не зная её модели? Я храню все пробы в базе и обобщаю их…"
-  en: "How do you teach a discrete-control system to hit a target without knowing its model? I keep every trial in a database and generalize…"
-  es: "¿Cómo hacer que un sistema de control discreto dé en el blanco sin conocer su modelo? Guardo los intentos en una base y los generalizo…"
-  sr: "Kako naučiti sistem sa diskretnim upravljanjem da pogađa cilj, ne znajući njegov model? Sve pokušaje čuvam u bazi i uopštavam ih…"
-  uz: "Diskret boshqaruvli tizimga modelini bilmay maqsadga urishni qanday oʻrgatish mumkin? Barcha urinishlarni bazada saqlayman va ularni…"
+  ru: "Гусеничный робот и цепь с поворотными и выдвижными звеньями не знают законов своего движения. Каждую их пробу я сохраняю и…"
+  en: "A tracked robot and a chain of rotating and sliding joints know nothing of their own physics. I save every attempt and then…"
+  es: "Un robot oruga y una cadena de eslabones giratorios y telescópicos ignoran las leyes de su movimiento. Guardo cada intento y…"
+  sr: "Gusenični robot i lanac sa obrtnim i izvlačnim segmentima ne znaju zakone svog kretanja. Svaki njihov pokušaj čuvam i…"
+  uz: "Gusenitsali robot va burilma hamda choʻziluvchi boʻgʻinli zanjir oʻz harakat qonunlarini bilmaydi. Har urinishini saqlayman va…"
 
 pi-birthday:
-  ru: "Вводишь дату рождения, и программа ищет её среди 3 миллиардов знаков π. Знаки я посчитал, а потом оказалось, что Python 2.7…"
-  en: "Type in your birthday and my program finds it among 3 billion digits of π. I computed the digits, then found out that Python 2.7…"
-  es: "Escribes tu fecha de nacimiento y el programa la busca entre 3000 millones de dígitos de π. Los calculé y luego resultó que Python 2.7…"
-  sr: "Uneseš datum rođenja, a program ga traži među 3 milijarde cifara π. Cifre sam izračunao, a onda se ispostavilo da Python 2.7…"
-  uz: "Tugʻilgan sanangizni kiritasiz, dastur uni π ning 3 milliard raqami orasidan qidiradi. Raqamlarni hisobladim, keyin esa Python 2.7…"
+  ru: "Обычно я пишу окна на C++ и WinAPI, а тут взял Python 2.7 с Tkinter. И выяснилось, что даты до 1900 года он…"
+  en: "I usually build windowed apps in C++ on WinAPI, but this time I took Python 2.7 and Tkinter. It turned out dates before 1900…"
+  es: "Suelo hacer ventanas en C++ con WinAPI, pero esta vez tomé Python 2.7 con Tkinter. Y resultó que las fechas anteriores a 1900 no…"
+  sr: "Obično pišem prozorske programe u C++-u i WinAPI-ju, a sad sam uzeo Python 2.7 i Tkinter. Ispostavilo se da datume pre 1900. on…"
+  uz: "Odatda C++ va WinAPIda oynali dastur yozaman, bu safar Python 2.7 va Tkinter oldim. Maʼlum boʻldiki, 1900-yilgacha sanalarni u…"
 
 learning-systems-discrete-control:
-  ru: "Моя система учится действовать методом проб и ошибок и хранит весь опыт в базе. Главное — сократить число проб, и для этого…"
-  en: "My system learns to act by trial and error and keeps all its experience in a database. The key is fewer trials, and for that…"
-  es: "Mi sistema aprende por ensayo y error y guarda toda su experiencia en una base de datos. Lo clave es reducir los ensayos, y para eso…"
-  sr: "Moj sistem uči da deluje metodom pokušaja i grešaka i sve iskustvo čuva u bazi. Glavno je smanjiti broj pokušaja, a za to…"
-  uz: "Tizimim sinov va xato orqali ishlashni oʻrganadi, butun tajribasini bazada saqlaydi. Asosiysi — urinishlarni kamaytirish, buning uchun…"
+  ru: "Весь опыт проб и ошибок я складываю в базу данных. Попадать точно мало: каждая лишняя проба стоит времени, и поэтому…"
+  en: "I put every bit of trial-and-error experience into a database. Hitting the goal isn't enough: each extra try costs time, so…"
+  es: "Guardo toda la experiencia de ensayo y error en una base de datos. Acertar no basta: cada intento de más cuesta tiempo, y por eso…"
+  sr: "Svo iskustvo pokušaja i promašaja slažem u bazu. Nije dovoljno pogoditi cilj: svaki suvišan pokušaj košta vremena, pa zato…"
+  uz: "Sinov va xato tajribasini bazaga yigʻaman. Nishonga tegish yetarli emas: har ortiqcha urinish vaqt oladi, shuning uchun…"
 
 robot-hand:
-  ru: "Мой робот, как младенец, ничего не знает о своём теле и учится двигать рукой методом проб и ошибок. В каждую точку он попадал…"
-  en: "Like a newborn, my robot knows nothing about its body and learns to move its arm by trial and error. It reached every target in…"
-  es: "Mi robot, como un bebé, no sabe nada de su cuerpo y aprende a mover el brazo por ensayo y error. A cada punto llegaba en…"
-  sr: "Moj robot je poput bebe: ne zna ništa o svom telu i uči da pokreće ruku metodom pokušaja i grešaka. U svaku tačku je pogađao…"
-  uz: "Robotim chaqaloqdek tanasi haqida hech narsa bilmaydi, qoʻlini sinov-xato yoʻli bilan harakatlantirishni oʻrganadi. Har bir nuqtaga u…"
+  ru: "Мозг не рассчитывает движение с нуля, а собирает из памяти. Я дал манипулятору «бесконечную» память и ни одной формулы…"
+  en: "The brain builds each movement from memory, not from scratch. I gave a manipulator “infinite” memory and no formulas…"
+  es: "El cerebro no calcula cada gesto desde cero, lo arma con la memoria. Di a un manipulador memoria «infinita» y ni una fórmula…"
+  sr: "Mozak ne izračunava gest od nule, već ga sastavlja iz pamćenja. Manipulatoru sam dao „beskonačnu“ memoriju i nijednu formulu…"
+  uz: "Miya siljishni noldan hisoblamaydi, xotiradan yigʻadi. Manipulyatorga «cheksiz» xotira berdim va bitta ham formula…"
 
 ipl:
-  ru: "В 2013-м я хотел, чтобы компьютер говорил на языке человека, а не наоборот. Синтаксис моего интерпретатора настраивается вплоть до…"
-  en: "In 2013 I wanted computers to speak our language, not the other way round. In my interpreter you can reshape the syntax, even to…"
-  es: "En 2013 quería que la computadora hablara el idioma de las personas, y no al revés. La sintaxis de mi intérprete se configura hasta…"
-  sr: "Godine 2013. hteo sam da računar govori ljudskim jezikom, a ne obrnuto. Sintaksa mog interpretera podešava se sve do…"
-  uz: "2013-yilda kompyuter inson tilida gapirishini xohladim, aksincha emas. Interpretatorimda sintaksisni hatto…"
+  ru: "Я хотел, чтобы компьютер заговорил языком человека, без всяких «}_$<<;». Читать такой код оказалось легко, а вот писать…"
+  en: "I wanted the computer to speak our language, free of “}_$<<;”. Reading such code turned out to be easy, but writing it…"
+  es: "Quería que el ordenador hablara el idioma de las personas, sin «}_$<<;». Leer ese código resultó fácil, pero escribirlo…"
+  sr: "Hteo sam da računar progovori ljudskim jezikom, bez ikakvih „}_$<<;“. Čitati takav kod pokazalo se lako, a pisati ga…"
+  uz: "Kompyuter inson tilida gapirishini xohlardim, «}_$<<;» kabi belgilarsiz. Bunday kodni oʻqish oson boʻldi, yozish esa…"
 
 # ---------------------------------------------------------------- projects
 vcd-writer:
@@ -109,37 +130,37 @@ vcd-writer:
   uz: "18 ta muvaffaqiyatli test dinamik xotirada bufer toʻlib ketishi va notoʻgʻri VCDni yashirgan. Sanitayzerlar ularni topdi; endi…"
 
 neoml:
-  ru: "С 2022 по 2024 год в NeoML приняли больше сотни моих пул-реквестов. Среди них — перевод математического движка с OpenMP на…"
-  en: "From 2022 to 2024, over a hundred of my pull requests were merged into NeoML. One moved the CPU math engine off OpenMP and onto…"
-  es: "Entre 2022 y 2024 aceptaron en NeoML más de cien de mis pull requests. Uno pasó el motor matemático de la CPU de OpenMP a…"
-  sr: "Od 2022. do 2024. u NeoML-u je prihvaćeno preko sto mojih pull request-ova. Među njima je prelazak matematičkog motora sa OpenMP na…"
-  uz: "2022-yildan 2024-yilgacha NeoMLga yuzdan ortiq pull requestim qabul qilindi. Ulardan biri matematik dvigatelni OpenMPdan…"
+  ru: "С 2022 по 2024 год приняли больше сотни моих пул-реквестов. Один снял математический движок с OpenMP и пересадил на…"
+  en: "From 2022 to 2024 over a hundred of my pull requests got merged. One took the CPU math engine off OpenMP and moved it onto…"
+  es: "De 2022 a 2024 aceptaron más de cien de mis pull requests. Uno sacó el motor matemático de CPU de OpenMP y lo pasó a…"
+  sr: "Od 2022. do 2024. primljeno je preko sto mojih pull request-ova. Jedan je matematički mehanizam skinuo sa OpenMP-a i prebacio na…"
+  uz: "2022–2024-yillarda yuzdan ortiq pull requestim qabul qilindi. Bittasi matematik dvigatelni OpenMPdan ajratib, uning oʻrniga…"
 
 b-tree:
-  ru: "В 2015-м я написал на C хранилище «ключ — значение» на B-дереве, но удаление и восстановление из журнала не доделал. В 2026-м…"
-  en: "In 2015 I wrote a B-tree key-value store in C, but left deletion and journal recovery unfinished. In 2026…"
-  es: "En 2015 escribí en C un almacén clave-valor sobre un árbol B, pero no terminé el borrado ni la recuperación desde el registro. En 2026…"
-  sr: "Godine 2015. napisao sam u C-u key-value skladište na B-stablu, ali brisanje i oporavak iz žurnala nisam dovršio. Godine 2026…"
-  uz: "2015-yilda C tilida B-daraxtli kalit-qiymat omborini yozdim, lekin oʻchirish va jurnaldan tiklashni tugatmadim. 2026-yilda…"
+  ru: "В 2015-м я сдал курсовой проект без удаления и восстановления из журнала. Спустя одиннадцать лет я вернулся к нему, и…"
+  en: "In 2015 I handed in my course project without deletion or journal recovery. Eleven years later I came back to it, and…"
+  es: "En 2015 entregué mi trabajo de curso sin borrado ni recuperación desde el journal. Once años después volví a él y…"
+  sr: "Godine 2015. predao sam kursni projekat bez brisanja i oporavka iz žurnala. Posle jedanaest godina vratio sam mu se i…"
+  uz: "2015-yilda kurs loyihamni oʻchirish va jurnaldan tiklashsiz topshirdim. Oradan oʻn bir yil oʻtib unga qaytdim va…"
 
 allocator:
-  ru: "Мой аллокатор сам себя дефрагментирует, сдвигая блоки. Санитайзеры и ревью 2026 года нашли в нём 13 ошибок — от записи за конец…"
-  en: "My allocator defragments itself by moving blocks around. Sanitizers and a 2026 review found 13 bugs in it, from writes past the buffer…"
-  es: "Mi asignador se desfragmenta solo, moviendo bloques. Los sanitizers y la revisión de 2026 le hallaron 13 errores, desde escrituras…"
-  sr: "Moj alokator se sam defragmentuje pomerajući blokove. Sanitizeri i pregled koda iz 2026. našli su u njemu 13 grešaka — od upisa van…"
-  uz: "Allokatorim bloklarni siljitib, oʻzini oʻzi defragmentatsiya qiladi. Sanitayzerlar va 2026-yilgi kod koʻrigi unda 13 ta xato topdi…"
+  ru: "Мои блоки переезжают по арене, и сырые указатели ломаются. В 2015-м я придумал свой указатель, а в 2026-м санитайзеры…"
+  en: "My blocks move around the arena, breaking raw pointers. In 2015 I wrote my own pointer class, and in 2026 sanitizers…"
+  es: "Mis bloques se mueven por la arena y los punteros crudos se rompen. En 2015 inventé mi propio puntero, y en 2026 los sanitizers…"
+  sr: "Moji blokovi se sele po areni, pa sirovi pokazivači pucaju. Godine 2015. smislio sam sopstveni pokazivač, a 2026. sanitajzeri…"
+  uz: "Bloklarim arena boʻylab koʻchadi, xom koʻrsatkichlar buziladi. 2015-yilda oʻz koʻrsatkichimni yozdim, 2026-yilda sanitayzerlar…"
 
 # ---------------------------------------------------------------- courses
 cpp-course:
-  ru: "Я читал магистрантам МГУ, как проектировать большие системы на C++: идиомы, память, многопоточность, Boost и…"
-  en: "I taught Moscow State master's students how to design big systems in C++: idioms, memory, concurrency, Boost and…"
-  es: "En la Universidad Estatal de Moscú enseñé a maestrandos a diseñar grandes sistemas en C++: modismos, memoria, concurrencia, Boost y…"
-  sr: "Magistrantima MGU-a predavao sam kako se projektuju veliki sistemi na C++-u: idiomi, memorija, višenitnost, Boost i…"
-  uz: "Men MDU magistrlariga C++da katta tizimlarni qanday loyihalashni oʻqitdim: idiomalar, xotira, koʻp oqimlilik, Boost va…"
+  ru: "С 2019 по 2023 год я читал магистрантам лекции: стандарты с 11 по 20, идиомы, многопоточность, Boost и сеть. К видео и слайдам…"
+  en: "From 2019 to 2023 I lectured master's students on the 2011–2020 standards, idioms, concurrency, Boost and networking, and added…"
+  es: "De 2019 a 2023 di clases de máster: estándares de 2011 a 2020, idioms, multihilo, Boost y redes. Al vídeo y las diapositivas…"
+  sr: "Od 2019. do 2023. magistrantima sam predavao: od standarda 2011. do 2020, idiomi, višenitnost, Boost i mreža. Uz video i slajdove…"
+  uz: "2019–2023-yillarda magistrantlarga maʼruza oʻqidim: 11-standartdan 20-sigacha, idiomalar, oqimlar, Boost, tarmoq. Videoga yana…"
 
 arch-course:
-  ru: "Мой курс начинается с устройства процессора и x86-64, а дальше — кэши, виртуальная память, прерывания, ОС и…"
-  en: "My course starts with how a CPU and x86-64 work, then moves on to caches, virtual memory, interrupts, the OS and…"
-  es: "Mi curso arranca con el funcionamiento de una CPU y de x86-64, y sigue con cachés, memoria virtual, interrupciones, el SO y…"
-  sr: "Moj kurs počinje od građe procesora i x86-64, a dalje idu keševi, virtuelna memorija, prekidi, OS i…"
-  uz: "Mening kursim protsessor va x86-64 tuzilishidan boshlanadi, keyin — keshlar, virtual xotira, uzilishlar, operatsion tizim va…"
+  ru: "В 2018 и 2020 годах я читал лекции с самого низа: процессор и x86-64, виртуальная память, прерывания, ОС, а потом…"
+  en: "In 2018 and 2020 I lectured from the bottom up: how a CPU and x86-64 work, virtual memory, interrupts, the OS, and then…"
+  es: "En 2018 y 2020 di clases desde lo más bajo: el procesador y x86-64, memoria virtual, interrupciones, el SO, y luego…"
+  sr: "Godine 2018. i 2020. predavao sam od samog dna: procesor i x86-64, virtuelna memorija, prekidi, OS, a zatim…"
+  uz: "2018 va 2020-yillarda maʼruzalarni eng quyidan boshladim: protsessor va x86-64, virtual xotira, uzilishlar, OT, keyin esa…"
