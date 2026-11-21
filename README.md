@@ -156,14 +156,13 @@ above the title (`--plain-only` regenerates just the twins).
 
 Saved copies (in case the publisher's site loses the paper):
 - `pdf_copy: papers/<slug>.pdf` — the PDF kept in the repo (personal e-mail addresses blanked out), served at
-  `/papers/<slug>.pdf`;
-- `record_url` — a bibliographic record (ISTINA) for a paper that was never online; `abstract` may be left out
+  `/papers/<slug>.pdf`. Re-save it losslessly before adding (PDF streams are already compressed, this only drops
+  garbage, ~5%): `python -c "import fitz,sys; d=fitz.open(sys.argv[1]); d.save(sys.argv[2], garbage=4, deflate=True, clean=True)" in.pdf out.pdf`;
+- `record_url` — the paper's record in ISTINA (MSU); `abstract` may be left out
   when the text is lost (the page then says so).
 
-While the publisher's PDF is alive the page shows it plus its copy; when it is gone the PDF links (page and CV)
-switch to the copy. `pdf_gone: true` switches at once; otherwise `tools/check_sources.py` (weekly,
-`.github/workflows/source-check.yml`) counts failed checks in `papers/source-status.yml`; the switch happens after
-3 in a row, and back when the PDF answers again.
+The page shows two buttons: the publisher's PDF and the copy (just the copy if it was never online), and
+the ISTINA record (`record_url`, give it for every paper); the CV links the same.
 
 Add it to `content/cv.<lang>.html` → Publications in every language (links line:
 `<p class="links">$plinks_<slug, - as _></p>`), then translate the abstract like a post.

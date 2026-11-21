@@ -43,7 +43,6 @@ LICENSE_URL = "https://github.com/favorart/favorart.github.io/blob/main/LICENSE"
 DEFAULT_LANG = "en"
 LANG_ORDER = ["en", "es", "ru", "sr", "uz"]  # order in the language switcher
 LANGS = {}  # filled in main(): code -> i18n dict
-SOURCE_STATUS = {}  # papers/source-status.yml: results of tools/check_sources.py
 PAPERS = []  # paper items, for the publication links in the CV
 HOME_LATEST = 2  # cards per section on the home page
 # GoatCounter site code (https://<code>.goatcounter.com): cookie-free visit counter.
@@ -512,7 +511,7 @@ def paper_item(e):
         fail("%s: give 'pdf' (the original online) or 'pdf_copy' (the copy in papers/), or both" % where)
     if e.get("pdf_copy") and not (e["pdf_copy"].startswith("papers/") and os.path.isfile(os.path.join(ROOT, e["pdf_copy"]))):
         fail("%s: pdf_copy '%s' must be a file in papers/" % (where, e["pdf_copy"]))
-    alive = original_alive(e)
+    alive = bool(e.get("pdf"))  # the publisher's PDF; the copy in papers/ is always offered next to it
     cover = e.get("cover")
     if cover and not os.path.isfile(os.path.join(ROOT, cover)):
         fail("%s: cover '%s' not found" % (where, cover))
@@ -612,28 +611,8 @@ def load_translations(items, langs):
     return report
 
 
-SOURCE_STATUS_FILE = os.path.join(ROOT, "papers", "source-status.yml")
-SOURCE_GONE_AFTER = 3  # failed weekly checks in a row (tools/check_sources.py) before the saved copy takes over
-
-
-def source_status():
-    if not os.path.isfile(SOURCE_STATUS_FILE):
-        return {}
-    with open(SOURCE_STATUS_FILE, encoding="utf-8") as f:
-        return yaml.safe_load(f) or {}
-
-
-def original_alive(e):
-    """Is the publisher's PDF still there? 'pdf_gone: true' in sources.yml switches at once; otherwise the
-    weekly check decides (several failures in a row, so a site that is down for a day does not flip the links)."""
-    if not e.get("pdf") or e.get("pdf_gone"):
-        return False
-    st = SOURCE_STATUS.get(e["slug"]) or {}
-    return not (st.get("url") == e["pdf"] and int(st.get("fails", 0)) >= SOURCE_GONE_AFTER)
-
-
 def pdf_link(item):
-    """The PDF to open: the publisher's while it is alive, else the copy kept in papers/ (None if neither)."""
+    """The PDF to open: the publisher's, or the copy kept in papers/ when it was never online (None if neither)."""
     e = item["paper"]
     if item["original_alive"]:
         return e["pdf"]
@@ -641,7 +620,8 @@ def pdf_link(item):
 
 
 def paper_buttons(item, t):
-    """PDF: the publisher's while it is alive (plus the copy kept here), else the copy on this site."""
+    """Two buttons: the publisher's PDF and the copy kept on this site (just the copy if it was never online),
+    then the bibliographic record in ISTINA (MSU)."""
     e, lang = item["paper"], item["lang"]
     out = []
     pdf = pdf_link(item)
@@ -650,23 +630,23 @@ def paper_buttons(item, t):
             esc(pdf), esc(lang)))
     if item["original_alive"] and e.get("pdf_copy"):
         out.append('<a class="btn big calm" href="/%s" hreflang="%s">%s</a>' % (esc(e["pdf_copy"]), esc(lang), S(t, "paper_copy")))
-    note = ""
-    if e.get("pdf") and not item["original_alive"]:
-        note = '<p class="tr-note">%s <a href="https://web.archive.org/web/2024/%s">%s</a></p>' % (
-            S(t, "paper_gone"), esc(e["pdf"]), S(t, "paper_archive"))
-    elif not e.get("pdf") and e.get("record_url"):  # never online: the copy is the PDF, plus the record
-        note = '<p class="tr-note">%s <a href="%s">%s</a></p>' % (
-            S(t, "paper_offline"), esc(e["record_url"]), S(t, "paper_record"))
-    return note + ('<p class="paper-pdf">%s</p>' % " ".join(out) if out else "")
+    note = '<p class="tr-note">%s</p>' % S(t, "paper_offline") if not e.get("pdf") else ""
+    record = ('<p class="paper-record"><a href="%s" hreflang="ru">%s</a></p>' % (esc(e["record_url"]), S(t, "paper_record"))
+              if e.get("record_url") else "")
+    return note + ('<p class="paper-pdf">%s</p>' % " ".join(out) if out else "") + record
 
 
 def cv_paper_links(t):
-    """$plinks_<slug> in the CV: the page and the PDF (the publisher's while it is alive, else the copy)."""
+    """$plinks_<slug> in the CV: the page, the PDF, the copy on this site, the ISTINA record."""
     out = {}
     for item in PAPERS:
         links = ['<a href="%s">%s →</a>' % (item_url(item, t), S(t, "paper_page"))]
         if pdf_link(item):
             links.append('<a href="%s" hreflang="%s">PDF →</a>' % (esc(pdf_link(item)), esc(item["lang"])))
+        if item["original_alive"] and item["paper"].get("pdf_copy"):
+            links.append('<a href="/%s" hreflang="%s">%s →</a>' % (esc(item["paper"]["pdf_copy"]), esc(item["lang"]), S(t, "paper_copy")))
+        if item["paper"].get("record_url"):
+            links.append('<a href="%s" hreflang="ru">%s →</a>' % (esc(item["paper"]["record_url"]), S(t, "paper_istina")))
         out["plinks_" + item["slug"].replace("-", "_")] = " · ".join(links)
     return out
 
@@ -1276,7 +1256,6 @@ def main():
     langs = load_languages()
     LANGS.update(langs)
     t0 = langs[DEFAULT_LANG]
-    SOURCE_STATUS.update(source_status())
     items = load_posts() + load_external(args.offline) + load_projects()
     PAPERS.extend(i for i in items if i["type"] == "paper")
     keys = [(i["section"], i["slug"]) for i in items]

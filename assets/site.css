@@ -340,6 +340,7 @@ img.cover-dark { filter: none !important; }
 .prose .btn { font-family: "Plus Jakarta Sans", Inter, system-ui, sans-serif; }
 /* publication pages: the PDF and its copy side by side */
 .paper-pdf { display: flex; flex-wrap: wrap; gap: 12px; }
+.paper-record { font: 500 13px/1.5 Inter, sans-serif; text-align: left !important; }
 .paper-ref { font: 15px/1.6 "Plus Jakarta Sans", system-ui, sans-serif; color: var(--muted); text-align: left !important; }
 .post .badge { position: absolute; z-index: 2; top: 12px; left: 12px; font: 600 11px/1 "JetBrains Mono", monospace; letter-spacing: .04em;
   color: var(--sun-ink); background: var(--sun); padding: 7px 10px; border-radius: 999px; box-shadow: 0 4px 14px -6px var(--sun); transition: filter .2s; }

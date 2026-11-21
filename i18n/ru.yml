@@ -105,13 +105,12 @@ type_paper: Статья
 type_thesis: Тезисы
 # conference abstract on its page: conference, section, year
 thesis_source: "{c}, секция «{s}», {y}"
-# publication pages: the PDF copy kept in papers/ and the links when the original is gone
+# publication pages: the PDF copy kept in papers/, the ISTINA record
 paper_page: "Страница"
 paper_copy: "Копия PDF"
-paper_gone: "PDF на сайте издателя больше недоступен, поэтому ссылка ведёт на копию, сохранённую здесь."
-paper_archive: "Копия в Web Archive"
 paper_offline: "Сборник не выложен в сети, копия PDF хранится здесь."
-paper_record: "Библиографическая запись"
+paper_record: "Библиографическая запись в ИСТИНЕ МГУ"
+paper_istina: "ИСТИНА"
 paper_no_text: "Текст тезисов не сохранился ни у автора, ни в сети; копия PDF — страница программы конференции с этим докладом."
 paper_back: "К описанию публикации"
 filter_label: Фильтр по типу

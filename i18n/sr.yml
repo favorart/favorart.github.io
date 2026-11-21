@@ -99,13 +99,12 @@ type_paper: Rad
 type_thesis: Saopštenje
 # conference abstract on its page: conference, section, year
 thesis_source: "{c}, sekcija „{s}“, {y}"
-# publication pages: the PDF copy kept in papers/ and the links when the original is gone
+# publication pages: the PDF copy kept in papers/, the ISTINA record
 paper_page: "Stranica"
 paper_copy: "Kopija PDF-a"
-paper_gone: "PDF više nije dostupan na sajtu izdavača, pa link vodi na kopiju sačuvanu ovde."
-paper_archive: "Kopija na Web Archive-u"
 paper_offline: "Zbornik nije objavljen na internetu; kopija PDF-a čuva se ovde."
-paper_record: "Bibliografski zapis"
+paper_record: "Bibliografski zapis u sistemu ISTINA (MGU)"
+paper_istina: "ISTINA"
 paper_no_text: "Tekst ovog saopštenja nije sačuvan ni kod autora ni na internetu; kopija PDF-a je stranica programa konferencije na kojoj je izlaganje navedeno."
 paper_back: "Nazad na publikaciju"
 filter_label: Filtriraj po tipu
