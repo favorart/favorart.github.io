@@ -3,7 +3,7 @@ title: "Tu cumpleaños en las cifras de π"
 summary: "Una pequeña aplicación gráfica en Python/Tkinter que encuentra tu fecha de nacimiento entre 3000 millones de cifras de π, luego rehecha para la web."
 source: favorart/pi-birthday@main:article.md
 source_lang: en
-source_hash: 219b2f17
+source_hash: b30d8afa
 translated: 2026-11-21
 translator: Claude
 reviewed: 2026-11-21
@@ -271,7 +271,7 @@ Solo queda una minucia: la interfaz gráfica.
 
 El plan de la interfaz:
 
-<img width="807" height="579" alt="plan de la interfaz" src="https://github.com/user-attachments/assets/a718d644-af95-4aa8-8da3-48d56f8265bd" />
+<img width="807" height="579" alt="plan de la interfaz" src="img/plan-en.png" />
 
 1.  Fijar el tamaño mínimo de la ventana.
 2.  Entrada de fecha validada, para que no se pueda introducir una fecha no válida.
@@ -845,7 +845,7 @@ Fuente: [legacy/pi.py, líneas 140–141](legacy/pi.py#L140-L141)
 
 El código completo está en [legacy/pi.py](legacy/pi.py).
 
-<img width="1080" height="557" alt="interfaz" src="https://github.com/user-attachments/assets/81283f68-b27a-4b1d-8242-a384d49153bd" />
+<img width="1080" height="557" alt="interfaz" src="img/interface-en.jpg" />
 
 ### Localización
 
