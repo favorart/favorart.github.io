@@ -188,8 +188,9 @@ Saved copies (in case the publisher's site loses the paper):
 The page shows two buttons: the publisher's PDF and the copy (just the copy if it was never online), and
 the ISTINA record (`record_url`, give it for every paper); the CV links the same.
 
-Add it to `content/cv.<lang>.html` → Publications in every language (links line:
-`<p class="links">$plinks_<slug, - as _></p>`), then translate the abstract like a post.
+Add a journal paper to `content/cv.<lang>.html` → Publications in every language (links line:
+`<p class="links">$plinks_<slug, - as _></p>`); a conference abstract gets its page only, not a CV line. Then
+translate the abstract like a post.
 
 ## Analytics
 
