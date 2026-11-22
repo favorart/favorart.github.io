@@ -2,6 +2,9 @@
 
 Compares the text of the built pages with last week's snapshot: new pages (title, summary, link),
 changed paragraphs (was -> now), removed ones. Written for readers, not developers: no commits, no code.
+Short first: one line per new page ("Почитать") and per changed page ("Обновилось": what kind of change, how
+much); then a few small edits of the lightly edited pages for the careful reader; a rewritten page only says
+"reread it". Changes of markup alone (a formula losing its $ signs) are not changes.
 Sent through Web3Forms to the contact form's inbox (see weekly_report.send), ready to forward.
 
 Usage:
@@ -34,6 +37,10 @@ INLINE = {"span", "a", "time", "b", "strong", "em", "i"}
 NAMES = {"": "Главная", "cv": "Резюме (CV)"}
 MONTHS = "января февраля марта апреля мая июня июля августа сентября октября ноября декабря".split()
 MAX_PER_PAGE = 10
+SWAP_CHARS = 220       # a paragraph this short is shown whole as was -> now
+DETAILS_PER_PAGE = 5   # small edits shown per page at the end of the letter
+DETAIL_CHARS = 200     # an added/removed paragraph longer than this is only counted
+SUMMARY_CHARS = 160    # a new page's summary is cut to this
 MAX_CHARS = 40000
 
 
@@ -137,24 +144,13 @@ def short(s, n=400):
     return s if len(s) <= n else s[: n - 1].rsplit(" ", 1)[0] + "…"
 
 
-def word_changes(a, b):
-    """Fragments of a long paragraph that changed, with a few words of context around each."""
-    wa, wb = a.split(" "), b.split(" ")
-    out = []
-    for op, i1, i2, j1, j2 in difflib.SequenceMatcher(None, wa, wb, autojunk=False).get_opcodes():
-        if op == "equal":
-            continue
-        left = " ".join(wa[max(0, i1 - 5):i1])
-        right = " ".join(wa[i2:i2 + 5])
-        was, now = " ".join(wa[i1:i2]), " ".join(wb[j1:j2])
-        mid = ("[было: %s] [стало: %s]" % (short(was, 200), short(now, 200)) if was and now
-               else "[добавлено: %s]" % short(now, 200) if now else "[убрано: %s]" % short(was, 200))
-        out.append("…%s %s %s…" % (left, mid, right))
-    return out
+def same_text(a, b):
+    return re.sub(r"[\s$]", "", a) == re.sub(r"[\s$]", "", b)
 
 
 def page_changes(old, new):
-    """Changes of one page, each a list of lines (shown with a blank line between them)."""
+    """Changes of one page as (kind, was, now): swap (a short paragraph edited: was -> now), fix (a long
+    paragraph edited: only counted), add, remove, img (now = how many pictures more, negative if fewer)."""
     items = []
     ob, nb = old["blocks"], new["blocks"]
     for op, i1, i2, j1, j2 in difflib.SequenceMatcher(None, ob, nb, autojunk=False).get_opcodes():
@@ -166,15 +162,14 @@ def page_changes(old, new):
             if difflib.SequenceMatcher(None, a, b, autojunk=False).ratio() < 0.5:
                 break
             olds.pop(0), news.pop(0)
-            if len(a) <= 220 and len(b) <= 220:
-                items.append(["     ❌ было:   " + a, "     ✅ стало:  " + b])
-            else:
-                items += [["     ✏️ поправлено:  " + w] for w in word_changes(a, b)[:4]]
-        items += [["     ➖ убрано:  «%s»" % short(a, 200)] for a in olds]
-        items += [["     ➕ добавлено:  «%s»" % short(b)] for b in news]
+            if same_text(a, b):  # only markup changed (a formula lost its $ signs, spacing): nothing to read
+                continue
+            items.append(("swap" if len(a) <= SWAP_CHARS and len(b) <= SWAP_CHARS else "fix", a, b))
+        items += [("remove", a, "") for a in olds]
+        items += [("add", "", b) for b in news]
     d = new["imgs"] - old["imgs"]
     if d:
-        items.append(["     🖼 %s картинок: %d" % ("новых" if d > 0 else "убрано", abs(d))])
+        items.append(("img", "", d))
     return items
 
 
@@ -194,17 +189,72 @@ def plural(n, one, few, many):
     return "%d %s" % (n, few if 2 <= n % 10 <= 4 and not 12 <= n % 100 <= 14 else many)
 
 
-RULE = "━" * 28
-SECTIONS = [("writing", "📝 Публикации"), ("projects", "🛠 Проекты"), ("courses", "🎓 Курсы"), ("", "📄 Страницы")]
+RULE = "─" * 30
+NEW_WORDS = {"writing": ("новая публикация", "новые публикации", "новых публикаций"),
+             "projects": ("новый проект", "новых проекта", "новых проектов"),
+             "courses": ("новый курс", "новых курса", "новых курсов"),
+             "": ("новая страница", "новые страницы", "новых страниц")}
 
 
 def section(rel):
     head = rel.split("/")[0]
-    return head if head in ("writing", "projects", "courses") else ""
+    return head if head in NEW_WORDS else ""
 
 
-def heading(title):
-    return [RULE, title, RULE, ""]
+def rewritten(items):
+    """Changed so much that a list of edits would not help: the reader should reread the page."""
+    big = sum(1 for k, _, _ in items if k in ("add", "remove", "fix"))
+    return len(items) > 3 * MAX_PER_PAGE or big >= 6
+
+
+def what_changed(items):
+    """One plain line about a page's changes: what kind, how many."""
+    if rewritten(items):
+        return "текст заметно переписан, стоит перечитать"
+    n = {k: sum(1 for kk, _, _ in items if kk == k) for k in ("swap", "fix", "add", "remove", "img")}
+    parts = []
+    if n["swap"] + n["fix"]:
+        parts.append("поправлено " + plural(n["swap"] + n["fix"], "место", "места", "мест"))
+    if n["add"]:
+        parts.append(agreed(n["add"], "добавлен", "добавлено"))
+    if n["remove"]:
+        parts.append(agreed(n["remove"], "убран", "убрано"))
+    imgs = sum(v for k, _, v in items if k == "img")
+    if imgs:
+        parts.append(("новые картинки: %d" if imgs > 0 else "убрано картинок: %d") % abs(imgs))
+    return ", ".join(parts)
+
+
+def agreed(n, one, many):
+    """'добавлен 1 абзац', 'добавлено 3 абзаца'."""
+    return "%s %s" % (one if n % 10 == 1 and n % 100 != 11 else many, plural(n, "абзац", "абзаца", "абзацев"))
+
+
+def names(titles, limit=3):
+    if len(titles) <= limit:
+        return ", ".join(titles[:-1]) + (" и " if len(titles) > 1 else "") + titles[-1]
+    return ", ".join(titles[:limit]) + " и ещё %d" % (len(titles) - limit)
+
+
+def details(items):
+    """The small edits of a page, for the reader who wants to notice them: was -> now, added, removed."""
+    out, shown = [], 0
+    for kind, was, now in items:
+        if shown == DETAILS_PER_PAGE:
+            break
+        if kind == "swap":
+            out += ["   было:   " + was, "   стало:  " + now, ""]
+        elif kind == "add" and len(now) <= DETAIL_CHARS:
+            out += ["   + добавлено: «%s»" % now, ""]
+        elif kind == "remove" and len(was) <= DETAIL_CHARS:
+            out += ["   − убрано: «%s»" % was, ""]
+        else:
+            continue
+        shown += 1
+    rest = sum(1 for k, _, _ in items if k != "img") - shown
+    if rest > 0 and out:
+        out += ["   …и ещё %s — на странице" % plural(rest, "правка", "правки", "правок"), ""]
+    return out
 
 
 def digest(old, new, end, days=7):
@@ -212,46 +262,44 @@ def digest(old, new, end, days=7):
     added = [r for r in new if r not in old]
     removed = [r for r in old if r not in new]
     changed = [(r, page_changes(old[r], new[r])) for r in new if r in old]
-    changed = [(r, c) for r, c in changed if c]
+    changed = sorted([(r, c) for r, c in changed if c], key=lambda rc: -len(rc[1]))
     if not (added or removed or changed):
         return None, None
     when = "%s %d" % (period(start, end), end.year)
-    out = ["📰  Что нового на сайте favorart.github.io", "      %s" % when, ""]
+    out = ["Что нового на сайте · %s" % when, ""]
     if not old:
         out += ["На этой неделе сайт появился! Ниже всё, что на нём есть.", ""]
-    if old:
-        counts = [plural(len(added), "новая страница", "новые страницы", "новых страниц"),
-                  plural(len(changed), "страница с правками", "страницы с правками", "страниц с правками"),
-                  plural(len(removed), "страница убрана", "страницы убраны", "страниц убрано")]
-        out += ["Коротко: " + ", ".join(c for c in counts if not c.startswith("0 ")) + ".", ""]
+    else:
+        lead = []
+        for key in NEW_WORDS:
+            n = sum(1 for r in added if section(r) == key)
+            if n:
+                lead.append(plural(n, *NEW_WORDS[key]))
+        if changed:
+            lead.append("обновлено: " + names([new[r]["title"] for r, _ in changed]))
+        if removed:
+            lead.append("убрано " + plural(len(removed), "страница", "страницы", "страниц"))
+        out += ["За неделю: " + "; ".join(lead) + ".", ""]
     if added:
-        out += heading("✨  НОВОЕ")
-        for key, name in SECTIONS:
-            group = [r for r in added if section(r) == key]
-            if not group:
-                continue
-            out += [name, ""]
-            for i, r in enumerate(group, 1):
-                out.append("  %d. %s" % (i, new[r]["title"]))
-                if new[r]["summary"] and r:
-                    out.append("     " + new[r]["summary"])
-                out += ["     👉 " + url(r), ""]
+        out += [RULE, "📖 ПОЧИТАТЬ", ""]
+        for r in sorted(added, key=lambda r: list(NEW_WORDS).index(section(r))):
+            out.append("• " + new[r]["title"])
+            if new[r]["summary"] and r:
+                out.append("  " + short(new[r]["summary"], SUMMARY_CHARS))
+            out += ["  " + url(r), ""]
     if changed:
-        out += heading("✏️  ПРАВКИ НА СТРАНИЦАХ")
+        out += [RULE, "✏️ ОБНОВИЛОСЬ", ""]
         for r, items in changed:
-            out += ["📄 " + new[r]["title"], "     👉 " + url(r), ""]
-            if len(items) > 3 * MAX_PER_PAGE:  # rewritten as a whole: a list of fragments would not help
-                out += ["     🔄 Текст страницы заметно переработан (%s) — её стоит перечитать целиком."
-                        % plural(len(items), "правка", "правки", "правок"), ""]
-                continue
-            for it in items[:MAX_PER_PAGE]:
-                out += it + [""]
-            if len(items) > MAX_PER_PAGE:
-                rest = len(items) - MAX_PER_PAGE
-                out += ["     …и ещё %s — страницу стоит перечитать целиком." % plural(rest, "правка", "правки", "правок"), ""]
+            out += ["• %s — %s" % (new[r]["title"], what_changed(items)), "  " + url(r), ""]
     if removed:
-        out += heading("🗑  УБРАНО С САЙТА") + ["  • " + old[r]["title"] for r in removed] + [""]
-    out += [RULE, "Письмо собрано автоматически по русской версии сайта.", "Приятного чтения! 🙂"]
+        out += [RULE, "🗑 УБРАНО", ""] + ["• " + old[r]["title"] for r in removed] + [""]
+    small = [(r, details(items)) for r, items in changed if not rewritten(items)]
+    small = [(r, d) for r, d in small if d]
+    if small:
+        out += [RULE, "🔍 МЕЛКИЕ ПРАВКИ — для внимательного чтения", ""]
+        for r, d in small:
+            out += [new[r]["title"] + ":", ""] + d
+    out += [RULE, "Письмо собрано автоматически по русской версии сайта. Приятного чтения! 🙂"]
     text = "\n".join(out)
     if len(text) > MAX_CHARS:
         text = text[:MAX_CHARS].rsplit("\n", 1)[0] + "\n\n…письмо обрезано: правок за неделю очень много."
