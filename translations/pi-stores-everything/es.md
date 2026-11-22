@@ -1,7 +1,7 @@
 ---
 title: "π lo guarda todo, así que no tuve que guardar π"
 summary: "La historia detectivesca de un sitio que encuentra cualquier fecha entre tres mil millones de cifras de π: cuántas cifras hacen falta para que aparezcan todas las fechas, por qué convertir un número grande en cadena en CPython se declaró una vulnerabilidad y cómo numpy recorrió 1700 millones de cifras en un minuto y medio."
-source: favorart/pi-birthday@main:article-2026.ru.md
+source: favorart/pi-birthday@main:docs/article-2026.ru.md
 source_lang: ru
 source_hash: bfcf9dd2
 translated: 2026-11-21

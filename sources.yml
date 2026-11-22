@@ -29,7 +29,7 @@ articles:
   - slug: pi-birthday
     repo: favorart/pi-birthday
     branch: main
-    path: article.md
+    path: docs/article.md
     title:
       en: Your birthday in the digits of π
       es: Tu cumpleaños en las cifras de π
@@ -48,13 +48,13 @@ articles:
       uz: "Python/Tkinter asosidagi kichik GUI ilova: tugʻilgan sanangizni π sonining 3 milliard raqami orasidan topadi — keyinroq veb uchun qayta yaratilgan."
     cover: covers/pi-birthday/cover-4.svg
     demo_url: https://favorart.github.io/pi-birthday/
-    translation_files: {ru: article.ru.md}   # links to these files go to the page in that language
+    translation_files: {ru: docs/article.ru.md}   # links to these files go to the page in that language
 
 
   - slug: pi-stores-everything
     repo: favorart/pi-birthday
     branch: main
-    path: article-2026.ru.md
+    path: docs/article-2026.ru.md
     title:
       ru: π хранит всё, так что хранить π мне не пришлось
       en: π stores everything, so I didn't have to store π
@@ -66,7 +66,7 @@ articles:
       en: "The detective story behind a site that finds any date in three billion digits of π: how many digits it takes for every date to show up, why converting a big integer to a string in CPython became a vulnerability, and how numpy went through 1.7 billion digits in a minute and a half."
     cover: covers/pi-stores-everything/cover-5.svg
     demo_url: https://favorart.github.io/pi-birthday/
-    translation_files: {en: article-2026.md}
+    translation_files: {en: docs/article-2026.md}
     home: false
 
   - slug: robot-hand

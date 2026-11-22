@@ -1,9 +1,9 @@
 ---
 title: "Tu cumpleaños en las cifras de π"
 summary: "Una pequeña aplicación gráfica en Python/Tkinter que encuentra tu fecha de nacimiento entre 3000 millones de cifras de π, luego rehecha para la web."
-source: favorart/pi-birthday@main:article.md
+source: favorart/pi-birthday@main:docs/article.md
 source_lang: en
-source_hash: 7cb4d0b6
+source_hash: aa96f51d
 translated: 2026-11-21
 translator: Claude
 reviewed: 2026-11-21
@@ -12,7 +12,7 @@ reviewed: 2026-11-21
 
 **Español** · [English](article.md){: hreflang=en } · [Русский](article.ru.md){: hreflang=ru }
 
-_Artículo de 2018 sobre la primera versión, de escritorio (Python 2.7 + Tkinter), traducido del ruso. Publicación original: [VK](https://vk.ru/@33453621-pi-gui-python){: hreflang=ru }. Código completo: [legacy/pi.py](legacy/pi.py); para ejecutarlo hoy, usen [legacy/run.sh](legacy/run.sh)._
+_Artículo de 2018 sobre la primera versión, de escritorio (Python 2.7 + Tkinter), traducido del ruso. Publicación original: [VK](https://vk.ru/@33453621-pi-gui-python){: hreflang=ru }. Código completo: [legacy/pi.py](../legacy/pi.py); para ejecutarlo hoy, usen [legacy/run.sh](../legacy/run.sh)._
 
 _La continuación de 2026, una versión web que no guarda ni una cifra de π: [π lo guarda todo, así que no tuve que guardar π](/es/writing/pi-stores-everything/)._
 
@@ -102,7 +102,7 @@ lb_text.set("1")
 tk.Label(root, textvariable=lb_text, width=10, font=dFont, anchor=tk.NW)
 ```
 
-Fuente: [legacy/pi.py, líneas 227–230](legacy/pi.py#L227-L230)
+Fuente: [legacy/pi.py, líneas 227–230](../legacy/pi.py#L227-L230)
 
 El parámetro `font` cambia la fuente; preparé de antemano una fuente de interfaz más grande y legible:
 
@@ -111,7 +111,7 @@ import tkFont
 dFont = tkFont.Font(family="Arial", size=30)
 ```
 
-Fuente: [legacy/pi.py, línea 211](legacy/pi.py#L211)
+Fuente: [legacy/pi.py, línea 211](../legacy/pi.py#L211)
 
 El parámetro `anchor` fija la alineación del widget; aquí es NORTH-WEST, es decir, el texto se pega a la esquina superior izquierda del widget.
 
@@ -132,7 +132,7 @@ def bt_find_click(event):
 root.bind('<Return>', bt_find_click)
 ```
 
-Fuente: [legacy/pi.py, línea 210](legacy/pi.py#L210)
+Fuente: [legacy/pi.py, línea 210](../legacy/pi.py#L210)
 
 Recibe el nombre del evento y la función a la que hay que llamar. El evento, con todos sus parámetros, se pasa a la función como argumento `event`. Aquí el evento es pulsar la tecla Enter, que se escribe como la cadena `'<Return>'`.
 
@@ -261,7 +261,7 @@ fill_db(db, PI, 2000000000, 3000000000, count)
 print
 ```
 
-_Estos scripts de preparación no están en `legacy/`; en la versión web los sustituye [tools/build_index.py](tools/build_index.py)._
+_Estos scripts de preparación no están en `legacy/`; en la versión web los sustituye [tools/build_index.py](../tools/build_index.py)._
 
 Listo, la etapa de preparación está terminada.
 
@@ -290,7 +290,7 @@ root.geometry("1280x640") # default window size at startup
 root.minsize(680, 340)    # minimum window size, so widgets don't collapse into a dot
 ```
 
-Fuente: [legacy/pi.py, líneas 206–207](legacy/pi.py#L206-L207)
+Fuente: [legacy/pi.py, líneas 206–207](../legacy/pi.py#L206-L207)
 
 ### Validación de la entrada
 
@@ -346,7 +346,7 @@ Example(root).pack(fill="both", expand=True)
 
 De todo esto solo me hacía falta el parámetro `'%P'`: _toda la entrada nueva_. Si, después de escribir el siguiente carácter, el conjunto no es (el principio de) una fecha, nos quedamos con lo escrito antes de ese carácter; si lo es, el carácter se añade al `Entry`.
 
-Para la fecha completa usamos la misma biblioteca arrow. El widget `DateEntry` resultante: [legacy/pi.py, líneas 34–89](legacy/pi.py#L34-L89).
+Para la fecha completa usamos la misma biblioteca arrow. El widget `DateEntry` resultante: [legacy/pi.py, líneas 34–89](../legacy/pi.py#L34-L89).
 
 ### Configurar el widget de π
 
@@ -461,7 +461,7 @@ class WrappingLabel(tk.Text):
 lbt = WrappingLabel(frame, font=dFont, wrap=tk.CHAR, bg=frame["bg"], fg='black')
 ```
 
-Fuente: [legacy/pi.py, líneas 101–134](legacy/pi.py#L101-L134); creación del widget: [línea 248](legacy/pi.py#L248)
+Fuente: [legacy/pi.py, líneas 101–134](../legacy/pi.py#L101-L134); creación del widget: [línea 248](../legacy/pi.py#L248)
 
 La idea siguió siendo la misma, interceptar el evento de cambio del texto, pero la implementación mejoró. Algunos puntos.
 
@@ -475,7 +475,7 @@ if (actual_width  > max_width * max_height):
                                        max_width * max_height)
 ```
 
-Fuente: [legacy/pi.py, líneas 117–121](legacy/pi.py#L117-L121)
+Fuente: [legacy/pi.py, líneas 117–121](../legacy/pi.py#L117-L121)
 
 Como `bisect` no tiene un parámetro key para el valor por el que comparar, tuve que escribir un envoltorio:
 
@@ -491,7 +491,7 @@ class KeyList(object):
         return self.key(self.l[index], index)
 ```
 
-Fuente: [legacy/pi.py, líneas 91–99](legacy/pi.py#L91-L99)
+Fuente: [legacy/pi.py, líneas 91–99](../legacy/pi.py#L91-L99)
 
 En lugar de una letra, le da a la búsqueda la anchura del texto desde el principio hasta esa letra.
 
@@ -501,7 +501,7 @@ En lugar de una letra, le da a la búsqueda la anchura del texto desde el princi
 self.font_height = 46.8   # instead of self.font.metrics('linespace')
 ```
 
-Fuente: [legacy/pi.py, línea 107](legacy/pi.py#L107)
+Fuente: [legacy/pi.py, línea 107](../legacy/pi.py#L107)
 
 El coeficiente lleva el final del texto lo más cerca posible del final del widget, pero, claro, a veces falla:
 
@@ -520,7 +520,7 @@ self.tag_add("highlight", "1."+str(index), "1."+str(index+8))
 self.tag_config("highlight", background=frame["bg"], foreground="red")
 ```
 
-Fuente: [legacy/pi.py, líneas 130–131](legacy/pi.py#L130-L131)
+Fuente: [legacy/pi.py, líneas 130–131](../legacy/pi.py#L130-L131)
 
 5\. Prohibimos cualquier modificación del widget:
 
@@ -528,7 +528,7 @@ Fuente: [legacy/pi.py, líneas 130–131](legacy/pi.py#L130-L131)
 lb3.config(state=tk.DISABLED)
 ```
 
-Fuente: [legacy/pi.py, línea 255](legacy/pi.py#L255)
+Fuente: [legacy/pi.py, línea 255](../legacy/pi.py#L255)
 
 Para que el `Text` no destaque, igual que un `Label`, su `background` se iguala al color de la ventana principal:
 
@@ -543,7 +543,7 @@ LONG_ARRAY = read_pi(1,2500)
 lb3.insert(tk.END, LONG_ARRAY)
 ```
 
-Fuente: [legacy/pi.py, línea 204](legacy/pi.py#L204) y [línea 254](legacy/pi.py#L254)
+Fuente: [legacy/pi.py, línea 204](../legacy/pi.py#L204) y [línea 254](../legacy/pi.py#L254)
 
 En el manejador de eventos sustituimos los datos por los que hacen falta:
 
@@ -552,7 +552,7 @@ self.delete(1.0, tk.END)   # first delete the old data, starting from char 0 of 
 self.insert(tk.END, text)  # then insert the new data at the end of the text
 ```
 
-Fuente: [legacy/pi.py, líneas 125–126](legacy/pi.py#L125-L126)
+Fuente: [legacy/pi.py, líneas 125–126](../legacy/pi.py#L125-L126)
 
 Como ven, los datos se añaden de otra forma que en un `Label`: se pueden añadir línea a línea, indicando en qué línea escribir. No me compliqué con eso y trabajo con una sola línea.
 
@@ -597,7 +597,7 @@ def bt_find_click(event=None):
     lb3.config(state=tk.DISABLED)      # forbid editing
 ```
 
-Fuente: [legacy/pi.py, líneas 136–162](legacy/pi.py#L136-L162)
+Fuente: [legacy/pi.py, líneas 136–162](../legacy/pi.py#L136-L162)
 
 Como ven, ahora, para modificar el `Text`, incluso desde el código, primero hay que devolverlo al estado normal, cambiar el contenido y luego volver a desactivar la modificación.
 
@@ -618,7 +618,7 @@ def read_pi(first,last):
     return PI
 ```
 
-Fuente: [legacy/pi.py, líneas 164–173](legacy/pi.py#L164-L173)
+Fuente: [legacy/pi.py, líneas 164–173](../legacy/pi.py#L164-L173)
 
 ### Disposición
 
@@ -699,7 +699,7 @@ bt_find = tk.Button(frame, text="Find", font=dFont, command=bt_find_click)
 bt_find.grid(column=8, row=0, columnspan=2, sticky=tk.NSEW, pady=0)
 ```
 
-Fuente: [legacy/pi.py, líneas 213–224](legacy/pi.py#L213-L224)
+Fuente: [legacy/pi.py, líneas 213–224](../legacy/pi.py#L213-L224)
 
 Los demás elementos se colocaron igual. Como ven, el `Text` (`lbt`) es el que más espacio ocupa:
 
@@ -718,7 +718,7 @@ lbt = WrappingLabel(frame)
 lbt.grid(column=1, row=1, columnspan=9, rowspan=5, sticky=tk.NSEW)
 ```
 
-Fuente: [legacy/pi.py, líneas 225–249](legacy/pi.py#L225-L249)
+Fuente: [legacy/pi.py, líneas 225–249](../legacy/pi.py#L225-L249)
 
 Al final de todo fijé los pesos de las celdas: cuanto mayor es el peso, más cambia de tamaño la celda al escalar la ventana principal.
 
@@ -727,7 +727,7 @@ for y in range(1,11): tk.Grid.columnconfigure(frame, y, weight=1)
 for x in range(2,6): tk.Grid.rowconfigure(frame, x, weight=1)
 ```
 
-Fuente: [legacy/pi.py, líneas 250–253](legacy/pi.py#L250-L253)
+Fuente: [legacy/pi.py, líneas 250–253](../legacy/pi.py#L250-L253)
 
 ### Optimizar el programa
 
@@ -789,7 +789,7 @@ pd csvrd 350.0057260714 secs.
 loadtxt  41.6930684601 secs.
 ```
 
-Gana csv. Sigue siendo lento. El `read_db` final: [legacy/pi.py, líneas 189–193](legacy/pi.py#L189-L193).
+Gana csv. Sigue siendo lento. El `read_db` final: [legacy/pi.py, líneas 189–193](../legacy/pi.py#L189-L193).
 
 Así que saqué la artillería pesada, el multihilo: leer el archivo de texto de fechas en segundo plano mientras se carga el formulario.
 
@@ -803,7 +803,7 @@ class Worker(threading.Thread):
 WORKER = Worker() # an instance of the thread that reads the DB from the file
 ```
 
-Fuente: [legacy/pi.py, líneas 27–32](legacy/pi.py#L27-L32)
+Fuente: [legacy/pi.py, líneas 27–32](../legacy/pi.py#L27-L32)
 
 Para este caso, bastante habitual en la programación de GUI (mantener el formulario receptivo durante cálculos pesados), Tk tiene funciones especiales. Nos hace falta `after()`, que llama a nuestra función, aquí `listen_for_result()`, al cabo de 10 milisegundos del bucle de eventos.
 
@@ -823,7 +823,7 @@ if __name__ == '__main__':
     root.mainloop()
 ```
 
-Fuente: [legacy/pi.py, líneas 195–200](legacy/pi.py#L195-L200) y [líneas 208–209](legacy/pi.py#L208-L209)
+Fuente: [legacy/pi.py, líneas 195–200](../legacy/pi.py#L195-L200) y [líneas 208–209](../legacy/pi.py#L208-L209)
 
 Intenta unirse al hilo si ya ha terminado y, si no, le pide a Tk que espere otros 10 milisegundos.
 
@@ -839,17 +839,17 @@ def bt_find_click(event=None):
     # ...
 ```
 
-Fuente: [legacy/pi.py, líneas 140–141](legacy/pi.py#L140-L141)
+Fuente: [legacy/pi.py, líneas 140–141](../legacy/pi.py#L140-L141)
 
 ### Código fuente completo
 
-El código completo está en [legacy/pi.py](legacy/pi.py).
+El código completo está en [legacy/pi.py](../legacy/pi.py).
 
 <img width="1080" height="557" alt="interfaz" src="img/interface-en.jpg" />
 
 ### Localización
 
-En lugar de cadenas fijas en el código, las cadenas se leen de un archivo de configuración: [legacy/pi.py, líneas 175–187](legacy/pi.py#L175-L187).
+En lugar de cadenas fijas en el código, las cadenas se leen de un archivo de configuración: [legacy/pi.py, líneas 175–187](../legacy/pi.py#L175-L187).
 
 <img width="1080" height="565" alt="localización" src="https://github.com/user-attachments/assets/36be95e5-22fa-42e1-982e-cf63ec3ea86a" />
 

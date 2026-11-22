@@ -1,9 +1,9 @@
 ---
 title: "Vaš rođendan u ciframa broja π"
 summary: "Mala GUI aplikacija u Python-u/Tkinter-u koja pronalazi vaš datum rođenja među 3 milijarde cifara broja π – kasnije prepravljena za veb."
-source: favorart/pi-birthday@main:article.md
+source: favorart/pi-birthday@main:docs/article.md
 source_lang: en
-source_hash: 7cb4d0b6
+source_hash: aa96f51d
 translated: 2026-11-21
 translator: Claude
 reviewed: 2026-11-21
@@ -12,7 +12,7 @@ reviewed: 2026-11-21
 
 **Srpski** · [English](article.md){: hreflang=en } · [Русский](article.ru.md){: hreflang=ru }
 
-_Članak iz 2018. o prvoj, desktop verziji (Python 2.7 + Tkinter), prvobitno napisan na ruskom. Originalna objava: [VK](https://vk.ru/@33453621-pi-gui-python){: hreflang=ru }. Ceo kod: [legacy/pi.py](legacy/pi.py); da biste ga danas pokrenuli, koristite [legacy/run.sh](legacy/run.sh)._
+_Članak iz 2018. o prvoj, desktop verziji (Python 2.7 + Tkinter), prvobitno napisan na ruskom. Originalna objava: [VK](https://vk.ru/@33453621-pi-gui-python){: hreflang=ru }. Ceo kod: [legacy/pi.py](../legacy/pi.py); da biste ga danas pokrenuli, koristite [legacy/run.sh](../legacy/run.sh)._
 
 _Nastavak iz 2026. – veb verzija koja ne čuva nijednu cifru broja π: [π čuva sve, pa ja nisam morao da čuvam π](/sr/writing/pi-stores-everything/)._
 
@@ -102,7 +102,7 @@ lb_text.set("1")
 tk.Label(root, textvariable=lb_text, width=10, font=dFont, anchor=tk.NW)
 ```
 
-Izvor: [legacy/pi.py, redovi 227–230](legacy/pi.py#L227-L230)
+Izvor: [legacy/pi.py, redovi 227–230](../legacy/pi.py#L227-L230)
 
 Parametar `font` menja font; unapred sam pripremio veći, čitljiviji font za interfejs:
 
@@ -111,7 +111,7 @@ import tkFont
 dFont = tkFont.Font(family="Arial", size=30)
 ```
 
-Izvor: [legacy/pi.py, red 211](legacy/pi.py#L211)
+Izvor: [legacy/pi.py, red 211](../legacy/pi.py#L211)
 
 Parametar `anchor` određuje poravnanje vidžeta – ovde je to NORTH-WEST, tj. tekst se lepi za gornji levi ugao vidžeta.
 
@@ -132,7 +132,7 @@ def bt_find_click(event):
 root.bind('<Return>', bt_find_click)
 ```
 
-Izvor: [legacy/pi.py, red 210](legacy/pi.py#L210)
+Izvor: [legacy/pi.py, red 210](../legacy/pi.py#L210)
 
 Prima ime događaja i funkciju koju treba pozvati. Događaj sa svim svojim parametrima prosleđuje se funkciji kao argument `event`. Ovde je događaj pritisak na taster Enter, zapisan kao string `'<Return>'`.
 
@@ -261,7 +261,7 @@ fill_db(db, PI, 2000000000, 3000000000, count)
 print
 ```
 
-_Ove pripremne skripte nisu u `legacy/`; u veb verziji zamenjuje ih [tools/build_index.py](tools/build_index.py)._
+_Ove pripremne skripte nisu u `legacy/`; u veb verziji zamenjuje ih [tools/build_index.py](../tools/build_index.py)._
 
 To je to, faza pripreme je završena.
 
@@ -290,7 +290,7 @@ root.geometry("1280x640") # default window size at startup
 root.minsize(680, 340)    # minimum window size, so widgets don't collapse into a dot
 ```
 
-Izvor: [legacy/pi.py, redovi 206–207](legacy/pi.py#L206-L207)
+Izvor: [legacy/pi.py, redovi 206–207](../legacy/pi.py#L206-L207)
 
 ### Validacija unosa
 
@@ -346,7 +346,7 @@ Example(root).pack(fill="both", expand=True)
 
 Od svega toga bio mi je potreban samo parametar `'%P'` – _ceo novi unos_. Ako posle kucanja sledećeg znaka unos u celini nije (početak) datuma, zadržavamo ono što je bilo otkucano pre tog znaka; u suprotnom se znak dodaje u `Entry`.
 
-Za potpun datum koristimo istu biblioteku arrow. Dobijeni vidžet `DateEntry`: [legacy/pi.py, redovi 34–89](legacy/pi.py#L34-L89).
+Za potpun datum koristimo istu biblioteku arrow. Dobijeni vidžet `DateEntry`: [legacy/pi.py, redovi 34–89](../legacy/pi.py#L34-L89).
 
 ### Podešavanje vidžeta za π
 
@@ -461,7 +461,7 @@ class WrappingLabel(tk.Text):
 lbt = WrappingLabel(frame, font=dFont, wrap=tk.CHAR, bg=frame["bg"], fg='black')
 ```
 
-Izvor: [legacy/pi.py, redovi 101–134](legacy/pi.py#L101-L134); stvaranje vidžeta – [red 248](legacy/pi.py#L248)
+Izvor: [legacy/pi.py, redovi 101–134](../legacy/pi.py#L101-L134); stvaranje vidžeta – [red 248](../legacy/pi.py#L248)
 
 Ideja je ostala ista – presretanje događaja promene teksta – ali je implementacija poboljšana. Nekoliko tačaka.
 
@@ -475,7 +475,7 @@ if (actual_width  > max_width * max_height):
                                        max_width * max_height)
 ```
 
-Izvor: [legacy/pi.py, redovi 117–121](legacy/pi.py#L117-L121)
+Izvor: [legacy/pi.py, redovi 117–121](../legacy/pi.py#L117-L121)
 
 Pošto `bisect` nema parametar key za vrednost po kojoj se poredi, morao sam da napišem omotač:
 
@@ -491,7 +491,7 @@ class KeyList(object):
         return self.key(self.l[index], index)
 ```
 
-Izvor: [legacy/pi.py, redovi 91–99](legacy/pi.py#L91-L99)
+Izvor: [legacy/pi.py, redovi 91–99](../legacy/pi.py#L91-L99)
 
 Umesto slova, on pretrazi daje širinu teksta od početka do tog slova.
 
@@ -501,7 +501,7 @@ Umesto slova, on pretrazi daje širinu teksta od početka do tog slova.
 self.font_height = 46.8   # instead of self.font.metrics('linespace')
 ```
 
-Izvor: [legacy/pi.py, red 107](legacy/pi.py#L107)
+Izvor: [legacy/pi.py, red 107](../legacy/pi.py#L107)
 
 Koeficijent postavlja kraj teksta što bliže kraju vidžeta, ali se, naravno, ponekad promaši:
 
@@ -520,7 +520,7 @@ self.tag_add("highlight", "1."+str(index), "1."+str(index+8))
 self.tag_config("highlight", background=frame["bg"], foreground="red")
 ```
 
-Izvor: [legacy/pi.py, redovi 130–131](legacy/pi.py#L130-L131)
+Izvor: [legacy/pi.py, redovi 130–131](../legacy/pi.py#L130-L131)
 
 5\. Zabraniti svaku izmenu vidžeta:
 
@@ -528,7 +528,7 @@ Izvor: [legacy/pi.py, redovi 130–131](legacy/pi.py#L130-L131)
 lb3.config(state=tk.DISABLED)
 ```
 
-Izvor: [legacy/pi.py, red 255](legacy/pi.py#L255)
+Izvor: [legacy/pi.py, red 255](../legacy/pi.py#L255)
 
 Da se `Text` ne bi isticao, baš kao `Label`, njegov `background` postavlja se na boju glavnog prozora:
 
@@ -543,7 +543,7 @@ LONG_ARRAY = read_pi(1,2500)
 lb3.insert(tk.END, LONG_ARRAY)
 ```
 
-Izvor: [legacy/pi.py, red 204](legacy/pi.py#L204) i [red 254](legacy/pi.py#L254)
+Izvor: [legacy/pi.py, red 204](../legacy/pi.py#L204) i [red 254](../legacy/pi.py#L254)
 
 U rukovaocu događajem zamenimo podatke potrebnim:
 
@@ -552,7 +552,7 @@ self.delete(1.0, tk.END)   # first delete the old data, starting from char 0 of 
 self.insert(tk.END, text)  # then insert the new data at the end of the text
 ```
 
-Izvor: [legacy/pi.py, redovi 125–126](legacy/pi.py#L125-L126)
+Izvor: [legacy/pi.py, redovi 125–126](../legacy/pi.py#L125-L126)
 
 Kao što vidite, podaci se dodaju drugačije nego u `Label`-u: mogu se dodavati red po red, uz navođenje u koji red se piše. Nisam se time zamarao i radim samo sa jednim redom.
 
@@ -597,7 +597,7 @@ def bt_find_click(event=None):
     lb3.config(state=tk.DISABLED)      # forbid editing
 ```
 
-Izvor: [legacy/pi.py, redovi 136–162](legacy/pi.py#L136-L162)
+Izvor: [legacy/pi.py, redovi 136–162](../legacy/pi.py#L136-L162)
 
 Kao što vidite, da bi se `Text` sada izmenio, čak i iz koda, najpre ga treba vratiti u normalno stanje, promeniti sadržaj, a zatim ponovo zabraniti izmene.
 
@@ -618,7 +618,7 @@ def read_pi(first,last):
     return PI
 ```
 
-Izvor: [legacy/pi.py, redovi 164–173](legacy/pi.py#L164-L173)
+Izvor: [legacy/pi.py, redovi 164–173](../legacy/pi.py#L164-L173)
 
 ### Raspored
 
@@ -699,7 +699,7 @@ bt_find = tk.Button(frame, text="Find", font=dFont, command=bt_find_click)
 bt_find.grid(column=8, row=0, columnspan=2, sticky=tk.NSEW, pady=0)
 ```
 
-Izvor: [legacy/pi.py, redovi 213–224](legacy/pi.py#L213-L224)
+Izvor: [legacy/pi.py, redovi 213–224](../legacy/pi.py#L213-L224)
 
 Ostali elementi postavljeni su na isti način. Kao što vidite, `Text` – `lbt` – zauzima najviše prostora:
 
@@ -718,7 +718,7 @@ lbt = WrappingLabel(frame)
 lbt.grid(column=1, row=1, columnspan=9, rowspan=5, sticky=tk.NSEW)
 ```
 
-Izvor: [legacy/pi.py, redovi 225–249](legacy/pi.py#L225-L249)
+Izvor: [legacy/pi.py, redovi 225–249](../legacy/pi.py#L225-L249)
 
 Na samom kraju postavio sam težine ćelija: što je težina veća, to se ćelija više menja pri skaliranju glavnog prozora.
 
@@ -727,7 +727,7 @@ for y in range(1,11): tk.Grid.columnconfigure(frame, y, weight=1)
 for x in range(2,6): tk.Grid.rowconfigure(frame, x, weight=1)
 ```
 
-Izvor: [legacy/pi.py, redovi 250–253](legacy/pi.py#L250-L253)
+Izvor: [legacy/pi.py, redovi 250–253](../legacy/pi.py#L250-L253)
 
 ### Optimizacija programa
 
@@ -789,7 +789,7 @@ pd csvrd 350.0057260714 secs.
 loadtxt  41.6930684601 secs.
 ```
 
-Pobeđuje csv. I dalje sporo. Konačni `read_db`: [legacy/pi.py, redovi 189–193](legacy/pi.py#L189-L193).
+Pobeđuje csv. I dalje sporo. Konačni `read_db`: [legacy/pi.py, redovi 189–193](../legacy/pi.py#L189-L193).
 
 Zato sam uveo tešku artiljeriju – višenitnost: čitati tekstualnu datoteku sa datumima u pozadini dok se forma učitava.
 
@@ -803,7 +803,7 @@ class Worker(threading.Thread):
 WORKER = Worker() # an instance of the thread that reads the DB from the file
 ```
 
-Izvor: [legacy/pi.py, redovi 27–32](legacy/pi.py#L27-L32)
+Izvor: [legacy/pi.py, redovi 27–32](../legacy/pi.py#L27-L32)
 
 Za ovaj slučaj, prilično čest u GUI programiranju – da forma ostane responzivna tokom teških izračunavanja – Tk ima posebne funkcije. Potrebna nam je `after()`, koja poziva našu funkciju, ovde `listen_for_result()`, posle 10 milisekundi petlje događaja.
 
@@ -823,7 +823,7 @@ if __name__ == '__main__':
     root.mainloop()
 ```
 
-Izvor: [legacy/pi.py, redovi 195–200](legacy/pi.py#L195-L200) i [redovi 208–209](legacy/pi.py#L208-L209)
+Izvor: [legacy/pi.py, redovi 195–200](../legacy/pi.py#L195-L200) i [redovi 208–209](../legacy/pi.py#L208-L209)
 
 Ona pokušava da pridruži nit ako je završila, a ako nije, zakazuje da Tk sačeka još 10 milisekundi.
 
@@ -839,17 +839,17 @@ def bt_find_click(event=None):
     # ...
 ```
 
-Izvor: [legacy/pi.py, redovi 140–141](legacy/pi.py#L140-L141)
+Izvor: [legacy/pi.py, redovi 140–141](../legacy/pi.py#L140-L141)
 
 ### Ceo izvorni kod
 
-Ceo kod je u [legacy/pi.py](legacy/pi.py).
+Ceo kod je u [legacy/pi.py](../legacy/pi.py).
 
 <img width="1080" height="557" alt="interface" src="img/interface-en.jpg" />
 
 ### Lokalizacija
 
-Umesto stringova upisanih direktno u kod, stringovi se čitaju iz konfiguracione datoteke: [legacy/pi.py, redovi 175–187](legacy/pi.py#L175-L187).
+Umesto stringova upisanih direktno u kod, stringovi se čitaju iz konfiguracione datoteke: [legacy/pi.py, redovi 175–187](../legacy/pi.py#L175-L187).
 
 <img width="1080" height="565" alt="localize" src="https://github.com/user-attachments/assets/36be95e5-22fa-42e1-982e-cf63ec3ea86a" />
 
