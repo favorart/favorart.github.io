@@ -1,9 +1,9 @@
 ---
 title: "Tugʻilgan kuningiz π raqamlari ichida"
 summary: "Tugʻilgan sanangizni π sonining 3 milliard raqami orasidan topadigan Python/Tkinterdagi kichik GUI-ilova — keyinchalik veb uchun qayta yaratilgan."
-source: favorart/pi-birthday@main:article.md
+source: favorart/pi-birthday@main:docs/article.md
 source_lang: en
-source_hash: 7cb4d0b6
+source_hash: aa96f51d
 translated: 2026-11-21
 translator: Claude
 reviewed: 2026-11-21
@@ -12,7 +12,7 @@ reviewed: 2026-11-21
 
 **Oʻzbekcha** · [English](article.md){: hreflang=en } · [Русский](article.ru.md){: hreflang=ru }
 
-_Birinchi, desktop versiyasi (Python 2.7 + Tkinter) haqidagi 2018-yilgi qayd, rus tilidan tarjima. Asl nashr: [VK](https://vk.ru/@33453621-pi-gui-python){: hreflang=ru }. Toʻliq kod: [legacy/pi.py](legacy/pi.py); uni bugun ishga tushirish uchun [legacy/run.sh](legacy/run.sh)dan foydalaning._
+_Birinchi, desktop versiyasi (Python 2.7 + Tkinter) haqidagi 2018-yilgi qayd, rus tilidan tarjima. Asl nashr: [VK](https://vk.ru/@33453621-pi-gui-python){: hreflang=ru }. Toʻliq kod: [legacy/pi.py](../legacy/pi.py); uni bugun ishga tushirish uchun [legacy/run.sh](../legacy/run.sh)dan foydalaning._
 
 _2026-yilgi davomi — π sonining birorta ham raqamini saqlamaydigan veb-versiya: [π hamma narsani saqlaydi, shuning uchun men π sonini saqlamasam ham boʻldi](/uz/writing/pi-stores-everything/)._
 
@@ -102,7 +102,7 @@ lb_text.set("1")
 tk.Label(root, textvariable=lb_text, width=10, font=dFont, anchor=tk.NW)
 ```
 
-Manba: [legacy/pi.py, 227–230-qatorlar](legacy/pi.py#L227-L230)
+Manba: [legacy/pi.py, 227–230-qatorlar](../legacy/pi.py#L227-L230)
 
 `font` parametri shriftni oʻzgartiradi; men oldindan kattaroq, oʻqish oson interfeys shriftini tayyorlab qoʻydim:
 
@@ -111,7 +111,7 @@ import tkFont
 dFont = tkFont.Font(family="Arial", size=30)
 ```
 
-Manba: [legacy/pi.py, 211-qator](legacy/pi.py#L211)
+Manba: [legacy/pi.py, 211-qator](../legacy/pi.py#L211)
 
 `anchor` parametri vidjetning tekislanishini belgilaydi — bu yerda u NORTH-WEST, yaʼni matn vidjetning yuqori chap burchagiga yopishadi.
 
@@ -132,7 +132,7 @@ def bt_find_click(event):
 root.bind('<Return>', bt_find_click)
 ```
 
-Manba: [legacy/pi.py, 210-qator](legacy/pi.py#L210)
+Manba: [legacy/pi.py, 210-qator](../legacy/pi.py#L210)
 
 U hodisa nomini va chaqiriladigan funksiyani qabul qiladi. Hodisa barcha parametrlari bilan funksiyaga `event` argumenti sifatida uzatiladi. Bu yerda hodisa — Enter tugmasini bosish, u `'<Return>'` satri bilan yoziladi.
 
@@ -261,7 +261,7 @@ fill_db(db, PI, 2000000000, 3000000000, count)
 print
 ```
 
-_Bu tayyorgarlik skriptlari `legacy/`da yoʻq; veb-versiyada ularning oʻrnini [tools/build_index.py](tools/build_index.py) egallaydi._
+_Bu tayyorgarlik skriptlari `legacy/`da yoʻq; veb-versiyada ularning oʻrnini [tools/build_index.py](../tools/build_index.py) egallaydi._
 
 Tamom, tayyorgarlik bosqichi tugadi.
 
@@ -290,7 +290,7 @@ root.geometry("1280x640") # default window size at startup
 root.minsize(680, 340)    # minimum window size, so widgets don't collapse into a dot
 ```
 
-Manba: [legacy/pi.py, 206–207-qatorlar](legacy/pi.py#L206-L207)
+Manba: [legacy/pi.py, 206–207-qatorlar](../legacy/pi.py#L206-L207)
 
 ### Kiritishni tekshirish
 
@@ -346,7 +346,7 @@ Example(root).pack(fill="both", expand=True)
 
 Bularning hammasidan menga faqat `'%P'` parametri — _butun yangi kiritma_ kerak edi. Agar navbatdagi belgi terilgandan keyin u bir butun sifatida sana (yoki sana boshi) boʻlmasa, shu belgigacha terilgan narsani qoldiramiz; aks holda belgi `Entry`ga qoʻshiladi.
 
-Toʻliq sana uchun oʻsha arrow kutubxonasidan foydalanamiz. Hosil boʻlgan `DateEntry` vidjeti: [legacy/pi.py, 34–89-qatorlar](legacy/pi.py#L34-L89).
+Toʻliq sana uchun oʻsha arrow kutubxonasidan foydalanamiz. Hosil boʻlgan `DateEntry` vidjeti: [legacy/pi.py, 34–89-qatorlar](../legacy/pi.py#L34-L89).
 
 ### π vidjetini sozlash
 
@@ -461,7 +461,7 @@ class WrappingLabel(tk.Text):
 lbt = WrappingLabel(frame, font=dFont, wrap=tk.CHAR, bg=frame["bg"], fg='black')
 ```
 
-Manba: [legacy/pi.py, 101–134-qatorlar](legacy/pi.py#L101-L134); vidjetni yaratish — [248-qator](legacy/pi.py#L248)
+Manba: [legacy/pi.py, 101–134-qatorlar](../legacy/pi.py#L101-L134); vidjetni yaratish — [248-qator](../legacy/pi.py#L248)
 
 Gʻoya oʻsha-oʻsha qoldi — matn oʻzgarishi hodisasini ushlash — lekin amalga oshirilishi yaxshilandi. Bir necha jihat.
 
@@ -475,7 +475,7 @@ if (actual_width  > max_width * max_height):
                                        max_width * max_height)
 ```
 
-Manba: [legacy/pi.py, 117–121-qatorlar](legacy/pi.py#L117-L121)
+Manba: [legacy/pi.py, 117–121-qatorlar](../legacy/pi.py#L117-L121)
 
 `bisect`da solishtiriladigan qiymat uchun key parametri yoʻqligi sababli, oʻram yozishga toʻgʻri keldi:
 
@@ -491,7 +491,7 @@ class KeyList(object):
         return self.key(self.l[index], index)
 ```
 
-Manba: [legacy/pi.py, 91–99-qatorlar](legacy/pi.py#L91-L99)
+Manba: [legacy/pi.py, 91–99-qatorlar](../legacy/pi.py#L91-L99)
 
 U qidiruvga harf oʻrniga matnning boshidan shu harfgacha boʻlgan kengligini beradi.
 
@@ -501,7 +501,7 @@ U qidiruvga harf oʻrniga matnning boshidan shu harfgacha boʻlgan kengligini be
 self.font_height = 46.8   # instead of self.font.metrics('linespace')
 ```
 
-Manba: [legacy/pi.py, 107-qator](legacy/pi.py#L107)
+Manba: [legacy/pi.py, 107-qator](../legacy/pi.py#L107)
 
 Koeffitsiyent matn oxirini vidjet oxiriga imkon qadar yaqin qoʻyadi, lekin, albatta, baʼzan adashadi:
 
@@ -520,7 +520,7 @@ self.tag_add("highlight", "1."+str(index), "1."+str(index+8))
 self.tag_config("highlight", background=frame["bg"], foreground="red")
 ```
 
-Manba: [legacy/pi.py, 130–131-qatorlar](legacy/pi.py#L130-L131)
+Manba: [legacy/pi.py, 130–131-qatorlar](../legacy/pi.py#L130-L131)
 
 5\. Vidjetni har qanday oʻzgartirishni taqiqlash:
 
@@ -528,7 +528,7 @@ Manba: [legacy/pi.py, 130–131-qatorlar](legacy/pi.py#L130-L131)
 lb3.config(state=tk.DISABLED)
 ```
 
-Manba: [legacy/pi.py, 255-qator](legacy/pi.py#L255)
+Manba: [legacy/pi.py, 255-qator](../legacy/pi.py#L255)
 
 `Text` ajralib turmasligi uchun, xuddi `Label`dagidek, uning `background`i asosiy oyna rangiga oʻrnatiladi:
 
@@ -543,7 +543,7 @@ LONG_ARRAY = read_pi(1,2500)
 lb3.insert(tk.END, LONG_ARRAY)
 ```
 
-Manba: [legacy/pi.py, 204-qator](legacy/pi.py#L204) va [254-qator](legacy/pi.py#L254)
+Manba: [legacy/pi.py, 204-qator](../legacy/pi.py#L204) va [254-qator](../legacy/pi.py#L254)
 
 Hodisa ishlovchisida maʼlumotni keraklisiga almashtiramiz:
 
@@ -552,7 +552,7 @@ self.delete(1.0, tk.END)   # first delete the old data, starting from char 0 of 
 self.insert(tk.END, text)  # then insert the new data at the end of the text
 ```
 
-Manba: [legacy/pi.py, 125–126-qatorlar](legacy/pi.py#L125-L126)
+Manba: [legacy/pi.py, 125–126-qatorlar](../legacy/pi.py#L125-L126)
 
 Koʻrib turganingizdek, maʼlumot `Label`dagidan boshqacha qoʻshiladi: uni qatorma-qator, qaysi qatorga yozishni koʻrsatib qoʻshish mumkin. Men bu bilan ovora boʻlmadim va faqat bitta qator bilan ishlayman.
 
@@ -597,7 +597,7 @@ def bt_find_click(event=None):
     lb3.config(state=tk.DISABLED)      # forbid editing
 ```
 
-Manba: [legacy/pi.py, 136–162-qatorlar](legacy/pi.py#L136-L162)
+Manba: [legacy/pi.py, 136–162-qatorlar](../legacy/pi.py#L136-L162)
 
 Koʻrib turganingizdek, endi `Text`ni hatto koddan oʻzgartirish uchun ham avval uni oddiy holatga qaytarish, tarkibni oʻzgartirish va keyin oʻzgartirishni yana taqiqlash kerak.
 
@@ -618,7 +618,7 @@ def read_pi(first,last):
     return PI
 ```
 
-Manba: [legacy/pi.py, 164–173-qatorlar](legacy/pi.py#L164-L173)
+Manba: [legacy/pi.py, 164–173-qatorlar](../legacy/pi.py#L164-L173)
 
 ### Joylashuv
 
@@ -699,7 +699,7 @@ bt_find = tk.Button(frame, text="Find", font=dFont, command=bt_find_click)
 bt_find.grid(column=8, row=0, columnspan=2, sticky=tk.NSEW, pady=0)
 ```
 
-Manba: [legacy/pi.py, 213–224-qatorlar](legacy/pi.py#L213-L224)
+Manba: [legacy/pi.py, 213–224-qatorlar](../legacy/pi.py#L213-L224)
 
 Qolgan elementlar ham xuddi shunday joylashtirildi. Koʻrib turganingizdek, eng koʻp joyni `Text` — `lbt` egallaydi:
 
@@ -718,7 +718,7 @@ lbt = WrappingLabel(frame)
 lbt.grid(column=1, row=1, columnspan=9, rowspan=5, sticky=tk.NSEW)
 ```
 
-Manba: [legacy/pi.py, 225–249-qatorlar](legacy/pi.py#L225-L249)
+Manba: [legacy/pi.py, 225–249-qatorlar](../legacy/pi.py#L225-L249)
 
 Eng oxirida katakchalar vaznlarini belgiladim: vazn qancha katta boʻlsa, asosiy oyna masshtablanganda katakcha shuncha koʻp oʻzgaradi.
 
@@ -727,7 +727,7 @@ for y in range(1,11): tk.Grid.columnconfigure(frame, y, weight=1)
 for x in range(2,6): tk.Grid.rowconfigure(frame, x, weight=1)
 ```
 
-Manba: [legacy/pi.py, 250–253-qatorlar](legacy/pi.py#L250-L253)
+Manba: [legacy/pi.py, 250–253-qatorlar](../legacy/pi.py#L250-L253)
 
 ### Dasturni optimallashtirish
 
@@ -789,7 +789,7 @@ pd csvrd 350.0057260714 secs.
 loadtxt  41.6930684601 secs.
 ```
 
-csv yutadi. Baribir sekin. Yakuniy `read_db`: [legacy/pi.py, 189–193-qatorlar](legacy/pi.py#L189-L193).
+csv yutadi. Baribir sekin. Yakuniy `read_db`: [legacy/pi.py, 189–193-qatorlar](../legacy/pi.py#L189-L193).
 
 Shuning uchun ogʻir artilleriyani — koʻp oqimlilikni ishga soldim: forma yuklanayotganda sanalar matnli faylini fonda oʻqish.
 
@@ -803,7 +803,7 @@ class Worker(threading.Thread):
 WORKER = Worker() # an instance of the thread that reads the DB from the file
 ```
 
-Manba: [legacy/pi.py, 27–32-qatorlar](legacy/pi.py#L27-L32)
+Manba: [legacy/pi.py, 27–32-qatorlar](../legacy/pi.py#L27-L32)
 
 GUI-dasturlashda ancha keng tarqalgan bu holat uchun — ogʻir hisoblashlar paytida formani javob beradigan holatda saqlash — Tkda maxsus funksiyalar bor. Bizga hodisalar siklining 10 millisekundidan keyin bizning funksiyamizni, bu yerda `listen_for_result()`ni, chaqiradigan `after()` kerak.
 
@@ -823,7 +823,7 @@ if __name__ == '__main__':
     root.mainloop()
 ```
 
-Manba: [legacy/pi.py, 195–200-qatorlar](legacy/pi.py#L195-L200) va [208–209-qatorlar](legacy/pi.py#L208-L209)
+Manba: [legacy/pi.py, 195–200-qatorlar](../legacy/pi.py#L195-L200) va [208–209-qatorlar](../legacy/pi.py#L208-L209)
 
 U oqim tugagan boʻlsa, unga qoʻshilishga (join) harakat qiladi, tugamagan boʻlsa, Tkga yana 10 millisekund kutishni rejalashtiradi.
 
@@ -839,17 +839,17 @@ def bt_find_click(event=None):
     # ...
 ```
 
-Manba: [legacy/pi.py, 140–141-qatorlar](legacy/pi.py#L140-L141)
+Manba: [legacy/pi.py, 140–141-qatorlar](../legacy/pi.py#L140-L141)
 
 ### Toʻliq dastlabki kod
 
-Toʻliq kod [legacy/pi.py](legacy/pi.py)da.
+Toʻliq kod [legacy/pi.py](../legacy/pi.py)da.
 
 <img width="1080" height="557" alt="interfeys" src="img/interface-en.jpg" />
 
 ### Lokalizatsiya
 
-Kodga qattiq yozilgan satrlar oʻrniga satrlar konfiguratsiya faylidan oʻqiladi: [legacy/pi.py, 175–187-qatorlar](legacy/pi.py#L175-L187).
+Kodga qattiq yozilgan satrlar oʻrniga satrlar konfiguratsiya faylidan oʻqiladi: [legacy/pi.py, 175–187-qatorlar](../legacy/pi.py#L175-L187).
 
 <img width="1080" height="565" alt="lokalizatsiya" src="https://github.com/user-attachments/assets/36be95e5-22fa-42e1-982e-cf63ec3ea86a" />
 

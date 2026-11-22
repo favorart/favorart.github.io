@@ -1,7 +1,7 @@
 ---
 title: "π čuva sve, pa ja nisam morao da čuvam π"
 summary: "Detektivska priča o sajtu koji nalazi bilo koji datum u tri milijarde cifara broja π: koliko cifara treba da bi se pojavio svaki datum, zašto je pretvaranje velikog broja u string u CPython-u postalo ranjivost i kako je numpy prešao 1,7 milijardi cifara za minut i po."
-source: favorart/pi-birthday@main:article-2026.ru.md
+source: favorart/pi-birthday@main:docs/article-2026.ru.md
 source_lang: ru
 source_hash: bfcf9dd2
 translated: 2026-11-21

@@ -1,7 +1,7 @@
 ---
 title: "π hamma narsani saqlaydi, shuning uchun men π sonini saqlamasam ham boʻldi"
 summary: "π sonining uch milliard raqami ichidan istalgan sanani topadigan sayt ortidagi detektiv hikoya: har bir sana chiqishi uchun nechta raqam kerak, nega CPythonda katta butun sonni satrga aylantirish zaiflikka aylandi va numpy 1,7 milliard raqamni bir yarim daqiqada qanday bosib oʻtdi."
-source: favorart/pi-birthday@main:article-2026.ru.md
+source: favorart/pi-birthday@main:docs/article-2026.ru.md
 source_lang: ru
 source_hash: bfcf9dd2
 translated: 2026-11-21
